@@ -5,7 +5,6 @@ import Campaigns from './shared/Campaigns'
 import { Grid, Card } from '@mui/material'
 import StatCards2 from './shared/StatCards2'
 import DoughnutChart from './shared/Doughnut'
-import UpgradeCard from './shared/UpgradeCard'
 import { styled, useTheme } from '@mui/system'
 import TopSellingTable from './shared/TopSellingTable'
 
