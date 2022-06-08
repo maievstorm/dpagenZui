@@ -46,7 +46,7 @@ const Footer = () => {
                 sx={{ zIndex: 96 }}
             >
                 <AppFooter>
-                    <FooterContent>
+                    {/* <FooterContent>
                         <a href="https://ui-lib.com/downloads/matx-pro-react-admin/">
                             <Button variant="contained" color="secondary">
                                 Get MatX Pro
@@ -57,7 +57,7 @@ const Footer = () => {
                             Design and Developed by{' '}
                             <a href="http://ui-lib.com">UI Lib</a>
                         </Paragraph>
-                    </FooterContent>
+                    </FooterContent> */}
                 </AppFooter>
             </AppBar>
         </ThemeProvider>
