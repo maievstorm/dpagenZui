@@ -9,42 +9,6 @@ export const navigations = [
         type: 'label',
     },
     {
-        name: 'Data Platform Analyst',
-        icon: 'insights',
-        children:[
-            {
-                name: 'Audio',
-                iconText: 'SI',
-                path: '/dpa/audio',
-            },
-            {
-                name: 'Airflow',
-                iconText: 'SI',
-                path: '/dpa/airflow',
-            },
-            {
-                name: 'CloudStorate',
-                iconText: 'SI',
-                path: '/dpa/cloudstorate',
-            },
-            {
-                name: 'Database',
-                iconText: 'SI',
-                path: '/dpa/database',
-            },
-            {
-                name: 'Streaming',
-                iconText: 'SI',
-                path: '/dpa/streaming',
-            },
-            {
-                name: 'Visualization',
-                iconText: 'SI',
-                path: '/dpa/visualization',
-            },
-        ]
-    },
-    {
         name: 'Session/Auth',
         icon: 'security',
         children: [
