@@ -8,7 +8,6 @@ export const navigations = [
         label: 'PAGES',
         type: 'label',
     },
-   
     {
         name: 'Session/Auth',
         icon: 'security',
@@ -48,11 +47,6 @@ export const navigations = [
                 name: 'Auto Complete',
                 path: '/material/autocomplete',
                 iconText: 'A',
-            },
-            {
-                name: 'Lưu trữ',
-                path: '/material/cloudstorage',
-                icon: 'cloud',
             },
             {
                 name: 'Buttons',
@@ -121,11 +115,22 @@ export const navigations = [
             },
         ],
     },
-    
+    {
+        name: 'Charts',
+        icon: 'trending_up',
+
+        children: [
+            {
+                name: 'Echarts',
+                path: '/charts/echarts',
+                iconText: 'E',
+            },
+        ],
+    },
     {
         name: 'Documentation',
         icon: 'launch',
         type: 'extLink',
-        path: '',
+        path: 'http://demos.ui-lib.com/matx-react-doc/',
     },
 ]
