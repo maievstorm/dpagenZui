@@ -136,8 +136,7 @@ const Airflow = () => {
     return(
         <Container>
             <button onClick={() => { 
-                axios.get("https://flowdpa.apps.xplat.fis.com.vn/api/v1/dags?limit=100&offset=10&only_active=false").then(rel => {
-                    console.log(rel);
+                axios.get('https://flowdpa.apps.xplat.fis.com.vn/api/v1/dags?limit=100&offset=10&only_active=false',{auth: {username: 'hung', password: '123456a@'}}).then(rel => {console.log(rel);
                 })
 
             }}>Check</button>
