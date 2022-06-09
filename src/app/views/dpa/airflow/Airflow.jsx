@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import {
     IconButton,
     Table,
@@ -11,6 +11,10 @@ import {
 } from '@mui/material'
 import { Box, styled } from '@mui/system'
 import { SimpleCard } from 'app/components'
+import axios from 'axios';
+import { useDispatch } from "react-redux";
+import { testAPI } from '../../../redux/actions/AirflowActions'
+
 const StyledTable = styled(Table)(({ theme }) => ({
     whiteSpace: 'pre',
     '& thead': {
@@ -104,102 +108,101 @@ const subscribarList = [
     },
 ]
 
-class Airflow extends React.Component{
-    constructor(props) {
-        super(props);
-        this.state = {
-            page: 0,
-            setPage: 0,
-            rowsPerPage: 5,
-            setRowsPerPage: 5,
-        };
-    }
-    componentDidUpdate() {
+const Airflow = () => {
+    const dispatch = useDispatch();
+    const status = useState("Chua co gi")
+    const [rowsPerPage, setRowsPerPage] = React.useState(5)
+    const [page, setPage] = React.useState(0)
 
+    const callAPITest = () => {
+        // dispatch(testAPI()).then(data => {console.log("data call api", data)}).catch(e => {
+        //     console.log(e) 
+        // })
     }
-
-    handleChangePage = (event, newPage) => {
-        this.setState({setPage: newPage})
-    }
-    handleChangeRowsPerPage = (event) => {
-        // this.setState({
-        //     setRowsPerPage: event.target.value
-        //   }, () => {
-        //      // only now the state was updated
-        //      console.log("setRowsPerPage2", this.state.setRowsPerPage); 
-        //   });
-          this.setState((state) => {
-            return {setRowsPerPage: event.target.value};
-          });
-        console.log("setRowsPerPage3", this.state.setRowsPerPage)
-        this.setState({setPage: 0})
+    const handleChangePage = (event, newPage) => {
+        setPage(newPage)
     }
 
-    render(){
-        return(
-            <Container>
-                <SimpleCard title="List dags">
-                    <Box width="100%" overflow="auto">
-                        <StyledTable>
-                        <TableHead>
-                                <TableRow>
-                                    <TableCell>Dags</TableCell>
-                                    <TableCell>Owners</TableCell>
-                                    <TableCell>Description</TableCell>
-                                    <TableCell>Is Active</TableCell>
-                                    <TableCell>Schedule Interval</TableCell>
-                                    <TableCell>Action</TableCell>
-                                </TableRow>
-                            </TableHead>
-                            <TableBody>
-                                {subscribarList
-                                    .slice(
-                                        this.state.page * this.state.rowsPerPage,
-                                        this.state.page * this.state.rowsPerPage + this.state.rowsPerPage
-                                    )
-                                    .map((subscriber, index) => (
-                                        <TableRow key={index}>
-                                            <TableCell align="left">
-                                                {subscriber.name}
-                                            </TableCell>
-                                            <TableCell align="left">
-                                                {subscriber.company}
-                                            </TableCell>
-                                            <TableCell align="left">
-                                                {subscriber.date}
-                                            </TableCell>
-                                            <TableCell>{subscriber.status}</TableCell>
-                                            <TableCell>${subscriber.amount}</TableCell>
-                                            <TableCell>
-                                                <IconButton>
-                                                    <Icon color="success">play_arrow</Icon>
-                                                </IconButton>
-                                            </TableCell>
-                                        </TableRow>
-                                    ))}
-                            </TableBody>
-                        </StyledTable>
-                        <TablePagination
-                            sx={{ px: 2 }}
-                            rowsPerPageOptions={[5, 10, 25]}
-                            component="div"
-                            count={subscribarList.length}
-                            rowsPerPage={this.state.rowsPerPage}
-                            page={this.state.page}
-                            backIconButtonProps={{
-                                'aria-label': 'Previous Page',
-                            }}
-                            nextIconButtonProps={{
-                                'aria-label': 'Next Page',
-                            }}
-                            onPageChange={this.handleChangePage}
-                            onRowsPerPageChange={this.handleChangeRowsPerPage}
-                        />
-                    </Box>
-                </SimpleCard>
-            </Container>
-        )
+    const handleChangeRowsPerPage = (event) => {
+        setRowsPerPage(+event.target.value)
+        setPage(0)
     }
+
+    useEffect(() => {
+        console.log("useEffect");
+        callAPITest();
+    });
+
+    return(
+        <Container>
+            <button onClick={() => { 
+                axios.get("https://flowdpa.apps.xplat.fis.com.vn/api/v1/dags?limit=100&offset=10&only_active=false").then(rel => {
+                    console.log(rel);
+                })
+
+            }}>Check</button>
+            <SimpleCard title="List dags">
+                <Box width="100%" overflow="auto">
+                    <StyledTable>
+                    <TableHead>
+                            <TableRow>
+                                <TableCell>Dags</TableCell>
+                                <TableCell>Owners</TableCell>
+                                <TableCell>Description</TableCell>
+                                <TableCell>Is Active</TableCell>
+                                <TableCell>Schedule Interval</TableCell>
+                                <TableCell>Action</TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {subscribarList
+                                .slice(
+                                    page * rowsPerPage,
+                                    page * rowsPerPage + rowsPerPage
+                                )
+                                .map((subscriber, index) => (
+                                    <TableRow key={index}>
+                                        <TableCell align="left">
+                                            {subscriber.name}
+                                        </TableCell>
+                                        <TableCell align="left">
+                                            {subscriber.company}
+                                        </TableCell>
+                                        <TableCell align="left">
+                                            {subscriber.date}
+                                        </TableCell>
+                                        <TableCell>{subscriber.status}</TableCell>
+                                        <TableCell>${subscriber.amount}</TableCell>
+                                        <TableCell>
+                                            <IconButton>
+                                                <Icon color="success">play_arrow</Icon>
+                                            </IconButton>
+                                        </TableCell>
+                                    </TableRow>
+                                ))}
+                        </TableBody>
+                    </StyledTable>
+                    <TablePagination
+                        sx={{ px: 2 }}
+                        rowsPerPageOptions={[5, 10, 25]}
+                        component="div"
+                        count={subscribarList.length}
+                        rowsPerPage={rowsPerPage}
+                        page={page}
+                        backIconButtonProps={{
+                            'aria-label': 'Previous Page',
+                        }}
+                        nextIconButtonProps={{
+                            'aria-label': 'Next Page',
+                        }}
+                        onPageChange={handleChangePage}
+                        onRowsPerPageChange={handleChangeRowsPerPage}
+                    />
+                </Box>
+            </SimpleCard>
+        </Container>
+    )
 }
 
 export default Airflow
+
