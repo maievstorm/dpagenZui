@@ -53,14 +53,14 @@ const Analytics = () => {
                         <Card sx={{ px: 3, py: 2, mb: 3 }}>
                             <Title>Traffic Sources</Title>
                             <SubTitle>Last 30 days</SubTitle>
-                            <DoughnutChart
+                            {/* <DoughnutChart
                                 height="300px"
                                 color={[
                                     palette.primary.dark,
                                     palette.primary.main,
                                     palette.primary.light,
                                 ]}
-                            />
+                            /> */}
                         </Card>
                         <Campaigns />
                     </Grid>

@@ -74,7 +74,7 @@ const RowCards = () => {
 
                     <Grid item md={3} xs={4}>
                         <Box color={textMuted}>
-                            {format(new Date().getTime(), 'MM/dd/yyyy hh:mma')}
+                           
                         </Box>
                     </Grid>
 
@@ -85,18 +85,7 @@ const RowCards = () => {
                                 position="relative"
                                 marginLeft='-0.875rem !important'
                             >
-                                <StyledAvatar
-                                    src="/assets/images/face-4.jpg"
-                                />
-                                <StyledAvatar
-                                    src="/assets/images/face-4.jpg"
-                                />
-                                <StyledAvatar
-                                    src="/assets/images/face-4.jpg"
-                                />
-                                <StyledAvatar sx={{ fontSize: '14px' }}>
-                                    +3
-                                </StyledAvatar>
+                              
                             </Box>
                         </Grid>
                     </Hidden>
