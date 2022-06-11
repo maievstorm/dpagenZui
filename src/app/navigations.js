@@ -14,36 +14,42 @@ export const navigations = [
         icon: 'insights',
         children:[
             {
-                name: 'Audio',
-                iconText: 'SI',
-                path: '/dpa/audio',
+                name: 'Lưu trữ',
+                icon: 'cloud',
+                path: '/dpa/cloudstorage',
             },
             {
-                name: 'Airflow',
-                iconText: 'SI',
-                path: '/dpa/airflow',
-            },
-            {
-                name: 'CloudStorate',
-                iconText: 'SI',
-                path: '/dpa/cloudstorate',
-            },
-            {
-                name: 'Database',
-                iconText: 'SI',
+                name: 'Dữ liệu',
+                icon: 'grid_on',
                 path: '/dpa/database',
             },
             {
+                name: 'Airflow',
+                icon: 'input',
+                path: '/dpa/airflow',
+            },
+            {
                 name: 'Streaming',
-                iconText: 'SI',
+                icon: 'cached',
                 path: '/dpa/streaming',
             },
             {
                 name: 'Visualization',
-                iconText: 'SI',
+                icon: 'wallpaper',
                 path: '/dpa/visualization',
             },
         ]
+    },
+    {
+        name: 'ML',
+        icon: 'all_inclusive',
+        children: [
+            {
+                name: 'Audio',
+                icon: 'music_note',
+                path: '/dpa/audio',
+            }
+        ],
     },
     {
         name: 'Session/Auth',

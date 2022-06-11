@@ -8,6 +8,9 @@ import { useRoutes } from 'react-router-dom'
 import { AuthProvider } from 'app/contexts/JWTAuthContext'
 import { SettingsProvider } from 'app/contexts/SettingsContext'
 
+
+const bodyParser = require("body-parser");
+const cors = require("cors");
 const App = () => {
     const all_pages = useRoutes(AllPages())
 

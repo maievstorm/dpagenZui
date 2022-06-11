@@ -4,7 +4,7 @@ import chartsRoute from './views/charts/ChartsRoute'
 import dashboardRoutes from './views/dashboard/DashboardRoutes'
 import materialRoutes from './views/material-kit/MaterialRoutes'
 import dpaRoutes from './views/dpa/DpaRoutes'
-import apiroutes from './apiroutes'
+import apiRoutes from 'app/apiRoutes'
 
 const redirectRoute = [
     {
@@ -22,7 +22,7 @@ const errorRoute = [
 
 const routes = [
     ...dpaRoutes,
-    ...apiroutes,
+    ...apiRoutes,
     ...dashboardRoutes,
     ...materialRoutes,
     ...chartsRoute,
