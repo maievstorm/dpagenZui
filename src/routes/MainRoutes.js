@@ -16,7 +16,16 @@ const UtilsTablerIcons = Loadable(lazy(() => import('views/utilities/TablerIcons
 
 // sample page routing
 const SamplePage = Loadable(lazy(() => import('views/sample-page')));
-
+const Bigdatapage = Loadable(lazy(() => import('views/bigdata')));
+const Datawhpage = Loadable(lazy(() => import('views/datawh')));
+const Objectstorepage = Loadable(lazy(() => import('views/objectstore')));
+const Dataingestpage = Loadable(lazy(() => import('views/dataingest')));
+const Datastreampage = Loadable(lazy(() => import('views/datastream')));
+const Databackuppage = Loadable(lazy(() => import('views/databackup')));
+const Dataaipage = Loadable(lazy(() => import('views/dataai')));
+const Financereportpage = Loadable(lazy(() => import('views/financereport')));
+const Datavisualpage = Loadable(lazy(() => import('views/datavisual')));
+const Dragonflypage= Loadable(lazy(() => import('views/dragonfly')));
 // ==============================|| MAIN ROUTING ||============================== //
 
 const MainRoutes = {
@@ -54,6 +63,56 @@ const MainRoutes = {
         {
             path: '/sample-page',
             element: <SamplePage />
+        }
+        ,
+        {
+            path: '/bigdata',
+            element: <Bigdatapage />
+        }
+        ,
+        {
+            path: '/datawh',
+            element: <Datawhpage />
+        }
+        ,
+        {
+            path: '/ojectstorage',
+            element: <Objectstorepage />
+        }
+        ,
+        {
+            path: '/dataingest',
+            element: <Dataingestpage />
+        }
+        ,
+        {
+            path: '/datastream',
+            element: <Datastreampage />
+        }
+        ,
+        {
+            path: '/databackup',
+            element: <Databackuppage />
+        }
+        ,
+        {
+            path: '/dataai',
+            element: <Dataaipage />
+        }
+        ,
+        {
+            path: '/financereport',
+            element: <Financereportpage />
+        }
+        ,
+        {
+            path: '/datavisual',
+            element: <Datavisualpage />
+        }
+        ,
+        {
+            path: '/dragonfly',
+            element: <Dragonflypage />
         }
     ]
 };

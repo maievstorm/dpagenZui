@@ -29,6 +29,7 @@
         "history": "^5.0.0",
         "keycloak-js": "^18.0.0",
         "material-ui-popup-state": "^1.8.0",
+        "minio": "^7.0.28",
         "pg": "^8.7.3",
         "pg-hstore": "^2.3.4",
         "prop-types": "^15.7.2",

@@ -25,23 +25,23 @@ const pages = {
                     id: 'objectstorage',
                     title: 'Lưu trữ đám mây',
                     type: 'item',
-                   // url: '/pages/login/login3',
-                    target: true
+                    url: '/ojectstorage',
+                    breadcrumbs: false
                 },
                 {
                     id: 'datawarehouse',
                     title: 'Kho dữ liệu',
                     type: 'item',
-                  //  url: '/pages/register/register3',
-                    target: true
+                    url: '/datawh',
+                    breadcrumbs: false
                 }
                 ,
                 {
                     id: 'bigdata',
                     title: 'Dữ liệu lớn',
                     type: 'item',
-                   // url: '/pages/register/register3',
-                    target: true
+                    url: '/bigdata',
+                    breadcrumbs: false
                 }
             ]
         }, 
@@ -56,23 +56,23 @@ const pages = {
                     id: 'dataingest',
                     title: 'Lưu chuyển dữ liêu',
                     type: 'item',
-                   // url: '/pages/login/login3',
-                    target: true
+                    url: '/dataingest',
+                    breadcrumbs: false
                 },
                 {
                     id: 'datastreaming',
                     title: 'Truyền tải trực tiếp',
                     type: 'item',
-                  //  url: '/pages/register/register3',
-                    target: true
+                    url: '/datastream',
+                    breadcrumbs: false
                 }
                 ,
                 {
                     id: 'databackup',
                     title: 'Sao lưu',
                     type: 'item',
-                   // url: '/pages/register/register3',
-                    target: true
+                    url: '/databackup',
+                    breadcrumbs: false
                 }
             ]
         }, 
@@ -87,23 +87,23 @@ const pages = {
                     id: 'dataai',
                     title: 'Trí tuệ nhân tạo',
                     type: 'item',
-                   // url: '/pages/login/login3',
-                    target: true
+                    url: '/dataai',
+                    breadcrumbs: false
                 },
                 {
                     id: 'finnacereport',
                     title: 'Xây dựng BCTC',
                     type: 'item',
-                  //  url: '/pages/register/register3',
-                    target: true
+                    url: '/financereport',
+                    breadcrumbs: false
                 }
                 ,
                 {
                     id: 'datavisualize',
                     title: 'Trực quan dữ liệu',
                     type: 'item',
-                   // url: '/pages/register/register3',
-                    target: true
+                    url: '/datavisual',
+                    breadcrumbs: false
                 }
             ]
         }

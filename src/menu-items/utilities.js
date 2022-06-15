@@ -20,9 +20,10 @@ const utilities = {
             id: 'util-typography',
             title: 'Học máy',
             type: 'item',
-            url: '/utils/util-typography',
+            url: 'http://jupyterhub-fis-mbf-dplat.apps.xplat.fis.com.vn',
             icon: icons.IconTypography,
-            breadcrumbs: false
+            external: true,
+            target: true
         },
         {
             id: 'util-color',
@@ -34,34 +35,34 @@ const utilities = {
         },
         {
             id: 'util-shadow',
-            title: 'Shadow',
+            title: 'Dragonfly',
             type: 'item',
-            url: '/utils/util-shadow',
+            url: '/dragonfly',
             icon: icons.IconShadow,
             breadcrumbs: false
         },
-        {
-            id: 'icons',
-            title: 'Icons',
-            type: 'collapse',
-            icon: icons.IconWindmill,
-            children: [
-                {
-                    id: 'tabler-icons',
-                    title: 'Tabler Icons',
-                    type: 'item',
-                    url: '/icons/tabler-icons',
-                    breadcrumbs: false
-                },
-                {
-                    id: 'material-icons',
-                    title: 'Material Icons',
-                    type: 'item',
-                    url: '/icons/material-icons',
-                    breadcrumbs: false
-                }
-            ]
-        }
+        // {
+        //     id: 'icons',
+        //     title: 'Icons',
+        //     type: 'collapse',
+        //     icon: icons.IconWindmill,
+        //     children: [
+        //         {
+        //             id: 'tabler-icons',
+        //             title: 'Tabler Icons',
+        //             type: 'item',
+        //             url: '/icons/tabler-icons',
+        //             breadcrumbs: false
+        //         },
+        //         {
+        //             id: 'material-icons',
+        //             title: 'Material Icons',
+        //             type: 'item',
+        //             url: '/icons/material-icons',
+        //             breadcrumbs: false
+        //         }
+        //     ]
+        // }
     ]
 };
 

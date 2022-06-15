@@ -3,6 +3,7 @@ import { ThemeProvider } from '@mui/material/styles';
 import { CssBaseline, StyledEngineProvider } from '@mui/material';
 
 
+
 // routing
 import Routes from 'routes';
 
@@ -14,6 +15,8 @@ import NavigationScroll from 'layout/NavigationScroll';
 import RenderOnAuthenticated from 'components/RenderOnAuthenticated';
 import RenderOnAnonymous from 'components/RenderOnAnonymous';
 import Welcome from 'components/welcome';
+
+
 
 
 // ==============================|| APP ||============================== //
