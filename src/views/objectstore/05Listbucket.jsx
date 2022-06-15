@@ -24,8 +24,8 @@ import MainCard from 'ui-component/cards/MainCard';
 var Minio = require('minio')
 
 var minioClient = new Minio.Client({
-    endPoint: 'lakedpaapi-fis-mbf-dplat.apps.xplat.fis.com.vn',
-    useSSL: false,
+    endPoint: 'apilakedpa.apps.xplat.fis.com.vn',
+    useSSL: true,
     accessKey: 'ZtPfk0wzKFOuSvhf',
     secretKey: 'tQBDJnzZy2G4yIyv6rAjhnsdfidN2swz',
    
