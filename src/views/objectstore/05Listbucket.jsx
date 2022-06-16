@@ -2,6 +2,10 @@
 import { Typography } from '@mui/material';
 import React from 'react'
 import { useEffect, useState } from 'react';
+import { IconCloudDownload,IconTrash} from '@tabler/icons';
+
+
+
 import {
     Table,
     TableHead,
@@ -61,7 +65,10 @@ const StyledTable = styled(Table)(({ theme }) => ({
     },
 }))
 
-
+const icons = {
+    IconCloudDownload,
+    IconTrash
+};
 
 
 const Listbucketpage = () => {
@@ -102,6 +109,12 @@ const handleChangeRowsPerPage = (event) => {
                             </TableCell>
                             <TableCell align="left">
                                 {subscriber.versionId}
+                            </TableCell>
+                            <TableCell align="left">
+                            <icons.IconCloudDownload />
+                            </TableCell>
+                            <TableCell align="left">
+                                <icons.IconTrash/>
                             </TableCell>
                            
                         </TableRow>

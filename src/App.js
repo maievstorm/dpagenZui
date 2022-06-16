@@ -18,21 +18,21 @@ import Welcome from 'components/welcome';
 
 
 
-
 // ==============================|| APP ||============================== //
 
 const App = () => {
     const customization = useSelector((state) => state.customization);
 
     return (
+        
        
         <StyledEngineProvider injectFirst>
+             <RenderOnAnonymous>
+                <Welcome />
+             </RenderOnAnonymous>
             <ThemeProvider theme={themes(customization)}>
                 <CssBaseline />
                 <NavigationScroll>
-                    <RenderOnAnonymous>
-                        <Welcome />
-                    </RenderOnAnonymous>
                     <RenderOnAuthenticated>
                         <Routes />
                     </RenderOnAuthenticated>

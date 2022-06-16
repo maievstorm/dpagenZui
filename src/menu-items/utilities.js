@@ -1,12 +1,13 @@
 // assets
-import { IconTypography, IconPalette, IconShadow, IconWindmill } from '@tabler/icons';
+import { IconTypography, IconPalette, IconShadow, IconWindmill,IconNotebook } from '@tabler/icons';
 
 // constant
 const icons = {
     IconTypography,
     IconPalette,
     IconShadow,
-    IconWindmill
+    IconWindmill,
+    IconNotebook
 };
 
 // ==============================|| UTILITIES MENU ITEMS ||============================== //
@@ -21,7 +22,7 @@ const utilities = {
             title: 'Học máy',
             type: 'item',
             url: 'http://jupyterhub-fis-mbf-dplat.apps.xplat.fis.com.vn',
-            icon: icons.IconTypography,
+            icon: icons.IconNotebook,
             external: true,
             target: true
         },

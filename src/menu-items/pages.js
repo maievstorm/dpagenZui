@@ -1,9 +1,15 @@
 // assets
-import { IconKey } from '@tabler/icons';
+import { IconKey,IconTypography,IconBrandCodepen,IconDatabaseImport,IconDeviceAnalytics,IconCloud } from '@tabler/icons';
 
 // constant
 const icons = {
-    IconKey
+    IconKey,
+    IconTypography,
+    IconBrandCodepen,
+    IconDatabaseImport,
+    IconDeviceAnalytics,
+    IconCloud
+    
 };
 
 // ==============================|| EXTRA PAGES MENU ITEMS ||============================== //
@@ -18,7 +24,7 @@ const pages = {
             id: 'dataplatform',
             title: 'Nền tảng',
             type: 'collapse',
-            icon: icons.Data,
+            icon: icons.IconCloud,
 
             children: [
                 {
@@ -49,7 +55,7 @@ const pages = {
             id: 'dataingest',
             title: 'Tích hợp',
             type: 'collapse',
-            icon: icons.Data,
+            icon: icons.IconDatabaseImport,
 
             children: [
                 {
@@ -80,7 +86,7 @@ const pages = {
             id: 'dataservice',
             title: 'Dịch vụ dữ liệu',
             type: 'collapse',
-            icon: icons.Data,
+            icon: icons.IconDeviceAnalytics,
 
             children: [
                 {
