@@ -50,7 +50,7 @@ export default function ChecksongDataTable() {
           axios({method:'get',url:"https://dpzapi.apps.xplat.fis.com.vn/api/v1/checksong"}).then(res=>{
             setData(res.data.data);    
           })  
-  }, []);   
+        }, []);   
     return (  
       <Paper className={classes.root}>  
         <TableContainer className={classes.container}>  
