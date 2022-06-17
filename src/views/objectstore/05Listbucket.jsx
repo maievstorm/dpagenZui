@@ -1,10 +1,7 @@
 // material-ui
-import { Typography } from '@mui/material';
 import React from 'react'
 import { useEffect, useState } from 'react';
-import { IconCloudDownload,IconTrash} from '@tabler/icons';
-
-
+import { IconCloudDownload,IconTrash,IconUpload} from '@tabler/icons';
 
 import {
     Table,
@@ -16,9 +13,9 @@ import {
     TableRow,
     TablePagination
 } from '@mui/material'
-import { Box, styled } from '@mui/system'
-import { gridSpacing } from 'store/constant';
-import { Grid } from '@mui/material';
+// import { Box, styled } from '@mui/system'
+// import { gridSpacing } from 'store/constant';
+// import { Grid } from '@mui/material';
 
 
 // project imports
@@ -35,8 +32,7 @@ var minioClient = new Minio.Client({
    
 });
 
-// ==============================|| Bigdata Page ||============================== //
-
+// ==============================|| cloudstorage Page ||============================== //
 
 
 var data = []
@@ -45,34 +41,35 @@ stream.on('data', function(obj) { data.push(obj) } )
 stream.on("end", function (obj) { console.log(data) })
 stream.on('error', function(err) { console.log(err) } )
 
-const StyledTable = styled(Table)(({ theme }) => ({
-    whiteSpace: 'pre',
-    '& thead': {
-        '& tr': {
-            '& th': {
-                paddingLeft: 0,
-                paddingRight: 0,
-            },
-        },
-    },
-    '& tbody': {
-        '& tr': {
-            '& td': {
-                paddingLeft: 0,
-                textTransform: 'capitalize',
-            },
-        },
-    },
-}))
+// const StyledTable = styled(Table)(({ theme }) => ({
+//     whiteSpace: 'pre',
+//     '& thead': {
+//         '& tr': {
+//             '& th': {
+//                 paddingLeft: 0,
+//                 paddingRight: 0,
+//             },
+//         },
+//     },
+//     '& tbody': {
+//         '& tr': {
+//             '& td': {
+//                 paddingLeft: 0,
+//                 textTransform: 'capitalize',
+//             },
+//         },
+//     },
+// }))
 
 const icons = {
     IconCloudDownload,
-    IconTrash
+    IconTrash,
+    IconUpload
 };
 
 
 const Listbucketpage = () => {
-    const [rowsPerPage, setRowsPerPage] = React.useState(5)
+const [rowsPerPage, setRowsPerPage] = React.useState(5)
 const [page, setPage] = React.useState(0)
 
 const handleChangePage = (event, newPage) => {
@@ -116,7 +113,6 @@ const handleChangeRowsPerPage = (event) => {
                             <TableCell align="left">
                                 <icons.IconTrash/>
                             </TableCell>
-                           
                         </TableRow>
                     ))}
                 </TableBody>

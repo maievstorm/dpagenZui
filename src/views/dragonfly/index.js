@@ -1,17 +1,23 @@
 // material-ui
-import { Typography } from '@mui/material';
+import React from 'react'
+import { IconCloudDownload,IconTrash} from '@tabler/icons';
+ 
 
 // project imports
 import MainCard from 'ui-component/cards/MainCard';
+import ChecksongDataTable from './Checksongtable';
+
+
 
 // ==============================|| Dragonfly Page ||============================== //
 
-const Dragonflypage = () => (
-    <MainCard title="Nhận dạng âm thanh">
-        <Typography variant="body2">
-            abc
-        </Typography>
-    </MainCard>
-);
 
+const Dragonflypage = () => {
+    
+    return (
+        <MainCard>
+           <ChecksongDataTable></ChecksongDataTable>
+        </MainCard>
+    )
+}
 export default Dragonflypage;

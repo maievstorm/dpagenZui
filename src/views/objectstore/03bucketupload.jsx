@@ -1,15 +1,18 @@
 import PropTypes from 'prop-types';
+import React, { Component } from "react";
 
 // material-ui
 import { styled, useTheme } from '@mui/material/styles';
 import { Avatar, Box, List, ListItem, ListItemAvatar, ListItemText, Typography } from '@mui/material';
+import { DropzoneArea } from "material-ui-dropzone";
 
 // project imports
 import MainCard from 'ui-component/cards/MainCard';
 import TotalIncomeCard from 'ui-component/cards/Skeleton/TotalIncomeCard';
 
 // assets
-import TableChartOutlinedIcon from '@mui/icons-material/TableChartOutlined';
+import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import { IconCloudDownload,IconTrash,IconUpload} from '@tabler/icons';
 
 // styles
 const CardWrapper = styled(MainCard)(({ theme }) => ({
@@ -39,13 +42,22 @@ const CardWrapper = styled(MainCard)(({ theme }) => ({
     }
 }));
 
+const icons = {
+    IconCloudDownload,
+    IconTrash,
+    IconUpload
+};
+
 // ==============================|| DASHBOARD - TOTAL INCOME DARK CARD ||============================== //
+
 
 const Bucketupload = ({ isLoading }) => {
     const theme = useTheme();
+    
 
     return (
         <>
+         
             {isLoading ? (
                 <TotalIncomeCard />
             ) : (
@@ -63,26 +75,11 @@ const Bucketupload = ({ isLoading }) => {
                                             color: '#fff'
                                         }}
                                     >
-                                        <TableChartOutlinedIcon fontSize="inherit" />
+                                        <CloudUploadIcon  fontSize="inherit" />
                                     </Avatar>
                                 </ListItemAvatar>
-                                <ListItemText
-                                    sx={{
-                                        py: 0,
-                                        mt: 0.45,
-                                        mb: 0.45
-                                    }}
-                                    primary={
-                                        <Typography variant="h4" sx={{ color: '#fff' }}>
-                                            ^
-                                        </Typography>
-                                    }
-                                    secondary={
-                                        <Typography variant="subtitle2" sx={{ color: 'primary.light', mt: 0.25 }}>
-                                            Tải lên
-                                        </Typography>
-                                    }
-                                />
+                                {/* <DropzoneArea ></DropzoneArea> */}
+                                
                             </ListItem>
                         </List>
                     </Box>
@@ -97,3 +94,22 @@ Bucketupload.propTypes = {
 };
 
 export default Bucketupload;
+
+
+// export default class extends Component {
+//     constructor(props) {
+//       super(props);
+//       this.state = {
+//         files: []
+//       };
+//     }
+//     handleChange(files) {
+//       console.log(files);
+//       this.setState({
+//         files: files
+//       });
+//     }
+//     render() {
+//       return <DropzoneArea onChange={this.handleChange.bind(this)} />;
+//     }
+//   }
