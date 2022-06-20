@@ -1,5 +1,5 @@
 // material-ui
-import { Typography } from '@mui/material';
+import CreateETLjob from './CreateJob';
 
 // project imports
 import MainCard from 'ui-component/cards/MainCard';
@@ -8,9 +8,9 @@ import MainCard from 'ui-component/cards/MainCard';
 
 const Dataingestpage = () => (
     <MainCard title="Lưu chuyển dữ liệu">
-        <Typography variant="body2">
-            abc
-        </Typography>
+       
+            <CreateETLjob/>
+     
     </MainCard>
 );
 

@@ -1,17 +1,8 @@
 // material-ui
-import { Typography } from '@mui/material';
+
 import React from 'react'
 import { useEffect, useState } from 'react';
-import {
-    Table,
-    TableHead,
-    TableCell,
-    TableBody,
-    IconButton,
-    Icon,
-    TableRow,
-} from '@mui/material'
-import { Box, styled } from '@mui/system'
+
 import { gridSpacing } from 'store/constant';
 import { Grid } from '@mui/material';
 
@@ -22,9 +13,6 @@ import Bucketvolumnpage from './02bucketvolumn';
 import Bucketupload from './03bucketupload';
 import Createprocesspage from './04Createprocess';
 
-import TotalIncomeDarkCard from 'views/dashboard/Default/TotalIncomeDarkCard';
-import TotalIncomeLightCard from 'views/dashboard/Default/TotalIncomeLightCard';
-import TotalGrowthBarChart from 'views/dashboard/Default/TotalGrowthBarChart';
 
 
 const Objectstorepage = () => {
