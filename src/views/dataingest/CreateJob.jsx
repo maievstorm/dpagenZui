@@ -11,6 +11,8 @@ function CreateETLjob() {
         {
             sourcetype: '',
             connectstring: '',
+            srcusername:'',
+            srcpassword :'',
             tablename: '',
             alias: ''
         },
@@ -121,6 +123,25 @@ function CreateETLjob() {
             key :'bigdata',
             name : 'Dữ liệu lớn'
         }
+        ,
+        {
+            key :'mssql',
+            name : 'Microsof Sql, Azure SQL'
+        } ,
+        {
+            key :'oracle',
+            name : 'Oracle'
+        }
+        ,
+        {
+            key :'mysql',
+            name : 'MySQL'
+        }
+        ,
+        {
+            key :'postgres',
+            name : 'PostgresSQL'
+        }
         
 
     ]
@@ -227,6 +248,22 @@ function CreateETLjob() {
                                     style={divStyle}
                                 />
                                 <TextField
+                                    name='srcusername'
+                                    size="small"
+                                    label='Tài khoản đăng nhập'
+                                    onChange={event => handleFormSrcChange(event, index)}
+                                    value={form.srcusername}
+                                    style={divStyle}
+                                />
+                                 <TextField
+                                    name='srcpassword'
+                                    size="small"
+                                    label='Mật khẩu'
+                                    onChange={event => handleFormSrcChange(event, index)}
+                                    value={form.srcpassword}
+                                    style={divStyle}
+                                />
+                                <TextField
                                     name='tablename'
                                     size="small"
                                     label='Tên bảng/tên file'
@@ -286,7 +323,6 @@ function CreateETLjob() {
                                             {formSrcField.alias}
                                             </MenuItem>
                                         ))}
-
                                 </Select> */}
  
                                 <TextField

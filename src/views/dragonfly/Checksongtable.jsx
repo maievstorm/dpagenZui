@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React  from "react";
 import { useState, useEffect } from 'react'   
 import axios from 'axios'; // npm instal axios
 
@@ -11,8 +11,6 @@ import {
     TableHead,
     TableCell,
     TableBody,
-    IconButton,
-    Icon,
     TableRow,
     TablePagination,
     TableContainer
