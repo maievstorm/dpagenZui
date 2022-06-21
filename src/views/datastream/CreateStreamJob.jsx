@@ -5,9 +5,9 @@ import Button from '@mui/material/Button';
 import { Select } from '@mui/material';
 import MenuItem from '@mui/material/MenuItem';
 import { IconSquarePlus,IconCircleMinus} from '@tabler/icons'; 
-import axios from 'axios'; // npm instal axios
+import axios from 'axios';
 
-function CreateETLjob() {
+function CreateStreamJob() {
     const [formSrcFields, setFormSrcFields] = useState([
         {
             sourcetype: '',
@@ -18,12 +18,12 @@ function CreateETLjob() {
             alias: ''
         },
     ])
-    const [Daginfo, setDagInfo] = useState([
+    const [Streaminfo, setStreaminfo] = useState([
         {
-            DagId: '',
+            StreamId: '',
             Schedule: '',
             owner: '',
-            tags_name: ''
+            Description: ''
         },
     ])
 
@@ -50,60 +50,35 @@ function CreateETLjob() {
         setformQuery(data);
     }
 
-    const handleDagInfo = (event, index) => {
-        let data = [...Daginfo];
+    const handleStreaminfo = (event, index) => {
+        let data = [...Streaminfo];
         data[index][event.target.name] = event.target.value;
-        setDagInfo(data);
+        setStreaminfo(data);
     }
 
 
     const submit = (e) => {
         e.preventDefault();
-        let conf = { 
-            'DagId': Daginfo.DagId,
-            "Schedule": Daginfo.Schedule,
-            "owner": Daginfo.owner,
-            'tags': Daginfo.tags_name,
-            'source': formSrcFields,
-            'query': formQuery
+        let data = {
+            'DAG': [
+                {
+                    'DagId': Streaminfo.DagId,
+                    "Schedule": Streaminfo.Schedule,
+                    "owner": Streaminfo.owner,
+                    'tags': Streaminfo.tags_name,
+                    'source': formSrcFields,
+                    'query': formQuery
+                }
 
-       
-                  
-    }
-
-        // console.log(datadag)
-        // const json = JSON.stringify(datadag)
-        // console.log (json)
-
-       
-        const body = {
-            "conf": {conf},
-          }
-
-        console.log (conf)
-
-       
-       
-         
-            axios({
-                method: 'post',
-                url: 'https://flowdpa.apps.xplat.fis.com.vn/api/v1/dags/dag_create_job_file/dagRuns',
-                 
-                auth: {
-                    username: 'hung',
-                    password: '123456a@'
-                  },
-                data: body
-              }); 
-
-            // axios.post("https://flowdpa.apps.xplat.fis.com.vn/api/v1/dags/dag_create_job_file/dagRuns", 
-            //             auth=auth, 
-            //             data=json.dumps(body)
-            // )   
-
+            ]
         }
 
-
+        
+        const json = JSON.stringify({ "name": "SQLDBZtest", "config": { "connector.class": "io.debezium.connector.sqlserver.SqlServerConnector", "database.hostname": "10.15.10.135", "database.port": "1433", "database.user": "sa",  "database.password": "123456a@",  "database.dbname": "dpa", "database.server.name": "test", "table.include.list": "dbo.CARD_TRANSACTION", "database.history.kafka.bootstrap.servers": "kafkadpa-headless:9092" , "database.history.kafka.topic": "test_dbhistory", "decimal.handling.mode":"double", "time.precision.mode": "connect", "transforms": "route,unwrap", "transforms.route.type": "org.apache.kafka.connect.transforms.RegexRouter", "transforms.route.regex": "([^.]+)\\.([^.]+)\\.([^.]+)", "transforms.route.replacement": "$3", "transforms.unwrap.type": "io.debezium.transforms.ExtractNewRecordState", "transforms.unwrap.drop.tombstones": "false" } });
+        console.log(json)
+        
+        const res =  axios.post('https://streamdpa.apps.xplat.fis.com.vn', json);
+    }
 
     const addFields = () => {
         let object = {
@@ -155,7 +130,7 @@ function CreateETLjob() {
         }
         ,
         {
-            key :'sqlserver',
+            key :'mssql',
             name : 'Microsof Sql, Azure SQL'
         } ,
         {
@@ -204,9 +179,9 @@ function CreateETLjob() {
                     label="Tên Job"
                     id="DagId"
                     name="DagId"
-                    value={Daginfo.DagId}
+                    value={Streaminfo.DagId}
                     size="small"
-                    onChange={event => setDagInfo({ ...Daginfo.DagId, ['DagId']: event.target.value })}
+                    onChange={event => setStreaminfo({ ...Streaminfo.DagId, ['DagId']: event.target.value })}
                     style={divStyle}
 
                 />
@@ -215,16 +190,16 @@ function CreateETLjob() {
                     id="Schedule"
                     name="Schedule"
                     size="small"
-                    value={Daginfo.Schedule}
-                    onChange={event => setDagInfo({ ...Daginfo, 'Schedule': event.target.value })}
+                    value={Streaminfo.Schedule}
+                    onChange={event => setStreaminfo({ ...Streaminfo, 'Schedule': event.target.value })}
                     style={divStyle}
                 />
                 <TextField
                     label="Người tạo"
                     id="owner"
                     name="owner"
-                    value={Daginfo.owner}
-                    onChange={event => setDagInfo({ ...Daginfo, 'owner': event.target.value })}
+                    value={Streaminfo.owner}
+                    onChange={event => setStreaminfo({ ...Streaminfo, 'owner': event.target.value })}
                     size="small"
                     style={divStyle}
                 />
@@ -232,8 +207,8 @@ function CreateETLjob() {
                     label="Tags"
                     id="tags_name"
                     name="tags_name"
-                    value={Daginfo.tags_name}
-                    onChange={event => setDagInfo({ ...Daginfo, 'tags_name': event.target.value })}
+                    value={Streaminfo.tags_name}
+                    onChange={event => setStreaminfo({ ...Streaminfo, 'tags_name': event.target.value })}
                     size="small"
                     style={divStyle}
                 />
@@ -317,7 +292,7 @@ function CreateETLjob() {
                     <Button style={divStyle} name = "addsoruce" onClick={addFields}><IconSquarePlus/></Button>
                 </Box>
                 <strong>
-                    Đăng ký thủ tục tổng hợp dữ liệu
+                    Đăng ký thủ tục truyền tải dữ liệu
                 </strong>
                 <div  >
                     {/* <input placeholder='Số query' onChange={e => addFieldQuery(e.target.value)}/> */}
@@ -327,7 +302,7 @@ function CreateETLjob() {
                             <div >
                                 {/* <strong>Query {index}</strong> */}
                                 <TextField
-                                    label="Tên job tổng hợp"
+                                    label="Tên job streaming"
                                     id="queryname"
                                     name="queryname"
                                     value={formquery.queryname}
@@ -336,13 +311,12 @@ function CreateETLjob() {
                                     style={divStyle}
                                 />
                                  <br></br>
-                                {/* <Select name='listsourcetable' 
-                                        value={formquery.listsourcetable}   
+                                 Bảng nguồn: 
+                                 <Select name='listsourcetable' 
+                                        value={formquery.listsourcetable}  
                                         onChange={event => handleformQuery(event, index)}
                                         size="small"
                                         style={divStyle}
-                                        multiple
-                                        MenuProps={MenuProps}
                                 >
                                    
                                      {formSrcFields.map((formSrcField) => (
@@ -353,32 +327,12 @@ function CreateETLjob() {
                                             {formSrcField.alias}
                                             </MenuItem>
                                         ))}
-                                </Select> */}
- 
-                                <TextField
-                                    label="Danh sách bảng cần tổng hợp"
-                                    id="listsourcetable"
-                                    name="listsourcetable"
-                                    value={formquery.listsourcetable}
-                                    onChange={event => handleformQuery(event, index)}
-                                    size="small"
-                                    style={divStyle}
-                                />  
-                                
+
+                                </Select>
                                  <Button name="btnremovequery" onClick={() => removeQuery(index)}><IconCircleMinus/></Button>
                                  <br></br>
-                                 <TextField
-                                    label="Query Detail"
-                                    id="querydetail"
-                                    name="querydetail"
-                                    multiline
-                                    size="small"
-                                    fullWidth
-                                    value={formquery.querydetail}
-                                    onChange={event => handleformQuery(event, index)}
-                                    style={divStyle}
-                                />
-
+                               
+                                Bảng đích :
                                 <Select name='targettable' 
                                         value={formquery.targettable}  
                                         onChange={event => handleformQuery(event, index)}
@@ -412,7 +366,7 @@ function CreateETLjob() {
                         
                     ))
                     }
-                    <Button style={divStyle} name="btnaddquery" onClick={addFieldQuery}><IconSquarePlus/></Button>
+                 
                 </div>
             </div>
             <br />
@@ -421,4 +375,4 @@ function CreateETLjob() {
     );
 }
 
-export default CreateETLjob;
+export default CreateStreamJob;

@@ -3,6 +3,7 @@ import { lazy } from 'react';
 // project imports
 import MainLayout from 'layout/MainLayout';
 import Loadable from 'ui-component/Loadable';
+ 
 
 // dashboard routing
 const DashboardDefault = Loadable(lazy(() => import('views/dashboard/Default')));
@@ -26,6 +27,7 @@ const Dataaipage = Loadable(lazy(() => import('views/dataai')));
 const Financereportpage = Loadable(lazy(() => import('views/financereport')));
 const Datavisualpage = Loadable(lazy(() => import('views/datavisual')));
 const Dragonflypage= Loadable(lazy(() => import('views/dragonfly')));
+const MonitorJob = Loadable(lazy(() => import('views/dataingest/MonitorJob')));
 // ==============================|| MAIN ROUTING ||============================== //
 
 const MainRoutes = {
@@ -113,6 +115,11 @@ const MainRoutes = {
         {
             path: '/dragonfly',
             element: <Dragonflypage />
+        }
+        ,
+        {
+            path: '/monitorjob',
+            element: <MonitorJob />
         }
     ]
 };
