@@ -7,6 +7,7 @@ import MenuItem from '@mui/material/MenuItem';
 import { IconSquarePlus,IconCircleMinus} from '@tabler/icons'; 
 import axios from 'axios'; // npm instal axios
 import MultipleSelectCheckmarks from './MultipleSelectCheckmarks';
+import UserService from 'services/UserService';
 
 function CreateETLjob() {
     const [formSrcFields, setFormSrcFields] = useState([
@@ -24,7 +25,7 @@ function CreateETLjob() {
         {
             DagId: '',
             Schedule: '',
-            owner: '',
+         //   owner: '',
             tags_name: ''
         },
     ])
@@ -65,7 +66,7 @@ function CreateETLjob() {
         let conf = { 
             'DagId': Daginfo.DagId,
             "Schedule": Daginfo.Schedule,
-            "owner": Daginfo.owner,
+            "owner": UserService.getUsername(),
             'tags': Daginfo.tags_name,
             'source': formSrcFields,
             'query': formQuery
@@ -83,16 +84,16 @@ function CreateETLjob() {
        
        
          
-            axios({
-                method: 'post',
-                url: 'https://flowdpa.apps.xplat.fis.com.vn/api/v1/dags/dag_create_job_file/dagRuns',
+            // axios({
+            //     method: 'post',
+            //     url: 'https://flowdpa.apps.xplat.fis.com.vn/api/v1/dags/dag_create_job_file/dagRuns',
                  
-                auth: {
-                    username: 'hung',
-                    password: '123456a@'
-                  },
-                data: body
-              }); 
+            //     auth: {
+            //         username: 'hung',
+            //         password: '123456a@'
+            //       },
+            //     data: body
+            //   }); 
 
               const invoicebody=
               {
@@ -115,7 +116,7 @@ function CreateETLjob() {
                   data: invoicebody
               });     
 
-              
+
 
            
 
@@ -248,7 +249,7 @@ function CreateETLjob() {
                     onChange={event => setDagInfo({ ...Daginfo, 'Schedule': event.target.value })}
                     style={divStyle}
                 />
-                <TextField
+                {/* <TextField
                     label="Người tạo"
                     id="owner"
                     name="owner"
@@ -256,7 +257,7 @@ function CreateETLjob() {
                     onChange={event => setDagInfo({ ...Daginfo, 'owner': event.target.value })}
                     size="small"
                     style={divStyle}
-                />
+                /> */}
                 <TextField
                     label="Tags"
                     id="tags_name"
