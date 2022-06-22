@@ -6,12 +6,14 @@ import { Select } from '@mui/material';
 import MenuItem from '@mui/material/MenuItem';
 import { IconSquarePlus,IconCircleMinus} from '@tabler/icons'; 
 import axios from 'axios'; // npm instal axios
+import MultipleSelectCheckmarks from './MultipleSelectCheckmarks';
 
 function CreateETLjob() {
     const [formSrcFields, setFormSrcFields] = useState([
         {
             sourcetype: '',
             connectstring: '',
+            databasename:'',
             srcusername:'',
             srcpassword :'',
             tablename: '',
@@ -32,7 +34,8 @@ function CreateETLjob() {
             queryname: '',
             querydetail: '',
             listsourcetable: '',
-            targettable: ''
+            targettable: '',
+            writemode: ''
         },
     ])
     // console.log(formQuery)
@@ -70,18 +73,13 @@ function CreateETLjob() {
        
                   
     }
-
-        // console.log(datadag)
-        // const json = JSON.stringify(datadag)
-        // console.log (json)
-
        
         const body = {
             "conf": {conf},
           }
 
-        console.log (conf)
-
+        //console.log (conf)
+        console.log(JSON.stringify(body))
        
        
          
@@ -96,10 +94,30 @@ function CreateETLjob() {
                 data: body
               }); 
 
-            // axios.post("https://flowdpa.apps.xplat.fis.com.vn/api/v1/dags/dag_create_job_file/dagRuns", 
-            //             auth=auth, 
-            //             data=json.dumps(body)
-            // )   
+              const invoicebody=
+              {
+                  "item_name":Daginfo.DagId,
+                  "customer_invoice_data":JSON.stringify(body),
+                  "subscription_id":1,
+                  "plan_history_id":1,
+                  "invoice_period_start_date": new Date().toLocaleString() + '',
+                  "invoice_period_end_date":new Date().toLocaleString() + '',
+                  "invoice_description":Daginfo.DagId,
+                  "invoice_amount":100,
+                  "invoice_created_ts":new Date().toLocaleString() + '',
+                  "invoice_due_ts":new Date().toLocaleString() + '',
+                  "invoice_paid_ts":new Date().toLocaleString() + ''
+              }
+          
+              axios({
+                  method: 'post',
+                  url: 'https://dpzapi.apps.xplat.fis.com.vn/api/v1/invoice',           
+                  data: invoicebody
+              });     
+
+              
+
+           
 
         }
 
@@ -175,6 +193,17 @@ function CreateETLjob() {
         
 
     ]
+    const writemodetype = [
+        {
+            key: 'append',
+            name: 'append'
+        },
+        {
+            key: 'overwrite',
+            name: 'overwrite'
+        } 
+    ]
+
 
     
     const divStyle = {
@@ -277,6 +306,14 @@ function CreateETLjob() {
                                     value={form.connectstring}
                                     style={divStyle}
                                 />
+                                 <TextField
+                                    name='databasename'
+                                    size="small"
+                                    label='Tên cơ sở dữ liệu'
+                                    onChange={event => handleFormSrcChange(event, index)}
+                                    value={form.databasename}
+                                    style={divStyle}
+                                />
                                 <TextField
                                     name='srcusername'
                                     size="small"
@@ -336,26 +373,9 @@ function CreateETLjob() {
                                     style={divStyle}
                                 />
                                  <br></br>
-                                {/* <Select name='listsourcetable' 
-                                        value={formquery.listsourcetable}   
-                                        onChange={event => handleformQuery(event, index)}
-                                        size="small"
-                                        style={divStyle}
-                                        multiple
-                                        MenuProps={MenuProps}
-                                >
-                                   
-                                     {formSrcFields.map((formSrcField) => (
-                                            <MenuItem
-                                            key={formSrcField.alias}
-                                            value={formSrcField.alias}
-                                            >
-                                            {formSrcField.alias}
-                                            </MenuItem>
-                                        ))}
-                                </Select> */}
+                               
  
-                                <TextField
+                                {/* <TextField
                                     label="Danh sách bảng cần tổng hợp"
                                     id="listsourcetable"
                                     name="listsourcetable"
@@ -363,7 +383,17 @@ function CreateETLjob() {
                                     onChange={event => handleformQuery(event, index)}
                                     size="small"
                                     style={divStyle}
-                                />  
+                                />  */}
+
+                                
+                                <MultipleSelectCheckmarks 
+                                headerName={'Danh sách bảng cần tổng hợp'} 
+                                data={formSrcFields}
+                                formQuery={formQuery}
+                                setformQuery = {setformQuery}
+                                index = {index}
+                                source = {'listsourcetable'}
+                                /> 
                                 
                                  <Button name="btnremovequery" onClick={() => removeQuery(index)}><IconCircleMinus/></Button>
                                  <br></br>
@@ -394,6 +424,25 @@ function CreateETLjob() {
                                             {formSrcField.alias}
                                             </MenuItem>
                                         ))}
+
+                                </Select>
+
+                                Write mode
+                                <Select name='writemode'
+                                    value={formquery.writemode}
+                                    onChange={event => handleformQuery(event, index)}
+                                    size="small"
+                                    style={divStyle}
+                                >
+
+                                    {writemodetype.map((writemode) => (
+                                        <MenuItem
+                                            key={writemode.key}
+                                            value={writemode.key}
+                                        >
+                                            {writemode.name}
+                                        </MenuItem>
+                                    ))}
 
                                 </Select>
 
