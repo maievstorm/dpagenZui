@@ -30,9 +30,10 @@ const utilities = {
             id: 'util-color',
             title: 'Truy vấn',
             type: 'item',
-            url: '/utils/util-color',
+            url: 'https://dpaquerry.apps.xplat.fis.com.vn',
             icon: icons.IconPalette,
-            breadcrumbs: false
+            external: true,
+            target: true
         },
         {
             id: 'util-shadow',
