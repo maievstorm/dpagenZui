@@ -6,9 +6,9 @@ import { JSONTree } from 'react-json-tree';
 // If you're using Immutable.js: `npm i --save immutable`
 import { Map } from 'immutable';
 
-export const Review = ({data,submit,navigation}) => {
+export const Review = ({conf,submit,navigation}) => {
   const json = {
-    data
+    conf
   };
   const theme = {
     scheme: 'monokai',

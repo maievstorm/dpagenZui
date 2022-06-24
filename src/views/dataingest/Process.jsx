@@ -5,10 +5,11 @@ import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import axios from 'axios';
 
 const steps = ['Đăng ký tiến trình','Đăng ký CSDL', 'Tạo truy vấn tổng hợp', 'Xác nhận thông tin','Hoàn thành'];
 
-export default function HorizontalLinearStepper({navigation,data}) {
+export default function HorizontalLinearStepper({navigation,conf}) {
   const [activeStep, setActiveStep] = React.useState(0);
   const [skipped, setSkipped] = React.useState(new Set());
 
@@ -28,7 +29,44 @@ export default function HorizontalLinearStepper({navigation,data}) {
     }
     // set api
     if(activeStep === steps.length - 2){
-      console.log(data)
+      const body = {
+        "conf": {conf},
+      }
+      console.log(conf)
+            axios({
+                method: 'post',
+                url: 'https://flowdpa.apps.xplat.fis.com.vn/api/v1/dags/dag_create_job_file/dagRuns',
+                 
+                auth: {
+                    username: 'hung',
+                    password: '123456a@'
+                  },
+                data: body
+              }); 
+
+              const invoicebody=
+              {
+                  "item_name":conf.DagId,
+                  "customer_invoice_data":JSON.stringify(body),
+                  "subscription_id":1,
+                  "plan_history_id":1,
+                  "invoice_period_start_date": new Date().toLocaleString() + '',
+                  "invoice_period_end_date":new Date().toLocaleString() + '',
+                  "invoice_description":conf.DagId,
+                  "invoice_amount":100,
+                  "invoice_created_ts":new Date().toLocaleString() + '',
+                  "invoice_due_ts":new Date().toLocaleString() + '',
+                  "invoice_paid_ts":new Date().toLocaleString() + ''
+              }
+
+           console.log(invoicebody)
+              axios({
+                  method: 'post',
+                  url: 'https://dpzapi.apps.xplat.fis.com.vn/api/v1/invoice',           
+                  data: invoicebody
+              });     
+
+
     }
     if(activeStep !== steps.length - 1){
       navigation.next()

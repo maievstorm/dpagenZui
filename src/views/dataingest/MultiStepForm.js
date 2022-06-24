@@ -182,15 +182,15 @@ const addFields = () => {
       <Query {...props3} />
       </>
     case "review":
-      let data = { 
+      let conf = { 
         'DagId': Daginfo.DagId,
         "Schedule": Daginfo.Schedule,
-        // "owner": UserService.getUsername(),
+         "owner": UserService.getUsername(),
         'tags': Daginfo.tags_name,
         'source': formSrcFields,
         'query': formQuery
       }
-      const props4 = {data,submit, navigation };
+      const props4 = {conf,submit, navigation };
       
       return <>
       <HorizontalLinearStepper {...props4}/>
