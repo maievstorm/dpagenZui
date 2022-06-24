@@ -3,30 +3,22 @@ import { useForm, useStep } from "react-hooks-helper";
 import { Info } from "./stepForm/Info";
 import { Query } from "./stepForm/Query";
 import { Source } from "./stepForm/Source";
-import { Submit } from "./stepForm/Submit";
+import { Review } from "./stepForm/Review";
+import { Finish } from "./stepForm/Finish";
 import { useState } from "react";
+import HorizontalLinearStepper from "./Process";
+import UserService from 'services/UserService';
 
-const defaultData = {
-  DagId: "",
-  Schedule: "",
-  tags_name: "",
-  address: "",
-  city: "",
-  state: "",
-  zip: "",
-  phone: "",
-  email: "",
-};
 
 const steps = [
   { id: "info" },
   { id: "source" },
   { id: "query" },
-  { id: "submit" },
+  { id: "review" },
+  { id: "finish" },
 ];
 
 export const MultiStepForm = () => {
-  const [formData, setForm] = useForm(defaultData);
   const [Daginfo, setDagInfo] = useState([
       {
           DagId: '',
@@ -109,7 +101,7 @@ const addFields = () => {
     let conf = { 
         'DagId': Daginfo.DagId,
         "Schedule": Daginfo.Schedule,
-        // "owner": UserService.getUsername(),
+        "owner": UserService.getUsername(),
         'tags': Daginfo.tags_name,
         'source': formSrcFields,
         'query': formQuery
@@ -169,19 +161,46 @@ const addFields = () => {
   const props1 = { Daginfo, setDagInfo, navigation };
   const props2 = { formSrcFields, handleFormSrcChange, removeFields,addFields,navigation };
   const props3 = { formQuery, handleformQuery, removeQuery,addFieldQuery,formSrcFields,setformQuery,navigation };
+  const props = { navigation };
 
-  const props4 = { submit, navigation };
 
 
   switch (step.id) {
     case "info":
-      return <Info {...props1} />;
+      return <>
+        <HorizontalLinearStepper {...props}/>
+        <Info {...props1} />
+      </>;
     case "source":
-      return <Source {...props2} />;
+      return <>
+        <HorizontalLinearStepper {...props}/>
+        <Source {...props2} />
+        </>
     case "query":
-      return <Query {...props3} />;
-    case "submit":
-      return <Submit {...props4} />;
+      return <>
+      <HorizontalLinearStepper {...props}/>
+      <Query {...props3} />
+      </>
+    case "review":
+      let data = { 
+        'DagId': Daginfo.DagId,
+        "Schedule": Daginfo.Schedule,
+        // "owner": UserService.getUsername(),
+        'tags': Daginfo.tags_name,
+        'source': formSrcFields,
+        'query': formQuery
+      }
+      const props4 = {data,submit, navigation };
+      
+      return <>
+      <HorizontalLinearStepper {...props4}/>
+      <Review {...props4} />
+      </>
+    case "finish":    
+      return <>
+      <HorizontalLinearStepper {...props}/>
+      <Finish/>
+      </>
   }
 
   return (

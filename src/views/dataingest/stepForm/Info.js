@@ -1,8 +1,8 @@
 import React from "react";
 import Container from "@material-ui/core/Container";
 import Box from '@mui/material/Box';
-import TextField from "@material-ui/core/TextField";
-import Button from "@material-ui/core/Button";
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
 
 export const Info = ({  Daginfo, setDagInfo, navigation }) => {
   const divStyle = {
@@ -55,9 +55,11 @@ export const Info = ({  Daginfo, setDagInfo, navigation }) => {
               style={divStyle}
           />
 
+          {/* <Button variant="contained" color="primary">Check</Button> */}
+
 
       </Box>
-      <Button
+      {/* <Button
         variant="contained"
         fullWidth
         color="primary"
@@ -65,7 +67,7 @@ export const Info = ({  Daginfo, setDagInfo, navigation }) => {
         onClick={() => navigation.next()}
       >
         Next
-      </Button>
+      </Button> */}
     </div>
   );
 };

@@ -2,8 +2,8 @@ import React from "react";
 import Container from "@material-ui/core/Container";
 import Box from '@mui/material/Box';
 import { Select } from '@mui/material';
-import TextField from "@material-ui/core/TextField";
-import Button from "@material-ui/core/Button";
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
 import { IconSquarePlus,IconCircleMinus} from '@tabler/icons'
 import MenuItem from '@mui/material/MenuItem';
 
@@ -133,7 +133,7 @@ export const Source = ({ formSrcFields, handleFormSrcChange,removeFields,addFiel
           <Button style={divStyle} name = "addsoruce" onClick={addFields}><IconSquarePlus/></Button>
       </Box>
 
-      <div style={{ marginTop: "1rem" }}>
+      {/* <div style={{ marginTop: "1rem" }}>
         <Button
           color="secondary"
           variant="contained"
@@ -149,7 +149,7 @@ export const Source = ({ formSrcFields, handleFormSrcChange,removeFields,addFiel
         >
           Next
         </Button>
-      </div>
+      </div> */}
     </div>
   );
 };
