@@ -84,37 +84,37 @@ function CreateETLjob() {
        
        
          
-            axios({
-                method: 'post',
-                url: 'https://flowdpa.apps.xplat.fis.com.vn/api/v1/dags/dag_create_job_file/dagRuns',
+            // axios({
+            //     method: 'post',
+            //     url: 'https://flowdpa.apps.xplat.fis.com.vn/api/v1/dags/dag_create_job_file/dagRuns',
                  
-                auth: {
-                    username: 'hung',
-                    password: '123456a@'
-                  },
-                data: body
-              }); 
+            //     auth: {
+            //         username: 'hung',
+            //         password: '123456a@'
+            //       },
+            //     data: body
+            //   }); 
 
-              const invoicebody=
-              {
-                  "item_name":Daginfo.DagId,
-                  "customer_invoice_data":JSON.stringify(body),
-                  "subscription_id":1,
-                  "plan_history_id":1,
-                  "invoice_period_start_date": new Date().toLocaleString() + '',
-                  "invoice_period_end_date":new Date().toLocaleString() + '',
-                  "invoice_description":Daginfo.DagId,
-                  "invoice_amount":100,
-                  "invoice_created_ts":new Date().toLocaleString() + '',
-                  "invoice_due_ts":new Date().toLocaleString() + '',
-                  "invoice_paid_ts":new Date().toLocaleString() + ''
-              }
+            //   const invoicebody=
+            //   {
+            //       "item_name":Daginfo.DagId,
+            //       "customer_invoice_data":JSON.stringify(body),
+            //       "subscription_id":1,
+            //       "plan_history_id":1,
+            //       "invoice_period_start_date": new Date().toLocaleString() + '',
+            //       "invoice_period_end_date":new Date().toLocaleString() + '',
+            //       "invoice_description":Daginfo.DagId,
+            //       "invoice_amount":100,
+            //       "invoice_created_ts":new Date().toLocaleString() + '',
+            //       "invoice_due_ts":new Date().toLocaleString() + '',
+            //       "invoice_paid_ts":new Date().toLocaleString() + ''
+            //   }
           
-              axios({
-                  method: 'post',
-                  url: 'https://dpzapi.apps.xplat.fis.com.vn/api/v1/invoice',           
-                  data: invoicebody
-              });     
+            //   axios({
+            //       method: 'post',
+            //       url: 'https://dpzapi.apps.xplat.fis.com.vn/api/v1/invoice',           
+            //       data: invoicebody
+            //   });     
 
 
 
