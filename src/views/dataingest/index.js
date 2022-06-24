@@ -1,6 +1,7 @@
 // material-ui
 import CreateETLjob from './CreateJob'
  
+ 
 
 // project imports
 import MainCard from 'ui-component/cards/MainCard';
@@ -11,6 +12,7 @@ const Dataingestpage = () => (
     <MainCard title="Lưu chuyển dữ liệu">
        
             <CreateETLjob/>
+           
      
     </MainCard>
 );
