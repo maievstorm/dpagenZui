@@ -13,12 +13,12 @@ export const Info = ({  Daginfo, setDagInfo, navigation }) => {
   return (
     <div>
       <strong>
-          Thông tin job
+          Thông tin tiến trình
       </strong>
       <Box >
 
           <TextField
-              label="Tên Job"
+              label="Tên tiến trình"
               id="DagId"
               name="DagId"
               value={Daginfo.DagId}
@@ -28,7 +28,7 @@ export const Info = ({  Daginfo, setDagInfo, navigation }) => {
 
           />
           <TextField
-              label="Schedule"
+              label="Tần suất chạy"
               id="Schedule"
               name="Schedule"
               size="small"

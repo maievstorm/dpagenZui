@@ -1,11 +1,11 @@
 import React  from "react";
 import { useState, useEffect } from 'react'   
 import axios from 'axios'; // npm instal axios
-
 import {IconPlayerPlay} from '@tabler/icons';
-
-
-
+import config from "../../config";
+import Button from '@mui/material/Button';
+import ButtonGroup from '@mui/material/ButtonGroup';
+import { useNavigate } from "react-router-dom"; 
 import Paper from '@material-ui/core/Paper'; 
 import { makeStyles } from '@material-ui/core/styles'; 
 
@@ -33,13 +33,18 @@ const useStyles = makeStyles({
     });
     const icons = {
       IconPlayerPlay
-    };      
+    };   
+   
+ 
+ 
 
 export default function MonitorJob() {  
     const classes = useStyles();  
     const [page, setPage] = React.useState(0);  
     const [data, setData] = useState([]);   
     const [rowsPerPage, setRowsPerPage] = React.useState(5);  
+    
+    
 
     const handleChangePage = (event, newPage) => {  
         setPage(newPage);  
@@ -48,28 +53,38 @@ export default function MonitorJob() {
       const handleChangeRowsPerPage = event => {  
         setRowsPerPage(+event.target.value);  
         setPage(0);  
-      };  
+      }; 
+      
+    const getairflowapi= config.rootapi+'/invoice/subntype/1&airflow';
  
     useEffect(() => {   
-          axios({method:'get',url:"https://flowdpa.apps.xplat.fis.com.vn/api/v1/dags",
-           auth: {
-            username: 'hung',
-            password: '123456a@'
-          }}).then(res=>{
-            setData(res.data.dags);    
+          axios({method:'get',url:getairflowapi}
+           ).then(res=>{
+            setData(res.data.data);    
           })  
-        }, []);   
+        },[] ); 
+
+        const navigate = useNavigate()
+
+        const onClickHandler = () => navigate('/dataingest/createflowjob')
+        
     return (  
-      <Paper className={classes.root}>  
+      
+      <Paper className={classes.root}> 
+      <ButtonGroup variant="text" aria-label="text button group">
+        <Button  onClick={onClickHandler} >Tạo tiến trình</Button>
+        <Button >Chỉnh sửa tiến trình</Button>
+        <Button>Xoá tiến trình</Button>
+      </ButtonGroup> 
+       
         <TableContainer className={classes.container}>  
           <Table stickyHeader aria-label="sticky table">  
           <TableHead>  
               <TableRow>  
-                <TableCell>dag_id</TableCell>  
-                <TableCell align="right">owners</TableCell>  
-                <TableCell align="right">max_active_runs</TableCell>  
-                <TableCell align="right">schedule_interval</TableCell>  
-                <TableCell align="right">Action</TableCell> 
+                <TableCell>id</TableCell>  
+                <TableCell >Tên tiến trình</TableCell>  
+                {/* <TableCell >Chi tiết tiến trình</TableCell>   */}
+                <TableCell >Action</TableCell> 
               </TableRow>  
             </TableHead>  
             <TableBody>  
@@ -77,13 +92,10 @@ export default function MonitorJob() {
                 return (  
   
              <TableRow >  
-                  <TableCell component="th" scope="row">  
-                    {row.dag_id}  
-                  </TableCell>  
-                  <TableCell align="right">{row.owners}</TableCell>  
-                  <TableCell align="right">{row.max_active_runs}</TableCell>  
-                  <TableCell align="right">{row.schedule_interval}</TableCell>  
-                  <TableCell align="right"><icons.IconPlayerPlay/></TableCell>  
+                  <TableCell component="th" scope="row">{row.id}</TableCell>  
+                  <TableCell >{row.item_name}</TableCell>  
+                  {/* <TableCell >{row.customer_invoice_data}</TableCell>   */}
+                  <TableCell ><icons.IconPlayerPlay/></TableCell>  
                   
                 </TableRow>  
                 );  

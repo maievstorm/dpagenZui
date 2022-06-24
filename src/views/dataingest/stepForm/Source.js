@@ -43,6 +43,8 @@ export const Source = ({ formSrcFields, handleFormSrcChange,removeFields,addFiel
     
 
 ]
+
+
   const divStyle = {
     margin: '5px'
   };
@@ -109,18 +111,23 @@ export const Source = ({ formSrcFields, handleFormSrcChange,removeFields,addFiel
                           value={form.srcpassword}
                           style={divStyle}
                       />
+                      <br></br>
+                      
                       <TextField
                           name='tablename'
                           size="small"
-                          label='Tên bảng/tên file'
+                          multiline
+                          fullWidth
+                          label='Tên bảng/Truy vấn/Tên file'
                           onChange={event => handleFormSrcChange(event, index)}
                           value={form.tablename}
                           style={divStyle}
                       />
+                      <br></br>
                       <TextField
                           name='alias'
                           size="small"
-                          label='Tên bảng cho truy vấn'
+                          label='Tên bảng cho tiến trình'
                           onChange={event => handleFormSrcChange(event, index)}
                           value={form.alias}
                           style={divStyle}

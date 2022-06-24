@@ -28,6 +28,7 @@ const Financereportpage = Loadable(lazy(() => import('views/financereport')));
 const Datavisualpage = Loadable(lazy(() => import('views/datavisual')));
 const Dragonflypage= Loadable(lazy(() => import('views/dragonfly')));
 const MonitorJob = Loadable(lazy(() => import('views/dataingest/MonitorJob')));
+const CreateflowJob  = Loadable(lazy(() => import('views/dataingest/CreateFlowJob')));
 // ==============================|| MAIN ROUTING ||============================== //
 
 const MainRoutes = {
@@ -118,8 +119,13 @@ const MainRoutes = {
         }
         ,
         {
-            path: '/monitorjob',
+            path: '/dataingest/monitorjob',
             element: <MonitorJob />
+        }
+        ,
+        {
+            path: '/dataingest/createflowjob',
+            element: <CreateflowJob />
         }
     ]
 };

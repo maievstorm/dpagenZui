@@ -47,6 +47,7 @@ export default function HorizontalLinearStepper({navigation,conf}) {
               const invoicebody=
               {
                   "item_name":conf.DagId,
+                  "item_type":'airflow',
                   "customer_invoice_data":JSON.stringify(body),
                   "subscription_id":1,
                   "plan_history_id":1,

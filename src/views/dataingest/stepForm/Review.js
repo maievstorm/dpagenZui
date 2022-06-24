@@ -1,18 +1,30 @@
 import React from "react";
+import { useState, useEffect } from 'react'  
 import Container from '@material-ui/core/Container';
 import { Divider } from "@mui/material";
 import Button from '@mui/material/Button';
 import { JSONTree } from 'react-json-tree';
 // If you're using Immutable.js: `npm i --save immutable`
 import { Map } from 'immutable';
+import {
+  Table,
+  TableHead,
+  TableCell,
+  TableBody,
+  TableRow,
+  TablePagination,
+  TableContainer
+} from '@mui/material'
 
 export const Review = ({conf,submit,navigation}) => {
-  const json = {
-    conf
-  };
+  //const classes = useStyles();  
+  const [page, setPage] = React.useState(0);  
+  const [data, setData] = useState([]);   
+  const [rowsPerPage, setRowsPerPage] = React.useState(5);  
+   
+  
   const theme = {
     scheme: 'monokai',
-    author: 'wimer hazenberg (http://www.monokai.nl)',
     base00: '#272822',
     base01: '#383830',
     base02: '#49483e',
@@ -33,9 +45,35 @@ export const Review = ({conf,submit,navigation}) => {
   
   return (
       <div style={{ marginTop: "1rem" }}>
-        <h3>Dữ liệu</h3>
-        <JSONTree data={json} theme={theme} />
+        <h3>Dữ liệu</h3> 
+        <JSONTree data={conf} theme={theme} />
         {/* <Button onClick={submit} variant="contained" color="primary">Tạo tiến trình</Button> */}
-    </div>
+        {/* <Table stickyHeader aria-label="sticky table">  
+          <TableHead>  
+              <TableRow>  
+                <TableCell >Tên tiến trình</TableCell>  
+                <TableCell >Danh sách data</TableCell>
+                <TableCell >Danh sách truy vấn</TableCell> 
+              </TableRow>  
+            </TableHead>  
+            <TableBody>  
+            
+              {conf[0]?.slice().map(row => {  
+                return (  
+  
+             <TableRow >  
+                  <TableCell component="th" scope="row">{row.DagId}</TableCell>  
+                  <TableCell >{row.source}</TableCell>  
+                  <TableCell >{row.query}</TableCell>  
+               
+                  
+                </TableRow>  
+                );  
+  
+              })}  
+            </TableBody>  
+          </Table>  */}
+
+    </div> 
   )
 };
