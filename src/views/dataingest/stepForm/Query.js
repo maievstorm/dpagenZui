@@ -2,8 +2,8 @@ import React from "react";
 import Container from "@material-ui/core/Container";
 import Box from '@mui/material/Box';
 import { Select } from '@mui/material';
-import TextField from "@material-ui/core/TextField";
-import Button from "@material-ui/core/Button";
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
 import { IconSquarePlus,IconCircleMinus} from '@tabler/icons'
 import MenuItem from '@mui/material/MenuItem';
 import MultipleSelectCheckmarks from '../MultipleSelectCheckmarks';
@@ -136,7 +136,7 @@ export const Query = ({ formQuery, handleformQuery, removeQuery,addFieldQuery,fo
           }
           <Button style={divStyle} name="btnaddquery" onClick={addFieldQuery}><IconSquarePlus/></Button>
       </div>
-      <div style={{ marginTop: "1rem" }}>
+      {/* <div style={{ marginTop: "1rem" }}>
         <Button
           color="secondary"
           variant="contained"
@@ -152,7 +152,7 @@ export const Query = ({ formQuery, handleformQuery, removeQuery,addFieldQuery,fo
         >
           Next
         </Button>
-      </div>
+      </div> */}
     </div>
   );
 };
