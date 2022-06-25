@@ -8,7 +8,7 @@ import {
   makeStyles,
   Button
 } from "@material-ui/core";
-import { Link } from "react-router-dom";
+
 import Logo from 'ui-component/Logo';
 const useStyles = makeStyles((theme) => ({
     root: {

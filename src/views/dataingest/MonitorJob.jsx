@@ -4,10 +4,14 @@ import axios from 'axios'; // npm instal axios
 import {IconPlayerPlay} from '@tabler/icons';
 import config from "../../config";
 import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import { useNavigate } from "react-router-dom"; 
 import Paper from '@material-ui/core/Paper'; 
 import { makeStyles } from '@material-ui/core/styles'; 
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+ 
 
 import {
     Table,
@@ -63,6 +67,14 @@ export default function MonitorJob() {
             setData(res.data.data);    
           })  
         },[] ); 
+        const [anchorEl, setAnchorEl] = React.useState(null);
+        const open = Boolean(anchorEl);
+        const handleClick = (event) => {
+          setAnchorEl(event.currentTarget);
+        };
+        const handleClose = () => {
+          setAnchorEl(null);
+        };    
 
         const navigate = useNavigate()
 
@@ -71,11 +83,16 @@ export default function MonitorJob() {
     return (  
       
       <Paper className={classes.root}> 
-      <ButtonGroup variant="text" aria-label="text button group">
+      <Box>
+      
         <Button  onClick={onClickHandler} >Tạo tiến trình</Button>
         <Button >Chỉnh sửa tiến trình</Button>
         <Button>Xoá tiến trình</Button>
-      </ButtonGroup> 
+       
+      
+      </Box>
+      
+
        
         <TableContainer className={classes.container}>  
           <Table stickyHeader aria-label="sticky table">  

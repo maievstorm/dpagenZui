@@ -11,13 +11,7 @@ import MainCard from 'ui-component/cards/MainCard';
 // ==============================|| Bigdata Page ||============================== //
 
 const Dataingestpage = () => (
-    <MainCard title="Lưu chuyển dữ liệu">
-       
-
-            {/* <CreateETLjob/> */}
             <MonitorJob/>
-     
-    </MainCard>
 );
 
 export default Dataingestpage;

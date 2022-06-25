@@ -6,6 +6,7 @@ import StepLabel from '@mui/material/StepLabel';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import axios from 'axios';
+import config from '../../config';
 
 const steps = ['Đăng ký tiến trình','Đăng ký CSDL', 'Tạo truy vấn tổng hợp', 'Xác nhận thông tin','Hoàn thành'];
 
@@ -32,10 +33,12 @@ export default function HorizontalLinearStepper({navigation,conf}) {
       const body = {
         "conf": {conf},
       }
-      console.log(conf)
+      if(conf.DagId.length>3)
+      {
+        console.log(conf)
             axios({
                 method: 'post',
-                url: 'https://flowdpa.apps.xplat.fis.com.vn/api/v1/dags/dag_create_job_file/dagRuns',
+                url:  config.airflowapi+'/dags/dag_create_job_file/dagRuns',
                  
                 auth: {
                     username: 'hung',
@@ -59,13 +62,16 @@ export default function HorizontalLinearStepper({navigation,conf}) {
                   "invoice_due_ts":new Date().toLocaleString() + '',
                   "invoice_paid_ts":new Date().toLocaleString() + ''
               }
-
+               
            console.log(invoicebody)
               axios({
                   method: 'post',
-                  url: 'https://dpzapi.apps.xplat.fis.com.vn/api/v1/invoice',           
+                  url: config.rootapi+'/invoice',           
                   data: invoicebody
-              });     
+              });  
+
+      }
+         
 
 
     }

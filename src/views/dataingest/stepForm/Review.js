@@ -42,37 +42,17 @@ export const Review = ({conf,submit,navigation}) => {
     base0E: '#ae81ff',
     base0F: '#cc6633',
   };
+   
   
+  const  body= JSON.stringify(conf)
+  console.log(body)
   return (
       <div style={{ marginTop: "1rem" }}>
-        <h3>Dữ liệu</h3> 
+        <h3>Thông số chi tiết tiến trình</h3> 
         <JSONTree data={conf} theme={theme} />
         {/* <Button onClick={submit} variant="contained" color="primary">Tạo tiến trình</Button> */}
-        {/* <Table stickyHeader aria-label="sticky table">  
-          <TableHead>  
-              <TableRow>  
-                <TableCell >Tên tiến trình</TableCell>  
-                <TableCell >Danh sách data</TableCell>
-                <TableCell >Danh sách truy vấn</TableCell> 
-              </TableRow>  
-            </TableHead>  
-            <TableBody>  
-            
-              {conf[0]?.slice().map(row => {  
-                return (  
-  
-             <TableRow >  
-                  <TableCell component="th" scope="row">{row.DagId}</TableCell>  
-                  <TableCell >{row.source}</TableCell>  
-                  <TableCell >{row.query}</TableCell>  
-               
-                  
-                </TableRow>  
-                );  
-  
-              })}  
-            </TableBody>  
-          </Table>  */}
+         
+    
 
     </div> 
   )
