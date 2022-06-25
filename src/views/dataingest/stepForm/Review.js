@@ -3,9 +3,9 @@ import { useState, useEffect } from 'react'
 import Container from '@material-ui/core/Container';
 import { Divider } from "@mui/material";
 import Button from '@mui/material/Button';
-import { JSONTree } from 'react-json-tree';
+// import { JSONTree } from 'react-json-tree';
 // If you're using Immutable.js: `npm i --save immutable`
-import { Map } from 'immutable';
+// import { Map } from 'immutable';
 import {
   Table,
   TableHead,
@@ -42,17 +42,16 @@ export const Review = ({conf,submit,navigation}) => {
     base0E: '#ae81ff',
     base0F: '#cc6633',
   };
-   
   
   const  body= JSON.stringify(conf)
   console.log(body)
   return (
       <div style={{ marginTop: "1rem" }}>
         <h3>Thông số chi tiết tiến trình</h3> 
-        <JSONTree data={conf} theme={theme} />
+        {/* <JSONTree data={conf} theme={theme} /> */}
         {/* <Button onClick={submit} variant="contained" color="primary">Tạo tiến trình</Button> */}
          
-    
+       
 
     </div> 
   )

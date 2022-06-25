@@ -19,14 +19,15 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 import Checkbox from '@mui/material/Checkbox';
-import IconButton from '@mui/material/IconButton';
-import Tooltip from '@mui/material/Tooltip';
+// import IconButton from '@mui/material/IconButton';
+// import Tooltip from '@mui/material/Tooltip';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
 import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
 import ModeEditIcon from '@mui/icons-material/ModeEdit';
 import AddIcon from '@mui/icons-material/Add';
 import { visuallyHidden } from '@mui/utils';
+ 
 
    
     function descendingComparator(a, b, orderBy) {
@@ -71,10 +72,16 @@ import { visuallyHidden } from '@mui/utils';
         label: 'Tên tiến trình',
       },
       {
-        id: 'customer_invoice_data',
+        id: 'invoice_created_ts',
         numeric: false,
         disablePadding: false,
-        label: 'Chi tiết tiến trình',
+        label: 'Ngày tạo',
+      } ,
+      {
+        id: 'status',
+        numeric: false,
+        disablePadding: false,
+        label: 'Trạng thái',
       } 
     ];
 
@@ -327,7 +334,8 @@ export default function MonitorJob() {
                         {row.id}
                       </TableCell>
                       <TableCell align="left">{row.item_name}</TableCell>
-                      <TableCell align="left" >{row.customer_invoice_data}</TableCell>
+                      <TableCell align="left" >{row.invoice_created_ts}</TableCell>
+                      <TableCell align="left" >Running</TableCell>
              
                     </TableRow>
                   );
