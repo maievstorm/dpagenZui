@@ -23,9 +23,9 @@ import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
-import DeleteIcon from '@mui/icons-material/Delete';
 import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
-import FilterListIcon from '@mui/icons-material/FilterList';
+import ModeEditIcon from '@mui/icons-material/ModeEdit';
+import AddIcon from '@mui/icons-material/Add';
 import { visuallyHidden } from '@mui/utils';
 
    
@@ -88,7 +88,7 @@ function EnhancedTableHead(props) {
 
   return (
     <TableHead>
-      <TableRow>
+      <TableRow >
         <TableCell padding="checkbox">
           <Checkbox
             color="primary"
@@ -106,6 +106,7 @@ function EnhancedTableHead(props) {
             align={headCell.numeric ? 'right' : 'left'}
             padding={headCell.disablePadding ? 'none' : 'normal'}
             sortDirection={orderBy === headCell.id ? order : false}
+             
           >
             <TableSortLabel
               active={orderBy === headCell.id}
@@ -169,11 +170,12 @@ const EnhancedTableToolbar = (props) => {
         </Typography>
       )}
 
-      {numSelected > 0 ? (
-        <Tooltip title="Delete">
+      {/* {numSelected  ==1 ? (
+        <Tooltip title="Kích hoạt">
           <IconButton>
             <PlayCircleOutlineIcon />
           </IconButton>
+          
         </Tooltip>
       ) : (
         <Tooltip title="Filter list">
@@ -181,7 +183,7 @@ const EnhancedTableToolbar = (props) => {
             <FilterListIcon />
           </IconButton>
         </Tooltip>
-      )}
+      )} */}
     </Toolbar>
   );
 };
@@ -269,7 +271,9 @@ export default function MonitorJob() {
   return (
     <Box sx={{ width: '100%' }}>
       <Paper sx={{ width: '100%', mb: 2 }}>
-      <Button  onClick={onClickHandler} >Tạo tiến trình</Button>
+      <Button  onClick={onClickHandler} > {<AddIcon/>} Tạo tiến trình</Button>
+      <Button   > {<ModeEditIcon/>} Hiệu chỉnh</Button>
+      <Button   > {<PlayCircleOutlineIcon/>} Kích hoạt</Button>
       
         <EnhancedTableToolbar numSelected={selected.length} />
         <TableContainer>
@@ -287,8 +291,7 @@ export default function MonitorJob() {
               rowCount={rows.length}
             />
             <TableBody>
-              {/* if you don't need to support IE11, you can replace the `stableSort` call with:
-                 rows.slice().sort(getComparator(order, orderBy)) */}
+             
               {stableSort(rows, getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
@@ -319,11 +322,12 @@ export default function MonitorJob() {
                         id={labelId}
                         scope="row"
                         padding="none"
+                         
                       >
                         {row.id}
                       </TableCell>
                       <TableCell align="left">{row.item_name}</TableCell>
-                      <TableCell align="left">{row.customer_invoice_data}</TableCell>
+                      <TableCell align="left" >{row.customer_invoice_data}</TableCell>
              
                     </TableRow>
                   );
