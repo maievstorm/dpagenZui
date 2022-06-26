@@ -1,7 +1,8 @@
 // material-ui
-import CreateETLjob from './CreateJob'
-import { MultiStepForm } from './MultiStepCreateJobForm';
-import MonitorJob from './MonitorJob';
+// import CreateETLjob from './CreateJob'
+// import { MultiStepForm } from './MultiStepCreateJobForm';
+// import MonitorJob from './MonitorJob';
+import ManageFlow from './ManageFlow';
  
  
 
@@ -11,7 +12,10 @@ import MainCard from 'ui-component/cards/MainCard';
 // ==============================|| Bigdata Page ||============================== //
 
 const Dataingestpage = () => (
-            <MonitorJob/>
+    <MainCard>
+        <ManageFlow/>
+    </MainCard>
+           
 );
 
 export default Dataingestpage;

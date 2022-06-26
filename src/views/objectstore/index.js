@@ -13,6 +13,7 @@
 // import Bucketupload from './03bucketupload';
 // import Createprocesspage from './04Createprocess';
 import MonitorObject from './MonitorObject';
+import ManageStore from './ManageStore';
 
 
 
@@ -65,7 +66,8 @@ import MonitorObject from './MonitorObject';
 
 
 const Objectstorepage = () => (
-    <MonitorObject></MonitorObject>
+    // <MonitorObject></MonitorObject>
+    <ManageStore></ManageStore>
 );
 
 export default Objectstorepage;
