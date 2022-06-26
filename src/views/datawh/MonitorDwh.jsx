@@ -173,7 +173,7 @@ const EnhancedTableToolbar = (props) => {
           id="tableTitle"
           component="div"
         >
-          Danh sách tiến trình
+          Danh sách CSDL
         </Typography>
       )}
 
@@ -199,7 +199,7 @@ EnhancedTableToolbar.propTypes = {
   numSelected: PropTypes.number.isRequired,
 };
 
-export default function MonitorJob() {
+export default function MonitorDwh() {
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('calories');
   const [selected, setSelected] = React.useState([]);
@@ -215,7 +215,7 @@ export default function MonitorJob() {
     setOrderBy(property);
   };
 
-    const getairflowapi= config.rootapi+'/invoice/subntype/1&airflow';
+    const getairflowapi= config.rootapi+'/invoice/subntype/1&dwh';
  
     useEffect(() => {   
           axios({method:'get',url:getairflowapi}
@@ -273,34 +273,14 @@ export default function MonitorJob() {
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
   const navigate = useNavigate()
 
-  const onClickHandler = () => navigate('/dataingest/createflowjob')
-
-  const onStartJobClickHandler =() =>{
-    console.log(selected);
-    const apidagurl=config.airflowapi+'/dags/'+ selected[0]+ '/dagRuns'
-
-    const body = {
-      "conf": { },
-    }
-       axios({
-        method: 'post',
-        url: apidagurl,
-
-        auth: {
-            username: 'hung',
-            password: '123456a@'
-          },
-        data: body
-      }); 
-  }
+  const onClickHandler = () => navigate('/datastream/createdwh')
 
   return (
     <Box sx={{ width: '100%' }}>
-       <p>Lưu chuyển dữ liệu</p>
+      <p>Kho dữ liệu</p>
       <Paper sx={{ width: '100%', mb: 2 }}>
-      <Button  onClick={onClickHandler} > {<AddIcon/>} Tạo tiến trình</Button>
-      <Button   > {<ModeEditIcon/>} Hiệu chỉnh</Button>
-      <Button onClick={onStartJobClickHandler}  > {<PlayCircleOutlineIcon/>} Kích hoạt</Button>
+      <Button  onClick={onClickHandler} > {<AddIcon/>} Tạo CSDL</Button>
+      <Button   > {<ModeEditIcon/>} Hiệu chỉnh tài nguyên</Button>
       
         <EnhancedTableToolbar numSelected={selected.length} />
         <TableContainer>

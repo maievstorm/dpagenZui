@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'   
-import axios from 'axios'; // npm instal axios
+
 import config from "../../config";
 import Button from '@mui/material/Button';
 import { useNavigate } from "react-router-dom"; 
@@ -27,6 +27,7 @@ import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
 import ModeEditIcon from '@mui/icons-material/ModeEdit';
 import AddIcon from '@mui/icons-material/Add';
 import { visuallyHidden } from '@mui/utils';
+import * as minio from "minio";
  
 
    
@@ -60,29 +61,23 @@ import { visuallyHidden } from '@mui/utils';
 
     const headCells = [
       {
-        id: 'id',
-        numeric: true,
+        id: 'name',
+        numeric: false,
         disablePadding: true,
-        label: 'id',
+        label: 'Tên tệp',
       },
       {
-        id: 'item_name',
+        id: 'size',
         numeric: false,
         disablePadding: false,
-        label: 'Tên tiến trình',
+        label: 'Dung lượng tệp',
       },
       {
-        id: 'invoice_created_ts',
+        id: 'lastModified',
         numeric: false,
         disablePadding: false,
         label: 'Ngày tạo',
-      } ,
-      {
-        id: 'status',
-        numeric: false,
-        disablePadding: false,
-        label: 'Trạng thái',
-      } 
+      }  
     ];
 
  
@@ -173,7 +168,7 @@ const EnhancedTableToolbar = (props) => {
           id="tableTitle"
           component="div"
         >
-          Danh sách tiến trình
+          Danh sách tệp tin
         </Typography>
       )}
 
@@ -199,46 +194,54 @@ EnhancedTableToolbar.propTypes = {
   numSelected: PropTypes.number.isRequired,
 };
 
-export default function MonitorJob() {
+// const minioClient = new minio.Client({
+//     endPoint: 'apilakedpa.apps.xplat.fis.com.vn',
+//     useSSL: true,
+//     accessKey: 's2l92I0TXj01BOGP',
+//     secretKey: 'Q25hRHG13VxoKPrFmgLuXMDOi3WFOLFk',
+   
+// });
+
+
+const rows = []
+// const stream = minioClient.listObjects('youtube','', true)
+// stream.on('data', function(obj) { rows.push(obj) } )
+
+// stream.on("end", function () { console.log(rows) })
+// stream.on('error', function(err) { console.log(err) } )
+// console.log(rows)
+
+export default function MonitorObject() {
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('calories');
   const [selected, setSelected] = React.useState([]);
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
-  const [rows, setData] = useState([]);   
-
-
+  const [rows, setData] = useState([]);  
+   
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
     setOrder(isAsc ? 'desc' : 'asc');
     setOrderBy(property);
   };
 
-    const getairflowapi= config.rootapi+'/invoice/subntype/1&airflow';
- 
-    useEffect(() => {   
-          axios({method:'get',url:getairflowapi}
-           ).then(res=>{
-            setData(res.data.data);    
-          })  
-        },[] ); 
 
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
-      const newSelecteds = rows.map((n) => n.item_name);
+      const newSelecteds = rows.map((n) => n.name);
       setSelected(newSelecteds);
       return;
     }
     setSelected([]);
   };
 
-  const handleClick = (event, item_name) => {
-    const selectedIndex = selected.indexOf(item_name);
+  const handleClick = (event, name) => {
+    const selectedIndex = selected.indexOf(name);
     let newSelected = [];
 
     if (selectedIndex === -1) {
-      newSelected = newSelected.concat(selected, item_name);
+      newSelected = newSelected.concat(selected, name);
     } else if (selectedIndex === 0) {
       newSelected = newSelected.concat(selected.slice(1));
     } else if (selectedIndex === selected.length - 1) {
@@ -273,34 +276,58 @@ export default function MonitorJob() {
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
   const navigate = useNavigate()
 
-  const onClickHandler = () => navigate('/dataingest/createflowjob')
+  const onClickHandler = () => navigate('/objectstore/uploadfile');
 
-  const onStartJobClickHandler =() =>{
-    console.log(selected);
-    const apidagurl=config.airflowapi+'/dags/'+ selected[0]+ '/dagRuns'
 
-    const body = {
-      "conf": { },
-    }
-       axios({
-        method: 'post',
-        url: apidagurl,
 
-        auth: {
-            username: 'hung',
-            password: '123456a@'
-          },
-        data: body
-      }); 
-  }
+// const minioClient = new minio.Client({
+//     endPoint: 'apilakedpa.apps.xplat.fis.com.vn',
+//     useSSL: true,
+//     accessKey: 's2l92I0TXj01BOGP',
+//     secretKey: 'Q25hRHG13VxoKPrFmgLuXMDOi3WFOLFk',
+   
+// });
+ 
+
+// const stream = minioClient.listObjects('youtube','', true)
+// stream.on('data', function(obj) { rows.push(obj) } )
+
+// stream.on("end", function () { console.log(rows) })
+// stream.on('error', function(err) { console.log(err) } )
+// console.log(rows)
+ 
+ 
+  useEffect(() => {
+    const getBuckets = async () => {
+      // create the client
+      const fileObj=[]
+      const mc = new minio.Client({
+        endPoint: "apilakedpa.apps.xplat.fis.com.vn",
+        useSSL: true,
+        accessKey: "s2l92I0TXj01BOGP",
+        secretKey: "Q25hRHG13VxoKPrFmgLuXMDOi3WFOLFk"
+      });
+     
+         
+        const stream = await mc.listObjects('youtube','', true);
+        
+        stream.on('data', function(obj) { fileObj.push(obj) } );
+        stream.on("end", function () { setData(JSON.parse(JSON.stringify(fileObj)));
+        });
+        stream.on('error', function(err) { console.log(err) } );
+      };
+       getBuckets();
+    }, []);
+
+ 
 
   return (
     <Box sx={{ width: '100%' }}>
-       <p>Lưu chuyển dữ liệu</p>
+      <p>Lưu trữ trên mây</p>
       <Paper sx={{ width: '100%', mb: 2 }}>
-      <Button  onClick={onClickHandler} > {<AddIcon/>} Tạo tiến trình</Button>
-      <Button   > {<ModeEditIcon/>} Hiệu chỉnh</Button>
-      <Button onClick={onStartJobClickHandler}  > {<PlayCircleOutlineIcon/>} Kích hoạt</Button>
+      <Button  onClick={onClickHandler} > {<AddIcon/>} Tải lên</Button>
+      <Button   > {<ModeEditIcon/>} Tải xuống</Button>
+      <Button   > {<ModeEditIcon/>} Xoá</Button>
       
         <EnhancedTableToolbar numSelected={selected.length} />
         <TableContainer>
@@ -318,21 +345,21 @@ export default function MonitorJob() {
               rowCount={rows.length}
             />
             <TableBody>
-             
+          
               {stableSort(rows, getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
-                  const isItemSelected = isSelected(row.item_name);
+                  const isItemSelected = isSelected(row.name);
                   const labelId = `enhanced-table-checkbox-${index}`;
 
                   return (
                     <TableRow
                       hover
-                      onClick={(event) => handleClick(event, row.item_name)}
+                      onClick={(event) => handleClick(event, row.name)}
                       role="checkbox"
                       aria-checked={isItemSelected}
                       tabIndex={-1}
-                      key={row.item_name}
+                      key={row.name}
                       selected={isItemSelected}
                     >
                       <TableCell padding="checkbox">
@@ -351,11 +378,11 @@ export default function MonitorJob() {
                         padding="none"
                          
                       >
-                        {row.id}
+                        {row.name}
                       </TableCell>
-                      <TableCell align="left">{row.item_name}</TableCell>
-                      <TableCell align="left" >{row.invoice_created_ts}</TableCell>
-                      <TableCell align="left" >Running</TableCell>
+                      <TableCell align="left">{row.size}</TableCell>
+                      <TableCell align="left" >{row.lastModified}</TableCell>
+                      
              
                     </TableRow>
                   );

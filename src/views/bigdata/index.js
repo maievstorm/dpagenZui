@@ -1,17 +1,12 @@
-// material-ui
-import { Typography } from '@mui/material';
 
-// project imports
-import MainCard from 'ui-component/cards/MainCard';
+import MonitorBigdata from './MonitorBigdata';
 
 // ==============================|| Bigdata Page ||============================== //
 
 const Bigdatapage = () => (
-    <MainCard title="Dữ liệu lớn">
-        <Typography variant="body2">
-            abc
-        </Typography>
-    </MainCard>
+  
+    <MonitorBigdata></MonitorBigdata>  
+ 
 );
 
 export default Bigdatapage;

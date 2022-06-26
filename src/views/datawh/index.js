@@ -1,17 +1,10 @@
-// material-ui
-import { Typography } from '@mui/material';
 
-// project imports
-import MainCard from 'ui-component/cards/MainCard';
+import MonitorDwh from './MonitorDwh';
 
 // ==============================|| Bigdata Page ||============================== //
 
 const Datawhpage = () => (
-    <MainCard title="Kho dữ liệu">
-        <Typography variant="body2">
-            abc
-        </Typography>
-    </MainCard>
+    <MonitorDwh></MonitorDwh> 
 );
 
 export default Datawhpage;
