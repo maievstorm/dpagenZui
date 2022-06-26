@@ -29,6 +29,7 @@ const Datavisualpage = Loadable(lazy(() => import('views/datavisual')));
 const Dragonflypage= Loadable(lazy(() => import('views/dragonfly')));
 const MonitorJob = Loadable(lazy(() => import('views/dataingest/MonitorJob')));
 const CreateflowJob  = Loadable(lazy(() => import('views/dataingest/CreateFlowJob')));
+const UploadStorage = Loadable(lazy(() => import('views/objectstore/UploadStorage')));
 // ==============================|| MAIN ROUTING ||============================== //
 
 const MainRoutes = {
@@ -126,6 +127,11 @@ const MainRoutes = {
         {
             path: '/dataingest/createflowjob',
             element: <CreateflowJob />
+        }
+        ,
+        {
+            path: '/objectstore/uploadstorage',
+            element: <UploadStorage />
         }
     ]
 };

@@ -8,6 +8,7 @@ import PropTypes from 'prop-types';
 import { alpha } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Table from '@mui/material/Table';
+import MaterialTable from 'material-table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
@@ -28,6 +29,7 @@ import ModeEditIcon from '@mui/icons-material/ModeEdit';
 import AddIcon from '@mui/icons-material/Add';
 import { visuallyHidden } from '@mui/utils';
 import * as minio from "minio";
+ 
  
 
    
@@ -194,22 +196,10 @@ EnhancedTableToolbar.propTypes = {
   numSelected: PropTypes.number.isRequired,
 };
 
-// const minioClient = new minio.Client({
-//     endPoint: 'apilakedpa.apps.xplat.fis.com.vn',
-//     useSSL: true,
-//     accessKey: 's2l92I0TXj01BOGP',
-//     secretKey: 'Q25hRHG13VxoKPrFmgLuXMDOi3WFOLFk',
-   
-// });
 
 
-const rows = []
-// const stream = minioClient.listObjects('youtube','', true)
-// stream.on('data', function(obj) { rows.push(obj) } )
+//const rows = []
 
-// stream.on("end", function () { console.log(rows) })
-// stream.on('error', function(err) { console.log(err) } )
-// console.log(rows)
 
 export default function MonitorObject() {
   const [order, setOrder] = React.useState('asc');
@@ -276,33 +266,16 @@ export default function MonitorObject() {
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
   const navigate = useNavigate()
 
-  const onClickHandler = () => navigate('/objectstore/uploadfile');
+  const onClickHandler = () => navigate('/objectstore/uploadstorage');
 
-
-
-// const minioClient = new minio.Client({
-//     endPoint: 'apilakedpa.apps.xplat.fis.com.vn',
-//     useSSL: true,
-//     accessKey: 's2l92I0TXj01BOGP',
-//     secretKey: 'Q25hRHG13VxoKPrFmgLuXMDOi3WFOLFk',
-   
-// });
- 
-
-// const stream = minioClient.listObjects('youtube','', true)
-// stream.on('data', function(obj) { rows.push(obj) } )
-
-// stream.on("end", function () { console.log(rows) })
-// stream.on('error', function(err) { console.log(err) } )
-// console.log(rows)
- 
+  //"apilakedpa.apps.xplat.fis.com.vn"
  
   useEffect(() => {
     const getBuckets = async () => {
       // create the client
       const fileObj=[]
       const mc = new minio.Client({
-        endPoint: "apilakedpa.apps.xplat.fis.com.vn",
+        endPoint: config.storageapi,
         useSSL: true,
         accessKey: "s2l92I0TXj01BOGP",
         secretKey: "Q25hRHG13VxoKPrFmgLuXMDOi3WFOLFk"
@@ -319,6 +292,8 @@ export default function MonitorObject() {
        getBuckets();
     }, []);
 
+    
+
  
 
   return (
@@ -334,7 +309,11 @@ export default function MonitorObject() {
           <Table
             sx={{ minWidth: 750 }}
             aria-labelledby="tableTitle"
-            size={dense ? 'small' : 'medium'}
+            size={dense ? 'small' : 'medium'
+          }
+          options={{
+            filtering: true
+          }}
           >
             <EnhancedTableHead
               numSelected={selected.length}

@@ -2,9 +2,9 @@ import React  from "react";
 import { useState, useEffect } from 'react'   
 import axios from 'axios'; // npm instal axios
 
+ 
+import Paper from "@mui/material/Paper";
 
-import Paper from '@material-ui/core/Paper'; 
-import { makeStyles } from '@material-ui/core/styles'; 
 
 import {
     Table,
@@ -18,19 +18,8 @@ import {
 
 
 
-const useStyles = makeStyles({  
- 
-      root: {  
-        width: '100%',  
-      },  
-        container: {  
-        maxHeight: '100%',  
-        },  
-    
-    });  
-
 export default function ChecksongDataTable() {  
-    const classes = useStyles();  
+ 
     const [page, setPage] = React.useState(0);  
     const [data, setData] = useState([]);   
     const [rowsPerPage, setRowsPerPage] = React.useState(5);  
@@ -50,8 +39,8 @@ export default function ChecksongDataTable() {
           })  
         }, []);   
     return (  
-      <Paper className={classes.root}>  
-        <TableContainer className={classes.container}>  
+      <Paper>  
+        <TableContainer>  
           <Table stickyHeader aria-label="sticky table">  
           <TableHead>  
               <TableRow>  

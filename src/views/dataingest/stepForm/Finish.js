@@ -1,7 +1,5 @@
 import React from "react";
-import Container from '@material-ui/core/Container';
-import { Divider } from "@mui/material";
-import Button from '@mui/material/Button';
+
 
 
 export const Finish = () => {
