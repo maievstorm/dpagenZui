@@ -1,5 +1,4 @@
 import React, {Component} from 'react'
-import {DropzoneArea} from 'material-ui-dropzone'
 import MainCard from 'ui-component/cards/MainCard';
 
 class UploadStorage extends Component{
@@ -16,10 +15,11 @@ class UploadStorage extends Component{
   }
   render(){
     return (
-       
-            <DropzoneArea
-                onChange={this.handleChange.bind(this)}
-             />
+        
+             
+      <div>
+
+      </div>
  
       
     )

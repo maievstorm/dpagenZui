@@ -1,5 +1,5 @@
 import React from "react";
-import { useForm, useStep } from "react-hooks-helper";
+//import { useForm, useStep } from "react-hooks-helper";
 import { Info } from "./stepForm/Info";
 import { Query } from "./stepForm/Query";
 import { Source } from "./stepForm/Source";
@@ -8,6 +8,8 @@ import { Finish } from "./stepForm/Finish";
 import { useState } from "react";
 import HorizontalLinearStepper from "./Process";
 import UserService from 'services/UserService';
+import { useStepContext } from "@mui/material";
+ 
 
 
 const steps = [
@@ -27,7 +29,7 @@ export const MultiStepCreateJobForm = () => {
       tags_name: ''
     },
   ])
-  const { step, navigation } = useStep({
+  const { step, navigation } = useStepContext({
     steps,
     initialStep: 0,
   });
