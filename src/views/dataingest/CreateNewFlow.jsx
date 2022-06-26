@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { Stepper, Step } from  "@mui/material";
+import { Stepper, Step,StepLabel } from  "@mui/material";
 import StepWizard from "react-step-wizard";
 import {  Button, FormGroup, Input } from "@mui/material"; 
-import { Label } from "@material-ui/icons";
+ 
  
 
 const ActionButtons = (props) => {
@@ -67,7 +67,7 @@ const One = (props) => {
       <span >{error}</span>
       <h1>This is step 1 content</h1>
       <FormGroup>
-        <Label>Name: </Label>
+        <p>Name: </p>
         <Input
           type="text"
           name="name"
@@ -109,12 +109,12 @@ const Two = (props) => {
       <span >{error}</span>
       <h1>This is step 2 content</h1>
       <FormGroup>
-        <Label>
+        <p>
           Welcome <b>{props.user.name || ""}</b>
-        </Label>
+        </p>
       </FormGroup>
       <FormGroup>
-        <Label>Age: </Label>
+        <p>Age: </p>
         <Input
           type="text"
           name="age"
