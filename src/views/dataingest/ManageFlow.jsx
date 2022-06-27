@@ -7,6 +7,7 @@ import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
 import AddIcon from '@mui/icons-material/Add';
 import { useNavigate } from "react-router-dom";
 import Button from '@mui/material/Button';
+import UserService from 'services/UserService';
 
 import EditIcon from "@material-ui/icons/Create";
 
@@ -18,7 +19,7 @@ export default function ManageFlow() {
     const [rows, setData] = useState([]);
     const columns = [
         {
-            name: "id",
+            name: "id_invoice",
             options: {
                 filter: true
             },
@@ -40,7 +41,7 @@ export default function ManageFlow() {
         }
 
     ];
-    const getairflowapi = config.rootapi + '/invoice/subntype/1&airflow';
+    const getairflowapi = config.rootapi + '/invoice/usernamentype/'+UserService.getUsername()+'&airflow';
 
     useEffect(() => {
         axios({ method: 'get', url: getairflowapi }

@@ -30,6 +30,10 @@ const Dragonflypage= Loadable(lazy(() => import('views/dragonfly')));
 const MonitorJob = Loadable(lazy(() => import('views/dataingest/MonitorJob')));
 const CreateflowJob  = Loadable(lazy(() => import('views/dataingest/CreateNewFlow')));
 const UploadStorage = Loadable(lazy(() => import('views/objectstore/UploadStorage')));
+//const ManageDpaStorage = Loadable(lazy(() => import('views/DpaStorage/ManageDpaStorage')));
+
+//const ListObjects = Loadable(lazy(() => import('views/DpaStorage/ListObjects'))); 
+ 
 // ==============================|| MAIN ROUTING ||============================== //
 
 const MainRoutes = {
@@ -132,7 +136,7 @@ const MainRoutes = {
         {
             path: '/objectstore/uploadstorage',
             element: <UploadStorage />
-        }
+        } 
     ]
 };
 

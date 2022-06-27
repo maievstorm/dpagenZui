@@ -61,6 +61,7 @@ export default function ManageStore() {
         };
         getBuckets();
     }, []);
+    console.log(rows)
 
     const handleRowClick = (rowData, rowMeta) => {
         console.log(rowData, rowMeta);

@@ -12,7 +12,7 @@
 // import Bucketvolumnpage from './02bucketvolumn';
 // import Bucketupload from './03bucketupload';
 // import Createprocesspage from './04Createprocess';
-import MonitorObject from './MonitorObject';
+//import MonitorObject from './MonitorObject';
 import ManageStore from './ManageStore';
 
 
