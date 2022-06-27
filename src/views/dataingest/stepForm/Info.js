@@ -3,27 +3,51 @@ import React from "react";
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import ActionButtons from "./ActionButton";
+import { useState } from "react";
 
-export const Info = ({  Daginfo, setDagInfo, navigation }) => {
+export const Info = (props) => {
   const divStyle = {
     margin: '5px'
   };
+  const [error, setError] = useState("");
 
+  const [daginfo, setDagInfo] = useState({})
+
+  const onInputChanged = (event) => {
+    const targetName = event.target.name;
+    const targetValue = event.target.value;
+
+    setDagInfo((daginfo) => ({
+      ...daginfo,
+      [targetName]: targetValue
+    }));
+  };
+
+  const validate = () => {
+    if (!daginfo.DagId || !daginfo.Schedule || !daginfo.tags_name) setError("Thông tin không chính xác!");
+    else {
+      setError("");
+      props.nextStep();
+      props.userCallback(daginfo);
+    }
+  };
 
   return (
     <div>
       <strong>
           Thông tin tiến trình
-      </strong>
+      </strong><br></br>
+      <span style={{color:'red'}}>{error}</span>
       <Box >
 
           <TextField
               label="Tên tiến trình"
               id="DagId"
               name="DagId"
-              value={Daginfo.DagId}
+              value={daginfo.DagId}
               size="small"
-              onChange={event => setDagInfo({ ...Daginfo.DagId, ['DagId']: event.target.value })}
+              onChange={onInputChanged}
               style={divStyle}
 
           />
@@ -32,8 +56,8 @@ export const Info = ({  Daginfo, setDagInfo, navigation }) => {
               id="Schedule"
               name="Schedule"
               size="small"
-              // value={Daginfo.Schedule}
-              onChange={event => setDagInfo({ ...Daginfo, 'Schedule': event.target.value })}
+              value={daginfo.Schedule}
+              onChange={onInputChanged}
               style={divStyle}
           />
           {/* <TextField
@@ -49,25 +73,16 @@ export const Info = ({  Daginfo, setDagInfo, navigation }) => {
               label="Tags"
               id="tags_name"
               name="tags_name"
-              // value={Daginfo.tags_name}
-              onChange={event => setDagInfo({ ...Daginfo, 'tags_name': event.target.value })}
+              value={daginfo.tags_name}
+              onChange={onInputChanged}
               size="small"
               style={divStyle}
           />
 
-          {/* <Button variant="contained" color="primary">Check</Button> */}
 
 
       </Box>
-      {/* <Button
-        variant="contained"
-        fullWidth
-        color="primary"
-        style={{ marginTop: "1rem" }}
-        onClick={() => navigation.next()}
-      >
-        Next
-      </Button> */}
+      <ActionButtons {...props} nextStep={validate}/>
     </div>
   );
 };

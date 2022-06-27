@@ -22,7 +22,7 @@ const MenuProps = {
 export default function MultipleSelectCheckmarks({headerName,data,formQuery,setformQuery,index,source}) {
     const [itemname, setitemname] = React.useState([]);
 
-    const names = data.map(item => {
+    const names = data?.map(item => {
     if (item !== undefined){
         return item.alias
     }

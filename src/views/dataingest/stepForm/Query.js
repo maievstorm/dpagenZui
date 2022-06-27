@@ -4,34 +4,89 @@ import Box from '@mui/material/Box';
 import { Select } from '@mui/material';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import { IconSquarePlus,IconCircleMinus} from '@tabler/icons'
+import { IconSquarePlus, IconCircleMinus } from '@tabler/icons'
 import MenuItem from '@mui/material/MenuItem';
 import MultipleSelectCheckmarks from '../MultipleSelectCheckmarks';
+import ActionButtons from "./ActionButton";
+import { useState } from "react";
 
+export const Query = (props) => {
+  const [error, setError] = useState("");
 
-export const Query = ({ formQuery, handleformQuery, removeQuery,addFieldQuery,formSrcFields,setformQuery,navigation }) => {
+  const formSrcFields = props.srcData!== undefined?  props.srcData:[]
   const divStyle = {
     margin: '5px'
   };
   const writemodetype = [
     {
-        key: 'append',
-        name: 'append'
+      key: 'append',
+      name: 'append'
     },
     {
-        key: 'overwrite',
-        name: 'overwrite'
-    } 
-]
+      key: 'overwrite',
+      name: 'overwrite'
+    }
+  ]
+
+  const [formQuery, setformQuery] = useState([
+    {
+      queryname: '',
+      querydetail: '',
+      listsourcetable: '',
+      targettable: '',
+      writemode: ''
+    },
+  ])
+  const removeQuery = (index) => {
+    let data = [...formQuery];
+    data.splice(index, 1)
+    setformQuery(data)
+  }
+  const addFieldQuery = () => {
+    let object = {
+      queryname: '',
+      querydetail: '',
+      // targettype: '',
+      listsourcetable: '',
+      targettable: ''
+    }
+
+    setformQuery([...formQuery, object])
+
+  }
+  const handleformQuery = (event, index) => {
+    let data = [...formQuery];
+    data[index][event.target.name] = event.target.value;
+    setformQuery(data);
+  }
+
+  const validate = () => {
+    let is_error = true;
+    for(let i= 0;i<formQuery.length;i++){
+      for(let key in formQuery[i]){
+        if(!formQuery[i][key]){
+          is_error = false
+          setError("Không được bỏ trống các trường");
+          break;
+        }
+      }
+  }
+    if(is_error){
+        setError("");
+        props.nextStep();
+        props.userCallback(formQuery);
+    }
+
+};
 
   return (
     <div>
       <strong>
-          Đăng ký thủ tục tổng hợp dữ liệu
-      </strong>
+        Đăng ký thủ tục tổng hợp dữ liệu
+      </strong><br></br>
+      <span style={{color:'red'}}>{error}</span>
       <div  >
-          {/* <input placeholder='Số query' onChange={e => addFieldQuery(e.target.value)}/> */}
-          {formQuery.map((formquery, index) => (
+          {formQuery?.map((formquery, index) => (
               <div key={index} >
                   <strong>{index+1} </strong> 
                   <div >
@@ -40,7 +95,7 @@ export const Query = ({ formQuery, handleformQuery, removeQuery,addFieldQuery,fo
                           label="Tên job tổng hợp"
                           id="queryname"
                           name="queryname"
-                          value={formquery.queryname}
+                          value={formquery?.queryname}
                           size="small"
                           onChange={event => handleformQuery(event, index)}
                           style={divStyle}
@@ -89,7 +144,7 @@ export const Query = ({ formQuery, handleformQuery, removeQuery,addFieldQuery,fo
                               style={divStyle}
                       >
                           
-                            {formSrcFields.map((formSrcField) => (
+                            {formSrcFields?.map((formSrcField) => (
                                   <MenuItem
                                   key={formSrcField.alias}
                                   value={formSrcField.alias}
@@ -118,16 +173,6 @@ export const Query = ({ formQuery, handleformQuery, removeQuery,addFieldQuery,fo
                           ))}
 
                       </Select>
-
-                      {/* <TextField
-                          label="Tên bảng đích"
-                          id="targettable"
-                          name="targettable"
-                          value={formquery.targettable}
-                          onChange={event => handleformQuery(event, index)}
-                          size="small"
-                          style={divStyle}
-                      /> */}
                   </div>
                 
               </div>
@@ -136,23 +181,8 @@ export const Query = ({ formQuery, handleformQuery, removeQuery,addFieldQuery,fo
           }
           <Button style={divStyle} name="btnaddquery" onClick={addFieldQuery}><IconSquarePlus/></Button>
       </div>
-      {/* <div style={{ marginTop: "1rem" }}>
-        <Button
-          color="secondary"
-          variant="contained"
-          style={{ marginRight: "1rem" }}
-          onClick={() => navigation.previous()}
-        >
-          Back
-        </Button>
-        <Button
-          color="primary"
-          variant="contained"
-          onClick={() => navigation.next()}
-        >
-          Next
-        </Button>
-      </div> */}
+      <ActionButtons {...props} nextStep={validate}/>
+
     </div>
   );
 };
