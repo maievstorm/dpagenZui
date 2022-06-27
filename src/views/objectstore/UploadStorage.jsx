@@ -1,7 +1,10 @@
-//UploadStorage
-import axios from 'axios';
 import React,{Component} from 'react'; 
 import DpzStorageConf from 'components/StorageConf';
+import MainCard from 'ui-component/cards/MainCard';
+import { Button ,Input} from '@mui/material';
+ 
+
+
 class UploadStorage extends Component { 
 
     state = { 
@@ -35,34 +38,38 @@ class UploadStorage extends Component {
       const contentType = fileToUpload.type
      
       // Details of the uploaded file 
-      console.log(objectKey); 
+      //console.log(objectKey); 
      
       // Request made to the backend api 
       // Send formData object 
       const fileReader = new FileReader()
+
+      fileReader.readAsArrayBuffer(fileToUpload)
+       
       fileReader.onload = async function (evt) {
+        console.log(evt)
         if (evt.target.readyState === FileReader.DONE) {
            
             const uint = new Uint8Array(evt.target.result)
-            await DpzStorageConf.putObject('youtube1', objectKey, Buffer.from(uint), {
+            await DpzStorageConf.putObject('youtube', objectKey, Buffer.from(uint), {
                 'Content-Type': contentType,
                 'X-Amz-Meta-App': "ReactJS"
             })
+            
             
         }
         fileReader.onerror = function () {
           fileReader.abort()
           // reject(null)
       }
-      fileReader.readAsArrayBuffer(fileToUpload)
+     // fileReader.readAsArrayBuffer(fileToUpload)
     }
 
-      //axios.post("api/uploadfile", formData); 
+    
 
     }; 
      
-    // File content to be displayed after 
-    // file upload is complete 
+  
     fileData = () => { 
       if (this.state.selectedFile) { 
           
@@ -89,19 +96,17 @@ class UploadStorage extends Component {
      
     render() { 
       return ( 
-        <div> 
-           
-            <h3> 
-              File Upload using React! 
-            </h3> 
-            <div> 
-                <input type="file" onChange={this.onFileChange} /> 
-                <button onClick={this.onFileUpload}> 
-                  Upload! 
-                </button> 
-            </div> 
+        <MainCard>
+ 
+          <Input type="file" onChange={this.onFileChange} /> 
+          <Button onClick={this.onFileUpload}> 
+                 Tải lên 
+          </Button> 
+          
           {this.fileData()} 
-        </div> 
+
+        </MainCard>
+       
       ); 
     } 
   } 

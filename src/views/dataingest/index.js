@@ -12,9 +12,9 @@ import MainCard from 'ui-component/cards/MainCard';
 // ==============================|| Bigdata Page ||============================== //
 
 const Dataingestpage = () => (
-    <MainCard>
+    
         <ManageFlow/>
-    </MainCard>
+     
            
 );
 

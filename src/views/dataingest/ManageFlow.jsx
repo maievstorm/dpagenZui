@@ -8,9 +8,6 @@ import AddIcon from '@mui/icons-material/Add';
 import { useNavigate } from "react-router-dom";
 import Button from '@mui/material/Button';
 import UserService from 'services/UserService';
-
-import EditIcon from "@material-ui/icons/Create";
-
 import { Tooltip, IconButton } from '@mui/material';
 
 

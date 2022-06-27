@@ -1,10 +1,10 @@
 import React from "react";
-
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
 import ActionButtons from "./ActionButton";
-import { useState } from "react";
+import { useState,useEffect } from "react";
+import config from "../../../config";
+import axios from 'axios';
 
 export const Info = (props) => {
   const divStyle = {
@@ -13,6 +13,8 @@ export const Info = (props) => {
   const [error, setError] = useState("");
 
   const [daginfo, setDagInfo] = useState({})
+  
+    
 
   const onInputChanged = (event) => {
     const targetName = event.target.name;
@@ -23,8 +25,9 @@ export const Info = (props) => {
       [targetName]: targetValue
     }));
   };
+ 
 
-  const validate = () => {
+  const validate = () => { 
     if (!daginfo.DagId || !daginfo.Schedule || !daginfo.tags_name) setError("Thông tin không chính xác!");
     else {
       setError("");
