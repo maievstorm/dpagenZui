@@ -60,7 +60,7 @@ const pages = {
             children: [
                 {
                     id: 'dataingest',
-                    title: 'Lưu chuyển dữ liêu',
+                    title: 'Lưu chuyển dữ liệu',
                     type: 'item',
                     url: '/dataingest',
                     breadcrumbs: false

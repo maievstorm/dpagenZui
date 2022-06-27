@@ -113,6 +113,7 @@ const CreateNewFlow = () => {
           );
         })}
       </Stepper>
+      <br></br>
       <StepWizard instance={assignStepWizard} onStepChange={handleStepChange}>
         <Info userCallback={assignDagInfo} />
         <Source userCallback={assignSource} />
