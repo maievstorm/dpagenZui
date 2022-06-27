@@ -8,6 +8,9 @@ import { Query } from "./stepForm/Query";
 import { Source } from "./stepForm/Source";
 import { Review } from "./stepForm/Review";
 import { Finish } from "./stepForm/Finish";
+import config from '../../config';
+import axios from 'axios';
+
 
 
 import UserService from 'services/UserService';
@@ -58,6 +61,45 @@ const CreateNewFlow = () => {
 
   // fetch data if done set loading = false
 
+  const submit = ()=>{
+    const body = {
+      "conf": {conf},
+    }
+    axios({
+      method: 'post',
+      url:  config.airflowapi+'/dags/dag_create_job_file/dagRuns',
+       
+      auth: {
+          username: 'hung',
+          password: '123456a@'
+        },
+      data: body
+    }); 
+
+    const invoicebody =
+    {
+        "item_name":conf.DagId,
+        "item_type":'airflow',
+        "customer_invoice_data":JSON.stringify(body),
+        "subscription_id":1,
+        "plan_history_id":1,
+        "invoice_period_start_date": new Date().toLocaleString() + '',
+        "invoice_period_end_date":new Date().toLocaleString() + '',
+        "invoice_description":conf.DagId,
+        "invoice_amount":100,
+        "invoice_created_ts":new Date().toLocaleString() + '',
+        "invoice_due_ts":new Date().toLocaleString() + '',
+        "invoice_paid_ts":new Date().toLocaleString() + ''
+    }
+     
+ console.log(invoicebody)
+    axios({
+        method: 'post',
+        url: config.rootapi+'/invoice',           
+        data: invoicebody
+    });  
+  }
+
 
 
   return (
@@ -75,7 +117,7 @@ const CreateNewFlow = () => {
         <Info userCallback={assignDagInfo} />
         <Source userCallback={assignSource} />
         <Query userCallback={assignQuery} srcData={formSrcFields} />
-        <Review userCallback={assignDagInfo} conf={conf}/>
+        <Review userCallback={submit} conf={conf}/>
         <Finish loading={loading} setLoading={setLoading} />
       </StepWizard>
     </div>

@@ -19,12 +19,12 @@ import {
 
 export const Review = (props) => {
   //const classes = useStyles();  
-  const [page, setPage] = React.useState(0);
-  const [data, setData] = useState([]);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
   const conf = props.conf
-  console.log(conf)
+  const validate = () => {
+        props.lastStep();
+        props.userCallback();
+    }
   return (
     <div style={{ marginTop: "1rem" }}>
       <h3>Thông số chi tiết tiến trình</h3>
@@ -41,7 +41,7 @@ export const Review = (props) => {
       <div><pre>{JSON.stringify(conf, null, 2) }</pre></div>
 
 
-      <ActionButtons {...props} />
+      <ActionButtons {...props} lastStep={validate}/>
 
     </div>
   )
