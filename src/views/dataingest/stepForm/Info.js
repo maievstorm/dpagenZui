@@ -35,7 +35,6 @@ export const Info = (props) => {
 
       })
       .catch(err => {
-        
         if (!daginfo.DagId || !daginfo.Schedule || !daginfo.tags_name) setError("Thông tin không chính xác!");
         else {
           setError("");
