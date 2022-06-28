@@ -220,8 +220,6 @@ function CreateETLjob() {
             },
         },
         };
-  
-
 
     return (
         <div >
