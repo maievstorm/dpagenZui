@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import { Stepper, Step, StepLabel } from "@mui/material";
 import StepWizard from "react-step-wizard";
-// import { Button, FormGroup, Input } from "@mui/material";
-// import Typography from '@mui/material/Typography';
 import { Info } from "./stepForm/Info";
 import { Query } from "./stepForm/Query";
 import { Source } from "./stepForm/Source";
@@ -10,9 +8,6 @@ import { Review } from "./stepForm/Review";
 import { Finish } from "./stepForm/Finish";
 import config from '../../config';
 import axios from 'axios';
-
-
-
 import UserService from 'services/UserService';
 
 

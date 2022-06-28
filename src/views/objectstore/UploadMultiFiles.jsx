@@ -94,10 +94,8 @@ export default class UploadMultiFiles extends Component {
         
       }
     );
-
-    //const navigate = useNavigate()
-    //this.props.navigate('/objectstore', { replace: true });
-    history.push('/login');
+    
+ 
   }
 
   
