@@ -8,11 +8,18 @@ import { Review } from "./stepForm/Review";
 import { Finish } from "./stepForm/Finish";
 import config from '../../config';
 import axios from 'axios';
+import { useNavigate } from "react-router-dom";
+
+
+
+
 import UserService from 'services/UserService';
 
 
 
 const CreateNewFlow = () => {
+  const navigate = useNavigate();
+
   const steps = ['Đăng ký tiến trình', 'Đăng ký CSDL', 'Tạo truy vấn tổng hợp', 'Xác nhận thông tin', 'Hoàn thành'];
 
   const [stepWizard, setStepWizard] = useState(null);
@@ -93,7 +100,10 @@ const CreateNewFlow = () => {
       url: config.rootapi + '/invoice',
       data: invoicebody
     });
-    setTimeout(()=>setLoading(false), 5000);
+    setTimeout(()=>{
+      setLoading(false)
+      navigate('/dataingest')
+    }, 5000);
 
   }
 
