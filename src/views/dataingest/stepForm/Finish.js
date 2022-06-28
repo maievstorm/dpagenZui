@@ -9,6 +9,7 @@ import ActionButtons from "./ActionButton";
 import { height } from "@mui/system";
 export const Finish = (props) => {
   const loading = props.loading
+  console.log(props.loading)
   const timerRef = React.useRef();
 
   useEffect(
@@ -41,9 +42,9 @@ export const Finish = (props) => {
           </Fade>
           
         </Box>
-        <Button onClick={handleClickLoading} sx={{ m: 2 }}>
+        {/* <Button onClick={handleClickLoading} sx={{ m: 2 }}>
           {loading ? 'Stop loading' : 'Loading'}
-        </Button>
+        </Button> */}
       </Box>
       <ActionButtons {...props} />
     </div>
