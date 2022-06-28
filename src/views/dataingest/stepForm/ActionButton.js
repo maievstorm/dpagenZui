@@ -18,15 +18,15 @@ export default function ActionButtons(props){
   
         {props.currentStep > 1 && (
   
-          <Button onClick={handleBack}>Back</Button>
+          <Button onClick={handleBack}>Trở về</Button>
   
         )}
   
         {props.currentStep < props.totalSteps -1 && (
-          <Button onClick={handleNext}>Next</Button>
+          <Button onClick={handleNext}>Tiếp </Button>
         )}
         {props.currentStep === props.totalSteps - 1 && (
-          <Button onClick={handleFinish}>Finish</Button>
+          <Button onClick={handleFinish}>Tạo tiến trình</Button>
         )}
   
   

@@ -1,12 +1,9 @@
 import React from "react";
 import Box from '@mui/material/Box';
 import Fade from '@mui/material/Fade';
-import Button from '@mui/material/Button';
 import CircularProgress from '@mui/material/CircularProgress';
-import Typography from '@mui/material/Typography';
 import { useEffect } from "react";
-import ActionButtons from "./ActionButton";
-import { height } from "@mui/system";
+
 
 export const Finish = (props) => {
   const loading = props.loading

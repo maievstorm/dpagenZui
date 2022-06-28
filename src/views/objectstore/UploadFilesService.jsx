@@ -17,7 +17,7 @@ class UploadFilesService {
       if (evt.target.readyState === FileReader.DONE) {
 
         const uint = new Uint8Array(evt.target.result)
-        return DpzStorageConf.putObject(bucket, objectKey, Buffer.from(uint), {
+        return await DpzStorageConf.putObject(bucket, objectKey, Buffer.from(uint), {
           'Content-Type': contentType,
           'X-Amz-Meta-App': "ReactJS"
         },

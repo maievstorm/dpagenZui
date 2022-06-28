@@ -1,14 +1,17 @@
 import React, { Component } from "react";
 import UploadService from "./UploadFilesService";
-import { BrowserRouter, Route,Switch} from 'react-router-dom';
+import { withRouter } from "./withRouter";
+import { Button } from "@mui/material";
+
  
 
-export default class UploadMultiFiles extends Component {
+export  class UploadMultiFiles extends Component {
   constructor(props) {
     super(props);
     this.selectFiles = this.selectFiles.bind(this);
     this.upload = this.upload.bind(this);
     this.uploadFiles = this.uploadFiles.bind(this);
+    this.gohome=this.gohome.bind(this);
 
     this.state = {
       selectedFiles: undefined,
@@ -91,12 +94,22 @@ export default class UploadMultiFiles extends Component {
         for (let i = 0; i < selectedFiles.length; i++) {
           this.upload(i, selectedFiles[i]);
         }
+        this.gohome();
         
       }
     );
     
- 
+     
+     
+     
   }
+
+  gohome()
+    {
+        this.props.navigate('/ojectstorage')
+    }
+   
+ 
 
   
   render() {
@@ -131,13 +144,13 @@ export default class UploadMultiFiles extends Component {
           </div>
 
           <div className="col-4">
-            <button
+            <Button
               className="btn btn-success btn-sm"
               disabled={!selectedFiles}
               onClick={this.uploadFiles}
             >
-              Upload
-            </button>
+              Tải lên
+            </Button>
           </div>
         </div>
 
@@ -152,7 +165,7 @@ export default class UploadMultiFiles extends Component {
         )}
 
         <div className="card">
-          <div className="card-header">List of Files</div>
+          <div className="card-header"></div>
           <ul className="list-group list-group-flush">
             {fileInfos &&
               fileInfos.map((file, index) => (
@@ -166,3 +179,6 @@ export default class UploadMultiFiles extends Component {
     );
   }
 }
+
+
+export default withRouter(UploadMultiFiles);
