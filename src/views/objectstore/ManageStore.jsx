@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import MUIDataTable from "mui-datatables";
 import config from "../../config";
 import * as minio from "minio";
-import ModeEditIcon from '@mui/icons-material/ModeEdit';
+ 
 import AddIcon from '@mui/icons-material/Add';
 import { useNavigate } from "react-router-dom";
 import Button from '@mui/material/Button';
@@ -105,7 +105,7 @@ export default function ManageStore() {
 
     const navigate = useNavigate()
 
-    const onClickHandler = () => navigate('/objectstore/uploadstorage');
+    const onClickHandler = () => navigate('/objectstore/uploadmultifile');
 
 
 
