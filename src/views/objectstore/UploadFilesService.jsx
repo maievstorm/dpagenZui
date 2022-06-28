@@ -1,10 +1,12 @@
 import DpzStorageConf from 'components/StorageConf';
 
 class UploadFilesService {
-  upload(file,bucket, onUploadProgress) {
+  upload(file,bucket) {
+    console.log(file)
+
     let formData = new FormData();
     formData.append("file", file);
-    const fileToUpload = this.state.file;
+    const fileToUpload = file;
     const objectKey = fileToUpload.name;
     const contentType = fileToUpload.type;
     const fileReader = new FileReader()
@@ -18,7 +20,11 @@ class UploadFilesService {
         return DpzStorageConf.putObject(bucket, objectKey, Buffer.from(uint), {
           'Content-Type': contentType,
           'X-Amz-Meta-App': "ReactJS"
-        },onUploadProgress)
+        },
+        // onUploadProgress
+        )
+
+        // console.log(onUploadProgress)
 
       }
       fileReader.onerror = function () {

@@ -98,7 +98,7 @@ class UploadStorage extends Component {
       return ( 
         <MainCard>
  
-          <Input type="file" onChange={this.onFileChange} /> 
+          <Input type="file" multiple onChange={this.onFileChange} /> 
           <Button onClick={this.onFileUpload}> 
                  Tải lên 
           </Button> 
