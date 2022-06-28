@@ -7,6 +7,7 @@ import Typography from '@mui/material/Typography';
 import { useEffect } from "react";
 import ActionButtons from "./ActionButton";
 import { height } from "@mui/system";
+
 export const Finish = (props) => {
   const loading = props.loading
   console.log(props.loading)
@@ -46,7 +47,7 @@ export const Finish = (props) => {
           {loading ? 'Stop loading' : 'Loading'}
         </Button> */}
       </Box>
-      <ActionButtons {...props} />
+      {/* <ActionButtons {...props} /> */}
     </div>
   );
 };
