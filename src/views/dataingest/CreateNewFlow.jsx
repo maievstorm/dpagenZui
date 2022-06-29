@@ -9,6 +9,7 @@ import { Finish } from "./stepForm/Finish";
 import config from '../../config';
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
+import MainCard from "ui-component/cards/MainCard";
 
 
 
@@ -49,7 +50,7 @@ const CreateNewFlow = () => {
       'DagId': daginfo.DagId,
       "Schedule": daginfo.Schedule,
       "owner": UserService.getUsername(),
-      'tags': daginfo.tags_name,
+      'tags': daginfo.tags,
       'source': formSrcFields,
       'query': val
     })
@@ -104,13 +105,12 @@ const CreateNewFlow = () => {
       setLoading(false)
       navigate('/dataingest')
     }, 5000);
-
   }
 
 
 
   return (
-    <div>
+    <MainCard>
       <Stepper activeStep={activeStep}>
         {steps.map((label, index) => {
           return (
@@ -128,7 +128,7 @@ const CreateNewFlow = () => {
         <Review userCallback={submit} conf={conf} />
         <Finish loading={loading} setLoading={setLoading} />
       </StepWizard>
-    </div>
+    </MainCard>
   );
 };
 

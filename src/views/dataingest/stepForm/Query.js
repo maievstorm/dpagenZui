@@ -86,7 +86,7 @@ export const Query = (props) => {
       <div  >
         {formQuery?.map((formquery, index) => (
           <div key={index} >
-            <strong>{index + 1} </strong>
+            <strong>Query {index + 1} </strong>
             <div >
               {/* <strong>Query {index}</strong> */}
               <TextField
