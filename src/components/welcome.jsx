@@ -101,7 +101,7 @@ import Pricing from "./Pricing";
 
 
 const drawerWidth = 240;
-const navItems = ['Home', 'About', 'Contact'];
+// const navItems = ['Home', 'About', 'Contact'];
 
 
 function Welcome(props) {

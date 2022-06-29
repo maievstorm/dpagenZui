@@ -42,7 +42,7 @@ const styles = theme => ({
     padding: `${theme.spacing.unit * 8}px 0 ${theme.spacing.unit * 6}px`,
   },
   cardHeader: {
-    backgroundColor: theme.palette.grey[200],
+    backgroundColor: theme.palette.info.light,
   },
   cardPricing: {
     display: 'flex',
@@ -145,8 +145,9 @@ function Pricing(props) {
                   subheader={tier.subheader}
                   titleTypographyProps={{ align: 'center' }}
                   subheaderTypographyProps={{ align: 'center' }}
-                  action={tier.title === 'Pro' ? <StarIcon /> : null}
+                  action={tier.title === 'DPeZ' ? <StarIcon /> : null}
                   className={classes.cardHeader}
+                  
                 />
                 <CardContent>
                   <div className={classes.cardPricing}>
