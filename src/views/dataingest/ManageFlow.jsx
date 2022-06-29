@@ -48,8 +48,7 @@ export default function ManageFlow() {
     }, []);
 
 
-
-
+    
     const onStartJobClickHandler = (selected) => {
         console.log(selected);
         const apidagurl = config.airflowapi + '/dags/' + selected + '/dagRuns'
