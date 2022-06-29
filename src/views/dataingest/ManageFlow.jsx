@@ -70,7 +70,7 @@ export default function ManageFlow() {
     }
 
     const onEdittJobClickHandler = (selected) => {
-        console.log(selected);
+        navigate('editflowjob',{state:{id:selected}})
 
     }
 

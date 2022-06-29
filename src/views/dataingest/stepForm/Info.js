@@ -106,7 +106,7 @@ export const Info = (props) => {
         <Select id="Schedule" name='Schedule' value={daginfo.Schedule} onChange={onInputChanged}
           size="small"
           style={divStyle}
-          headerName={'Tần suất chạy'}
+          headername={'Tần suất chạy'}
         >
 
           {scheduletypes.map((scheduletype) => (
