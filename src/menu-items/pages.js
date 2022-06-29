@@ -32,14 +32,14 @@ const pages = {
                     title: 'Lưu trữ đám mây',
                     type: 'item',
                     url: '/ojectstorage',
-                    breadcrumbs: false
+                    breadcrumbs: true
                 },
                 {
                     id: 'datawarehouse',
                     title: 'Kho dữ liệu',
                     type: 'item',
                     url: '/datawh',
-                    breadcrumbs: false
+                    breadcrumbs: true
                 }
                 ,
                 {
@@ -47,7 +47,7 @@ const pages = {
                     title: 'Dữ liệu lớn',
                     type: 'item',
                     url: '/bigdata',
-                    breadcrumbs: false
+                    breadcrumbs: true
                 }
             ]
         }, 
@@ -63,14 +63,14 @@ const pages = {
                     title: 'Lưu chuyển dữ liệu',
                     type: 'item',
                     url: '/dataingest',
-                    breadcrumbs: false
+                    breadcrumbs: true
                 },
                 {
                     id: 'datastreaming',
                     title: 'Truyền tải trực tiếp',
                     type: 'item',
                     url: '/datastream',
-                    breadcrumbs: false
+                    breadcrumbs: true
                 }
                 ,
                 {
@@ -78,7 +78,7 @@ const pages = {
                     title: 'Sao lưu',
                     type: 'item',
                     url: '/databackup',
-                    breadcrumbs: false
+                    breadcrumbs: true
                 }
             ]
         }, 
@@ -94,14 +94,14 @@ const pages = {
                     title: 'Trí tuệ nhân tạo',
                     type: 'item',
                     url: '/dataai',
-                    breadcrumbs: false
+                    breadcrumbs: true
                 },
                 {
                     id: 'finnacereport',
                     title: 'Xây dựng BCTC',
                     type: 'item',
                     url: '/financereport',
-                    breadcrumbs: false
+                    breadcrumbs: true
                 }
                 ,
                 {
@@ -109,7 +109,7 @@ const pages = {
                     title: 'Trực quan dữ liệu',
                     type: 'item',
                     url: '/datavisual',
-                    breadcrumbs: false
+                    breadcrumbs: true
                 }
             ]
         }

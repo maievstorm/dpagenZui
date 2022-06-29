@@ -3,7 +3,7 @@ import { experimentalStyled as styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
-import { TextField,Select,Button } from '@mui/material';
+import { TextField, Select, Button } from '@mui/material';
 import MenuItem from '@mui/material/MenuItem';
 
 
@@ -18,10 +18,10 @@ const Item = styled(Paper)(({ theme }) => ({
     padding: theme.spacing(2),
     textAlign: 'center',
     color: theme.palette.text.secondary,
-  }));
+}));
 
 
-  const datatypes = [
+const datatypes = [
     {
         key: 'storage',
         name: 'Lưu trữ đám mây'
@@ -55,197 +55,197 @@ const Item = styled(Paper)(({ theme }) => ({
     }
 
 
-]  
- 
+]
+
 
 
 const RegisterStreaming = () => {
- 
+
     const divStyle = {
         marginTop: '10px',
-    
-      };
+
+    };
 
 
     return (
         <div>
             <Box sx={{ flexGrow: 1 }}>
                 <Grid container spacing={{ xs: 2, md: 2 }} columns={{ sm: 6, md: 12 }} style={divStyle}>
-                <TextField
-                            type="text"
-                            name="tentientrinh"
-                            id="tentientrinh"
-                            label="tentientrinh"
-                            fullWidth 
-                             
-                            />
-                        <Grid item xs={3} sm={6} md={6} >
-                            <Item style={divStyle} >Nguồn</Item>
-                            <strong>Loại CSDL Nguồn: </strong>
-                            <Select name='sdbtype'  
-                                size="small"
-                                style={divStyle}
-                            >
+                    <TextField
+                        type="text"
+                        name="tentientrinh"
+                        id="tentientrinh"
+                        label="Tên tiến trình"
+                        fullWidth
 
-                                {datatypes.map((datatype) => (
-                                    <MenuItem
-                                        key={datatype.key}
-                                        value={datatype.key}
-                                    >
-                                        {datatype.name}
-                                    </MenuItem>
-                                ))}
+                    />
+                    <Grid item xs={3} sm={6} md={6} >
+                        <Item style={divStyle} >Nguồn</Item>
+                        <strong>Loại CSDL Nguồn: </strong>
+                        <Select name='sdbtype'
+                            size="small"
+                            style={divStyle}
+                        >
 
-                            </Select>
-                            {/* 1 */}
-                            <TextField
+                            {datatypes.map((datatype) => (
+                                <MenuItem
+                                    key={datatype.key}
+                                    value={datatype.key}
+                                >
+                                    {datatype.name}
+                                </MenuItem>
+                            ))}
+
+                        </Select>
+                        {/* 1 */}
+                        <TextField
                             type="text"
                             name="sdatabase.server.name"
                             id="sdatabase.server.name"
                             label="Tên máy chủ CSDL nguồn"
-                            fullWidth 
+                            fullWidth
                             style={divStyle}
-                            />
-                            {/* 2 */}
-                            <TextField
+                        />
+                        {/* 2 */}
+                        <TextField
                             type="text"
                             name="sdatabase.hostname"
                             id="sdatabase.hostname"
                             label="IP/Host Name CSDL nguồn"
-                            fullWidth 
+                            fullWidth
                             style={divStyle}
-                            />
-                            {/* 3 */}
-                            <TextField
+                        />
+                        {/* 3 */}
+                        <TextField
                             type="text"
                             name="sdatabase.port"
                             id="sdatabase.port"
                             label="Port CSDL nguồn"
-                            fullWidth 
+                            fullWidth
                             style={divStyle}
-                            />
-                            {/* 4 */}
-                            <TextField
+                        />
+                        {/* 4 */}
+                        <TextField
                             type="text"
                             name="sdatabase.dbname"
                             id="sdatabase.dbname"
                             label="Tên CSDL nguồn"
-                            fullWidth 
+                            fullWidth
                             style={divStyle}
-                            />
-                            {/* 5 */}
-                            <TextField
+                        />
+                        {/* 5 */}
+                        <TextField
                             type="text"
                             name="sdatabase.user"
                             id="sdatabase.user"
                             label="Tài khoản đăng nhập nguồn"
-                            fullWidth 
+                            fullWidth
                             style={divStyle}
-                            />
-                            {/* 6 */}
-                            <TextField
+                        />
+                        {/* 6 */}
+                        <TextField
                             type="text"
                             name="sdatabase.password"
                             id="sdatabase.password"
                             label="Mật khẩu đăng nhặp nguồn"
-                            fullWidth 
+                            fullWidth
                             style={divStyle}
-                            />
-                            {/* 7 */}
-                            <TextField
+                        />
+                        {/* 7 */}
+                        <TextField
                             type="text"
                             name="stable.include.list"
                             id="stable.include.list"
                             label="Bảng dữ liệu nguồn"
-                            fullWidth 
+                            fullWidth
                             style={divStyle}
-                            />
-                            
-                        </Grid>
-                        <Grid item xs={3} sm={6} md={6} >
-                            <Item style={divStyle}>Đích</Item>
-                            <strong>Loại CSDL Đích: </strong>
-                            <Select name='tdbtype'  
-                                size="small"
-                                style={divStyle}
-                            >
+                        />
 
-                                {datatypes.map((datatype) => (
-                                    <MenuItem
-                                        key={datatype.key}
-                                        value={datatype.key}
-                                    >
-                                        {datatype.name}
-                                    </MenuItem>
-                                ))}
+                    </Grid>
+                    <Grid item xs={3} sm={6} md={6} >
+                        <Item style={divStyle}>Đích</Item>
+                        <strong>Loại CSDL Đích: </strong>
+                        <Select name='tdbtype'
+                            size="small"
+                            style={divStyle}
+                        >
 
-                            </Select>
-                            {/* 1 */}
-                            <TextField
+                            {datatypes.map((datatype) => (
+                                <MenuItem
+                                    key={datatype.key}
+                                    value={datatype.key}
+                                >
+                                    {datatype.name}
+                                </MenuItem>
+                            ))}
+
+                        </Select>
+                        {/* 1 */}
+                        <TextField
                             type="text"
                             name="tdatabase.server.name"
                             id="tdatabase.server.name"
                             label="Tên máy chủ CSDL đích"
-                            fullWidth 
+                            fullWidth
                             style={divStyle}
-                            />
-                            {/* 2 */}
-                            <TextField
+                        />
+                        {/* 2 */}
+                        <TextField
                             type="text"
                             name="tdatabase.hostname"
                             id="tdatabase.hostname"
                             label="IP/Host Name CSDL đích"
-                            fullWidth 
+                            fullWidth
                             style={divStyle}
-                            />
-                            {/* 3 */}
-                            <TextField
+                        />
+                        {/* 3 */}
+                        <TextField
                             type="text"
                             name="tdatabase.port"
                             id="tdatabase.port"
                             label="Port CSDL đích"
-                            fullWidth 
+                            fullWidth
                             style={divStyle}
-                            />
-                            {/* 4 */}
-                            <TextField
+                        />
+                        {/* 4 */}
+                        <TextField
                             type="text"
                             name="tdatabase.dbname"
                             id="tdatabase.dbname"
                             label="Tên CSDL đích"
-                            fullWidth 
+                            fullWidth
                             style={divStyle}
-                            />
-                            {/* 5 */}
-                            <TextField
+                        />
+                        {/* 5 */}
+                        <TextField
                             type="text"
                             name="tdatabase.user"
                             id="tdatabase.user"
                             label="Tài khoản đăng nhập đích"
-                            fullWidth 
+                            fullWidth
                             style={divStyle}
-                            />
-                            {/* 6 */}
-                            <TextField
+                        />
+                        {/* 6 */}
+                        <TextField
                             type="text"
                             name="tdatabase.password"
                             id="tdatabase.password"
                             label="Mật khẩu đăng nhặp đích"
-                            fullWidth 
+                            fullWidth
                             style={divStyle}
-                            />
-                             {/* 7 */}
-                             <TextField
+                        />
+                        {/* 7 */}
+                        <TextField
                             type="text"
                             name="ttable.include.list"
                             id="ttable.include.list"
                             label="Bảng dữ liệu đích"
-                            fullWidth 
+                            fullWidth
                             style={divStyle}
-                            />
-                        </Grid>
-                        
-                
+                        />
+                    </Grid>
+
+
                 </Grid>
                 <Button>Tạo Tiến Trình</Button>
             </Box>
