@@ -20,6 +20,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
+import Pricing from "./Pricing";
 
 // const useStyles =() => ({
 //     root: {
@@ -128,14 +129,6 @@ function Welcome(props) {
        
       </List> */}
       <Button sx={{ color: '#2196F3' }}>
-        Về chúng tôi
-      </Button>
-      <Divider />
-      <Button sx={{ color: '#2196F3' }}>
-        Sản phẩm
-      </Button>
-      <Divider />
-      <Button sx={{ color: '#2196F3' }}>
         Liên hệ
       </Button>
       <Divider />
@@ -150,6 +143,7 @@ function Welcome(props) {
   const container = window !== undefined ? () => window().document.body : undefined;
 
   return (
+    <div>
     <Box sx={{ display: 'flex' }}>
       <AppBar component="nav" style={{ backgroundColor: 'white' }} >
         <Toolbar>
@@ -167,7 +161,7 @@ function Welcome(props) {
             component="div"
             sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
           >
-            <Logo />
+            {/* <Logo /> */}
           </Typography>
           <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
             {/* {navItems.map((item) => (
@@ -176,12 +170,6 @@ function Welcome(props) {
               </Button>
 
             ))} */}
-            <Button sx={{ color: '#2196F3' }}>
-              Về chúng tôi
-            </Button>
-            <Button sx={{ color: '#2196F3' }}>
-              Sản phẩm
-            </Button>
             <Button sx={{ color: '#2196F3' }}>
               Liên hệ
             </Button>
@@ -211,11 +199,10 @@ function Welcome(props) {
       </Box>
       <Box component="main" sx={{ p: 3 }}>
         <Toolbar />
-        <Typography>
-          abc
-        </Typography>
       </Box>
     </Box>
+    <Pricing></Pricing>
+    </div>
   );
 }
 
