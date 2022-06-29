@@ -32,8 +32,8 @@ const CreateflowJob  = Loadable(lazy(() => import('views/dataingest/CreateNewFlo
 //const UploadStorage = Loadable(lazy(() => import('views/objectstore/UploadStorage')));
 const UploadMultiFiles = Loadable(lazy(() => import('views/objectstore/UploadMultiFiles')));
 //const ManageDpaStorage = Loadable(lazy(() => import('views/DpaStorage/ManageDpaStorage')));
-
-//const ListObjects = Loadable(lazy(() => import('views/DpaStorage/ListObjects'))); 
+const RegisterStreaming = Loadable(lazy(() => import('views/datastream/RegisterStream')));
+ 
  
 // ==============================|| MAIN ROUTING ||============================== //
 
@@ -142,6 +142,10 @@ const MainRoutes = {
         {
             path: '/objectstore/uploadmultifile',
             element: <UploadMultiFiles />
+        } ,
+        {
+            path: '/datastream/registerstream',
+            element: <RegisterStreaming />
         } 
     ]
 };
