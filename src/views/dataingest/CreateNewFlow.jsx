@@ -55,6 +55,7 @@ const CreateNewFlow = () => {
       'query': val
     })
   };
+  console.log(conf)
 
   const handleStepChange = (e) => {
     setActiveStep(e.activeStep - 1);
