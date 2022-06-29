@@ -8,6 +8,7 @@ import ReviewItem from "./ReviewItem";
 
 
 export const Review = (props) => {
+  const conf = props.conf
   //const classes = useStyles();  
   const divStyle = {
     margin: '5px',
@@ -17,7 +18,6 @@ export const Review = (props) => {
     props.lastStep();
     props.userCallback();
   }
-  console.log(conf)
   return (
     <div style={{ marginTop: "1rem" }}>
       <h3>Thông số chi tiết tiến trình</h3>
