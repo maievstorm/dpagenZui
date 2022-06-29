@@ -73,19 +73,19 @@ const tiers = [
   {
     title: 'DPeZ',
     subheader: 'Phổ biến',
-    price: '1500',
+    price: '30',
     description: [
       '10 tài khoản',
       '1 TB Lưu trữ trên mây',
       '30 tiến trình',
       'Hỗ trợ giờ hành chính',
     ],
-    buttonText: 'Bắt đầu đi thôi',
+    buttonText: 'Bắt đầu lên thôi',
     buttonVariant: 'contained',
   },
   {
     title: 'DPagenZ',
-    price: '3000',
+    price: '60',
     description: [
       '20 tài khoản',
       '3 TB Lưu trữ trên mây',
@@ -151,10 +151,10 @@ function Pricing(props) {
                 <CardContent>
                   <div className={classes.cardPricing}>
                     <Typography component="h2" variant="h3" color="textPrimary">
-                      ${tier.price}
+                      {tier.price}
                     </Typography>
                     <Typography variant="h6" color="textSecondary">
-                      /th
+                      tr/th
                     </Typography>
                   </div>
                   {tier.description.map(line => (
