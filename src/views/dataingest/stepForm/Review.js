@@ -9,6 +9,7 @@ import ReviewItem from "./ReviewItem";
 
 export const Review = (props) => {
   const conf = props.conf
+  console.log(conf)
   //const classes = useStyles();  
   const divStyle = {
     margin: '5px',
@@ -34,9 +35,11 @@ export const Review = (props) => {
           value={conf?.DagId}
           InputProps={{
             readOnly: true,
+            disableUnderline: true,
           }}
-          // focused='true'
+           focused='true'
           size="small"
+          variant="standard"
 
         />
 
@@ -50,8 +53,10 @@ export const Review = (props) => {
           // onChange={onInputChanged}
           InputProps={{
             readOnly: true,
+            disableUnderline: true,
           }}
           focused='true'
+          variant="standard"
 
         />
 
@@ -65,8 +70,10 @@ export const Review = (props) => {
           // onChange={onInputChanged}
           InputProps={{
             readOnly: true,
+            disableUnderline: true,
           }}
           focused='true'
+          variant="standard"
 
         />
 
@@ -76,12 +83,14 @@ export const Review = (props) => {
           name="tags_name"
 
           focused='true'
+          variant="standard"
 
           value={conf?.tags}
           // onChange={onInputChanged}
           size="small"
           InputProps={{
             readOnly: true,
+            disableUnderline: true,
           }}
 
         />
@@ -107,8 +116,10 @@ export const Review = (props) => {
               size="small"
               InputProps={{
                 readOnly: true,
+                disableUnderline: true,
               }}
               focused='true'
+              variant="standard"
             />
             <TextField
               label='Đường dẫn kết nối'
@@ -117,8 +128,10 @@ export const Review = (props) => {
               size="small"
               InputProps={{
                 readOnly: true,
+                disableUnderline: true,
               }}
               focused='true'
+              variant="standard"
             />
             <TextField
               name='databasename'
@@ -127,8 +140,10 @@ export const Review = (props) => {
               value={form.databasename}
               InputProps={{
                 readOnly: true,
+                disableUnderline: true,
               }}
               focused='true'
+              variant="standard"
             />
             <br></br>
             <TextField
@@ -138,8 +153,10 @@ export const Review = (props) => {
               value={form.srcusername}
               InputProps={{
                 readOnly: true,
+                disableUnderline: true,
               }}
               focused='true'
+              variant="standard"
             />
             <TextField
               name='srcpassword'
@@ -148,8 +165,11 @@ export const Review = (props) => {
               value={form.srcpassword}
               InputProps={{
                 readOnly: true,
+                disableUnderline: true,
               }}
-              focused='true' />
+              focused='true'
+              variant="standard"
+              />
 
             <TextField
               name='tablename'
@@ -160,8 +180,11 @@ export const Review = (props) => {
               value={form.tablename}
               InputProps={{
                 readOnly: true,
+                disableUnderline: true,
               }}
-              focused='true' />
+              focused='true' 
+              variant="standard"
+              />
             <TextField
               name='alias'
               size="small"
@@ -169,8 +192,10 @@ export const Review = (props) => {
               value={form.alias}
               InputProps={{
                 readOnly: true,
+                disableUnderline: true,
               }}
               focused='true' 
+              variant="standard"
               />
           </Box>
         ))
@@ -200,8 +225,10 @@ export const Review = (props) => {
               style={divStyle}
               InputProps={{
                 readOnly: true,
+                disableUnderline: true,
               }}
               focused='true' 
+              variant="standard"
             />
             <TextField
               label="Bảng cần tổng hợp"
@@ -210,8 +237,10 @@ export const Review = (props) => {
               style={divStyle}
               InputProps={{
                 readOnly: true,
+                disableUnderline: true,
               }}
               focused='true' 
+              variant="standard"
             />
             <br></br>
 
@@ -228,6 +257,7 @@ export const Review = (props) => {
                 readOnly: true,
               }}
               focused='true' 
+              
             />
             <br></br>
 
@@ -239,8 +269,10 @@ export const Review = (props) => {
               style={divStyle}
               InputProps={{
                 readOnly: true,
+                disableUnderline: true,
               }}
               focused='true' 
+              variant="standard"
             />
             <TextField
               label="Write mode"
@@ -249,8 +281,10 @@ export const Review = (props) => {
               style={divStyle}
               InputProps={{
                 readOnly: true,
+                disableUnderline: true,
               }}
               focused='true' 
+              variant="standard"
             />
 
 

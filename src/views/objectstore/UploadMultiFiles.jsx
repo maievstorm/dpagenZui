@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import UploadService from "./UploadFilesService";
 import { withRouter } from "./withRouter";
-import { Button } from "@mui/material";
+import { Button,Select } from "@mui/material";
+ 
 
  
 
@@ -12,15 +13,15 @@ export  class UploadMultiFiles extends Component {
     this.upload = this.upload.bind(this);
     this.uploadFiles = this.uploadFiles.bind(this);
     this.gohome=this.gohome.bind(this);
-
     this.state = {
       selectedFiles: undefined,
       progressInfos: [],
       message: [],
-
       fileInfos: [],
     };
   }
+
+  
 
   // componentDidMount() {
   //   UploadService.getFiles().then((response) => {
@@ -99,9 +100,7 @@ export  class UploadMultiFiles extends Component {
       }
     );
     
-     
-     
-     
+        
   }
 
   gohome()
