@@ -66,7 +66,7 @@ export const Info = (props) => {
 
       })
       .catch(err => {
-        if (!daginfo.DagId || !daginfo.Schedule || !daginfo.tags_name) setError("Thông tin không chính xác!");
+        if (!daginfo.DagId || !daginfo.Schedule || !daginfo.tags) setError("Thông tin không chính xác!");
         else {
           setError("");
           props.nextStep();
@@ -121,9 +121,9 @@ export const Info = (props) => {
         </Select>
         <TextField
           label="Tags"
-          id="tags_name"
-          name="tags_name"
-          value={daginfo.tags_name}
+          id="tags"
+          name="tags"
+          value={daginfo.tags}
           onChange={onInputChanged}
           size="small"
           style={divStyle}
