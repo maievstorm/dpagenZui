@@ -38,13 +38,13 @@ export default function ManageFlow() {
         }
 
     ];
-    const getairflowapi = config.rootapi + '/invoice/usernamentype/'+UserService.getUsername()+'&airflow';
+    const getairflowapi = config.rootapi + '/invoice/usernamentype/' + UserService.getUsername() + '&airflow';
 
     useEffect(() => {
         axios({ method: 'get', url: getairflowapi }
         ).then(res => {
             setData(res.data.data);
-        })
+        }).catch(err => { console.log(err) })
     }, []);
 
 
@@ -71,7 +71,7 @@ export default function ManageFlow() {
 
     const onEdittJobClickHandler = (selected) => {
         console.log(selected);
-       
+
     }
 
     const options = {
@@ -82,40 +82,38 @@ export default function ManageFlow() {
         textLabels: {},
         customToolbarSelect: selectedRows => (
             <>
-            <Tooltip title="Kích hoạt tiến trình">
-                <IconButton
-                    onClick={() => {
-                        //  console.log(rows[selectedRows.data[0].dataIndex]);
-                        //setTest(rows[selectedRows.data[0].dataIndex]['item_name']);
-                        onStartJobClickHandler(rows[selectedRows.data[0].dataIndex]['item_name']);
+                <Tooltip title="Kích hoạt tiến trình">
+                    <IconButton
+                        onClick={() => {
 
-                    }}
+                            onStartJobClickHandler(rows[selectedRows.data[0].dataIndex]['item_name']);
 
-                >
-                    <PlayCircleOutlineIcon />
-                </IconButton>
-                
-            </Tooltip>
-            <Tooltip title="Hiệu chỉnh tiến trình">
-                <IconButton
-                    onClick={() => {
-                        //  console.log(rows[selectedRows.data[0].dataIndex]);
-                        //setTest(rows[selectedRows.data[0].dataIndex]['item_name']);
-                        onEdittJobClickHandler(rows[selectedRows.data[0].dataIndex]['item_name']);
+                        }}
 
-                    }}
+                    >
+                        <PlayCircleOutlineIcon />
+                    </IconButton>
 
-                >
-                    <ModeEditIcon />
-                </IconButton>
-                
-            </Tooltip>
+                </Tooltip>
+                <Tooltip title="Hiệu chỉnh tiến trình">
+                    <IconButton
+                        onClick={() => {
+
+                            onEdittJobClickHandler(rows[selectedRows.data[0].dataIndex]['item_name']);
+
+                        }}
+
+                    >
+                        <ModeEditIcon />
+                    </IconButton>
+
+                </Tooltip>
             </>
-            
+
         )
     };
 
-   
+
 
     const navigate = useNavigate()
 

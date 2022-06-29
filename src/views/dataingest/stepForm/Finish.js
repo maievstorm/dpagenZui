@@ -17,9 +17,9 @@ export const Finish = (props) => {
     [],
   );
 
-  const handleClickLoading = () => {
-    props.setLoading((prevLoading) => !prevLoading);
-  };
+  // const handleClickLoading = () => {
+  //   props.setLoading((prevLoading) => !prevLoading);
+  // };
 
   
   return (

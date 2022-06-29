@@ -5,6 +5,8 @@ import ActionButtons from "./ActionButton";
 import { useState, useEffect } from "react";
 import config from "../../../config";
 import axios from 'axios';
+import { Select } from '@mui/material';
+import MenuItem from '@mui/material/MenuItem';
 
 export const Info = (props) => {
   const divStyle = {
@@ -25,6 +27,35 @@ export const Info = (props) => {
       [targetName]: targetValue
     }));
   };
+
+  const scheduletypes = [
+    {
+      key: 'None',
+      name: 'None'
+    },
+    {
+      key: '@once',
+      name: 'Một lần'
+    },
+    {
+      key: '@hourly',
+      name: 'Hằng giờ'
+    },
+    {
+      key: '@daily',
+      name: 'Hằng ngày'
+    },
+    {
+      key: '@weekly',
+      name: 'Hằng tuần'
+    },
+    {
+      key: '@monthly',
+      name: 'Hằng tháng'
+    }
+
+
+  ]
 
 
   const validate = () => {
@@ -63,7 +94,7 @@ export const Info = (props) => {
           style={divStyle}
 
         />
-        <TextField
+        {/* <TextField
           label="Tần suất chạy"
           id="Schedule"
           name="Schedule"
@@ -71,16 +102,23 @@ export const Info = (props) => {
           value={daginfo.Schedule}
           onChange={onInputChanged}
           style={divStyle}
-        />
-        {/* <TextField
-              label="Người tạo"
-              id="owner"
-              name="owner"
-              value={Daginfo.owner}
-              onChange={event => setDagInfo({ ...Daginfo, 'owner': event.target.value })}
-              size="small"
-              style={divStyle}
-          /> */}
+        /> */}
+        <Select id="Schedule" name='Schedule' value={daginfo.Schedule} onChange={onInputChanged}
+          size="small"
+          style={divStyle}
+          headerName={'Tần suất chạy'}
+        >
+
+          {scheduletypes.map((scheduletype) => (
+            <MenuItem
+              key={scheduletype.key}
+              value={scheduletype.key}
+            >
+              {scheduletype.name}
+            </MenuItem>
+          ))}
+
+        </Select>
         <TextField
           label="Tags"
           id="tags_name"
