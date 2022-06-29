@@ -11,7 +11,7 @@ import { useState } from "react";
 export const Query = (props) => {
   const [error, setError] = useState("");
 
-  const formSrcFields = props.srcData!== undefined?  props.srcData:[]
+  const formSrcFields = props.srcData !== undefined ? props.srcData : []
   const divStyle = {
     margin: '5px'
   };
@@ -60,48 +60,48 @@ export const Query = (props) => {
 
   const validate = () => {
     let is_error = true;
-    for(let i= 0;i<formQuery.length;i++){
-      for(let key in formQuery[i]){
-        if(!formQuery[i][key]){
+    for (let i = 0; i < formQuery.length; i++) {
+      for (let key in formQuery[i]) {
+        if (!formQuery[i][key]) {
           is_error = false
           setError("Không được bỏ trống các trường");
           break;
         }
       }
-  }
-    if(is_error){
-        setError("");
-        props.nextStep();
-        props.userCallback(formQuery);
+    }
+    if (is_error) {
+      setError("");
+      props.nextStep();
+      props.userCallback(formQuery);
     }
 
-};
+  };
 
   return (
     <div>
       <strong>
         Đăng ký thủ tục tổng hợp dữ liệu
       </strong><br></br>
-      <span style={{color:'red'}}>{error}</span>
+      <span style={{ color: 'red' }}>{error}</span>
       <div  >
-          {formQuery?.map((formquery, index) => (
-              <div key={index} >
-                  <strong>{index+1} </strong> 
-                  <div >
-                      {/* <strong>Query {index}</strong> */}
-                      <TextField
-                          label="Tên job tổng hợp"
-                          id="queryname"
-                          name="queryname"
-                          value={formquery?.queryname}
-                          size="small"
-                          onChange={event => handleformQuery(event, index)}
-                          style={divStyle}
-                      />
-                        <br></br>
-                      
+        {formQuery?.map((formquery, index) => (
+          <div key={index} >
+            <strong>{index + 1} </strong>
+            <div >
+              {/* <strong>Query {index}</strong> */}
+              <TextField
+                label="Tên job tổng hợp"
+                id="queryname"
+                name="queryname"
+                value={formquery?.queryname}
+                size="small"
+                onChange={event => handleformQuery(event, index)}
+                style={divStyle}
+              />
+              <br></br>
 
-                      {/* <TextField
+
+              {/* <TextField
                           label="Danh sách bảng cần tổng hợp"
                           id="listsourcetable"
                           name="listsourcetable"
@@ -111,75 +111,75 @@ export const Query = (props) => {
                           style={divStyle}
                       />  */}
 
-                      
-                      <MultipleSelectCheckmarks 
-                        headerName={'Danh sách bảng cần tổng hợp'} 
-                        data={formSrcFields}
-                        formQuery={formQuery}
-                        setformQuery = {setformQuery}
-                        index = {index}
-                        source = {'listsourcetable'}
-                      /> 
-                      
-                        <Button name="btnremovequery" onClick={() => removeQuery(index)}><IconCircleMinus/></Button>
-                        <br></br>
-                        <TextField
-                          label="Query Detail"
-                          id="querydetail"
-                          name="querydetail"
-                          multiline
-                          size="small"
-                          fullWidth
-                          value={formquery.querydetail}
-                          onChange={event => handleformQuery(event, index)}
-                          style={divStyle}
-                      />
 
-                      <Select name='targettable' 
-                              value={formquery.targettable}  
-                              onChange={event => handleformQuery(event, index)}
-                              size="small"
-                              style={divStyle}
-                      >
-                          
-                            {formSrcFields?.map((formSrcField) => (
-                                  <MenuItem
-                                  key={formSrcField.alias}
-                                  value={formSrcField.alias}
-                                  >
-                                  {formSrcField.alias}
-                                  </MenuItem>
-                              ))}
+              <MultipleSelectCheckmarks
+                headerName={'Danh sách bảng cần tổng hợp'}
+                data={formSrcFields}
+                formQuery={formQuery}
+                setformQuery={setformQuery}
+                index={index}
+                source={'listsourcetable'}
+              />
 
-                      </Select>
+              <Button name="btnremovequery" onClick={() => removeQuery(index)}><IconCircleMinus /></Button>
+              <br></br>
+              <TextField
+                label="Query Detail"
+                id="querydetail"
+                name="querydetail"
+                multiline
+                size="small"
+                fullWidth
+                value={formquery.querydetail}
+                onChange={event => handleformQuery(event, index)}
+                style={divStyle}
+              />
 
-                      Write mode
-                      <Select name='writemode'
-                          value={formquery.writemode}
-                          onChange={event => handleformQuery(event, index)}
-                          size="small"
-                          style={divStyle}
-                      >
+              <Select name='targettable'
+                value={formquery.targettable}
+                onChange={event => handleformQuery(event, index)}
+                size="small"
+                style={divStyle}
+              >
 
-                          {writemodetype.map((writemode) => (
-                              <MenuItem
-                                  key={writemode.key}
-                                  value={writemode.key}
-                              >
-                                  {writemode.name}
-                              </MenuItem>
-                          ))}
+                {formSrcFields?.map((formSrcField) => (
+                  <MenuItem
+                    key={formSrcField.alias}
+                    value={formSrcField.alias}
+                  >
+                    {formSrcField.alias}
+                  </MenuItem>
+                ))}
 
-                      </Select>
-                  </div>
-                
-              </div>
-              
-          ))
-          }
-          <Button style={divStyle} name="btnaddquery" onClick={addFieldQuery}><IconSquarePlus/></Button>
+              </Select>
+
+              Write mode
+              <Select name='writemode'
+                value={formquery.writemode}
+                onChange={event => handleformQuery(event, index)}
+                size="small"
+                style={divStyle}
+              >
+
+                {writemodetype.map((writemode) => (
+                  <MenuItem
+                    key={writemode.key}
+                    value={writemode.key}
+                  >
+                    {writemode.name}
+                  </MenuItem>
+                ))}
+
+              </Select>
+            </div>
+
+          </div>
+
+        ))
+        }
+        <Button style={divStyle} name="btnaddquery" onClick={addFieldQuery}><IconSquarePlus /></Button>
       </div>
-      <ActionButtons {...props} nextStep={validate}/>
+      <ActionButtons {...props} nextStep={validate} />
 
     </div>
   );
