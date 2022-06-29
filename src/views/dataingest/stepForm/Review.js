@@ -24,7 +24,7 @@ export const Review = (props) => {
     margin: '5px',
   };
 
-  const conf = props.conf
+  const conf = props?.conf
   const validate = () => {
     props.lastStep();
     props.userCallback();
@@ -47,7 +47,7 @@ export const Review = (props) => {
           InputProps={{
             readOnly: true,
           }}
-          // focused='true'
+          focused={true}
           size="small"
 
         />
@@ -63,7 +63,7 @@ export const Review = (props) => {
           InputProps={{
             readOnly: true,
           }}
-          focused='true'
+          focused={true}
 
         />
 
@@ -78,7 +78,7 @@ export const Review = (props) => {
           InputProps={{
             readOnly: true,
           }}
-          focused='true'
+          focused={true}
 
         />
 
@@ -87,7 +87,7 @@ export const Review = (props) => {
           id="tags_name"
           name="tags_name"
 
-          focused='true'
+          focused={true}
 
           value={conf?.tags}
           // onChange={onInputChanged}
@@ -104,7 +104,9 @@ export const Review = (props) => {
       }
       {
         conf?.source?.map((form, index) => (
-          <Box component="form"
+          <Box 
+          key = {index}
+          component="form"
             sx={{
               '& .MuiTextField-root': { m: 1, width: '25ch' },
             }}
@@ -120,7 +122,7 @@ export const Review = (props) => {
               InputProps={{
                 readOnly: true,
               }}
-              focused='true'
+              focused={true}
             />
             <TextField
               label='Đường dẫn kết nối'
@@ -130,7 +132,7 @@ export const Review = (props) => {
               InputProps={{
                 readOnly: true,
               }}
-              focused='true'
+              focused={true}
             />
             <TextField
               name='databasename'
@@ -140,7 +142,7 @@ export const Review = (props) => {
               InputProps={{
                 readOnly: true,
               }}
-              focused='true'
+              focused={true}
             />
             <br></br>
             <TextField
@@ -151,7 +153,7 @@ export const Review = (props) => {
               InputProps={{
                 readOnly: true,
               }}
-              focused='true'
+              focused={true}
             />
             <TextField
               name='srcpassword'
@@ -161,7 +163,7 @@ export const Review = (props) => {
               InputProps={{
                 readOnly: true,
               }}
-              focused='true' />
+              focused={true} />
 
             <TextField
               name='tablename'
@@ -173,7 +175,7 @@ export const Review = (props) => {
               InputProps={{
                 readOnly: true,
               }}
-              focused='true' />
+              focused={true} />
             <TextField
               name='alias'
               size="small"
@@ -182,7 +184,7 @@ export const Review = (props) => {
               InputProps={{
                 readOnly: true,
               }}
-              focused='true' 
+              focused={true} 
               />
           </Box>
         ))
@@ -200,6 +202,8 @@ export const Review = (props) => {
           //   }}
           //   noValidate
           //   autoComplete="off"
+          key = {index}
+
             >
             <strong>Query {index + 1} </strong>
             <br></br>
@@ -213,7 +217,7 @@ export const Review = (props) => {
               InputProps={{
                 readOnly: true,
               }}
-              focused='true' 
+              focused={true} 
             />
             <TextField
               label="Bảng cần tổng hợp"
@@ -223,7 +227,7 @@ export const Review = (props) => {
               InputProps={{
                 readOnly: true,
               }}
-              focused='true' 
+              focused={true} 
             />
             <br></br>
 
@@ -239,7 +243,7 @@ export const Review = (props) => {
               InputProps={{
                 readOnly: true,
               }}
-              focused='true' 
+              focused={true} 
             />
             <br></br>
 
@@ -252,7 +256,7 @@ export const Review = (props) => {
               InputProps={{
                 readOnly: true,
               }}
-              focused='true' 
+              focused={true} 
             />
             <TextField
               label="Write mode"
@@ -262,7 +266,7 @@ export const Review = (props) => {
               InputProps={{
                 readOnly: true,
               }}
-              focused='true' 
+              focused={true} 
             />
 
 

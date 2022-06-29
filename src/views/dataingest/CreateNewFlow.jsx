@@ -38,7 +38,7 @@ const CreateNewFlow = () => {
   };
 
   const assignDagInfo = (val) => {
-    setDagInfo({ ...val })
+    setDagInfo(val)
   };
   const assignSource = (val) => {
     setFormSrcFields(val)
