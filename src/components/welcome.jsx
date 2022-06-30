@@ -21,6 +21,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import Pricing from "./Pricing";
+ 
 
 
 const drawerWidth = 240;
@@ -125,6 +126,8 @@ function Welcome(props) {
       </Box>
     </Box>
     <Pricing></Pricing>
+    <br></br>
+    
     </div>
   );
 }

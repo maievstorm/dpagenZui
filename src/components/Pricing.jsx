@@ -174,6 +174,7 @@ function Pricing(props) {
           ))}
         </Grid>
       </main>
+      
       {/* Footer */}
       <footer className={classNames(classes.footer, classes.layout)}>
         <Grid container spacing={32} justify="space-evenly">
