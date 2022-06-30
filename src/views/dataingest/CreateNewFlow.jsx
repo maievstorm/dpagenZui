@@ -51,6 +51,7 @@ const CreateNewFlow = () => {
       "Schedule": daginfo.Schedule,
       "owner": UserService.getUsername(),
       'tags': daginfo.tags,
+      'subscription_id': daginfo.subscription_id,
       'source': formSrcFields,
       'query': val
     })
@@ -69,23 +70,12 @@ const CreateNewFlow = () => {
     const body = {
       "conf": { conf },
     }
-    axios({
-      method: 'post',
-      url: config.airflowapi + '/dags/dag_create_job_file/dagRuns',
-
-      auth: {
-        username: 'hung',
-        password: '123456a@'
-      },
-      data: body
-    });
-
     const invoicebody =
     {
       "item_name": conf.DagId,
       "item_type": 'airflow',
       "customer_invoice_data": JSON.stringify(body),
-      "subscription_id": 1,
+      "subscription_id": conf.subscription_id,
       "plan_history_id": 1,
       "invoice_period_start_date": new Date().toLocaleString() + '',
       "invoice_period_end_date": new Date().toLocaleString() + '',
@@ -95,17 +85,37 @@ const CreateNewFlow = () => {
       "invoice_due_ts": new Date().toLocaleString() + '',
       "invoice_paid_ts": new Date().toLocaleString() + ''
     }
-
     console.log(invoicebody)
     axios({
       method: 'post',
-      url: config.rootapi + '/invoice',
-      data: invoicebody
-    });
-    setTimeout(()=>{
-      setLoading(false)
-      navigate('/dataingest')
-    }, 5000);
+      url: config.airflowapi + '/dags/dag_create_job_file/dagRuns',
+
+      auth: {
+        username: 'hung',
+        password: '123456a@'
+      },
+      data: body
+    })
+      .then(res => {
+        if (res.status === 200) {
+          axios({
+            method: 'post',
+            url: config.rootapi + '/invoice',
+            data: invoicebody
+          })
+          .then(res=>{
+            setTimeout(() => {
+              setLoading(false)
+              navigate('/dataingest')
+            }, 5000);
+
+          })
+          .catch(err => console.log(err))
+        }
+      })
+      .catch(err => console.log(err))
+
+
   }
 
 

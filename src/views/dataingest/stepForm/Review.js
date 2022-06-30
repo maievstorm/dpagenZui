@@ -37,9 +37,10 @@ export const Review = (props) => {
             readOnly: true,
             disableUnderline: true,
           }}
+          variant="standard"
+
            focused='true'
           size="small"
-          variant="standard"
 
         />
 
@@ -86,6 +87,23 @@ export const Review = (props) => {
           variant="standard"
 
           value={conf?.tags}
+          // onChange={onInputChanged}
+          size="small"
+          InputProps={{
+            readOnly: true,
+            disableUnderline: true,
+          }}
+
+        />
+        <TextField
+          label="Subscription_id"
+          id="subscription_id"
+          name="subscription_id"
+
+          focused='true'
+          variant="standard"
+
+          value={conf?.subscription_id}
           // onChange={onInputChanged}
           size="small"
           InputProps={{

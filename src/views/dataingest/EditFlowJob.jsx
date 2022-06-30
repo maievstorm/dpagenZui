@@ -1,4 +1,4 @@
-import { useLocation } from "react-router"
+import { useLocation, useNavigate } from "react-router"
 import ReviewItem from "./stepForm/ReviewItem"
 import config from "../../config";
 import Box from '@mui/material/Box';
@@ -9,16 +9,14 @@ import EditIcon from '@mui/icons-material/Edit';
 import NotStartedOutlinedIcon from '@mui/icons-material/NotStartedOutlined';
 import axios from "axios";
 import { IconButton } from '@mui/material';
-import { Info } from "./stepForm/Info";
-import { Query } from "./stepForm/Query";
-import { Source } from "./stepForm/Source";
 import UserService from 'services/UserService';
+
 
 
 export default function EditFlowJob() {
     const location = useLocation()
     const DagId = location?.state?.id
-    console.log(DagId)
+    const navigate = useNavigate()
 
     const [confInfo, setConfInfo] = useState()
     const [edit, setEdit] = useState(false)
@@ -34,6 +32,7 @@ export default function EditFlowJob() {
             [targetName]: targetValue
         }));
     };
+    console.log(confInfo)
 
 
 
@@ -101,48 +100,40 @@ export default function EditFlowJob() {
             "Schedule": confInfo.Schedule,
             "owner": UserService.getUsername(),
             'tags': confInfo.tags,
+            'subscription_id':confInfo.subscription_id,
             'source': formSrcFields,
             'query': formQuery
         }
         const body = {
-            "conf": {
-                conf
-            },
+            "conf": { conf }
         }
-        console.log(body)
+        const data = {
+            "customer_invoice_data": JSON.stringify(body),
+            "invoice_description": confInfo.DagId
+        }
+        let router = config.rootapi + '/invoice/itemname/' + confInfo.DagId
         axios({
             method: 'post',
             url: config.airflowapi + '/dags/dag_create_job_file/dagRuns',
-
+      
             auth: {
-                username: 'hung',
-                password: '123456a@'
+              username: 'hung',
+              password: '123456a@'
             },
             data: body
-        });
+        })
+        .then(res=>{
+            if (res.status === 200) {
+                axios({
+                    method: 'put',
+                    url: router,
+                    data: data
+                })
+                navigate('/dataingest/',{state:{id:DagId}})
+            }
+        })
 
-        const invoicebody =
-        {
-            "item_name": conf.DagId,
-            "item_type": 'airflow',
-            "customer_invoice_data": JSON.stringify(body),
-            "subscription_id": 1,
-            "plan_history_id": 1,
-            "invoice_period_start_date": new Date().toLocaleString() + '',
-            "invoice_period_end_date": new Date().toLocaleString() + '',
-            "invoice_description": conf.DagId,
-            "invoice_amount": 100,
-            "invoice_created_ts": new Date().toLocaleString() + '',
-            "invoice_due_ts": new Date().toLocaleString() + '',
-            "invoice_paid_ts": new Date().toLocaleString() + ''
-        }
-
-        console.log(invoicebody)
-        axios({
-            method: 'post',
-            url: config.rootapi + '/invoice',
-            data: invoicebody
-        });
+        
     }
 
 
