@@ -15,8 +15,7 @@ export default function ReviewItem(props) {
     const onInputChanged = props?.onInputChanged
 
     const divStyle = {
-        margin: '5px',
-        color: 'red'
+        margin: '5px'
     };
     const formSrcFields = props?.formSrcFields
     const formQuery = props?.formQuery
@@ -358,11 +357,14 @@ export default function ReviewItem(props) {
                                 />
                             }
 
+<Button name="btnremovequery" onClick={() => props.removeQuery(index)}><IconCircleMinus /></Button>
 
                         </Box>
 
                     ))
                 }
+                        <Button style={divStyle} name="btnaddquery" onClick={props.addFieldQuery}><IconSquarePlus /></Button>
+
             </Box>
         </div>
     )
