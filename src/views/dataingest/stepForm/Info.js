@@ -83,7 +83,7 @@ export const Info = (props) => {
 
       })
       .catch(err => {
-        if (!daginfo.DagId || !daginfo.Schedule || !daginfo.tags) setError("Thông tin không chính xác!");
+        if (!daginfo.DagId || !daginfo.Schedule || !daginfo.tags || !daginfo.subscription_id) setError("Thông tin không chính xác!");
         else {
           setError("");
           props.nextStep();
