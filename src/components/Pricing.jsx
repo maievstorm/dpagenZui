@@ -13,6 +13,7 @@ import StarIcon from '@material-ui/icons/StarBorder';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
+import RegisterForm from './RegisterForm';
 
 const styles = theme => ({
   '@global': {
@@ -174,6 +175,7 @@ function Pricing(props) {
           ))}
         </Grid>
       </main>
+      <RegisterForm></RegisterForm>
       
       {/* Footer */}
       <footer className={classNames(classes.footer, classes.layout)}>
