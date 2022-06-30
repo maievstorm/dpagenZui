@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useState } from 'react';
 import { experimentalStyled as styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
@@ -21,41 +22,10 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 
-const datatypes = [
-    {
-        key: 'storage',
-        name: 'Lưu trữ đám mây'
-    },
-    {
-        key: 'dwh',
-        name: 'Kho dữ liệu'
-    },
-    {
-        key: 'bigdata',
-        name: 'Dữ liệu lớn'
-    }
-    ,
-    {
-        key: 'sqlserver',
-        name: 'Microsof Sql, Azure SQL'
-    },
-    {
-        key: 'oracle',
-        name: 'Oracle'
-    }
-    ,
-    {
-        key: 'mysql',
-        name: 'MySQL'
-    }
-    ,
-    {
-        key: 'postgres',
-        name: 'PostgresSQL'
-    }
 
 
-]
+
+
 
 
 
@@ -65,7 +35,108 @@ const RegisterStreaming = () => {
         marginTop: '10px',
 
     };
+    const datatypes = [
+        {
+            key: 'storage',
+            name: 'Lưu trữ đám mây'
+        },
+        {
+            key: 'dwh',
+            name: 'Kho dữ liệu'
+        },
+        {
+            key: 'bigdata',
+            name: 'Dữ liệu lớn'
+        }
+        ,
+        {
+            key: 'sqlserver',
+            name: 'Microsof Sql, Azure SQL'
+        },
+        {
+            key: 'oracle',
+            name: 'Oracle'
+        }
+        ,
+        {
+            key: 'mysql',
+            name: 'MySQL'
+        }
+        ,
+        {
+            key: 'postgres',
+            name: 'PostgresSQL'
+        }
+    
+    
+    ]
 
+ 
+    
+    // const [Streamtarget, setStreamtarget] = useState([
+    //     {
+    //         tdbtype: '',
+    //         tdatabaseservername: '',
+    //         tdatabasehostname: '',
+    //         tdatabaseport: '',
+    //         tdatabasedbname: '',
+    //         tdatabaseuser: '',
+    //         tdatabasepassword: '',
+    //         ttableincludelist: ''
+    
+    //     },
+    // ])
+
+    const [Streamsource, setStreamsource] = useState({})
+    const [Streamtarget, setStreamtarget] = useState({})
+
+    const sonInputChanged = (event) => {
+        const targetName = event.target.name;
+        const targetValue = event.target.value;
+    
+        setStreamsource((Streamsource) => ({
+          ...Streamsource,
+          [targetName]: targetValue
+        }));
+      };
+
+      const tonInputChanged = (event) => {
+        const targetName = event.target.name;
+        const targetValue = event.target.value;
+    
+        setStreamtarget((Streamtarget) => ({
+          ...Streamtarget,
+          [targetName]: targetValue
+        }));
+      };  
+    
+
+
+  
+
+
+    const submit = (e) => {
+        e.preventDefault();
+        let stream = {
+            'data': [
+                {
+                    'source': Streamsource,
+                    'target': Streamtarget
+                }
+
+            ]
+        }
+
+     
+
+        const body = {
+            "conf": { stream },
+          }
+        
+    
+        console.log(JSON.stringify(body))
+
+    }
 
     return (
         <div>
@@ -77,6 +148,8 @@ const RegisterStreaming = () => {
                         id="tentientrinh"
                         label="Tên tiến trình"
                         fullWidth
+                        value={Streamsource.tentientrinh}
+                        onChange={sonInputChanged} 
 
                     />
                     <Grid item xs={3} sm={6} md={6} >
@@ -85,6 +158,8 @@ const RegisterStreaming = () => {
                         <Select name='sdbtype'
                             size="small"
                             style={divStyle}
+                            value={Streamsource.sdbtype}
+                            onChange={sonInputChanged}    
                         >
 
                             {datatypes.map((datatype) => (
@@ -100,65 +175,79 @@ const RegisterStreaming = () => {
                         {/* 1 */}
                         <TextField
                             type="text"
-                            name="sdatabase.server.name"
-                            id="sdatabase.server.name"
+                            name="sdatabaseservername"
+                            id="sdatabaseservername"
                             label="Tên máy chủ CSDL nguồn"
                             fullWidth
                             style={divStyle}
+                            value={Streamsource.sdatabaseservername}
+                            onChange={sonInputChanged}
                         />
                         {/* 2 */}
                         <TextField
                             type="text"
-                            name="sdatabase.hostname"
-                            id="sdatabase.hostname"
+                            name="sdatabasehostname"
+                            id="sdatabasehostname"
                             label="IP/Host Name CSDL nguồn"
                             fullWidth
                             style={divStyle}
+                            value={Streamsource.sdatabasehostname}
+                            onChange={sonInputChanged}
                         />
                         {/* 3 */}
                         <TextField
                             type="text"
-                            name="sdatabase.port"
-                            id="sdatabase.port"
+                            name="sdatabaseport"
+                            id="sdatabaseport"
                             label="Port CSDL nguồn"
                             fullWidth
                             style={divStyle}
+                            value={Streamsource.sdatabaseport}
+                            onChange={sonInputChanged}
                         />
                         {/* 4 */}
                         <TextField
                             type="text"
-                            name="sdatabase.dbname"
-                            id="sdatabase.dbname"
+                            name="sdatabasedbname"
+                            id="sdatabasedbname"
                             label="Tên CSDL nguồn"
                             fullWidth
                             style={divStyle}
+                            value={Streamsource.sdatabasedbname}
+                            onChange={sonInputChanged}
                         />
                         {/* 5 */}
                         <TextField
                             type="text"
-                            name="sdatabase.user"
-                            id="sdatabase.user"
+                            name="sdatabaseuser"
+                            id="sdatabaseuser"
                             label="Tài khoản đăng nhập nguồn"
                             fullWidth
                             style={divStyle}
+                            value={Streamsource.sdatabaseuser}
+                            onChange={sonInputChanged}
                         />
                         {/* 6 */}
                         <TextField
                             type="text"
-                            name="sdatabase.password"
-                            id="sdatabase.password"
+                            name="sdatabasepassword"
+                            id="sdatabasepassword"
                             label="Mật khẩu đăng nhặp nguồn"
                             fullWidth
                             style={divStyle}
+                            value={Streamsource.sdatabasepassword}
+                            onChange={sonInputChanged}
                         />
                         {/* 7 */}
                         <TextField
                             type="text"
-                            name="stable.include.list"
-                            id="stable.include.list"
+                            name="stableincludelist"
+                            id="stableincludelist"
                             label="Bảng dữ liệu nguồn"
                             fullWidth
                             style={divStyle}
+                            value={Streamsource.stableincludelist}
+                            onChange={sonInputChanged}
                         />
 
                     </Grid>
@@ -168,6 +257,8 @@ const RegisterStreaming = () => {
                         <Select name='tdbtype'
                             size="small"
                             style={divStyle}
+                            value={Streamtarget.tdbtype}
+                            onChange={tonInputChanged} 
                         >
 
                             {datatypes.map((datatype) => (
@@ -183,71 +274,85 @@ const RegisterStreaming = () => {
                         {/* 1 */}
                         <TextField
                             type="text"
-                            name="tdatabase.server.name"
-                            id="tdatabase.server.name"
+                            name="tdatabaseservername"
+                            id="tdatabaseservername"
                             label="Tên máy chủ CSDL đích"
                             fullWidth
                             style={divStyle}
+                            value={Streamtarget.tdatabaseservername}
+                            onChange={tonInputChanged} 
                         />
                         {/* 2 */}
                         <TextField
                             type="text"
-                            name="tdatabase.hostname"
-                            id="tdatabase.hostname"
+                            name="tdatabasehostname"
+                            id="tdatabasehostname"
                             label="IP/Host Name CSDL đích"
                             fullWidth
                             style={divStyle}
+                            value={Streamtarget.tdatabasehostname}
+                            onChange={tonInputChanged} 
                         />
                         {/* 3 */}
                         <TextField
                             type="text"
-                            name="tdatabase.port"
-                            id="tdatabase.port"
+                            name="tdatabaseport"
+                            id="tdatabaseport"
                             label="Port CSDL đích"
                             fullWidth
                             style={divStyle}
+                            value={Streamtarget.tdatabaseport}
+                            onChange={tonInputChanged} 
                         />
                         {/* 4 */}
                         <TextField
                             type="text"
-                            name="tdatabase.dbname"
-                            id="tdatabase.dbname"
+                            name="tdatabasedbname"
+                            id="tdatabasedbname"
                             label="Tên CSDL đích"
                             fullWidth
                             style={divStyle}
+                            value={Streamtarget.tdatabasedbname}
+                            onChange={tonInputChanged} 
                         />
                         {/* 5 */}
                         <TextField
                             type="text"
-                            name="tdatabase.user"
-                            id="tdatabase.user"
+                            name="tdatabaseuser"
+                            id="tdatabaseuser"
                             label="Tài khoản đăng nhập đích"
                             fullWidth
                             style={divStyle}
+                            value={Streamtarget.tdatabaseuser}
+                            onChange={tonInputChanged} 
                         />
                         {/* 6 */}
                         <TextField
                             type="text"
-                            name="tdatabase.password"
-                            id="tdatabase.password"
+                            name="tdatabasepassword"
+                            id="tdatabasepassword"
                             label="Mật khẩu đăng nhặp đích"
                             fullWidth
                             style={divStyle}
+                            value={Streamtarget.tdatabasepassword}
+                            onChange={tonInputChanged} 
                         />
                         {/* 7 */}
                         <TextField
                             type="text"
-                            name="ttable.include.list"
-                            id="ttable.include.list"
+                            name="ttableincludelist"
+                            id="ttableincludelist"
                             label="Bảng dữ liệu đích"
                             fullWidth
                             style={divStyle}
+                            value={Streamtarget.ttableincludelist}
+                            onChange={tonInputChanged} 
                         />
                     </Grid>
 
 
                 </Grid>
-                <Button>Tạo Tiến Trình</Button>
+                <Button onClick={submit}>Tạo Tiến Trình</Button>
             </Box>
 
         </div>

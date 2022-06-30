@@ -22,83 +22,6 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import Pricing from "./Pricing";
 
-// const useStyles =() => ({
-//     root: {
-//         boxShadow: " 5px 5px #2196F3",
-//         backgroundColor: "white",
-//         border: '1px solid' 
-//       } ,
-
-//     navlinks: {
-//       marginLeft: 10,
-//       display: "flex",
-//     },
-//    logo: {
-//       flexGrow: "1",
-// //       cursor: "pointer",
-//       },
-//     link: {
-//       //textDecoration: "none",
-//       color: "black",
-//       fontSize: "15px",
-//       marginLeft: 10,
-//       "&:hover": {
-//         color: "black",
-//         borderBottom: "1px solid white",
-//       },
-//     },
-//   });
-
-
-// export default class Welcome extends React.Component {
-
-
-
-//     render() {
-//         return (
-//             <div >
-//               <button className="btn btn-lg btn-warning" onClick={() => UserService.doLogin()}>Login</button>
-//             </div>
-//         )
-//     }
-// }
-
-
-// function Welcome() {
-//     // const classes = useStyles();
-
-//     return (
-//       <div>
-//       <AppBar position="static"  style={{backgroundColor : 'white'}}>
-//         <CssBaseline />
-//         <Toolbar>
-//           <Typography variant="h4" >
-//             <Logo/>
-//           </Typography>
-//             <div >
-//               <Button >
-//                 Về chúng tôi
-//               </Button>
-//               <Button  >
-//                 Sản phẩm
-//               </Button>
-//               <Button  >
-//                 Liên hệ
-//               </Button>
-//               <Button >
-//                 Đăng ký
-//               </Button>
-
-//             </div>
-//         </Toolbar>
-//       </AppBar>
-//       <Button  onClick={() => UserService.doLogin()}>Đăng nhập</Button>
-//       </div>
-
-//     );
-//   }
-//   export default Welcome;
-
 
 const drawerWidth = 240;
 // const navItems = ['Home', 'About', 'Contact'];
@@ -207,10 +130,7 @@ function Welcome(props) {
 }
 
 Welcome.propTypes = {
-  /**
-   * Injected by the documentation to work in an iframe.
-   * You won't need it on your project.
-   */
+
   window: PropTypes.func,
 };
 
