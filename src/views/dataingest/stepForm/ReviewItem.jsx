@@ -45,7 +45,7 @@ export default function ReviewItem(props) {
 
                 />
                 {
-                    !edit && <Select id="Schedule" name='Schedule' value={conf.Schedule} onChange={onInputChanged}
+                    !edit && <Select id="Schedule" name='Schedule' value={conf?.Schedule} onChange={onInputChanged}
                         size="small"
                         style={divStyle}
                         headername={'Tần suất chạy'}
