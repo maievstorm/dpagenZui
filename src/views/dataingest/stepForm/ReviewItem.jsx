@@ -8,11 +8,29 @@ import { datatypes } from "./constant";
 import { IconSquarePlus, IconCircleMinus } from '@tabler/icons'
 import Button from '@mui/material/Button';
 import MultipleSelectCheckmarks from "../MultipleSelectCheckmarks";
+import UserService from "services/UserService";
+import config from "../../../config";
+import axios from "axios";
+import FormControl from '@mui/material/FormControl';
+import InputLabel from '@mui/material/InputLabel';
+
 
 export default function ReviewItem(props) {
     const conf = props?.conf
     const edit = props?.edit === undefined ? true : props?.edit === false ? true : false
     const onInputChanged = props?.onInputChanged
+    const [subscription_id, setSubscription_id] = useState([]);
+    useEffect(() => {
+        let router = config.rootapi + '/subscription/subbyusername/' + UserService.getUsername()
+        axios({
+            method: 'get',
+            url: router
+        })
+            .then(res => {
+                setSubscription_id(res.data.data)
+            })
+            .catch(error => console.log(error))
+    }, [])
 
     const divStyle = {
         margin: '5px'
@@ -37,29 +55,34 @@ export default function ReviewItem(props) {
                     value={conf?.DagId}
                     InputProps={{
                         readOnly: true,
+                        disableUnderline: true,
                     }}
+                    variant="standard"
                     // onChange={onInputChanged}
                     focused={true}
                     size="small"
 
                 />
                 {
-                    !edit && <Select id="Schedule" name='Schedule' value={conf?.Schedule} onChange={onInputChanged}
-                        size="small"
-                        style={divStyle}
-                        headername={'Tần suất chạy'}
-                    >
+                    !edit && <FormControl fullWidth>
+                        <InputLabel id="demo-simple-select-label">Tần suất chạy</InputLabel>
+                        <Select id="Schedule" name='Schedule' value={conf?.Schedule} onChange={onInputChanged}
+                            size="small"
+                            style={divStyle}
+                            headername={'Tần suất chạy'}
+                        >
 
-                        {scheduletypes.map((scheduletype) => (
-                            <MenuItem
-                                key={scheduletype.key}
-                                value={scheduletype.key}
-                            >
-                                {scheduletype.name}
-                            </MenuItem>
-                        ))}
+                            {scheduletypes.map((scheduletype) => (
+                                <MenuItem
+                                    key={scheduletype.key}
+                                    value={scheduletype.key}
+                                >
+                                    {scheduletype.name}
+                                </MenuItem>
+                            ))}
 
-                    </Select>
+                        </Select>
+                    </FormControl>
                 }
 
                 {
@@ -73,7 +96,9 @@ export default function ReviewItem(props) {
                         // onChange={onInputChanged}
                         InputProps={{
                             readOnly: edit,
+                            disableUnderline: edit,
                         }}
+                        variant="standard"
                         focused={true}
 
                     />
@@ -90,7 +115,9 @@ export default function ReviewItem(props) {
                     // onChange={onInputChanged}
                     InputProps={{
                         readOnly: edit,
+                        disableUnderline: true,
                     }}
+                    variant="standard"
                     focused={true}
 
                 />
@@ -107,9 +134,54 @@ export default function ReviewItem(props) {
                     size="small"
                     InputProps={{
                         readOnly: edit,
+                        disableUnderline: edit,
                     }}
+                    variant="standard"
 
                 />
+
+                {
+                    !edit &&
+                    <FormControl fullWidth>
+                        <InputLabel id="demo-simple-select-label">Subscription</InputLabel>
+                        <Select id="subscription_id" name='subscription_id' value={conf?.subscription_id} onChange={onInputChanged}
+                            size="small"
+                            style={divStyle}
+                            headername={'Subscription id'}
+                        >
+
+                            {subscription_id.map((scheduletype) => (
+                                <MenuItem
+                                    key={scheduletype.subscription_id}
+                                    value={scheduletype.subscription_id}
+                                >
+                                    {scheduletype.subscription_id}
+                                </MenuItem>
+                            ))}
+
+                        </Select>
+                    </FormControl>
+
+                }
+
+                {
+                    edit && <TextField
+                        label="Subscription"
+                        id="subscription_id"
+                        name="subscription_id"
+                        size="small"
+
+                        value={conf?.subscription_id}
+                        // onChange={onInputChanged}
+                        InputProps={{
+                            readOnly: edit,
+                            disableUnderline: edit,
+                        }}
+                        variant="standard"
+                        focused={true}
+
+                    />
+                }
 
             </Box>
 
@@ -153,7 +225,9 @@ export default function ReviewItem(props) {
                                     size="small"
                                     InputProps={{
                                         readOnly: edit,
+                                        disableUnderline: edit,
                                     }}
+                                    variant="standard"
                                     focused={true}
                                 />
                             }
@@ -166,7 +240,9 @@ export default function ReviewItem(props) {
 
                                 InputProps={{
                                     readOnly: edit,
+                                    disableUnderline: edit,
                                 }}
+                                variant="standard"
                                 focused={true}
                             />
                             <TextField
@@ -178,7 +254,9 @@ export default function ReviewItem(props) {
                                 value={form.databasename}
                                 InputProps={{
                                     readOnly: edit,
+                                    disableUnderline: edit,
                                 }}
+                                variant="standard"
                                 focused={true}
                             />
                             <br></br>
@@ -191,7 +269,9 @@ export default function ReviewItem(props) {
                                 value={form.srcusername}
                                 InputProps={{
                                     readOnly: edit,
+                                    disableUnderline: edit,
                                 }}
+                                variant="standard"
                                 focused={true}
                             />
                             <TextField
@@ -203,7 +283,9 @@ export default function ReviewItem(props) {
                                 value={form.srcpassword}
                                 InputProps={{
                                     readOnly: edit,
+                                    disableUnderline: edit,
                                 }}
+                                variant="standard"
                                 focused={true} />
 
                             <TextField
@@ -217,7 +299,9 @@ export default function ReviewItem(props) {
                                 value={form.tablename}
                                 InputProps={{
                                     readOnly: edit,
+                                    disableUnderline: edit,
                                 }}
+                                variant="standard"
                                 focused={true} />
                             <TextField
                                 name='alias'
@@ -228,16 +312,23 @@ export default function ReviewItem(props) {
                                 value={form.alias}
                                 InputProps={{
                                     readOnly: edit,
+                                    disableUnderline: edit,
                                 }}
+                                variant="standard"
                                 focused={true}
                             />
-                            <Button style={divStyle} name="removesource" onClick={() => props?.removeFields(index)}><IconCircleMinus /></Button>
+                            {
+                                !edit && <Button style={divStyle} name="removesource" onClick={() => props?.removeFields(index)}><IconCircleMinus /></Button>
+                            }
                         </Box>
 
                     ))
 
                 }
-                <Button style={divStyle} name="addsoruce" onClick={props?.addFields}><IconSquarePlus /></Button>
+                {
+                    !edit && <Button style={divStyle} name="addsoruce" onClick={props?.addFields}><IconSquarePlus /></Button>
+
+                }
 
             </Box>
             <Box>
@@ -266,7 +357,9 @@ export default function ReviewItem(props) {
 
                                 InputProps={{
                                     readOnly: edit,
+                                    disableUnderline: edit,
                                 }}
+                                variant="standard"
                                 focused={true}
                             />
                             {
@@ -287,7 +380,9 @@ export default function ReviewItem(props) {
 
                                     InputProps={{
                                         readOnly: edit,
+                                        disableUnderline: edit,
                                     }}
+                                    variant="standard"
                                     focused={true}
                                 />
                             }
@@ -316,13 +411,16 @@ export default function ReviewItem(props) {
                             <TextField
                                 label="Target table"
                                 size="small"
+                                name='targettable'
                                 value={formquery?.targettable}
                                 onChange={event => props.handleformQuery(event, index)}
 
                                 style={divStyle}
                                 InputProps={{
                                     readOnly: edit,
+                                    disableUnderline: edit,
                                 }}
+                                variant="standard"
                                 focused={true}
                             />
                             {
@@ -352,18 +450,26 @@ export default function ReviewItem(props) {
                                     style={divStyle}
                                     InputProps={{
                                         readOnly: edit,
+                                        disableUnderline: edit,
                                     }}
+                                    variant="standard"
                                     focused={true}
                                 />
                             }
+                            {
+                                !edit && <Button name="btnremovequery" onClick={() => props.removeQuery(index)}><IconCircleMinus /></Button>
 
-<Button name="btnremovequery" onClick={() => props.removeQuery(index)}><IconCircleMinus /></Button>
+                            }
+
 
                         </Box>
 
                     ))
                 }
-                        <Button style={divStyle} name="btnaddquery" onClick={props.addFieldQuery}><IconSquarePlus /></Button>
+                {
+                    !edit && <Button style={divStyle} name="btnaddquery" onClick={props.addFieldQuery}><IconSquarePlus /></Button>
+
+                }
 
             </Box>
         </div>

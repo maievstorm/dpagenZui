@@ -7,6 +7,9 @@ import config from "../../../config";
 import axios from 'axios';
 import { Select } from '@mui/material';
 import MenuItem from '@mui/material/MenuItem';
+import UserService from "services/UserService";
+import FormControl from '@mui/material/FormControl';
+import InputLabel from '@mui/material/InputLabel';
 
 export const Info = (props) => {
   const divStyle = {
@@ -16,6 +19,19 @@ export const Info = (props) => {
 
   const [daginfo, setDagInfo] = useState({})
 
+  const [subscription_id, setSubscription_id] = useState([]);
+
+  useEffect(() => {
+    let router = config.rootapi + '/subscription/subbyusername/' + UserService.getUsername()
+    axios({
+      method: 'get',
+      url: router
+    })
+      .then(res => {
+        setSubscription_id(res.data.data)
+      })
+      .catch(error => console.log(error))
+  }, [])
 
 
   const onInputChanged = (event) => {
@@ -27,6 +43,7 @@ export const Info = (props) => {
       [targetName]: targetValue
     }));
   };
+  console.log('daginfo:', daginfo)
 
   const scheduletypes = [
     {
@@ -66,7 +83,7 @@ export const Info = (props) => {
 
       })
       .catch(err => {
-        if (!daginfo.DagId || !daginfo.Schedule || !daginfo.tags) setError("Thông tin không chính xác!");
+        if (!daginfo.DagId || !daginfo.Schedule || !daginfo.tags || !daginfo.subscription_id) setError("Thông tin không chính xác!");
         else {
           setError("");
           props.nextStep();
@@ -82,7 +99,9 @@ export const Info = (props) => {
         Thông tin tiến trình
       </strong><br></br>
       <span style={{ color: 'red' }}>{error}</span>
+
       <Box >
+
 
         <TextField
           label="Tên tiến trình"
@@ -103,22 +122,28 @@ export const Info = (props) => {
           onChange={onInputChanged}
           style={divStyle}
         /> */}
-        <Select id="Schedule" name='Schedule' value={daginfo.Schedule} onChange={onInputChanged}
-          size="small"
-          style={divStyle}
-          headername={'Tần suất chạy'}
-        >
+        <FormControl fullWidth>
+          <InputLabel id="demo-simple-select-label">Tần suất chạy</InputLabel>
+          <Select id="Schedule" name='Schedule' value={daginfo.Schedule} onChange={onInputChanged}
+            size="small"
+            style={divStyle}
+            headername={'Tần suất chạy'}
+            label='Tần suất chạy'
 
-          {scheduletypes.map((scheduletype) => (
-            <MenuItem
-              key={scheduletype.key}
-              value={scheduletype.key}
-            >
-              {scheduletype.name}
-            </MenuItem>
-          ))}
+          >
 
-        </Select>
+            {scheduletypes.map((scheduletype) => (
+              <MenuItem
+                key={scheduletype.key}
+                value={scheduletype.key}
+              >
+                {scheduletype.name}
+              </MenuItem>
+            ))}
+
+          </Select>
+        </FormControl>
+
         <TextField
           label="Tags"
           id="tags"
@@ -128,6 +153,26 @@ export const Info = (props) => {
           size="small"
           style={divStyle}
         />
+        <FormControl fullWidth>
+          <InputLabel id="demo-simple-select-label">Subscription</InputLabel>
+
+          <Select id="subscription_id" name='subscription_id' value={daginfo.subscription_id} onChange={onInputChanged}
+            size="small"
+            style={divStyle}
+            headername={'Subscription id'}
+          >
+
+            {subscription_id.map((scheduletype) => (
+              <MenuItem
+                key={scheduletype.subscription_id}
+                value={scheduletype.subscription_id}
+              >
+                {scheduletype.subscription_id}
+              </MenuItem>
+            ))}
+
+          </Select>
+        </FormControl>
 
 
 
