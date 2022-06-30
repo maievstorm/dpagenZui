@@ -43,7 +43,16 @@ export default function ManageFlow() {
     useEffect(() => {
         axios({ method: 'get', url: getairflowapi }
         ).then(res => {
-            setData(res.data.data);
+            setData(res.data.data.map(item=>{
+                let invoice_created_ts = new Date(Date.parse(item.invoice_created_ts)).toLocaleString()
+                return {
+                    'id_invoice':item.id_invoice,
+                    'item_name':item.item_name,
+                    'invoice_created_ts':invoice_created_ts
+                }
+
+            }));
+            // setData(res.data.data);
         }).catch(err => { console.log(err) })
     }, []);
 
