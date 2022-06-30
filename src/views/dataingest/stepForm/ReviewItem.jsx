@@ -97,7 +97,7 @@ export default function ReviewItem(props) {
 
                 <TextField
                     label="Tags"
-                    id="tags_name"
+                    id="tags"
                     name="tags"
 
                     focused={true}

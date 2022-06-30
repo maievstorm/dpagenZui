@@ -18,7 +18,7 @@ import UserService from 'services/UserService';
 export default function EditFlowJob() {
     const location = useLocation()
     const DagId = location?.state?.id
-    const getairflowapi = config.rootapi + '/invoice/' + DagId;
+    console.log(DagId)
 
     const [confInfo, setConfInfo] = useState()
     const [edit, setEdit] = useState(false)
@@ -38,6 +38,7 @@ export default function EditFlowJob() {
 
 
     useEffect(() => {
+        const getairflowapi = config.rootapi + '/invoice/' + DagId;
         axios.get(getairflowapi)
             .then(res => {
                 let data = res.data.data;
