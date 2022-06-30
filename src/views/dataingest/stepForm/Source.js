@@ -8,45 +8,12 @@ import Button from '@mui/material/Button';
 import { IconSquarePlus, IconCircleMinus } from '@tabler/icons'
 import MenuItem from '@mui/material/MenuItem';
 import { useState } from "react";
+import { datatypes } from "./constant";
 
 export const Source = (props) => {
     const [error, setError] = useState("");
 
-    const datatypes = [
-        {
-            key: 'storage',
-            name: 'Lưu trữ đám mây'
-        },
-        {
-            key: 'dwh',
-            name: 'Kho dữ liệu'
-        },
-        {
-            key: 'bigdata',
-            name: 'Dữ liệu lớn'
-        }
-        ,
-        {
-            key: 'sqlserver',
-            name: 'Microsof Sql, Azure SQL'
-        },
-        {
-            key: 'oracle',
-            name: 'Oracle'
-        }
-        ,
-        {
-            key: 'mysql',
-            name: 'MySQL'
-        }
-        ,
-        {
-            key: 'postgres',
-            name: 'PostgresSQL'
-        }
-
-
-    ]
+    
     const [formSrcFields, setFormSrcFields] = useState([
         {
             sourcetype: '',

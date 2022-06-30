@@ -7,6 +7,7 @@ import MenuItem from '@mui/material/MenuItem';
 import MultipleSelectCheckmarks from '../MultipleSelectCheckmarks';
 import ActionButtons from "./ActionButton";
 import { useState } from "react";
+import { writemodetype } from "./constant";
 
 export const Query = (props) => {
   const [error, setError] = useState("");
@@ -15,16 +16,7 @@ export const Query = (props) => {
   const divStyle = {
     margin: '5px'
   };
-  const writemodetype = [
-    {
-      key: 'append',
-      name: 'append'
-    },
-    {
-      key: 'overwrite',
-      name: 'overwrite'
-    }
-  ]
+
 
   const [formQuery, setformQuery] = useState([
     {
