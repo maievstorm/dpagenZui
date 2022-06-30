@@ -43,6 +43,7 @@ export default function ManageDwh() {
     ];
     const getairflowapi = config.rootapi + '/invoice/usernamentype/' + UserService.getUsername() + '&dwh';
 
+
     useEffect(() => {
         axios({ method: 'get', url: getairflowapi }
         ).then(res => {

@@ -3,7 +3,7 @@ import MUIDataTable from "mui-datatables";
 import axios from 'axios';
 import config from "../../config";
 import UserService from 'services/UserService';
-import { useNavigate } from "react-router-dom"; 
+import { useNavigate } from "react-router-dom";
 import Button from '@mui/material/Button';
 import ModeEditIcon from '@mui/icons-material/ModeEdit';
 import AddIcon from '@mui/icons-material/Add';
@@ -26,14 +26,7 @@ export default function ManageStream() {
             options: {
                 filter: true
             },
-            label: 'Tên CSDL',
-        },
-        {
-            name: "customer_invoice_data",
-            options: {
-                filter: false
-            },
-            label: 'Thông số CSDL'
+            label: 'Tên tiến trình',
         }
         ,
         {

@@ -3,6 +3,8 @@ import { lazy } from 'react';
 // project imports
 import MainLayout from 'layout/MainLayout';
 import Loadable from 'ui-component/Loadable';
+
+
  
 
 // dashboard routing
@@ -35,6 +37,9 @@ const EditFlowJob  = Loadable(lazy(() => import('views/dataingest/EditFlowJob'))
 const UploadMultiFiles = Loadable(lazy(() => import('views/objectstore/UploadMultiFiles')));
 //const ManageDpaStorage = Loadable(lazy(() => import('views/DpaStorage/ManageDpaStorage')));
 const RegisterStreaming = Loadable(lazy(() => import('views/datastream/RegisterStream')));
+const AdminPage = Loadable(lazy(() => import('views/admin')));
+ 
+
  
  
 // ==============================|| MAIN ROUTING ||============================== //
@@ -124,12 +129,7 @@ const MainRoutes = {
         {
             path: '/dragonfly',
             element: <Dragonflypage />
-        }
-        // ,
-        // {
-        //     path: '/dataingest/monitorjob',
-        //     element: <MonitorJob />
-        // }
+        } 
         ,
         {
             path: '/dataingest/createflowjob',
@@ -140,18 +140,19 @@ const MainRoutes = {
             element: <EditFlowJob />
         }
         ,
-        // {
-        //     path: '/objectstore/uploadstorage',
-        //     element: <UploadStorage />
-        // } 
-        // ,
-        {
+                {
             path: '/objectstore/uploadmultifile',
             element: <UploadMultiFiles />
         } ,
         {
+            
             path: '/datastream/registerstream',
             element: <RegisterStreaming />
+        } ,
+        {
+            
+            path: '/admin/admindpz',
+            element: <AdminPage />
         } 
     ]
 };

@@ -38,7 +38,7 @@ const updateToken = (successCallback) =>
 const getUsername = () => _kc.tokenParsed?.preferred_username;
 
 const hasRole = (roles) => roles.some((role) => _kc.hasRealmRole(role));
-
+const listroles =() =>  _kc.tokenParsed?.realm_access;
 const UserService = {
   initKeycloak,
   doLogin,
@@ -48,6 +48,7 @@ const UserService = {
   updateToken,
   getUsername,
   hasRole,
+  listroles
 };
 
 export default UserService;
