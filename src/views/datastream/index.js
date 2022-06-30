@@ -1,10 +1,11 @@
-import MonitorStream from './MonitorStream';
+import ManageStream from './ManageStream';
+ 
 
 // ==============================|| Bigdata Page ||============================== //
 
 const Datastreampage = () => (
     
-        <MonitorStream/>
+        <ManageStream/>
      
 );
 

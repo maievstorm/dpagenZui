@@ -1,10 +1,9 @@
-
-import MonitorDwh from './MonitorDwh';
+import ManageDwh from './ManageDwh';
 
 // ==============================|| Bigdata Page ||============================== //
 
 const Datawhpage = () => (
-    <MonitorDwh></MonitorDwh> 
+    <ManageDwh></ManageDwh> 
 );
 
 export default Datawhpage;

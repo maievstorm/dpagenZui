@@ -1,11 +1,10 @@
-
-import MonitorBigdata from './MonitorBigdata';
+import ManageBigdata from './ManageBigdata';
 
 // ==============================|| Bigdata Page ||============================== //
 
 const Bigdatapage = () => (
   
-    <MonitorBigdata></MonitorBigdata>  
+    <ManageBigdata></ManageBigdata>  
  
 );
 
