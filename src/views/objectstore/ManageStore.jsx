@@ -55,7 +55,21 @@ export default function ManageStore() {
 
             stream.on('data', function (obj) { fileObj.push(obj) });
             stream.on("end", function () {
-                setData(JSON.parse(JSON.stringify(fileObj)));
+                let data = JSON.parse(JSON.stringify(fileObj))
+                let newData = data.map(item=>{
+                    let lastModified = new Date(Date.parse(item.lastModified)).toLocaleString()
+
+                    return {
+                        'etag':item.item,
+                        'lastModified':lastModified,
+                        'name':item.name,
+                        'size':item.size
+                    }
+                })
+                // data.lastModified = data.lastModified.map(item =>{
+                //     return new Date(Date.parse(item)).toLocaleString()
+                // })
+                setData(newData);
             });
             stream.on('error', function (err) { console.log(err) });
 
