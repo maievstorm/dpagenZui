@@ -210,15 +210,16 @@ export default function EditFlowJob() {
                             </IconButton>
                         </Grid>
                         <Grid item xs={3} sm={6} md={4}>
-                            <IconButton onClick={submit}>
-                                <NotStartedOutlinedIcon color="primary" fontSize="medium" />
-                            </IconButton>
-                        </Grid>
-                        <Grid item xs={3} sm={6} md={4}>
                             <IconButton onClick={save}>
                                 <SaveIcon color="primary" fontSize="medium" />
                             </IconButton>
                         </Grid>
+                        <Grid item xs={3} sm={6} md={4}>
+                            <IconButton onClick={submit}>
+                                <NotStartedOutlinedIcon color="primary" fontSize="medium" />
+                            </IconButton>
+                        </Grid>
+                       
                     </Grid>
                 </Box>
 

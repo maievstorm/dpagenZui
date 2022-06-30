@@ -13,14 +13,14 @@ export default function LogInfo(props) {
             options: {
                 filter: true
             },
-            label: 'dag_run_id'
+            label: 'Lịch sử'
         },
         {
             name: "start_date",
             options: {
                 filter: true
             },
-            label: 'start_date',
+            label: 'Bắt đầu',
         },
         // {
         //     name: "execution_date",
@@ -34,7 +34,7 @@ export default function LogInfo(props) {
             options: {
                 filter: true
             },
-            label: 'end_date'
+            label: 'Kết thúc'
         }
         ,
         {
@@ -42,7 +42,7 @@ export default function LogInfo(props) {
             options: {
                 filter: true
             },
-            label: 'state'
+            label: 'Trạng thái'
         }
 
     ];
@@ -50,15 +50,17 @@ export default function LogInfo(props) {
         filter: false,
         print: false,
         selectableRows: "single",
-        responsive: "standard"
+        responsive: "standard",
+        selectableRows: false
       };
     return (
         <>
         <MUIDataTable
-            title={"Danh sách tiến trình"}
+            title={"Lịch sử tiến trình"}
             data={rows}
             columns={columns}
             options={options}
+             
         />
         </>
     )

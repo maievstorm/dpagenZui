@@ -142,7 +142,7 @@ export default function ManageStore() {
 
 
     return (
-        <div><strong>Danh sách lake : </strong>
+        <div><strong>Danh sách thư mục : </strong>
             <Select id="listbucket" name='listbucket' value={ownbucket.id} onChange={onInputChanged}
                 size="small"
               

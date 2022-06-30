@@ -43,24 +43,15 @@ function Welcome(props) {
         <Logo />
       </Typography>
       <Divider />
-      {/* <List>
-        {navItems.map((item) => (
-          <ListItem key={item} disablePadding>
-            <ListItemButton sx={{ textAlign: 'center' }}>
-              <ListItemText primary={item} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-       
-      </List> */}
-      <Button sx={{ color: '#2196F3' }}>
+     
+      {/* <Button sx={{ color: '#2196F3' }}>
         Liên hệ
       </Button>
       <Divider />
       <Button sx={{ color: '#2196F3' }}>
         Đăng ký
       </Button>
-      <Divider />
+      <Divider /> */}
       <Button sx={{ color: '#2196F3' }} onClick={() => UserService.doLogin()}>Đăng nhập</Button>
     </Box>
   );
@@ -89,18 +80,13 @@ function Welcome(props) {
             {/* <Logo /> */}
           </Typography>
           <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
-            {/* {navItems.map((item) => (
-              <Button key={item} sx={{ color: '#2196F3' }}>
-                {item}
-              </Button>
-
-            ))} */}
-            <Button sx={{ color: '#2196F3' }}>
+            
+            {/* <Button sx={{ color: '#2196F3' }}>
               Liên hệ
             </Button>
             <Button sx={{ color: '#2196F3' }}>
               Đăng ký
-            </Button>
+            </Button> */}
             <Button sx={{ color: '#2196F3' }} onClick={() => UserService.doLogin()}>Đăng nhập</Button>
           </Box>
         </Toolbar>

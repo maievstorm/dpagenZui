@@ -31,16 +31,16 @@ function UploadMultiFiles(props) {
   const [loading, setLoading] = useState(false)
   useEffect(() => {
     const getstorageapi = config.rootapi + '/invoice/usernamentype/' + UserService.getUsername() + '&storage';
-   
+
     axios.get(getstorageapi)
-        .then(res => {
-            setownbucket(res.data.data.map(item => {
-                return {
-                  'id': item.item_name, 'name': item.item_name
-                }
-              }))
-        }).catch(err => { console.log(err)})
-}, []);
+      .then(res => {
+        setownbucket(res.data.data.map(item => {
+          return {
+            'id': item.item_name, 'name': item.item_name
+          }
+        }))
+      }).catch(err => { console.log(err) })
+  }, []);
 
 
 
@@ -140,7 +140,7 @@ function UploadMultiFiles(props) {
     navigate('/ojectstorage')
   }
 
-
+console.log(bucketSelect.length)
 
 
 
@@ -167,9 +167,7 @@ function UploadMultiFiles(props) {
         ))}
 
       <Box className="row my-3">
-
-            <input type="file" multiple onChange={selectFiles} />
-
+        <strong>Chọn thư mục : </strong>
         <Select id="listbucket" name='listbucket' value={ownbucket?.id} onChange={onInputChanged}
           size="small"
 
@@ -184,17 +182,21 @@ function UploadMultiFiles(props) {
               {item.name}
             </MenuItem>
           ))}
-          </Select>
+        </Select>
+<br></br>
+        <input type="file" multiple onChange={selectFiles} />
 
-          <div className="col-4">
-            <Button
-              className="btn btn-success btn-sm"
-              disabled={!selectedFiles}
-              onClick={uploadFiles}
-            >
-              Tải lên
-            </Button>
-          </div>
+
+
+        <div className="col-4">
+          <Button
+            className="btn btn-success btn-sm"
+            disabled={(!selectedFiles) || (bucketSelect.length==0)}
+            onClick={uploadFiles}
+          >
+            Tải lên
+          </Button>
+        </div>
       </Box>
 
       {message.length > 0 && (
@@ -218,7 +220,7 @@ function UploadMultiFiles(props) {
             ))}
         </ul>
       </div>
-      <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center',marginTop:'80px' }}>
+      <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '80px' }}>
         <Fade
           in={loading}
           style={{
