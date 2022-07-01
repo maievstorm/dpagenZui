@@ -18,8 +18,32 @@ import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker';
 
 export const Info = (props) => {
+  const processTime = (time) =>{
+    let minus = time.getMinutes()
+    let year = time.getFullYear()
+    let month = time.getMonth()
+    let day = time.getDay()
+    let hours = time.getHours()
+    let date = time.getDate()
+    let crontab_struct = '* * * * *'
+    if(daginfo.Schedule === '@hourly'){
+      crontab_struct = `${minus} * * * *`
+    }
+    else if(daginfo.Schedule === '@daily'){
+      crontab_struct = `${minus} ${hours} * * *`
+    }
+    else if(daginfo.Schedule === '@weekly'){
+      crontab_struct = `${minus} ${hours} * * ${day}`
+    }
+    else if(daginfo.Schedule === '@monthly'){
+      crontab_struct = `${minus} ${hours} ${date} * *`
+    }
+    return crontab_struct
+    
+  }
   const handleChange = (newValue) => {
-    setDagInfo({...daginfo,'schedule_interval':newValue});
+    let crontab_struct = processTime(newValue)
+    setDagInfo({...daginfo,'schedule_interval':crontab_struct});
   };
   const divStyle = {
     margin: '5px'

@@ -46,8 +46,11 @@ const CreateNewFlow = () => {
   const assignSource = (val) => {
     setFormSrcFields(val)
   };
+
+  
   const assignQuery = (val) => {
     setformQuery(val)
+
     setConf({
       'DagId': daginfo.DagId,
       "Schedule": daginfo.Schedule,
