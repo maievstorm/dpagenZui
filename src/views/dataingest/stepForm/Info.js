@@ -16,41 +16,18 @@ import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker';
-
+import { processTime } from "./constant";
 export const Info = (props) => {
-  const processTime = (time) =>{
-    let minus = time.getMinutes()
-    let year = time.getFullYear()
-    let month = time.getMonth()
-    let day = time.getDay()
-    let hours = time.getHours()
-    let date = time.getDate()
-    let crontab_struct = '* * * * *'
-    if(daginfo.Schedule === '@hourly'){
-      crontab_struct = `${minus} * * * *`
-    }
-    else if(daginfo.Schedule === '@daily'){
-      crontab_struct = `${minus} ${hours} * * *`
-    }
-    else if(daginfo.Schedule === '@weekly'){
-      crontab_struct = `${minus} ${hours} * * ${day}`
-    }
-    else if(daginfo.Schedule === '@monthly'){
-      crontab_struct = `${minus} ${hours} ${date} * *`
-    }
-    return crontab_struct
-    
-  }
-  const handleChange = (newValue) => {
-    let crontab_struct = processTime(newValue)
-    setDagInfo({...daginfo,'schedule_interval':crontab_struct});
-  };
+  const [dateValue, setDateValue] = React.useState(new Date('2014-08-18T21:11:54'));
+
+
   const divStyle = {
     margin: '5px'
   };
   const [error, setError] = useState("");
 
   const [daginfo, setDagInfo] = useState({})
+  console.log(daginfo)
 
   const [subscription_id, setSubscription_id] = useState([]);
 
@@ -65,6 +42,21 @@ export const Info = (props) => {
       })
       .catch(error => console.log(error))
   }, [])
+  useEffect(() => {
+    let crontab_struct = processTime(dateValue, daginfo?.Schedule)
+    setDagInfo({ ...daginfo, 'schedule_interval': crontab_struct });
+
+
+  }, [daginfo.Schedule])
+
+
+
+  const handleChange = (newValue) => {
+    setDateValue(newValue)
+    let crontab_struct = processTime(newValue, daginfo?.Schedule)
+    setDagInfo({ ...daginfo, 'schedule_interval': crontab_struct });
+
+  };
 
 
   const onInputChanged = (event) => {
@@ -126,8 +118,6 @@ export const Info = (props) => {
 
   };
 
-  const [value, setValue] = React.useState(new Date());
-
 
   return (
     <div>
@@ -173,13 +163,13 @@ export const Info = (props) => {
           <br></br>
         </FormControl>
         <LocalizationProvider dateAdapter={AdapterDateFns}>
-        <DateTimePicker
-          label="Lịch chay"
-          name="schedule_interval"
-          value={value}
-         // onChange={handleChange}
-          renderInput={(params) => <TextField {...params} />}
-        />
+          <DateTimePicker
+            label="Lịch chay"
+            name="schedule_interval"
+            value={dateValue}
+            onChange={handleChange}
+            renderInput={(params) => <TextField {...params} />}
+          />
         </LocalizationProvider>
         <br></br>
         <TextField

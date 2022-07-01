@@ -10,12 +10,18 @@ import Button from '@mui/material/Button';
 import MultipleSelectCheckmarks from "../MultipleSelectCheckmarks";
 import UserService from "services/UserService";
 import config from "../../../config";
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import axios from "axios";
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
+import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { processTime } from "./constant";
 
 
 export default function ReviewItem(props) {
+    const [dateValue, setDateValue] = useState(new Date('2014-08-18T21:11:54'));
+    const setConfInfo = props?.setConfInfo
     const conf = props?.conf
     const edit = props?.edit === undefined ? true : props?.edit === false ? true : false
     const onInputChanged = props?.onInputChanged
@@ -37,6 +43,16 @@ export default function ReviewItem(props) {
     };
     const formSrcFields = props?.formSrcFields
     const formQuery = props?.formQuery
+    const handleChange = (newValue) => {
+        setDateValue(newValue)
+        let crontab_struct = processTime(newValue, conf?.Schedule)
+        setConfInfo({ ...conf, 'schedule_interval': crontab_struct });
+
+      };
+      useEffect(() => {
+        let crontab_struct = processTime(dateValue, conf?.Schedule)
+        setConfInfo({ ...conf, 'schedule_interval': crontab_struct });
+      }, [conf?.Schedule])
 
 
     return (
@@ -102,6 +118,37 @@ export default function ReviewItem(props) {
                         focused={true}
 
                     />
+                }
+                {
+                    !edit && <LocalizationProvider dateAdapter={AdapterDateFns}>
+                    <DateTimePicker
+                      label="Lịch chay"
+                      name="schedule_interval"
+                      value={dateValue}
+                      onChange={handleChange}
+                      renderInput={(params) => <TextField {...params} />}
+                    />
+                  </LocalizationProvider>
+                }
+
+                {
+                    edit && 
+                    <TextField
+                    label="schedule_interval"
+                    id="schedule_interval"
+                    name="schedule_interval"
+                    size="small"
+
+                    value={conf?.schedule_interval}
+                    // onChange={onInputChanged}
+                    InputProps={{
+                        readOnly: edit,
+                        disableUnderline: true,
+                    }}
+                    variant="standard"
+                    focused={true}
+
+                />
                 }
 
 
