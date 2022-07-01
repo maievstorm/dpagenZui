@@ -43,7 +43,7 @@ const RegisterForm = () => {
                                             <Grid item>
                                                 <Stack alignItems="center" justifyContent="center" spacing={1}>
                                                     <Typography
-                                                        color={theme.palette.secondary.main}
+                                                        color={theme.palette.info.light}
                                                         gutterBottom
                                                         variant={matchDownSM ? 'h3' : 'h2'}
                                                     >

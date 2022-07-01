@@ -1,5 +1,6 @@
 import React from "react";
 import RenderOnRole from "components/RenderOnRole";
+import ManageSubscription from "./ManageSubscription";
 
 
 // ==============================|| Bigdata Page ||============================== //
@@ -7,10 +8,9 @@ import RenderOnRole from "components/RenderOnRole";
 const AdminPage = () => (
 
     <div>
-        user thuong
-        <br></br>
+      
         <RenderOnRole roles={['admin']}>
-            Admin
+            <ManageSubscription/>
            
         </RenderOnRole>
 

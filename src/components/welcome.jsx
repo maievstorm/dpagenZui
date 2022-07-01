@@ -21,6 +21,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import Pricing from "./Pricing";
+import AuthRegister from './AuthRegisterForm';
  
  
 
@@ -114,7 +115,7 @@ function Welcome(props) {
     </Box>
     <Pricing></Pricing>
     <br></br>
-    
+  
     </div>
   );
 }

@@ -271,7 +271,7 @@ const FirebaseRegisterForm = ({ ...others }) => {
                                     size="large"
                                     type="submit"
                                     variant="contained"
-                                    color="secondary"
+                                    color="primary"
                                 >
                                     Đăng ký
                                 </Button>
