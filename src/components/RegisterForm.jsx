@@ -3,7 +3,9 @@ import { Link } from 'react-router-dom';
 // material-ui
 import { useTheme } from '@mui/material/styles';
 import { Divider, Grid, Stack, Typography, useMediaQuery } from '@mui/material';
-
+import {
+    Box
+} from '@mui/material';
 // project imports
 
 import AuthWrapper1 from 'views/pages/authentication/AuthWrapper1';
@@ -52,7 +54,7 @@ const RegisterForm = () => {
                                             </Grid>
                                         </Grid>
                                     </Grid>
-                                    <Grid item xs={12}>
+                                    <Grid xs={12}>
                                         <AuthRegister />
                                     </Grid>
                                     <Grid item xs={12}>
