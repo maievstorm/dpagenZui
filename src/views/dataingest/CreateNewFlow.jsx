@@ -49,6 +49,7 @@ const CreateNewFlow = () => {
     setConf({
       'DagId': daginfo.DagId,
       "Schedule": daginfo.Schedule,
+      // 'schedule_interval':daginfo.schedule_interval,
       "owner": UserService.getUsername(),
       'tags': daginfo.tags,
       'subscription_id': daginfo.subscription_id,
