@@ -10,14 +10,24 @@ import MenuItem from '@mui/material/MenuItem';
 import UserService from "services/UserService";
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
+<<<<<<< HEAD
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker';
+=======
+import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+
+>>>>>>> 000deeea1ad11888d70ad94734356ad2dc344994
 
 export const Info = (props) => {
+  const handleChange = (newValue) => {
+    setDagInfo({...daginfo,'schedule_interval':newValue});
+  };
   const divStyle = {
     margin: '5px'
   };
@@ -125,15 +135,7 @@ export const Info = (props) => {
           style={divStyle}
 
         />
-        {/* <TextField
-          label="Tần suất chạy"
-          id="Schedule"
-          name="Schedule"
-          size="small"
-          value={daginfo.Schedule}
-          onChange={onInputChanged}
-          style={divStyle}
-        /> */}
+
         <FormControl fullWidth>
           <InputLabel id="demo-simple-select-label">Tần suất chạy</InputLabel>
           <Select id="Schedule" name='Schedule' value={daginfo.Schedule} onChange={onInputChanged}
@@ -156,6 +158,7 @@ export const Info = (props) => {
           </Select>
           <br></br>
         </FormControl>
+<<<<<<< HEAD
         <LocalizationProvider dateAdapter={AdapterDateFns}>
         <DateTimePicker
           label="Lịch chay"
@@ -166,6 +169,20 @@ export const Info = (props) => {
         />
         </LocalizationProvider>
         <br></br>
+=======
+
+        <LocalizationProvider dateAdapter={AdapterDateFns}>
+          <DateTimePicker
+            label="Date&Time picker"
+            value={daginfo.schedule_interval}
+            name='schedule_interval'
+            onChange={handleChange}
+            renderInput={(params) => <TextField {...params} />}
+          />
+        </LocalizationProvider>
+        <br></br>
+
+>>>>>>> 000deeea1ad11888d70ad94734356ad2dc344994
         <TextField
           label="Tags"
           id="tags"
