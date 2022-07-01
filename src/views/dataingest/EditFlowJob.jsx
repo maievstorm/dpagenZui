@@ -11,6 +11,7 @@ import axios from "axios";
 import { IconButton } from '@mui/material';
 import UserService from 'services/UserService';
 import SaveIcon from '@mui/icons-material/Save';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import LogInfo from "./LogInfo";
 import MainCard from "ui-component/cards/MainCard";
 
@@ -191,6 +192,10 @@ export default function EditFlowJob() {
         })
 
     }
+    const backtodataingest = () => {
+       
+        navigate('/dataingest');
+    }
     const divStyle = {
         marginTop: '10px',
 
@@ -201,7 +206,9 @@ export default function EditFlowJob() {
     return (
         <MainCard>
             <Box>
-                <h3>Thông số chi tiết tiến trình</h3>
+                <h3><IconButton onClick={() => backtodataingest()}>
+                    <ArrowBackIcon color="primary" fontSize="medium" />
+                </IconButton>Thông số chi tiết tiến trình</h3>
                 <Box sx={{ flexGrow: 1 }}>
                     <Grid container spacing={{ xs: 2, md: 2 }} columns={{ sm: 6, md: 12 }} style={divStyle}>
                         <Grid item xs={3} sm={6} md={4}>
@@ -219,7 +226,7 @@ export default function EditFlowJob() {
                                 <NotStartedOutlinedIcon color="primary" fontSize="medium" />
                             </IconButton>
                         </Grid>
-                       
+
                     </Grid>
                 </Box>
 

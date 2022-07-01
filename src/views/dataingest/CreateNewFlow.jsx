@@ -10,6 +10,8 @@ import config from '../../config';
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import MainCard from "ui-component/cards/MainCard";
+import { IconButton } from '@mui/material';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 
 
@@ -117,11 +119,18 @@ const CreateNewFlow = () => {
 
 
   }
+  const backtodataingest = () => {
+       
+    navigate('/dataingest');
+}
 
 
 
   return (
     <MainCard>
+      <IconButton onClick={() => backtodataingest()}>
+                    <ArrowBackIcon color="primary" fontSize="medium" />
+                </IconButton>
       <Stepper activeStep={activeStep}>
         {steps.map((label, index) => {
           return (
