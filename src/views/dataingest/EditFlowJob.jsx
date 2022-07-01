@@ -129,6 +129,7 @@ export default function EditFlowJob() {
         let conf = {
             'DagId': confInfo.DagId,
             "Schedule": confInfo.Schedule,
+            'schedule_interval': confInfo.schedule_interval,
             "owner": UserService.getUsername(),
             'tags': confInfo.tags,
             'subscription_id': confInfo.subscription_id,
@@ -170,6 +171,7 @@ export default function EditFlowJob() {
         let conf = {
             'DagId': confInfo.DagId,
             "Schedule": confInfo.Schedule,
+            'schedule_interval': confInfo.schedule_interval,
             "owner": UserService.getUsername(),
             'tags': confInfo.tags,
             'subscription_id': confInfo.subscription_id,
@@ -193,7 +195,7 @@ export default function EditFlowJob() {
 
     }
     const backtodataingest = () => {
-       
+
         navigate('/dataingest');
     }
     const divStyle = {
@@ -238,6 +240,7 @@ export default function EditFlowJob() {
                                 formSrcFields={formSrcFields}
                                 formQuery={formQuery}
                                 addFields={addFields}
+                                setConfInfo={setConfInfo}
                                 removeFields={removeFields}
                                 handleFormSrcChange={handleFormSrcChange}
                                 removeQuery={removeQuery}

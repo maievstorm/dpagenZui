@@ -46,12 +46,15 @@ const CreateNewFlow = () => {
   const assignSource = (val) => {
     setFormSrcFields(val)
   };
+
+
   const assignQuery = (val) => {
     setformQuery(val)
+
     setConf({
       'DagId': daginfo.DagId,
       "Schedule": daginfo.Schedule,
-      // 'schedule_interval':daginfo.schedule_interval,
+      'schedule_interval': daginfo.schedule_interval,
       "owner": UserService.getUsername(),
       'tags': daginfo.tags,
       'subscription_id': daginfo.subscription_id,
@@ -106,14 +109,14 @@ const CreateNewFlow = () => {
             url: config.rootapi + '/invoice',
             data: invoicebody
           })
-          .then(res=>{
-            setTimeout(() => {
-              setLoading(false)
-              navigate('/dataingest')
-            }, 5000);
+            .then(res => {
+              setTimeout(() => {
+                setLoading(false)
+                navigate('/dataingest')
+              }, 5000);
 
-          })
-          .catch(err => console.log(err))
+            })
+            .catch(err => console.log(err))
         }
       })
       .catch(err => console.log(err))
@@ -121,17 +124,17 @@ const CreateNewFlow = () => {
 
   }
   const backtodataingest = () => {
-       
+
     navigate('/dataingest');
-}
+  }
 
 
 
   return (
     <MainCard>
       <IconButton onClick={() => backtodataingest()}>
-                    <ArrowBackIcon color="primary" fontSize="medium" />
-                </IconButton>
+        <ArrowBackIcon color="primary" fontSize="medium" />
+      </IconButton>
       <Stepper activeStep={activeStep}>
         {steps.map((label, index) => {
           return (

@@ -10,30 +10,24 @@ import MenuItem from '@mui/material/MenuItem';
 import UserService from "services/UserService";
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
-<<<<<<< HEAD
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker';
-=======
-import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
-
->>>>>>> 000deeea1ad11888d70ad94734356ad2dc344994
-
+import { processTime } from "./constant";
 export const Info = (props) => {
-  const handleChange = (newValue) => {
-    setDagInfo({...daginfo,'schedule_interval':newValue});
-  };
+  const [dateValue, setDateValue] = React.useState(new Date('2014-08-18T21:11:54'));
+
+
   const divStyle = {
     margin: '5px'
   };
   const [error, setError] = useState("");
 
   const [daginfo, setDagInfo] = useState({})
+  console.log(daginfo)
 
   const [subscription_id, setSubscription_id] = useState([]);
 
@@ -48,6 +42,21 @@ export const Info = (props) => {
       })
       .catch(error => console.log(error))
   }, [])
+  useEffect(() => {
+    let crontab_struct = processTime(dateValue, daginfo?.Schedule)
+    setDagInfo({ ...daginfo, 'schedule_interval': crontab_struct });
+
+
+  }, [daginfo.Schedule])
+
+
+
+  const handleChange = (newValue) => {
+    setDateValue(newValue)
+    let crontab_struct = processTime(newValue, daginfo?.Schedule)
+    setDagInfo({ ...daginfo, 'schedule_interval': crontab_struct });
+
+  };
 
 
   const onInputChanged = (event) => {
@@ -109,11 +118,6 @@ export const Info = (props) => {
 
   };
 
-  const [value, setValue] = React.useState(new Date());
-
-  const handleChange = (newValue) => {
-    setValue(newValue);
-  };
 
   return (
     <div>
@@ -158,31 +162,16 @@ export const Info = (props) => {
           </Select>
           <br></br>
         </FormControl>
-<<<<<<< HEAD
-        <LocalizationProvider dateAdapter={AdapterDateFns}>
-        <DateTimePicker
-          label="Lịch chay"
-          name="schedule_interval"
-          value={value}
-         // onChange={handleChange}
-          renderInput={(params) => <TextField {...params} />}
-        />
-        </LocalizationProvider>
-        <br></br>
-=======
-
         <LocalizationProvider dateAdapter={AdapterDateFns}>
           <DateTimePicker
-            label="Date&Time picker"
-            value={daginfo.schedule_interval}
-            name='schedule_interval'
+            label="Lịch chay"
+            name="schedule_interval"
+            value={dateValue}
             onChange={handleChange}
             renderInput={(params) => <TextField {...params} />}
           />
         </LocalizationProvider>
         <br></br>
-
->>>>>>> 000deeea1ad11888d70ad94734356ad2dc344994
         <TextField
           label="Tags"
           id="tags"
