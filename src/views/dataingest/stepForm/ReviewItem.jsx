@@ -48,11 +48,11 @@ export default function ReviewItem(props) {
         let crontab_struct = processTime(newValue, conf?.Schedule)
         setConfInfo({ ...conf, 'schedule_interval': crontab_struct });
 
-      };
-      useEffect(() => {
+    };
+    useEffect(() => {
         let crontab_struct = processTime(dateValue, conf?.Schedule)
         setConfInfo({ ...conf, 'schedule_interval': crontab_struct });
-      }, [conf?.Schedule])
+    }, [conf?.Schedule])
 
 
     return (
@@ -121,34 +121,34 @@ export default function ReviewItem(props) {
                 }
                 {
                     !edit && <LocalizationProvider dateAdapter={AdapterDateFns}>
-                    <DateTimePicker
-                      label="Lịch chay"
-                      name="schedule_interval"
-                      value={dateValue}
-                      onChange={handleChange}
-                      renderInput={(params) => <TextField {...params} />}
-                    />
-                  </LocalizationProvider>
+                        <DateTimePicker
+                            label="Lịch chay"
+                            name="schedule_interval"
+                            value={dateValue}
+                            onChange={handleChange}
+                            renderInput={(params) => <TextField {...params} />}
+                        />
+                    </LocalizationProvider>
                 }
 
                 {
-                    edit && 
+                    edit &&
                     <TextField
-                    label="schedule_interval"
-                    id="schedule_interval"
-                    name="schedule_interval"
-                    size="small"
+                        label="schedule_interval"
+                        id="schedule_interval"
+                        name="schedule_interval"
+                        size="small"
 
-                    value={conf?.schedule_interval}
-                    // onChange={onInputChanged}
-                    InputProps={{
-                        readOnly: edit,
-                        disableUnderline: true,
-                    }}
-                    variant="standard"
-                    focused={true}
+                        value={conf?.schedule_interval}
+                        // onChange={onInputChanged}
+                        InputProps={{
+                            readOnly: edit,
+                            disableUnderline: true,
+                        }}
+                        variant="standard"
+                        focused={true}
 
-                />
+                    />
                 }
 
 
@@ -455,7 +455,7 @@ export default function ReviewItem(props) {
                             <br></br>
 
 
-                            <TextField
+                            {/* <TextField
                                 label="Target table"
                                 size="small"
                                 name='targettable'
@@ -469,7 +469,27 @@ export default function ReviewItem(props) {
                                 }}
                                 variant="standard"
                                 focused={true}
-                            />
+                            /> */}
+
+                            <Select name='targettable'
+                                value={formquery?.targettable}
+                                onChange={event => props.handleformQuery(event, index)}
+                                size="small"
+                                style={divStyle}
+                                variant="standard"
+                                focused={true}
+                            >
+
+                                {formSrcFields?.map((formSrcField) => (
+                                    <MenuItem
+                                        key={formSrcField.alias}
+                                        value={formSrcField.alias}
+                                    >
+                                        {formSrcField.alias}
+                                    </MenuItem>
+                                ))}
+
+                            </Select>
                             {
                                 !edit && <Select name='writemode'
                                     value={formquery.writemode}
