@@ -1,5 +1,5 @@
 // assets
-import { IconKey,IconTypography,IconBrandCodepen,IconDatabaseImport,IconDeviceAnalytics,IconCloud } from '@tabler/icons';
+import { IconKey,IconTypography,IconBrandCodepen,IconDatabaseImport,IconCloud,IconDiamond } from '@tabler/icons';
 
 // constant
 const icons = {
@@ -7,8 +7,8 @@ const icons = {
     IconTypography,
     IconBrandCodepen,
     IconDatabaseImport,
-    IconDeviceAnalytics,
-    IconCloud
+    IconCloud,
+    IconDiamond
     
 };
 
@@ -21,32 +21,32 @@ const pages = {
     type: 'group',
     children: [
         {
-            id: 'dataplatform',
-            title: 'Nền tảng',
+            id: 'dataservice',
+            title: 'Khai thác',
             type: 'collapse',
-            icon: icons.IconCloud,
+            icon: icons.IconDiamond,
 
             children: [
                 {
-                    id: 'objectstorage',
-                    title: 'Lưu trữ đám mây',
+                    id: 'dataai',
+                    title: 'Trí tuệ nhân tạo',
                     type: 'item',
-                    url: '/ojectstorage',
+                    url: '/dataai',
                     breadcrumbs: true
                 },
                 {
-                    id: 'datawarehouse',
-                    title: 'Kho dữ liệu',
+                    id: 'finnacereport',
+                    title: 'Xây dựng BCTC',
                     type: 'item',
-                    url: '/datawh',
+                    url: '/financereport',
                     breadcrumbs: true
                 }
                 ,
                 {
-                    id: 'bigdata',
-                    title: 'Dữ liệu lớn',
+                    id: 'datavisualize',
+                    title: 'Trực quan dữ liệu',
                     type: 'item',
-                    url: '/bigdata',
+                    url: '/datavisual',
                     breadcrumbs: true
                 }
             ]
@@ -81,38 +81,40 @@ const pages = {
                     breadcrumbs: true
                 }
             ]
-        }, 
-        {
-            id: 'dataservice',
-            title: 'Dịch vụ dữ liệu',
+        }
+        ,
+         {
+            id: 'dataplatform',
+            title: 'Nền tảng',
             type: 'collapse',
-            icon: icons.IconDeviceAnalytics,
+            icon: icons.IconCloud,
 
             children: [
                 {
-                    id: 'dataai',
-                    title: 'Trí tuệ nhân tạo',
+                    id: 'objectstorage',
+                    title: 'Lưu trữ đám mây',
                     type: 'item',
-                    url: '/dataai',
+                    url: '/ojectstorage',
                     breadcrumbs: true
                 },
                 {
-                    id: 'finnacereport',
-                    title: 'Xây dựng BCTC',
+                    id: 'datawarehouse',
+                    title: 'Kho dữ liệu',
                     type: 'item',
-                    url: '/financereport',
+                    url: '/datawh',
                     breadcrumbs: true
                 }
                 ,
                 {
-                    id: 'datavisualize',
-                    title: 'Trực quan dữ liệu',
+                    id: 'bigdata',
+                    title: 'Dữ liệu lớn',
                     type: 'item',
-                    url: '/datavisual',
+                    url: '/bigdata',
                     breadcrumbs: true
                 }
             ]
         }
+        
     ]
 };
 
