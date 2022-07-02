@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import UploadService from "./UploadFilesService";
-import { withRouter } from "./withRouter";
 import { Select } from "@mui/material";
-
 import Box from '@mui/material/Box';
 import Fade from '@mui/material/Fade';
 import Button from '@mui/material/Button';
