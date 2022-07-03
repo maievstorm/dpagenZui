@@ -175,10 +175,10 @@ function Pricing(props) {
           ))}
         </Grid>
       </main>
-      <RegisterForm></RegisterForm>
+      {/* <RegisterForm></RegisterForm> */}
       
       {/* Footer */}
-      <footer className={classNames(classes.footer, classes.layout)}>
+      {/* <footer className={classNames(classes.footer, classes.layout)}>
         <Grid container spacing={32} justify="space-evenly">
           {footers.map(footer => (
             <Grid item xs key={footer.title}>
@@ -193,7 +193,7 @@ function Pricing(props) {
             </Grid>
           ))}
         </Grid>
-      </footer>
+      </footer> */}
       {/* End footer */}
     </React.Fragment>
   );
