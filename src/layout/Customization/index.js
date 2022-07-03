@@ -218,19 +218,19 @@ const Customization = () => {
                                             value="Dark"
                                             control={<Radio />}
                                             label="Dark"
-                                        // sx={{
-                                        //     '& .MuiSvgIcon-root': { fontSize: 28 },
-                                        //     '& .MuiFormControlLabel-label': { color: theme.palette.grey[900] }
-                                        // }}
+                                        sx={{
+                                            '& .MuiSvgIcon-root': { fontSize: 28 },
+                                            '& .MuiFormControlLabel-label': { color: theme.palette.grey[900] }
+                                        }}
                                         />
                                         <FormControlLabel
                                             value="Light"
                                             control={<Radio />}
                                             label="Light"
-                                        // sx={{
-                                        //     '& .MuiSvgIcon-root': { fontSize: 28 },
-                                        //     '& .MuiFormControlLabel-label': { color: theme.palette.grey[900] }
-                                        // }}
+                                        sx={{
+                                            '& .MuiSvgIcon-root': { fontSize: 28 },
+                                            '& .MuiFormControlLabel-label': { color: theme.palette.grey[900] }
+                                        }}
                                         />
 
                                     </RadioGroup>
