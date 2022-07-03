@@ -24,7 +24,7 @@ import PerfectScrollbar from 'react-perfect-scrollbar';
 // project imports
 import SubCard from 'ui-component/cards/SubCard';
 import AnimateButton from 'ui-component/extended/AnimateButton';
-import { SET_BORDER_RADIUS, SET_FONT_FAMILY,SET_THEME_MODE } from 'store/actions';
+import { SET_BORDER_RADIUS, SET_FONT_FAMILY, SET_THEME_MODE } from 'store/actions';
 import { gridSpacing } from 'store/constant';
 
 // concat 'px'
@@ -97,8 +97,6 @@ const Customization = () => {
             initialthemeMode = 'Dark';
             break;
         case 'Light':
-            initialFont = 'Light';
-            break;
         default:
             initialthemeMode = 'Light';
             break;
@@ -108,12 +106,11 @@ const Customization = () => {
     useEffect(() => {
         let newTheme;
         switch (themeMode) {
-            case 'Light':
-                newTheme = 'Light';
-                break;
+
             case 'Dark':
                 newTheme = 'Dark';
                 break;
+            case 'Light':
             default:
                 newTheme = 'Light';
                 break;
@@ -221,21 +218,21 @@ const Customization = () => {
                                             value="Dark"
                                             control={<Radio />}
                                             label="Dark"
-                                            sx={{
-                                                '& .MuiSvgIcon-root': { fontSize: 28 },
-                                                '& .MuiFormControlLabel-label': { color: theme.palette.grey[900] }
-                                            }}
+                                        // sx={{
+                                        //     '& .MuiSvgIcon-root': { fontSize: 28 },
+                                        //     '& .MuiFormControlLabel-label': { color: theme.palette.grey[900] }
+                                        // }}
                                         />
                                         <FormControlLabel
                                             value="Light"
                                             control={<Radio />}
                                             label="Light"
-                                            sx={{
-                                                '& .MuiSvgIcon-root': { fontSize: 28 },
-                                                '& .MuiFormControlLabel-label': { color: theme.palette.grey[900] }
-                                            }}
+                                        // sx={{
+                                        //     '& .MuiSvgIcon-root': { fontSize: 28 },
+                                        //     '& .MuiFormControlLabel-label': { color: theme.palette.grey[900] }
+                                        // }}
                                         />
-                                       
+
                                     </RadioGroup>
                                 </FormControl>
                             </SubCard>
