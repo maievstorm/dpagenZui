@@ -1,6 +1,7 @@
 // project imports
 import config from 'config';
 
+
 // action - state management
 import * as actionTypes from './actions';
 
@@ -8,6 +9,7 @@ export const initialState = {
     isOpen: [], // for active default menu
     fontFamily: config.fontFamily,
     borderRadius: config.borderRadius,
+    themeMode: config.themeMode,
     opened: true
 };
 
@@ -36,6 +38,11 @@ const customizationReducer = (state = initialState, action) => {
             return {
                 ...state,
                 borderRadius: action.borderRadius
+            };
+        case actionTypes.SET_THEME_MODE:
+            return {
+                ...state,
+                themeMode: action.themeMode
             };
         default:
             return state;

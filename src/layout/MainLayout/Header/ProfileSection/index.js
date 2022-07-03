@@ -3,6 +3,7 @@ import { useState, useRef, useEffect } from 'react';
 //import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import UserService from 'services/UserService';
+import Customization from 'layout/Customization';
 
 // material-ui
 import { useTheme } from '@mui/material/styles';
@@ -195,7 +196,9 @@ const ProfileSection = () => {
                                             >
                                                
                                             </Card>
+                                            <Customization></Customization>
                                             <Divider />
+                                           
                                             <List
                                                 component="nav"
                                                 sx={{

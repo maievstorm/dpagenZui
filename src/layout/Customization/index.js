@@ -24,7 +24,7 @@ import PerfectScrollbar from 'react-perfect-scrollbar';
 // project imports
 import SubCard from 'ui-component/cards/SubCard';
 import AnimateButton from 'ui-component/extended/AnimateButton';
-import { SET_BORDER_RADIUS, SET_FONT_FAMILY } from 'store/actions';
+import { SET_BORDER_RADIUS, SET_FONT_FAMILY,SET_THEME_MODE } from 'store/actions';
 import { gridSpacing } from 'store/constant';
 
 // concat 'px'
@@ -51,6 +51,8 @@ const Customization = () => {
         setBorderRadius(newValue);
     };
 
+
+
     useEffect(() => {
         dispatch({ type: SET_BORDER_RADIUS, borderRadius });
     }, [dispatch, borderRadius]);
@@ -68,6 +70,7 @@ const Customization = () => {
             initialFont = 'Roboto';
             break;
     }
+
 
     // state - font family
     const [fontFamily, setFontFamily] = useState(initialFont);
@@ -87,6 +90,37 @@ const Customization = () => {
         }
         dispatch({ type: SET_FONT_FAMILY, fontFamily: newFont });
     }, [dispatch, fontFamily]);
+
+    let initialthemeMode;
+    switch (customization.themeMode) {
+        case 'Dark':
+            initialthemeMode = 'Dark';
+            break;
+        case 'Light':
+            initialFont = 'Light';
+            break;
+        default:
+            initialthemeMode = 'Light';
+            break;
+    }
+
+    const [themeMode, setThemeMode] = useState(initialthemeMode);
+    useEffect(() => {
+        let newTheme;
+        switch (themeMode) {
+            case 'Light':
+                newTheme = 'Light';
+                break;
+            case 'Dark':
+                newTheme = 'Dark';
+                break;
+            default:
+                newTheme = 'Light';
+                break;
+        }
+        dispatch({ type: SET_THEME_MODE, themeMode: newTheme });
+    }, [dispatch, themeMode]);
+
 
     return (
         <>
@@ -136,6 +170,7 @@ const Customization = () => {
                                 <FormControl>
                                     <RadioGroup
                                         aria-label="font-family"
+                                        id="font-family"
                                         value={fontFamily}
                                         onChange={(e) => setFontFamily(e.target.value)}
                                         name="row-radio-buttons-group"
@@ -167,6 +202,40 @@ const Customization = () => {
                                                 '& .MuiFormControlLabel-label': { color: theme.palette.grey[900] }
                                             }}
                                         />
+                                    </RadioGroup>
+                                </FormControl>
+                            </SubCard>
+                        </Grid>
+                        <Grid item xs={12}>
+                            {/* Theme */}
+                            <SubCard title="Theme Mode">
+                                <FormControl>
+                                    <RadioGroup
+                                        aria-label="thememode"
+                                        id="thememode"
+                                        value={themeMode}
+                                        onChange={(e) => setThemeMode(e.target.value)}
+                                        name="thememode-radio-buttons-group"
+                                    >
+                                        <FormControlLabel
+                                            value="Dark"
+                                            control={<Radio />}
+                                            label="Dark"
+                                            sx={{
+                                                '& .MuiSvgIcon-root': { fontSize: 28 },
+                                                '& .MuiFormControlLabel-label': { color: theme.palette.grey[900] }
+                                            }}
+                                        />
+                                        <FormControlLabel
+                                            value="Light"
+                                            control={<Radio />}
+                                            label="Light"
+                                            sx={{
+                                                '& .MuiSvgIcon-root': { fontSize: 28 },
+                                                '& .MuiFormControlLabel-label': { color: theme.palette.grey[900] }
+                                            }}
+                                        />
+                                       
                                     </RadioGroup>
                                 </FormControl>
                             </SubCard>

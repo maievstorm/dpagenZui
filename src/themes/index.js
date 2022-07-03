@@ -16,7 +16,22 @@ import themeTypography from './typography';
 export const theme = (customization) => {
     const color = colors;
 
-    const themeOption = {
+    const DarkTheme={
+        colors: color,
+        heading: color.primaryLight,
+        paper: color.darkLevel1,
+        backgroundDefault: color.darkPaper,
+        background: color.darkBackground,
+        darkTextPrimary: color.primaryLight,
+        darkTextSecondary: color.grey900,
+        textDark: color.primaryLight,
+        menuSelected: color.primaryLight,
+        menuSelectedBack: color.darkLevel2,
+        divider: color.grey200,
+        customization
+    }
+
+    const LightTheme={
         colors: color,
         heading: color.grey900,
         paper: color.paper,
@@ -29,7 +44,48 @@ export const theme = (customization) => {
         menuSelectedBack: color.secondaryLight,
         divider: color.grey200,
         customization
-    };
+    }
+
+  
+    const themeOption=  {};
+    if(customization.themeMode=='Light')
+    {
+        Object.assign(themeOption, LightTheme);
+
+    } else
+    {
+        Object.assign(themeOption, DarkTheme);
+    }
+    
+
+    // const themeOption = {
+    //     colors: color,
+    //     heading: color.grey900,
+    //     paper: color.paper,
+    //     backgroundDefault: color.paper,
+    //     background: color.primaryLight,
+    //     darkTextPrimary: color.grey700,
+    //     darkTextSecondary: color.grey500,
+    //     textDark: color.grey900,
+    //     menuSelected: color.secondaryDark,
+    //     menuSelectedBack: color.secondaryLight,
+    //     divider: color.grey200,
+    //     customization
+
+
+    //     // colors: color,
+    //     // heading: color.primaryLight,
+    //     // paper: color.darkLevel1,
+    //     // backgroundDefault: color.darkPaper,
+    //     // background: color.darkBackground,
+    //     // darkTextPrimary: color.primaryLight,
+    //     // darkTextSecondary: color.grey900,
+    //     // textDark: color.primaryLight,
+    //     // menuSelected: color.primaryLight,
+    //     // menuSelectedBack: color.darkLevel2,
+    //     // divider: color.grey200,
+    //     // customization
+    // };
 
     const themeOptions = {
         direction: 'ltr',
