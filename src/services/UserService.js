@@ -1,4 +1,5 @@
 import Keycloak from 'keycloak-js';
+import BaseAxios from './BaseAxios';
 
 const _kc = new Keycloak('/keycloak.json');
 
@@ -39,6 +40,34 @@ const getUsername = () => _kc.tokenParsed?.preferred_username;
 
 const hasRole = (roles) => roles.some((role) => _kc.hasRealmRole(role));
 const listroles =() =>  _kc.tokenParsed?.realm_access;
+
+
+const applyService = async (data) => {
+  try{
+      await BaseAxios({
+        method:'post',
+        url:'/requestsub',
+        data:data
+      });
+  }catch(err){
+      console.log(err);
+  }
+}
+
+const getOffer = async () => {
+  let response
+  try{
+    response = await BaseAxios({
+        method:'get',
+        url:'/offer',
+      });
+  }catch(err){
+      console.log(err);
+  }
+  return response
+}
+
+
 const UserService = {
   initKeycloak,
   doLogin,
@@ -48,7 +77,9 @@ const UserService = {
   updateToken,
   getUsername,
   hasRole,
-  listroles
+  listroles,
+  applyService,
+  getOffer
 };
 
 export default UserService;

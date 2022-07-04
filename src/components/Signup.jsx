@@ -12,20 +12,45 @@ import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
- 
- 
+import UserService from 'services/UserService';
+import ReCAPTCHA from "react-google-recaptcha";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useState ,useRef} from 'react';
 
 const theme = createTheme();
 
 export default function SignInSide() {
+    const captchaRef = useRef(null)
     const handleSubmit = (event) => {
         event.preventDefault();
-        const data = new FormData(event.currentTarget);
-        console.log({
+        var today = new Date();
+        let data = new FormData(event.currentTarget);
+        data = {
+            user_account_id: null,
+            user_name: data.get('username'),
+            'fullname': data.get('fullname'),
             email: data.get('email'),
-            password: data.get('password'),
-        });
+            upassword: data.get('password'),
+            'offer_id': null,
+            'plan_id': null,
+            'request_date': today,
+            'request_status': 0,
+            'type': 0
+        }
+        // console.log(JSON.stringify(data))
+        let token =captchaRef.current.getValue()
+        console.log(token)
+        if (token){
+            UserService.applyService(data)
+            toast.success("Đăng ký thành công!",{theme: "colored" })
+            captchaRef.current.reset()
+        }
+        else{
+            toast.error("Hãy nhập CAPTCHA",{theme: "colored" })
+        }
     };
+
 
     return (
         <ThemeProvider theme={theme}>
@@ -69,6 +94,16 @@ export default function SignInSide() {
                         margin="normal"
                         required
                         fullWidth
+                        id="fullname"
+                        label="Họ và tên"
+                        name="fullname"
+                        autoComplete="fullname"
+                        autoFocus
+                    />
+                    <TextField
+                        margin="normal"
+                        required
+                        fullWidth
                         id="email"
                         label="Địa chỉ Email"
                         name="email"
@@ -85,6 +120,7 @@ export default function SignInSide() {
                         autoComplete="email"
                         autoFocus
                     />
+
                     <TextField
                         margin="normal"
                         required
@@ -95,7 +131,7 @@ export default function SignInSide() {
                         id="password"
                         autoComplete="current-password"
                     />
-                    
+
 
                     <Button
                         type="submit"
@@ -107,9 +143,15 @@ export default function SignInSide() {
                     </Button>
 
                 </Box>
+                <br></br>
+                <ReCAPTCHA
+                    sitekey="6LdSCMEgAAAAACzYgkBiTcNcr7DbA02I2MUL5UbU"
+                    ref={captchaRef } 
+                                 />
             </Box>
             {/* </Grid>
       </Grid> */}
+      <ToastContainer />
         </ThemeProvider>
     );
 }
