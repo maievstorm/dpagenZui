@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router"
-
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { IconButton } from '@mui/material';
+import Button from '@mui/material/Button';
 
 import config from "../../config";
 import Box from '@mui/material/Box';
@@ -8,9 +10,9 @@ import axios from "axios";
 import MUIDataTable from "mui-datatables";
 import DataIngest from "services/DataIngest";
 export default function LogInfo() {
+    const navigate = useNavigate()
     const location = useLocation()
     const DagId = location?.state?.id
-    console.log(DagId)
     const [rows, setData] = useState([]);
 
     useEffect(() => {
@@ -79,9 +81,14 @@ export default function LogInfo() {
         responsive: "standard",
         selectableRows: false
     };
+
     return (
-        <>  
-        <p>Tên tiến trình: <strong>{DagId}</strong></p>
+        <Box>
+            <Box>
+                <Button onClick={() => navigate('/dataingest')} > {<ArrowBackIcon />} Quay lại</Button>
+                <p>Tên tiến trình: <strong>{DagId}</strong></p>
+            </Box>
+
             <MUIDataTable
                 title={"Lịch sử tiến trình"}
                 data={rows}
@@ -89,6 +96,6 @@ export default function LogInfo() {
                 options={options}
 
             />
-        </>
+        </Box>
     )
 }
