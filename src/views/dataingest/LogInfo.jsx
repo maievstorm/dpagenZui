@@ -85,7 +85,7 @@ export default function LogInfo() {
     return (
         <Box>
             <Box>
-                <Button onClick={() => navigate('/dataingest')} > {<ArrowBackIcon />} Quay lại</Button>
+                <Button onClick={() => navigate('/dataingest')} >{<ArrowBackIcon />}</Button>
                 <p>Tên tiến trình: <strong>{DagId}</strong></p>
             </Box>
 
