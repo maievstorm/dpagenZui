@@ -15,7 +15,7 @@ const icons = {
 
 const registerService = {
     id: 'registerService',
-    title: 'Gói dịch vụ',
+    title: 'Mở rộng',
     type: 'group',
     children: [
         {
