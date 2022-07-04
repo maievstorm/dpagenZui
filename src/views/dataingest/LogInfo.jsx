@@ -1,11 +1,37 @@
 import { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router"
+
 
 import config from "../../config";
 import Box from '@mui/material/Box';
 import axios from "axios";
 import MUIDataTable from "mui-datatables";
-export default function LogInfo(props) {
-    const rows = props?.rows
+import DataIngest from "services/DataIngest";
+export default function LogInfo() {
+    const location = useLocation()
+    const DagId = location?.state?.id
+    console.log(DagId)
+    const [rows, setData] = useState([]);
+
+    useEffect(() => {
+        DataIngest.getLoginfo(DagId)
+            .then(res => {
+                setData(res.data.dag_runs.map(item => {
+                    let start_date = new Date(Date.parse(item.start_date)).toLocaleString()
+                    // let execution_date = new Date( Date.parse(item.execution_date) ).toLocaleString()
+                    let end_date = new Date(Date.parse(item.end_date)).toLocaleString()
+
+                    return {
+                        'dag_run_id': item.dag_run_id,
+                        'start_date': start_date,
+                        // 'execution_date': execution_date,
+                        'end_date': end_date,
+                        'state': item.state
+                    }
+                }))
+            })
+
+    }, [])
 
     const columns = [
         {
@@ -52,16 +78,17 @@ export default function LogInfo(props) {
         selectableRows: "single",
         responsive: "standard",
         selectableRows: false
-      };
+    };
     return (
-        <>
-        <MUIDataTable
-            title={"Lịch sử tiến trình"}
-            data={rows}
-            columns={columns}
-            options={options}
-             
-        />
+        <>  
+        <p>Tên tiến trình: <strong>{DagId}</strong></p>
+            <MUIDataTable
+                title={"Lịch sử tiến trình"}
+                data={rows}
+                columns={columns}
+                options={options}
+
+            />
         </>
     )
 }

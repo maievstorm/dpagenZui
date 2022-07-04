@@ -39,6 +39,8 @@ const UploadMultiFiles = Loadable(lazy(() => import('views/objectstore/UploadMul
 const RegisterStreaming = Loadable(lazy(() => import('views/datastream/RegisterStream')));
 const AdminPage = Loadable(lazy(() => import('views/admin')));
 const RegisterService = Loadable(lazy(() => import('views/registerservice')));
+const LogInfo = Loadable(lazy(() => import('views/dataingest/LogInfo')));
+
  
  
 // ==============================|| MAIN ROUTING ||============================== //
@@ -137,6 +139,10 @@ const MainRoutes = {
         {
             path: '/dataingest/editflowjob',
             element: <EditFlowJob />
+        },
+        {
+            path: '/dataingest/loginformation',
+            element: <LogInfo />
         }
         ,
                 {

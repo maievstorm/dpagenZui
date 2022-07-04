@@ -10,9 +10,10 @@ import Button from '@mui/material/Button';
 import UserService from 'services/UserService';
 import { Tooltip, IconButton } from '@mui/material';
 
-
+import RateReviewIcon from '@mui/icons-material/RateReview';
 
 export default function ManageFlow() {
+    
     const [rows, setData] = useState([]);
     const columns = [
         {
@@ -77,8 +78,8 @@ export default function ManageFlow() {
         });
     }
 
-    const onEdittJobClickHandler = (selected) => {
-        navigate('editflowjob',{state:{id:selected}})
+    const onEdittJobClickHandler = (type,selected) => {
+        navigate(type,{state:{id:selected}})
 
     }
 
@@ -103,11 +104,24 @@ export default function ManageFlow() {
                     </IconButton>
 
                 </Tooltip>
+                <Tooltip title="Xem log">
+                    <IconButton
+                        onClick={() => {
+
+                            onEdittJobClickHandler('loginformation',rows[selectedRows.data[0].dataIndex]['item_name']);
+
+                        }}
+
+                    >
+                        <RateReviewIcon />
+                    </IconButton>
+
+                </Tooltip>
                 <Tooltip title="Hiệu chỉnh tiến trình">
                     <IconButton
                         onClick={() => {
 
-                            onEdittJobClickHandler(rows[selectedRows.data[0].dataIndex]['item_name']);
+                            onEdittJobClickHandler('editflowjob',rows[selectedRows.data[0].dataIndex]['item_name']);
 
                         }}
 
