@@ -234,9 +234,7 @@ export default function EditFlowJob() {
 
 
                 <Box sx={{ flexGrow: 1 }}>
-                    <Grid container spacing={{ xs: 2, md: 2 }} columns={{ sm: 6, md: 12 }} style={divStyle}>
-                        <Grid item xs={3} sm={6} md={6} >
-                            <ReviewItem conf={confInfo} edit={edit} onInputChanged={onInputChanged}
+                <ReviewItem conf={confInfo} edit={edit} onInputChanged={onInputChanged}
                                 formSrcFields={formSrcFields}
                                 formQuery={formQuery}
                                 addFields={addFields}
@@ -249,12 +247,6 @@ export default function EditFlowJob() {
                                 setformQuery={setformQuery}
 
                             />
-                        </Grid>
-                        <Grid item xs={3} sm={6} md={6} >
-                            <LogInfo rows={rows} />
-
-                        </Grid>
-                    </Grid>
                 </Box>
             </Box>
         </MainCard>
