@@ -7,11 +7,13 @@ import MainCard from 'ui-component/cards/MainCard';
 // ==============================|| Bigdata Page ||============================== //
 
 const Databackuppage = () => (
-    <MainCard title="Sao lưu dữ liệu">
-        <Typography variant="body2">
+    <MainCard title="Sao lưu dữ liệu1">
+         <Typography variant="body2">  
+        
             abc
-        </Typography>
-    </MainCard>
+            
+         </Typography>  
+     </MainCard>
 );
 
 export default Databackuppage;

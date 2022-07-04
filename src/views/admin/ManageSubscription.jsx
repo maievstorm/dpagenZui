@@ -23,14 +23,14 @@ export default function ManageSubscription() {
             options: {
                 filter: true
             },
-            label: 'user_account_id',
+            label: 'ID Tài khoản',
         },
         {
             name: "user_name",
             options: {
                 filter: false
             },
-            label: 'user_name'
+            label: 'Tài khoản'
         }
         ,
         {
@@ -38,7 +38,7 @@ export default function ManageSubscription() {
             options: {
                 filter: false
             },
-            label: 'fullname'
+            label: 'Họ và tên'
         }
         ,
         {
@@ -46,42 +46,42 @@ export default function ManageSubscription() {
             options: {
                 filter: false
             },
-            label: 'email'
+            label: 'Email'
         },
         {
             name: "upassword",
             options: {
                 filter: false
             },
-            label: 'upassword'
+            label: 'Mật khẩu'
         },
         {
             name: "offer_id",
             options: {
                 filter: false
             },
-            label: 'offer_id'
+            label: 'ID Offer'
         },
         {
             name: "plan_id",
             options: {
                 filter: false
             },
-            label: 'plan_id'
+            label: 'ID Plan'
         },
         {
             name: "request_date",
             options: {
                 filter: false
             },
-            label: 'request_date'
+            label: 'Ngày yêu cầu'
         },
         {
             name: "request_status",
             options: {
                 filter: false
             },
-            label: 'request_status'
+            label: 'Trạng thái'
         }
 
     ];

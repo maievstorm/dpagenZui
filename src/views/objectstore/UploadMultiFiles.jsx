@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import UploadService from "./UploadFilesService";
 import { Select } from "@mui/material";
 import Box from '@mui/material/Box';
@@ -10,7 +10,6 @@ import { useNavigate } from "react-router";
 import MenuItem from '@mui/material/MenuItem';
 import config from "../../config";
 import UserService from "services/UserService";
-
 import axios from 'axios';
 
 
@@ -138,7 +137,7 @@ function UploadMultiFiles(props) {
     navigate('/ojectstorage')
   }
 
-console.log(bucketSelect.length)
+  console.log(bucketSelect.length)
 
 
 
@@ -181,7 +180,7 @@ console.log(bucketSelect.length)
             </MenuItem>
           ))}
         </Select>
-<br></br>
+        <br></br>
         <input type="file" multiple onChange={selectFiles} />
 
 
@@ -189,7 +188,7 @@ console.log(bucketSelect.length)
         <div className="col-4">
           <Button
             className="btn btn-success btn-sm"
-            disabled={(!selectedFiles) || (bucketSelect.length==0)}
+            disabled={(!selectedFiles) || (bucketSelect.length == 0)}
             onClick={uploadFiles}
           >
             Tải lên
