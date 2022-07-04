@@ -15,6 +15,7 @@ import themeTypography from './typography';
 
 export const theme = (customization) => {
     const color = colors;
+  
 
     const DarkTheme={
         colors: color,
@@ -28,6 +29,7 @@ export const theme = (customization) => {
         menuSelected: color.primaryLight,
         menuSelectedBack: color.darkLevel2,
         divider: color.grey200,
+        type: 'dark',
         customization
     }
 
@@ -43,6 +45,7 @@ export const theme = (customization) => {
         menuSelected: color.secondaryDark,
         menuSelectedBack: color.secondaryLight,
         divider: color.grey200,
+        type: 'light',
         customization
     }
 

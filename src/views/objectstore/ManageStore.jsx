@@ -111,7 +111,7 @@ export default function ManageStore() {
 
 
 
-  
+
     const options = {
         filter: false,
         print: false,
@@ -119,39 +119,39 @@ export default function ManageStore() {
         responsive: "standard",
         textLabels: {},
         customToolbarSelect: selectedRows => (
-           <>
-            <Tooltip title="Tải về">
-                <IconButton
-                    onClick={() => {
-                        getObject(bucketname, rows[selectedRows.data[0].dataIndex]['name'])
-                        //  console.log(rows[selectedRows.data[0].dataIndex]);
-                      //  setSelectedrow(rows[selectedRows.data[0].dataIndex]['name']);
-                        // console.log(selectedrow)
+            <>
+                <Tooltip title="Tải về">
+                    <IconButton
+                        onClick={() => {
+                            getObject(bucketname, rows[selectedRows.data[0].dataIndex]['name'])
+                            //  console.log(rows[selectedRows.data[0].dataIndex]);
+                            //  setSelectedrow(rows[selectedRows.data[0].dataIndex]['name']);
+                            // console.log(selectedrow)
 
-                    }}
+                        }}
 
-                >
-                    <FileDownloadIcon />
-                </IconButton>
-            </Tooltip>
-           
-           <Tooltip title="Xoá">
-                <IconButton
-                    onClick={() => {
-                        deleteObjects(bucketname, rows[selectedRows.data[0].dataIndex]['name'])
-                        //  console.log(rows[selectedRows.data[0].dataIndex]);
-                      //  setSelectedrow(rows[selectedRows.data[0].dataIndex]['name']);
-                        // console.log(selectedrow)
-
-                    }}
-
-                >
-                    <DeleteIcon />
-                </IconButton>
+                    >
+                        <FileDownloadIcon />
+                    </IconButton>
                 </Tooltip>
-               
+
+                <Tooltip title="Xoá">
+                    <IconButton
+                        onClick={() => {
+                            deleteObjects(bucketname, rows[selectedRows.data[0].dataIndex]['name'])
+                            //  console.log(rows[selectedRows.data[0].dataIndex]);
+                            //  setSelectedrow(rows[selectedRows.data[0].dataIndex]['name']);
+                            // console.log(selectedrow)
+
+                        }}
+
+                    >
+                        <DeleteIcon />
+                    </IconButton>
+                </Tooltip>
+
             </>
-            
+
         )
     };
 
@@ -182,12 +182,12 @@ export default function ManageStore() {
         if (obj) {
 
             try {
-                DpzStorageConf.presignedGetObject(curent_bucketName, obj, 24*60*60, function(err, presignedUrl) {
+                DpzStorageConf.presignedGetObject(curent_bucketName, obj, 24 * 60 * 60, function (err, presignedUrl) {
                     if (err) return console.log(err)
                     console.log(presignedUrl)
                     window.location.href = presignedUrl
-                    
-                  })
+
+                })
             } catch (e) {
                 console.log(e)
             }
@@ -208,10 +208,12 @@ export default function ManageStore() {
 
     return (
         <div><strong>Danh sách thư mục : </strong>
-            <Select id="listbucket" name='listbucket' value={ownbucket.id} onChange={onInputChanged}
-                size="small"
-
-
+            <Select id="listbucket" 
+            name='listbucket' 
+            value={ownbucket.id} 
+            onChange={onInputChanged}
+            
+            size="small"
             >
 
                 {ownbucket.map((item) => (

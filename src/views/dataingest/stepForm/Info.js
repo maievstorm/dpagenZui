@@ -147,7 +147,7 @@ export const Info = (props) => {
             style={divStyle}
             headername={'Tần suất chạy'}
             label='Tần suất chạy'
-
+             
           >
 
             {scheduletypes.map((scheduletype) => (

@@ -37,7 +37,7 @@ export default function EditFlowJob() {
             [targetName]: targetValue
         }));
     };
-    console.log(confInfo)
+  
 
 
 
