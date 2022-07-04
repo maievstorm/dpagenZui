@@ -38,8 +38,7 @@ const UploadMultiFiles = Loadable(lazy(() => import('views/objectstore/UploadMul
 //const ManageDpaStorage = Loadable(lazy(() => import('views/DpaStorage/ManageDpaStorage')));
 const RegisterStreaming = Loadable(lazy(() => import('views/datastream/RegisterStream')));
 const AdminPage = Loadable(lazy(() => import('views/admin')));
- 
-
+const RegisterService = Loadable(lazy(() => import('views/registerservice')));
  
  
 // ==============================|| MAIN ROUTING ||============================== //
@@ -153,6 +152,10 @@ const MainRoutes = {
             
             path: '/admin/admindpz',
             element: <AdminPage />
+        },
+        {
+            path: '/register-service',
+            element: <RegisterService />
         } 
     ]
 };

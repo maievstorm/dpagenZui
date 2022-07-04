@@ -41,10 +41,12 @@ import Transitions from 'ui-component/extended/Transitions';
 // assets
 //import { IconLogout, IconSearch, IconSettings, IconUser } from '@tabler/icons';
 import { IconLogout, IconSettings } from '@tabler/icons';
+import { useNavigate } from 'react-router';
 
 // ==============================|| PROFILE MENU ||============================== //
 
 const ProfileSection = () => {
+    const navigate = useNavigate()
     const theme = useTheme();
     const customization = useSelector((state) => state.customization);
     //const navigate = useNavigate();
@@ -89,6 +91,11 @@ const ProfileSection = () => {
 
         prevOpen.current = open;
     }, [open]);
+
+    const logOut = ()=>{
+        UserService.doLogout()
+        navigate('/')
+    }
 
     return (
         <>
@@ -220,7 +227,7 @@ const ProfileSection = () => {
                                                 <ListItemButton
                                                     sx={{ borderRadius: `${customization.borderRadius}px` }}
                                                     selected={selectedIndex === 4}
-                                                    onClick={() => UserService.doLogout()}
+                                                    onClick={logOut}
                                                 >
                                                     <ListItemIcon>
                                                         <IconLogout stroke={1.5} size="1.3rem" />

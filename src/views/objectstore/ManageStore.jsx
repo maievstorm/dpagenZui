@@ -25,11 +25,14 @@ export default function ManageStore() {
 
         axios.get(getstorageapi)
             .then(res => {
-                setownbucket(res.data.data.map(item => {
+                let data = res.data.data.map(item => {
                     return {
                         'id': item.item_name, 'name': item.item_name
                     }
-                }))
+                })
+                setownbucket(data)
+                setbucketname(data[0].name)
+                getBuckets(data[0].name)
             }).catch(err => { console.log(err) })
     }, []);
 
@@ -40,6 +43,7 @@ export default function ManageStore() {
         setbucketname(targetValue);
 
     };
+    console.log(bucketname)
 
 
     const getBuckets = (targetValue) => {
@@ -203,16 +207,16 @@ export default function ManageStore() {
     const onClickHandler = () => navigate('/objectstore/uploadmultifile');
 
 
-
+    console.log(ownbucket)
 
 
     return (
         <div><strong>Danh sách thư mục : </strong>
             <Select id="listbucket" 
-            name='listbucket' 
-            value={ownbucket.id} 
+            name='listbucket'
+            value={bucketname} 
+            // defaultValue={ownbucket[0]?.name}
             onChange={onInputChanged}
-            
             size="small"
             >
 
