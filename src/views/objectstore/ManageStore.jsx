@@ -11,7 +11,7 @@ import { Tooltip, IconButton } from '@mui/material';
 import UserService from 'services/UserService';
 import { Select } from '@mui/material';
 import MenuItem from '@mui/material/MenuItem';
-import DpzStorageConf from 'components/StorageConf';
+import DpzStorageConf from 'services/StorageConf';
 
 
 
