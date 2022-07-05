@@ -5,29 +5,27 @@ import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import MUIDataTable from "mui-datatables";
 import DataIngest from "services/DataIngest";
-import { Tooltip, IconButton } from '@mui/material';
 
-import RateReviewIcon from '@mui/icons-material/RateReview';
-export default function LogInfo() {
+export default function Logdetail() {
     const navigate = useNavigate()
     const location = useLocation()
-    const DagId = location?.state?.id
+    const DagIdnDagrunId = location?.state?.id;
     const [rows, setData] = useState([]);
 
     useEffect(() => {
-        DataIngest.getLoginfo(DagId)
+        DataIngest.Logdetail(DagIdnDagrunId)
             .then(res => {
-                setData(res.data.dag_runs.map(item => {
+                
+                setData(res.data.task_instances.map(item => {
                     let start_date = new Date(Date.parse(item.start_date)).toLocaleString()
-                    // let execution_date = new Date( Date.parse(item.execution_date) ).toLocaleString()
                     let end_date = new Date(Date.parse(item.end_date)).toLocaleString()
 
                     return {
-                        'dag_run_id': item.dag_run_id,
+                        'task_id': item.task_id,
                         'start_date': start_date,
-                        // 'execution_date': execution_date,
                         'end_date': end_date,
-                        'state': item.state
+                        'state': item.state,
+                        'duration' : item.duration,
                     }
                 }))
             })
@@ -36,11 +34,11 @@ export default function LogInfo() {
 
     const columns = [
         {
-            name: "dag_run_id",
+            name: "task_id",
             options: {
                 filter: true
             },
-            label: 'Lịch sử'
+            label: 'Bước'
         },
         {
             name: "start_date",
@@ -49,19 +47,21 @@ export default function LogInfo() {
             },
             label: 'Bắt đầu',
         },
-        // {
-        //     name: "execution_date",
-        //     options: {
-        //         filter: true
-        //     },
-        //     label: 'execution_date'
-        // },
+      
         {
             name: "end_date",
             options: {
                 filter: true
             },
             label: 'Kết thúc'
+        }
+        ,
+        {
+            name: "duration",
+            options: {
+                filter: true
+            },
+            label: 'Thời gian'
         }
         ,
         {
@@ -73,45 +73,28 @@ export default function LogInfo() {
         }
 
     ];
-
-    const onEdittJobClickHandler = (type,selected) => {
-        navigate(type,{state:{id:selected}})
-
-    }
+ 
     const options = {
         filter: false,
         print: false,
         selectableRows: "single",
         responsive: "standard",
         textLabels: {},
-        customToolbarSelect: selectedRows => (
-            <>
-                <Tooltip title="Xem chi tiết log">
-                    <IconButton
-                        onClick={() => {
-                            // DagId + '/dagRuns/'+DagrunId 
-
-                            onEdittJobClickHandler('logdagdetail',DagId+'/dagRuns/'+rows[selectedRows.data[0].dataIndex]['dag_run_id']);
-
-                        }}
-
-                    >
-                        <RateReviewIcon />
-                    </IconButton>
-
-                </Tooltip>
-                
-            </>
-
-        )
+        selectableRows: false 
        
-    };
+       
+    }; 
+
+    const BacktoDag = (selected) => {
+        navigate('/dataingest/loginformation',{state:{id:selected}})
+
+    } 
 
     return (
         <Box>
             <Box>
-                <Button onClick={() => navigate('/dataingest')} >{<ArrowBackIcon />}</Button>
-                <p>Tên tiến trình: <strong>{DagId}</strong></p>
+                <Button onClick={() => BacktoDag(DagIdnDagrunId.split("/")[0])} >{<ArrowBackIcon />}</Button>
+                <p>Tên tiến trình: <strong>{DagIdnDagrunId}</strong></p>
             </Box>
 
             <MUIDataTable

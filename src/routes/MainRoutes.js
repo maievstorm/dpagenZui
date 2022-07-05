@@ -40,9 +40,11 @@ const RegisterStreaming = Loadable(lazy(() => import('views/datastream/RegisterS
 const AdminPage = Loadable(lazy(() => import('views/admin')));
 const RegisterService = Loadable(lazy(() => import('views/registerservice')));
 const LogInfo = Loadable(lazy(() => import('views/dataingest/LogInfo')));
+const Logdetail = Loadable(lazy(() => import('views/dataingest/Logdetail')));
 
-//const Documents = Loadable(lazy(() => import('views/document/Documents')));
+ 
 
+ 
 
 
 
@@ -150,6 +152,10 @@ const MainRoutes = {
         {
             path: '/dataingest/loginformation',
             element: <LogInfo />
+        },
+        {
+            path: '/dataingest/loginformation/logdagdetail',
+            element: <Logdetail />
         }
         ,
                 {
