@@ -3,13 +3,11 @@ import React from "react";
 import ActionButtons from "./ActionButton";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
-import { InputLabel } from '@mui/material';
-import ReviewItem from "./ReviewItem";
 
 
 export const Review = (props) => {
   const conf = props.conf
-  console.log(conf)
+  //console.log(conf)
   //const classes = useStyles();  
   const divStyle = {
     margin: '5px',

@@ -1,7 +1,5 @@
 import React from 'react';
-import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -10,10 +8,9 @@ import CardHeader from '@material-ui/core/CardHeader';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
 import StarIcon from '@material-ui/icons/StarBorder';
-import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
-import RegisterForm from './RegisterForm';
+
 
 const styles = theme => ({
   '@global': {
@@ -97,24 +94,24 @@ const tiers = [
     buttonVariant: 'outlined',
   },
 ];
-const footers = [
-  {
-    title: 'Công ty',
-    description: ['Làm việc nhóm', 'Tận tâm', 'Liên hệ'],
-  },
-  {
-    title: 'Tính năng',
-    description: ['Truyền tải', 'Trực tuyến', 'Nhanh chóng', 'Bảo mật', 'Toàn vẹn'],
-  },
-  {
-    title: 'Nguồn lực',
-    description: ['Năng động', 'Nhanh nhẹn', 'Kinh nghiệm'],
-  },
-  {
-    title: 'Chính sách',
-    description: ['Chính sách bảo mật', 'Điều khoản sử dụng'],
-  },
-];
+// const footers = [
+//   {
+//     title: 'Công ty',
+//     description: ['Làm việc nhóm', 'Tận tâm', 'Liên hệ'],
+//   },
+//   {
+//     title: 'Tính năng',
+//     description: ['Truyền tải', 'Trực tuyến', 'Nhanh chóng', 'Bảo mật', 'Toàn vẹn'],
+//   },
+//   {
+//     title: 'Nguồn lực',
+//     description: ['Năng động', 'Nhanh nhẹn', 'Kinh nghiệm'],
+//   },
+//   {
+//     title: 'Chính sách',
+//     description: ['Chính sách bảo mật', 'Điều khoản sử dụng'],
+//   },
+// ];
 
 function Pricing(props) {
   const { classes } = props;
@@ -175,7 +172,7 @@ function Pricing(props) {
           ))}
         </Grid>
       </main>
-      {/* <RegisterForm></RegisterForm> */}
+    
       
       {/* Footer */}
       {/* <footer className={classNames(classes.footer, classes.layout)}>

@@ -1,12 +1,8 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router"
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import { IconButton } from '@mui/material';
 import Button from '@mui/material/Button';
-
-import config from "../../config";
 import Box from '@mui/material/Box';
-import axios from "axios";
 import MUIDataTable from "mui-datatables";
 import DataIngest from "services/DataIngest";
 export default function LogInfo() {

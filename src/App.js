@@ -28,7 +28,7 @@ const App = () => {
        
         <StyledEngineProvider injectFirst>
              <RenderOnAnonymous>
-                <Welcome />
+                <Welcome />               
              </RenderOnAnonymous>
             <ThemeProvider theme={themes(customization)}>
                 <CssBaseline />

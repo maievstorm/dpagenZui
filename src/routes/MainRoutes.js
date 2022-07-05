@@ -3,7 +3,7 @@ import { lazy } from 'react';
 // project imports
 import MainLayout from 'layout/MainLayout';
 import Loadable from 'ui-component/Loadable';
-
+import Documents from 'views/document/Documents';
 
  
 
@@ -40,6 +40,13 @@ const RegisterStreaming = Loadable(lazy(() => import('views/datastream/RegisterS
 const AdminPage = Loadable(lazy(() => import('views/admin')));
 const RegisterService = Loadable(lazy(() => import('views/registerservice')));
 const LogInfo = Loadable(lazy(() => import('views/dataingest/LogInfo')));
+
+//const Documents = Loadable(lazy(() => import('views/document/Documents')));
+
+
+
+
+ 
 
  
  
@@ -162,6 +169,11 @@ const MainRoutes = {
         {
             path: '/register-service',
             element: <RegisterService />
+        } 
+        ,
+        {
+            path: '/documents',
+            element: <Documents />
         } 
     ]
 };

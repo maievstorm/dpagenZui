@@ -59,7 +59,7 @@ function UploadMultiFiles(props) {
   }
 
   const upload = (idx, file) => {
-    let _progressInfos = [...progressInfos];
+    //let _progressInfos = [...progressInfos];
 
     UploadService.upload(file, bucketSelect
       // , (event) => {
@@ -100,11 +100,11 @@ function UploadMultiFiles(props) {
   const uploadFiles = () => {
     // const selectedFiles = selectedFiles;
 
-    let _progressInfos = [];
+    // let _progressInfos = [];
 
-    // for (let i = 0; i < selectedFiles.length; i++) {
-    //   _progressInfos.push({ percentage: 0, fileName: selectedFiles[i].name });
-    // }
+    // // for (let i = 0; i < selectedFiles.length; i++) {
+    // //   _progressInfos.push({ percentage: 0, fileName: selectedFiles[i].name });
+    // // }
     setLoading(true)
 
     for (let i = 0; i < selectedFiles.length; i++) {
@@ -115,20 +115,7 @@ function UploadMultiFiles(props) {
       gohome();
     }, 2000);
 
-
-    // this.setState(
-    //   {
-    //     progressInfos: _progressInfos,
-    //     message: [],
-    //   },
-    //   () => {
-    //     for (let i = 0; i < selectedFiles.length; i++) {
-    //upload(i, selectedFiles[i]);
-    // }
-    // gohome();
-
-    //   }
-    // );
+ 
 
 
   }

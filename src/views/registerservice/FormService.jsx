@@ -57,8 +57,8 @@ export default function FormService() {
                     }
                 </Select>
             </FormControl>
-            <Button sx={{width:100}} variant="contained" endIcon={<SendIcon />} onClick={submit}>
-                Send
+            <Button sx={{width:200}} variant="contained" endIcon={<SendIcon />} onClick={submit}>
+                Mở rộng
             </Button>
         </Stack>
     )

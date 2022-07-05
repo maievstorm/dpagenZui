@@ -43,7 +43,7 @@ export default function ManageStore() {
         setbucketname(targetValue);
 
     };
-    console.log(bucketname)
+  
 
 
     const getBuckets = (targetValue) => {
@@ -128,9 +128,7 @@ export default function ManageStore() {
                     <IconButton
                         onClick={() => {
                             getObject(bucketname, rows[selectedRows.data[0].dataIndex]['name'])
-                            //  console.log(rows[selectedRows.data[0].dataIndex]);
-                            //  setSelectedrow(rows[selectedRows.data[0].dataIndex]['name']);
-                            // console.log(selectedrow)
+                          
 
                         }}
 
@@ -143,9 +141,7 @@ export default function ManageStore() {
                     <IconButton
                         onClick={() => {
                             deleteObjects(bucketname, rows[selectedRows.data[0].dataIndex]['name'])
-                            //  console.log(rows[selectedRows.data[0].dataIndex]);
-                            //  setSelectedrow(rows[selectedRows.data[0].dataIndex]['name']);
-                            // console.log(selectedrow)
+                           
 
                         }}
 
@@ -206,8 +202,7 @@ export default function ManageStore() {
 
     const onClickHandler = () => navigate('/objectstore/uploadmultifile');
 
-
-    console.log(ownbucket)
+ 
 
 
     return (

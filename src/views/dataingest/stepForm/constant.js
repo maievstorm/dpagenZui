@@ -78,8 +78,8 @@ export const writemodetype = [
   ]
   export  const processTime = (time,Schedule) =>{
     let minus = time.getMinutes()
-    let year = time.getFullYear()
-    let month = time.getMonth()
+    // let year = time.getFullYear()
+    // let month = time.getMonth()
     let day = time.getDay()
     let hours = time.getHours()
     let date = time.getDate()
