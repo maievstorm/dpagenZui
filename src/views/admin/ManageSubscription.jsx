@@ -2,7 +2,9 @@ import { useState, useEffect } from 'react'
 import MUIDataTable from "mui-datatables";
 import axios from 'axios';
 import config from "../../config";
-import UserService from 'services/UserService';
+import { Tooltip, IconButton } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
+import FileDownloadIcon from '@mui/icons-material/FileDownload';
 
 
 
@@ -118,7 +120,29 @@ export default function ManageSubscription() {
         print: false,
         selectableRows: "single",
         responsive: "standard",
-        textLabels: {}
+        textLabels: {},
+        customToolbarSelect: selectedRows => (
+            <>
+                <Tooltip title="Tải về">
+                    <IconButton
+                        onClick={() => {
+                            console.log(rows[selectedRows.data[0].dataIndex]['user_name']) 
+                            console.log(rows[selectedRows.data[0].dataIndex]['offer_id']) 
+                            console.log(rows[selectedRows.data[0].dataIndex]['plan_id']) 
+                          
+
+                        }}
+
+                    >
+                        <FileDownloadIcon />
+                    </IconButton>
+                </Tooltip>
+
+                
+
+            </>
+
+        )
 
     };
 
