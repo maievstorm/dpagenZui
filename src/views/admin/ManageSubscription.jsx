@@ -114,6 +114,47 @@ export default function ManageSubscription() {
 
 
 
+    // {
+    //     "user_group_type_id": 27,
+    //     "customer_invoice_data": "ahihhhi",
+    //     "insert_ts": "2022-06-09",
+    //     *"first_name": "sdaghs",
+    //     *"last_name": "dshgfad",
+    //     *"user_name": "dsafdas",
+    //     *"password": "1",
+    //     *"email": "dsadhgfhsad@fpt.com.vn",
+    //     "confirmation_code": "9",
+    //     "confirmation_time": "2022-03-02",
+    //     "insert_ts": "2022-05-07",
+    //     "ingroup": [
+    //         {
+    //             "time_added":"2022-05-03",
+    //             "time_removed":"2022-06-01",
+    //             "group_admin": true
+    //         }
+    //     ],
+    //     "subscription": [
+    //         {
+    //             "trial_period_start_date": "2022-06-24T17:00:00.000Z",
+    //             "trial_period_end_date": "2030-12-26T17:00:00.000Z",
+    //             "subscribe_after_trial": false,
+    //             *"current_plan_id": 83,
+    //            * "offer_id": 92,
+    //             "offer_start_date": "2022-06-27T17:00:00.000Z",
+    //             "offer_end_date": "2030-12-29T17:00:00.000Z",
+    //             "date_subscribed": "2022-06-23T17:00:00.000Z",
+    //             "valid_to": "2030-12-29T17:00:00.000Z",
+    //             "date_unsubscribed": null,
+    //             "insert_ts": "2022-06-23T17:00:00.000Z",
+    //             "requestsub_id":null
+    //         }
+    //     ]
+    // }
+
+    const createuserandsub =() =>{
+
+
+    }
 
     const options = {
         filter: false,

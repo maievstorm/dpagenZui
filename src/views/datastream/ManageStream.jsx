@@ -41,7 +41,7 @@ export default function ManageStream() {
     const getairflowapi = config.rootapi + '/invoice/usernamentype/' + UserService.getUsername() + '&stream';
 
     useEffect(() => {
-        axios({ method: 'get', url: getairflowapi }
+        axios({ method: 'get', url: 'https://dpaapigw.apps.xplat.fis.com.vn/connectors/connectors' }
         ).then(res => {
             setData(res.data.data.map(item => {
                 let invoice_created_ts = new Date(Date.parse(item.invoice_created_ts)).toLocaleString()
