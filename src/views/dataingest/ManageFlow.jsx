@@ -39,7 +39,7 @@ export default function ManageFlow() {
         }
 
     ];
-    // const getairflowapi = config.rootapi + '/invoice/usernamentype/' + UserService.getUsername() + '&airflow';
+   
     // const getapi='https://dpaapigw.apps.xplat.fis.com.vn/dpzapi/api/v1' + '/invoice/usernamentype/' + UserService.getUsername() + '&airflow';
     // let JWTToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJDTE9PbHdEZ0pPTGpVOHVzMnoySTNyT2pzRkEzNnF6TiJ9.2hsA0NJzwy2YJOeST2JnYJoRIohiJh9SHaKvp9GhgjM';
     // useEffect(() => {
