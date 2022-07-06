@@ -41,6 +41,7 @@ const Logdetail = async (DagIdnDagrunId) => {
 }
 
 
+
 const DataIngest = {
     getLoginfo,
     Logdetail
