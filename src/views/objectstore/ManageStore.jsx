@@ -6,12 +6,11 @@ import { useNavigate } from "react-router-dom";
 import Button from '@mui/material/Button';
 import DeleteIcon from '@mui/icons-material/Delete';
 import FileDownloadIcon from '@mui/icons-material/FileDownload';
-import axios from 'axios';
 import { Tooltip, IconButton } from '@mui/material';
-import UserService from 'services/UserService';
 import { Select } from '@mui/material';
 import MenuItem from '@mui/material/MenuItem';
 import DpzStorageConf from 'services/StorageConf';
+import { GetProcess } from 'services/DataIngest';
 
 
 
@@ -21,9 +20,9 @@ export default function ManageStore() {
     const [bucketname, setbucketname] = useState("");
 
     useEffect(() => {
-        const getstorageapi = config.rootapi + '/invoice/usernamentype/' + UserService.getUsername() + '&storage';
+       // const getstorageapi = config.rootapi + '/invoice/usernamentype/' + UserService.getUsername() + '&storage';
 
-        axios.get(getstorageapi)
+        GetProcess('storage')
             .then(res => {
                 let data = res.data.data.map(item => {
                     return {
