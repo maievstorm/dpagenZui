@@ -25,6 +25,7 @@
         "clsx": "^1.1.1",
         "formik": "^2.2.6",
         "framer-motion": "^4.1.13",
+        "gh-pages": "^4.0.0",
         "history": "^5.0.0",
         "keycloak-js": "^18.0.0",
         "material-table": "^2.0.3",
@@ -49,6 +50,8 @@
         "yup": "^0.32.9"
     },
     "scripts": {
+        "predeploy": "npm run build",
+        "deploy": "gh-pages -d build",
         "start": "react-scripts start",
         "build": "react-scripts build",
         "test": "react-scripts test",

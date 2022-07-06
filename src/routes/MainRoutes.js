@@ -5,7 +5,7 @@ import MainLayout from 'layout/MainLayout';
 import Loadable from 'ui-component/Loadable';
 import Documents from 'views/document/Documents';
 
- 
+
 
 // dashboard routing
 const DashboardDefault = Loadable(lazy(() => import('views/dashboard/Default')));
@@ -28,10 +28,10 @@ const Databackuppage = Loadable(lazy(() => import('views/databackup')));
 const Dataaipage = Loadable(lazy(() => import('views/dataai')));
 const Financereportpage = Loadable(lazy(() => import('views/financereport')));
 const Datavisualpage = Loadable(lazy(() => import('views/datavisual')));
-const Dragonflypage= Loadable(lazy(() => import('views/dragonfly')));
+const Dragonflypage = Loadable(lazy(() => import('views/dragonfly')));
 //const MonitorJob = Loadable(lazy(() => import('views/dataingest/MonitorJob')));
-const CreateflowJob  = Loadable(lazy(() => import('views/dataingest/CreateNewFlow')));
-const EditFlowJob  = Loadable(lazy(() => import('views/dataingest/EditFlowJob')));
+const CreateflowJob = Loadable(lazy(() => import('views/dataingest/CreateNewFlow')));
+const EditFlowJob = Loadable(lazy(() => import('views/dataingest/EditFlowJob')));
 
 //const UploadStorage = Loadable(lazy(() => import('views/objectstore/UploadStorage')));
 const UploadMultiFiles = Loadable(lazy(() => import('views/objectstore/UploadMultiFiles')));
@@ -42,16 +42,16 @@ const RegisterService = Loadable(lazy(() => import('views/registerservice')));
 const LogInfo = Loadable(lazy(() => import('views/dataingest/LogInfo')));
 const Logdetail = Loadable(lazy(() => import('views/dataingest/Logdetail')));
 
- 
-
- 
 
 
 
- 
 
- 
- 
+
+
+
+
+
+
 // ==============================|| MAIN ROUTING ||============================== //
 
 const MainRoutes = {
@@ -139,7 +139,7 @@ const MainRoutes = {
         {
             path: '/dragonfly',
             element: <Dragonflypage />
-        } 
+        }
         ,
         {
             path: '/dataingest/createflowjob',
@@ -158,29 +158,29 @@ const MainRoutes = {
             element: <Logdetail />
         }
         ,
-                {
+        {
             path: '/objectstore/uploadmultifile',
             element: <UploadMultiFiles />
-        } ,
+        },
         {
-            
+
             path: '/datastream/registerstream',
             element: <RegisterStreaming />
-        } ,
+        },
         {
-            
+
             path: '/admin/admindpz',
             element: <AdminPage />
         },
         {
             path: '/register-service',
             element: <RegisterService />
-        } 
+        }
         ,
         {
             path: '/documents',
             element: <Documents />
-        } 
+        }
     ]
 };
 
