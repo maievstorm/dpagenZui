@@ -74,10 +74,12 @@ export default function LogInfo() {
 
     ];
 
-    const onEdittJobClickHandler = (type,selected) => {
-        navigate(type,{state:{id:selected}})
+    const onEdittJobClickHandler = (type, selected) => {
+        navigate(type, { state: { id: selected } })
 
     }
+
+   
     const options = {
         filter: false,
         print: false,
@@ -89,9 +91,7 @@ export default function LogInfo() {
                 <Tooltip title="Xem chi tiết log">
                     <IconButton
                         onClick={() => {
-                            // DagId + '/dagRuns/'+DagrunId 
-
-                            onEdittJobClickHandler('logdagdetail',DagId+'/dagRuns/'+rows[selectedRows.data[0].dataIndex]['dag_run_id']);
+                            onEdittJobClickHandler('logdagdetail', DagId + '/dagRuns/' + rows[selectedRows.data[0].dataIndex]['dag_run_id']);
 
                         }}
 
@@ -100,11 +100,12 @@ export default function LogInfo() {
                     </IconButton>
 
                 </Tooltip>
-                
+
             </>
 
         )
-       
+
+
     };
 
     return (

@@ -23,6 +23,19 @@ const initKeycloak = (onAuthenticatedCallback) => {
     .catch(console.error);
 };
 
+// const initKeycloak = (onAuthenticatedCallback) => {
+//   const token = localStorage.getItem('kc_token');
+//   const refreshToken = localStorage.getItem('kc_refreshToken');
+//   // pass to keycloak init
+//   _kc.init({ onLoad: 'login-required', token, refreshToken }).then(
+//   success=>{
+//     localStorage.setItem('kc_token', _kc.token);
+//     localStorage.setItem('kc_refreshToken', _kc.refreshToken);
+//     onAuthenticatedCallback();
+//   }
+//   )
+// };
+
 const doLogin = _kc.login;
 
 const doLogout = _kc.logout;
