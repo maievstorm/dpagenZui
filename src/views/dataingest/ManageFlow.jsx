@@ -11,6 +11,7 @@ import UserService from 'services/UserService';
 import { Tooltip, IconButton } from '@mui/material';
 
 import RateReviewIcon from '@mui/icons-material/RateReview';
+import { GetProcess } from 'services/DataIngest';
 
 export default function ManageFlow() {
     
@@ -40,11 +41,9 @@ export default function ManageFlow() {
 
     ];
    
-    const getapi='https://dpaapigw.apps.xplat.fis.com.vn/dpzapi/api/v1' + '/invoice/usernamentype/' + UserService.getUsername() + '&airflow';
-    let JWTToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJDTE9PbHdEZ0pPTGpVOHVzMnoySTNyT2pzRkEzNnF6TiJ9.2hsA0NJzwy2YJOeST2JnYJoRIohiJh9SHaKvp9GhgjM';
     useEffect(() => {
-        axios({ method: 'get', url: getapi,  headers: {"authorization" : `Bearer ${JWTToken}`}  }
-        ).then(res => {
+        GetProcess()
+        .then(res => {
             setData(res.data.data.map(item=>{
                 let invoice_created_ts = new Date(Date.parse(item.invoice_created_ts)).toLocaleString()
                 return {
@@ -52,9 +51,7 @@ export default function ManageFlow() {
                     'item_name':item.item_name,
                     'invoice_created_ts':invoice_created_ts
                 }
-
             }));
-            // setData(res.data.data);
         }).catch(err => { console.log(err) })
     }, []);
 
