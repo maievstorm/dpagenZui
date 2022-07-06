@@ -1,8 +1,6 @@
 import { useState, useEffect } from 'react'
 import MUIDataTable from "mui-datatables";
-import axios from 'axios';
-import config from "../../config";
-import UserService from 'services/UserService';
+import { GetProcess } from 'services/DataIngest';
 
 
 
@@ -41,12 +39,11 @@ export default function ManageDwh() {
         }
 
     ];
-    const getairflowapi = config.rootapi + '/invoice/usernamentype/' + UserService.getUsername() + '&dwh';
+  
 
 
     useEffect(() => {
-        axios({ method: 'get', url: getairflowapi }
-        ).then(res => {
+        GetProcess('dwh').then(res => {
             setData(res.data.data.map(item => {
                 let invoice_created_ts = new Date(Date.parse(item.invoice_created_ts)).toLocaleString()
                 return {
