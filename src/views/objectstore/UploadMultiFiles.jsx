@@ -7,10 +7,8 @@ import Button from '@mui/material/Button';
 import CircularProgress from '@mui/material/CircularProgress';
 import { useState, useEffect } from 'react'
 import { useNavigate } from "react-router";
-import MenuItem from '@mui/material/MenuItem';
-import config from "../../config";
-import UserService from "services/UserService";
-import axios from 'axios';
+import MenuItem from '@mui/material/MenuItem'; 
+import { GetProcess } from 'services/DataIngest';
 
 
 
@@ -27,9 +25,9 @@ function UploadMultiFiles(props) {
   const [fileInfos, setFileInfos] = useState([])
   const [loading, setLoading] = useState(false)
   useEffect(() => {
-    const getstorageapi = config.rootapi + '/invoice/usernamentype/' + UserService.getUsername() + '&storage';
+    
 
-    axios.get(getstorageapi)
+    GetProcess('storage')
       .then(res => {
         setownbucket(res.data.data.map(item => {
           return {
