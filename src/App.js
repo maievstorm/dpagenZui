@@ -33,9 +33,9 @@ const App = () => {
             <ThemeProvider theme={themes(customization)}>
                 <CssBaseline />
                 <NavigationScroll>
-                    <RenderOnAuthenticated>
+                    {/* <RenderOnAuthenticated> */}
                         <Routes />
-                    </RenderOnAuthenticated>
+                    {/* </RenderOnAuthenticated> */}
                 </NavigationScroll>
             </ThemeProvider>
         </StyledEngineProvider>

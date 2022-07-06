@@ -13,12 +13,14 @@ import { store } from 'store';
 import 'assets/scss/style.scss';
 
 import UserService from "./services/UserService";
+import config from 'config';
+import reportWebVitals from 'reportWebVitals';
 
 // ==============================|| REACT DOM RENDER  ||============================== //
 
 const renderApp = () => ReactDOM.render(
     <Provider store={store}>
-        <BrowserRouter>
+        <BrowserRouter basename={config.basename}>
             <App />
         </BrowserRouter>
     </Provider>,
@@ -26,5 +28,6 @@ const renderApp = () => ReactDOM.render(
 );
 
 UserService.initKeycloak(renderApp);
+reportWebVitals();
 
 //serviceWorker.register();

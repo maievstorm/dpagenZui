@@ -40,16 +40,7 @@ const RegisterStreaming = Loadable(lazy(() => import('views/datastream/RegisterS
 const AdminPage = Loadable(lazy(() => import('views/admin')));
 const RegisterService = Loadable(lazy(() => import('views/registerservice')));
 const LogInfo = Loadable(lazy(() => import('views/dataingest/LogInfo')));
-const Logdetail = Loadable(lazy(() => import('views/dataingest/Logdetail')));
-
-
-
-
-
-
-
-
-
+const Logdetail = Loadable(lazy(() => import('views/dataingest/Logdetail'))); 
 
 
 // ==============================|| MAIN ROUTING ||============================== //
@@ -58,6 +49,10 @@ const MainRoutes = {
     path: '/',
     element: <MainLayout />,
     children: [
+        {
+            path: '/',
+            element: <DashboardDefault />
+        },
         {
             path: '/',
             element: <DashboardDefault />
@@ -119,7 +114,7 @@ const MainRoutes = {
         {
             path: '/databackup',
             element: <Databackuppage />
-        }
+        } 
         ,
         {
             path: '/dataai',

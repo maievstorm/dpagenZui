@@ -1,8 +1,7 @@
 {
     "name": "dpzui-react",
-    "version": "3.0.1",
+    "version": "3.3.0",
     "private": true,
-    "homepage": "https://dpaportal.apps.xplat.fis.com.vn",
     "dependencies": {
         "@emotion/cache": "^11.4.0",
         "@emotion/react": "^11.4.0",
@@ -47,6 +46,7 @@
         "react-step-wizard": "^5.3.11",
         "react-toastify": "^8.1.0",
         "redux": "^4.0.5",
+        "web-vitals": "^2.1.4",
         "yup": "^0.32.9"
     },
     "scripts": {
