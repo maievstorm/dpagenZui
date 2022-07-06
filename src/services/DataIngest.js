@@ -40,7 +40,7 @@ const Logdetail = async (DagIdnDagrunId) => {
     return response
 }
 
-export const GetProcess = async ()=>{
+export const GetProcess = async (item_type)=>{
     let response
     const router =  '/invoice/usernamentype';
     let JWTToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJDTE9PbHdEZ0pPTGpVOHVzMnoySTNyT2pzRkEzNnF6TiJ9.2hsA0NJzwy2YJOeST2JnYJoRIohiJh9SHaKvp9GhgjM';
@@ -51,7 +51,7 @@ export const GetProcess = async ()=>{
             headers: {"authorization" : `Bearer ${JWTToken}`},
             params: {
                 user_name: UserService.getUsername(),
-                item_type: 'airflow'
+                item_type: item_type
             }
         });
     } catch (err) {

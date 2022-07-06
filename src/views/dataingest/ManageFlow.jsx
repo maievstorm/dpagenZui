@@ -42,7 +42,7 @@ export default function ManageFlow() {
     ];
    
     useEffect(() => {
-        GetProcess()
+        GetProcess('airflow')
         .then(res => {
             setData(res.data.data.map(item=>{
                 let invoice_created_ts = new Date(Date.parse(item.invoice_created_ts)).toLocaleString()
