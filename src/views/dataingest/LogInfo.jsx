@@ -6,6 +6,7 @@ import Box from '@mui/material/Box';
 import MUIDataTable from "mui-datatables";
 import DataIngest from "services/DataIngest";
 import { Tooltip, IconButton } from '@mui/material';
+import RefreshIcon from '@mui/icons-material/Refresh';
 
 import RateReviewIcon from '@mui/icons-material/RateReview';
 export default function LogInfo() {
@@ -14,7 +15,8 @@ export default function LogInfo() {
     const DagId = location?.state?.id
     const [rows, setData] = useState([]);
 
-    useEffect(() => {
+
+    const getData = () => {
         DataIngest.getLoginfo(DagId)
             .then(res => {
                 setData(res.data.dag_runs.map(item => {
@@ -32,6 +34,10 @@ export default function LogInfo() {
                 }))
             })
 
+    }
+
+    useEffect(() => {
+        getData()
     }, [])
 
     const columns = [
@@ -76,16 +82,24 @@ export default function LogInfo() {
 
     const onEdittJobClickHandler = (type, selected) => {
         navigate(type, { state: { id: selected } })
-
     }
 
-   
+    const refresh = () => {
+        getData()
+    }
+
+
     const options = {
         filter: false,
         print: false,
         selectableRows: "single",
         responsive: "standard",
         textLabels: {},
+        customToolbar: () => {
+            return (
+                <IconButton onClick={refresh}>{<RefreshIcon />}</IconButton>
+            )
+        },
         customToolbarSelect: selectedRows => (
             <>
                 <Tooltip title="Xem chi tiết log">
