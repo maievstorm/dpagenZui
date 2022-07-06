@@ -1,0 +1,2 @@
+(this["webpackJsonpdpzui-react"]=this["webpackJsonpdpzui-react"]||[]).push([[31],{1464:function(t,a,c){"use strict";c.r(a);var e=c(71),i=c(116),n=c(1);a.default=function(){return Object(n.jsx)(i.a,{title:"Sao l\u01b0u d\u1eef li\u1ec7u1",children:Object(n.jsx)(e.a,{variant:"body2",children:"abc"})})}}}]);
+//# sourceMappingURL=31.b00ceea8.chunk.js.map
