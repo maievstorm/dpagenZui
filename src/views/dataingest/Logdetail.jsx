@@ -5,6 +5,9 @@ import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import MUIDataTable from "mui-datatables";
 import DataIngest from "services/DataIngest";
+import RefreshIcon from '@mui/icons-material/Refresh';
+import { Tooltip, IconButton } from '@mui/material';
+
 
 export default function Logdetail() {
     const navigate = useNavigate()
@@ -12,7 +15,7 @@ export default function Logdetail() {
     const DagIdnDagrunId = location?.state?.id;
     const [rows, setData] = useState([]);
 
-    useEffect(() => {
+    const getData = () => {
         DataIngest.Logdetail(DagIdnDagrunId)
             .then(res => {
                 
@@ -30,7 +33,16 @@ export default function Logdetail() {
                 }))
             })
 
+    }
+
+    useEffect(() => {
+        getData()
+        
+
     }, [])
+    const refresh = ()=>{
+        getData()
+    }
 
     const columns = [
         {
@@ -80,7 +92,12 @@ export default function Logdetail() {
         selectableRows: "single",
         responsive: "standard",
         textLabels: {},
-        selectableRows: false 
+        customToolbar: () =>{
+            return (
+                <IconButton onClick={refresh}>{<RefreshIcon />}</IconButton>
+            )
+        },
+        selectableRows: 'none' 
        
        
     }; 
