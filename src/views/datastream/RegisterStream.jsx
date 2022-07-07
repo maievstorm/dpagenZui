@@ -51,7 +51,11 @@ const RegisterStreaming = () => {
         ,
         {
             key: 'sqlserver',
-            name: 'Microsof Sql, Azure SQL'
+            name: 'Microsof Sql'
+        }, 
+        {
+            key: 'azuresql',
+            name: 'Azure SQL'
         },
         {
             key: 'oracle',

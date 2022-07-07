@@ -12,9 +12,10 @@ import themes from 'themes';
 
 // project imports
 import NavigationScroll from 'layout/NavigationScroll';
-import RenderOnAuthenticated from 'components/RenderOnAuthenticated';
-import RenderOnAnonymous from 'components/RenderOnAnonymous';
+// import RenderOnAuthenticated from 'components/RenderOnAuthenticated';
+// import RenderOnAnonymous from 'components/RenderOnAnonymous';
 import Welcome from 'components/welcome';
+import UserService from 'services/UserService';
 
 
 
@@ -22,25 +23,77 @@ import Welcome from 'components/welcome';
 
 const App = () => {
     const customization = useSelector((state) => state.customization);
+    // console.log(UserService.ckLoggedIn());
+    // console.log(UserService.isLoggedIn());
+    // console.log(UserService.getToken());
+    
 
-    return (
-        
-       
+
+    // return (
+    //     <StyledEngineProvider injectFirst>
+    //         {
+    //             UserService.isLoggedIn() &&
+    //             console.log('ddddd')&&
+    //             <ThemeProvider theme={themes(customization)}>
+    //                 <CssBaseline />
+    //                 <NavigationScroll>
+    //                     <Routes />
+    //                 </NavigationScroll>
+    //             </ThemeProvider>
+    //         }
+    //         {
+               
+    //             !UserService.isLoggedIn() && 
+    //             <ThemeProvider theme={themes(customization)}>
+    //             <CssBaseline />
+    //             <NavigationScroll>
+    //                 <Welcome />
+    //             </NavigationScroll>
+    //         </ThemeProvider>
+    //         }
+
+    //     </StyledEngineProvider>
+
+    // );
+
+    if (UserService.isLoggedIn())
+    {
+        console.log('yes')
+        return (
         <StyledEngineProvider injectFirst>
-             <RenderOnAnonymous>
-                <Welcome />               
-             </RenderOnAnonymous>
-            <ThemeProvider theme={themes(customization)}>
-                <CssBaseline />
-                <NavigationScroll>
-                    {/* <RenderOnAuthenticated> */}
+               
+                <ThemeProvider theme={themes(customization)}>
+                    <CssBaseline />
+                    <NavigationScroll>
                         <Routes />
-                    {/* </RenderOnAuthenticated> */}
-                </NavigationScroll>
-            </ThemeProvider>
-        </StyledEngineProvider>
-     
-        
-    );
+                    </NavigationScroll>
+                </ThemeProvider>
+            
+            </StyledEngineProvider>
+        )
+
+
+    } else
+    {
+        console.log('no')
+        return (
+            <StyledEngineProvider injectFirst>
+                   
+                    <ThemeProvider theme={themes(customization)}>
+                        <CssBaseline />
+                        <NavigationScroll>
+                            <Welcome />
+                        </NavigationScroll>
+                    </ThemeProvider>
+                
+                </StyledEngineProvider>
+            )
+    }
+
+    
+
+
+
+
 };
 export default App;
