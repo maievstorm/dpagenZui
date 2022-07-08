@@ -12,6 +12,7 @@ import { useNavigate } from "react-router-dom";
 import MainCard from "ui-component/cards/MainCard";
 import { IconButton } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import DataIngest from "services/DataIngest";
 
 
 
@@ -104,11 +105,7 @@ const CreateNewFlow = () => {
     })
       .then(res => {
         if (res.status === 200) {
-          axios({
-            method: 'post',
-            url: config.rootapi + '/invoice',
-            data: invoicebody
-          })
+          DataIngest.CreateInvoiceProcess(invoicebody)
             .then(res => {
               setTimeout(() => {
                 setLoading(false)

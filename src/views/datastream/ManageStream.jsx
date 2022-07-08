@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react'
 import MUIDataTable from "mui-datatables";
-import axios from 'axios';
 import config from "../../config";
 import UserService from 'services/UserService';
 import { useNavigate } from "react-router-dom";
 import Button from '@mui/material/Button';
 import ModeEditIcon from '@mui/icons-material/ModeEdit';
 import AddIcon from '@mui/icons-material/Add';
+import { GetProcess } from 'services/DataIngest';
 
 
 
@@ -38,14 +38,10 @@ export default function ManageStream() {
         }
 
     ];
-    const getairflowapi = config.rootapi + '/invoice/usernamentype/' + UserService.getUsername() + '&stream';
-
+   
     useEffect(() => {
-        axios({ method: 'get', url: 'https://dpaapigw.apps.xplat.fis.com.vn/connectors/connectors', auth: {
-            username: 'hung',
-            password: '123456a@'
-        } }
-        ).then(res => {
+        GetProcess('stream')
+        .then(res => {
             setData(res.data.data.map(item => {
                 let invoice_created_ts = new Date(Date.parse(item.invoice_created_ts)).toLocaleString()
                 return {

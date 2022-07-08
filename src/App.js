@@ -58,7 +58,7 @@ const App = () => {
 
     if (UserService.isLoggedIn())
     {
-        console.log('yes')
+       
         return (
         <StyledEngineProvider injectFirst>
                
@@ -75,7 +75,7 @@ const App = () => {
 
     } else
     {
-        console.log('no')
+       
         return (
             <StyledEngineProvider injectFirst>
                    

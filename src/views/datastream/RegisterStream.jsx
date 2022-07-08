@@ -6,6 +6,7 @@ import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import { TextField, Select, Button } from '@mui/material';
 import MenuItem from '@mui/material/MenuItem';
+import { GetKafkaConnect, GetKafkaConnects ,GetProcess} from 'services/DataIngest';
 
 
 
@@ -52,7 +53,7 @@ const RegisterStreaming = () => {
         {
             key: 'sqlserver',
             name: 'Microsof Sql'
-        }, 
+        },
         {
             key: 'azuresql',
             name: 'Azure SQL'
@@ -71,12 +72,12 @@ const RegisterStreaming = () => {
             key: 'postgres',
             name: 'PostgresSQL'
         }
-    
-    
+
+
     ]
 
- 
-    
+
+
     // const [Streamtarget, setStreamtarget] = useState([
     //     {
     //         tdbtype: '',
@@ -87,7 +88,7 @@ const RegisterStreaming = () => {
     //         tdatabaseuser: '',
     //         tdatabasepassword: '',
     //         ttableincludelist: ''
-    
+
     //     },
     // ])
 
@@ -97,26 +98,26 @@ const RegisterStreaming = () => {
     const sonInputChanged = (event) => {
         const targetName = event.target.name;
         const targetValue = event.target.value;
-    
-        setStreamsource((Streamsource) => ({
-          ...Streamsource,
-          [targetName]: targetValue
-        }));
-      };
 
-      const tonInputChanged = (event) => {
+        setStreamsource((Streamsource) => ({
+            ...Streamsource,
+            [targetName]: targetValue
+        }));
+    };
+
+    const tonInputChanged = (event) => {
         const targetName = event.target.name;
         const targetValue = event.target.value;
-    
+
         setStreamtarget((Streamtarget) => ({
-          ...Streamtarget,
-          [targetName]: targetValue
+            ...Streamtarget,
+            [targetName]: targetValue
         }));
-      };  
-    
+    };
 
 
-  
+
+
 
 
     const submit = (e) => {
@@ -131,14 +132,21 @@ const RegisterStreaming = () => {
             ]
         }
 
-     
+
 
         const body = {
             "conf": { stream },
-          }
-        
-    
-        console.log(JSON.stringify(body))
+        }
+
+
+        console.log(JSON.stringify(body));
+        GetKafkaConnect().then(res => {
+            console.log(res.data)
+        }).catch(err => { console.log(err) })
+
+        GetProcess('airflow').then(res => {
+            console.log(res.data)
+        }).catch(err => { console.log(err) })
 
     }
 
@@ -153,7 +161,7 @@ const RegisterStreaming = () => {
                         label="Tên tiến trình"
                         fullWidth
                         value={Streamsource.tentientrinh}
-                        onChange={sonInputChanged} 
+                        onChange={sonInputChanged}
 
                     />
                     <Grid item xs={3} sm={6} md={6} >
@@ -163,7 +171,7 @@ const RegisterStreaming = () => {
                             size="small"
                             style={divStyle}
                             value={Streamsource.sdbtype}
-                            onChange={sonInputChanged}    
+                            onChange={sonInputChanged}
                         >
 
                             {datatypes.map((datatype) => (
@@ -262,7 +270,7 @@ const RegisterStreaming = () => {
                             size="small"
                             style={divStyle}
                             value={Streamtarget.tdbtype}
-                            onChange={tonInputChanged} 
+                            onChange={tonInputChanged}
                         >
 
                             {datatypes.map((datatype) => (
@@ -284,7 +292,7 @@ const RegisterStreaming = () => {
                             fullWidth
                             style={divStyle}
                             value={Streamtarget.tdatabaseservername}
-                            onChange={tonInputChanged} 
+                            onChange={tonInputChanged}
                         />
                         {/* 2 */}
                         <TextField
@@ -295,7 +303,7 @@ const RegisterStreaming = () => {
                             fullWidth
                             style={divStyle}
                             value={Streamtarget.tdatabasehostname}
-                            onChange={tonInputChanged} 
+                            onChange={tonInputChanged}
                         />
                         {/* 3 */}
                         <TextField
@@ -306,7 +314,7 @@ const RegisterStreaming = () => {
                             fullWidth
                             style={divStyle}
                             value={Streamtarget.tdatabaseport}
-                            onChange={tonInputChanged} 
+                            onChange={tonInputChanged}
                         />
                         {/* 4 */}
                         <TextField
@@ -317,7 +325,7 @@ const RegisterStreaming = () => {
                             fullWidth
                             style={divStyle}
                             value={Streamtarget.tdatabasedbname}
-                            onChange={tonInputChanged} 
+                            onChange={tonInputChanged}
                         />
                         {/* 5 */}
                         <TextField
@@ -328,7 +336,7 @@ const RegisterStreaming = () => {
                             fullWidth
                             style={divStyle}
                             value={Streamtarget.tdatabaseuser}
-                            onChange={tonInputChanged} 
+                            onChange={tonInputChanged}
                         />
                         {/* 6 */}
                         <TextField
@@ -339,7 +347,7 @@ const RegisterStreaming = () => {
                             fullWidth
                             style={divStyle}
                             value={Streamtarget.tdatabasepassword}
-                            onChange={tonInputChanged} 
+                            onChange={tonInputChanged}
                         />
                         {/* 7 */}
                         <TextField
@@ -350,7 +358,7 @@ const RegisterStreaming = () => {
                             fullWidth
                             style={divStyle}
                             value={Streamtarget.ttableincludelist}
-                            onChange={tonInputChanged} 
+                            onChange={tonInputChanged}
                         />
                     </Grid>
 

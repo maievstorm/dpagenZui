@@ -14,6 +14,7 @@ import SaveIcon from '@mui/icons-material/Save';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import LogInfo from "./LogInfo";
 import MainCard from "ui-component/cards/MainCard";
+import DataIngest from "services/DataIngest";
 
 
 export default function EditFlowJob() {
@@ -156,11 +157,8 @@ export default function EditFlowJob() {
         })
             .then(res => {
                 if (res.status === 200) {
-                    axios({
-                        method: 'put',
-                        url: router,
-                        data: data
-                    })
+                    DataIngest.UpdateInvoiceProcess(confInfo.DagId,data);
+                   
                     navigate('/dataingest/', { state: { id: DagId } })
                 }
             })
