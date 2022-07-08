@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
 import MUIDataTable from "mui-datatables";
-import config from "../../config";
-import UserService from 'services/UserService';
+ 
 import { useNavigate } from "react-router-dom";
 import Button from '@mui/material/Button';
 import ModeEditIcon from '@mui/icons-material/ModeEdit';

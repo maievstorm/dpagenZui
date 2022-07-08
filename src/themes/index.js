@@ -51,7 +51,7 @@ export const theme = (customization) => {
 
   
     const themeOption=  {};
-    if(customization.themeMode=='Light')
+    if(customization.themeMode==='Light')
     {
         Object.assign(themeOption, LightTheme);
 

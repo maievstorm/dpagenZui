@@ -6,7 +6,7 @@ import Box from '@mui/material/Box';
 import MUIDataTable from "mui-datatables";
 import DataIngest from "services/DataIngest";
 import RefreshIcon from '@mui/icons-material/Refresh';
-import { Tooltip, IconButton } from '@mui/material';
+import {  IconButton } from '@mui/material';
 
 
 export default function Logdetail() {
@@ -36,8 +36,7 @@ export default function Logdetail() {
     }
 
     useEffect(() => {
-        getData()
-        
+        getData();
 
     }, [])
     const refresh = ()=>{

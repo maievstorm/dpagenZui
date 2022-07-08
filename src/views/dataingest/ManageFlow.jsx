@@ -7,7 +7,6 @@ import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
 import AddIcon from '@mui/icons-material/Add';
 import { useNavigate } from "react-router-dom";
 import Button from '@mui/material/Button';
-import UserService from 'services/UserService';
 import { Tooltip, IconButton } from '@mui/material';
 
 import RateReviewIcon from '@mui/icons-material/RateReview';

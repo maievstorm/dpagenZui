@@ -2,7 +2,6 @@ import { useLocation, useNavigate } from "react-router"
 import ReviewItem from "./stepForm/ReviewItem"
 import config from "../../config";
 import Box from '@mui/material/Box';
-import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import { useEffect, useState } from "react";
 import EditIcon from '@mui/icons-material/Edit';
@@ -12,7 +11,6 @@ import { IconButton } from '@mui/material';
 import UserService from 'services/UserService';
 import SaveIcon from '@mui/icons-material/Save';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import LogInfo from "./LogInfo";
 import MainCard from "ui-component/cards/MainCard";
 import DataIngest from "services/DataIngest";
 

@@ -1,18 +1,20 @@
 import * as React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from "react";
 import { experimentalStyled as styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import { TextField, Select, Button } from '@mui/material';
 import MenuItem from '@mui/material/MenuItem';
-import { GetKafkaConnect, GetKafkaConnects ,GetProcess} from 'services/DataIngest';
+import UserService from 'services/UserService';
+import { getSubcription } from 'services/DataIngest';
+import MainCard from 'ui-component/cards/MainCard';
+
+ 
 
 
 
-// import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
-// import LocalizationProvider from '@mui/lab/LocalizationProvider';
-// import { DatePicker } from '@mui/lab';
+
 
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -31,6 +33,16 @@ const Item = styled(Paper)(({ theme }) => ({
 
 
 const RegisterStreaming = () => {
+
+
+    const [subscription_id, setSubscription_id] = useState([]);
+    useEffect(() => {
+        getSubcription()
+          .then(res => {
+            setSubscription_id(res.data.data)
+          })
+          .catch(error => console.log(error))
+      }, []);
 
     const divStyle = {
         marginTop: '10px',
@@ -114,10 +126,7 @@ const RegisterStreaming = () => {
             [targetName]: targetValue
         }));
     };
-
-
-
-
+    
 
 
     const submit = (e) => {
@@ -140,26 +149,65 @@ const RegisterStreaming = () => {
 
 
         console.log(JSON.stringify(body));
-         
+        const invoicebody =
+        {
+            "item_name": Streamsource.tentientrinh,
+            "item_type": 'stream',
+            "customer_invoice_data": JSON.stringify(body),
+            "subscription_id": Streamsource.subscription_id,
+            "plan_history_id": 1,
+            "invoice_period_start_date": new Date().toLocaleString() + '',
+            "invoice_period_end_date": new Date().toLocaleString() + '',
+            "invoice_description": Streamsource.tentientrinh,
+            "invoice_amount": 100,
+            "invoice_created_ts": new Date().toLocaleString() + '',
+            "invoice_due_ts": new Date().toLocaleString() + '',
+            "invoice_paid_ts": new Date().toLocaleString() + ''
+        }
+
+        console.log(JSON.stringify(invoicebody));
+
 
     }
 
     return (
-        <div>
+        <MainCard>
             <Box sx={{ flexGrow: 1 }}>
                 <Grid container spacing={{ xs: 2, md: 2 }} columns={{ sm: 6, md: 12 }} style={divStyle}>
+                <Grid item xs={3} sm={6} md={6} >
+                 <strong>Chọn subcripttion: </strong>   <Select id="subscription_id" name='subscription_id'
+                        size="small"
+                        style={divStyle}
+                        headername={'Subscription id'}
+                        onChange={sonInputChanged}
+                    >
+
+                        {subscription_id.map((scheduletype) => (
+                            <MenuItem
+                                key={scheduletype.subscription_id}
+                                value={scheduletype.subscription_id}
+                            >
+                                {scheduletype.subscription_id}
+                            </MenuItem>
+                        ))}
+
+                    </Select>
+                </Grid>
+                <Grid item xs={3} sm={6} md={6} >
                     <TextField
                         type="text"
                         name="tentientrinh"
                         id="tentientrinh"
                         label="Tên tiến trình"
                         fullWidth
-                        value={Streamsource.tentientrinh}
+                        value={UserService.getUsername()+'_'+Streamsource.tentientrinh}
                         onChange={sonInputChanged}
+                        style={divStyle}
 
                     />
+                    </Grid>  
                     <Grid item xs={3} sm={6} md={6} >
-                        <Item style={divStyle} >Nguồn</Item>
+                        <Item style={divStyle} ><strong>Nguồn</strong></Item>
                         <strong>Loại CSDL Nguồn: </strong>
                         <Select name='sdbtype'
                             size="small"
@@ -258,7 +306,7 @@ const RegisterStreaming = () => {
 
                     </Grid>
                     <Grid item xs={3} sm={6} md={6} >
-                        <Item style={divStyle}>Đích</Item>
+                        <Item style={divStyle}><strong>Đích</strong></Item>
                         <strong>Loại CSDL Đích: </strong>
                         <Select name='tdbtype'
                             size="small"
@@ -361,7 +409,7 @@ const RegisterStreaming = () => {
                 <Button onClick={submit}>Tạo Tiến Trình</Button>
             </Box>
 
-        </div>
+        </MainCard>
     )
 }
 

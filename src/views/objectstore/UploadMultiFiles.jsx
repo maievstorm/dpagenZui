@@ -20,9 +20,9 @@ function UploadMultiFiles(props) {
   const navigate = useNavigate()
   const [selectedFiles, setSelectedFiles] = useState()
   const [progressInfos, setProgressInfos] = useState([])
-  const [message, setMessage] = useState([])
+  //const [message, setMessage] = useState([])
 
-  const [fileInfos, setFileInfos] = useState([])
+  //const [fileInfos, setFileInfos] = useState([])
   const [loading, setLoading] = useState(false)
   useEffect(() => {
     
@@ -38,14 +38,7 @@ function UploadMultiFiles(props) {
   }, []);
 
 
-
-  // componentDidMount() {
-  //   UploadService.getFiles().then((response) => {
-  //     this.setState({
-  //       fileInfos: response.data,
-  //     });
-  //   });
-  // }
+ 
   const onInputChanged = (event) => {
     const targetValue = event.target.value;
     setBucketSelect(targetValue)
@@ -59,40 +52,8 @@ function UploadMultiFiles(props) {
   const upload = (idx, file) => {
     //let _progressInfos = [...progressInfos];
 
-    UploadService.upload(file, bucketSelect
-      // , (event) => {
-      // _progressInfos[idx].percentage = Math.round((100 * event.loaded) / event.total);
-      // this.setState({
-      //   _progressInfos,
-      // });
-      //  }
-    )
-    // .then((response) => {
-    //   this.setState((prev) => {
-    //     let nextMessage = [...prev.message, "Uploaded the file successfully: " + file.name];
-    //     return {
-    //       message: nextMessage
-    //     };
-    //   });
-    //   return console.log("ok")
-
-    //   // return UploadService.getFiles();
-    // })
-    // .then((files) => {
-    //   this.setState({
-    //     fileInfos: files.data,
-    //   });
-    // })
-    // .catch(() => {
-    //   _progressInfos[idx].percentage = 0;
-    //   this.setState((prev) => {
-    //     let nextMessage = [...prev.message, "Could not upload the file: " + file.name];
-    //     return {
-    //       progressInfos: _progressInfos,
-    //       message: nextMessage
-    //     };
-    //   });
-    // });
+    UploadService.upload(file, bucketSelect )
+    
   }
 
   const uploadFiles = () => {
@@ -173,7 +134,7 @@ function UploadMultiFiles(props) {
         <div className="col-4">
           <Button
             className="btn btn-success btn-sm"
-            disabled={(!selectedFiles) || (bucketSelect.length == 0)}
+            disabled={(!selectedFiles) || (bucketSelect.length === 0)}
             onClick={uploadFiles}
           >
             Tải lên
@@ -181,7 +142,7 @@ function UploadMultiFiles(props) {
         </div>
       </Box>
 
-      {message.length > 0 && (
+      {/* {message.length > 0 && (
         <div className="alert alert-secondary" role="alert">
           <ul>
             {message.map((item, i) => {
@@ -189,17 +150,17 @@ function UploadMultiFiles(props) {
             })}
           </ul>
         </div>
-      )}
+      )} */}
 
       <div className="card">
         <div className="card-header"></div>
         <ul className="list-group list-group-flush">
-          {fileInfos &&
+          {/* {fileInfos &&
             fileInfos.map((file, index) => (
               <li className="list-group-item" key={index}>
                 <a href={file.url}>{file.name}</a>
               </li>
-            ))}
+            ))} */}
         </ul>
       </div>
       <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '80px' }}>
