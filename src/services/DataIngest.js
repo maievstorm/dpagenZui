@@ -94,9 +94,9 @@ export const UpdateInvoiceProcess = async (item_name,body)=>{
     return response
 }
 
-export const GetKafkaConnect = async ()=>{
+export const GetKafkaConnectors = async ()=>{
     let response
-    const router =  'https://dpaapigw.apps.xplat.fis.com.vn/dpzapipub/api/v1/kafka/connectorstatus';
+    const router =  'https://dpaapigw.apps.xplat.fis.com.vn/dpzapipub/api/v1/kafka/connector';
     try {
         response = await axios({
             method: 'get',
@@ -114,13 +114,35 @@ export const GetKafkaConnect = async ()=>{
 }
 
 
-export const GetKafkaConnects = async ()=>{
+export const GetKafkaConnector = async (connectorname)=>{
     let response
-    const router =  'https://streamdpa.apps.xplat.fis.com.vn/connectors';
+    const router =  '/kafka/connector';
     try {
-        response = await axios({
+        response = await BaseAxios({
             method: 'get',
             url: router,
+            headers: {"Authorization": `Bearer ${UserService.getToken()}`},
+            params: {
+                connector:connectorname
+            }
+        });
+    } catch (err) {
+        console.log(err);
+    }
+    return response
+}
+
+export const pauseKafkaConnector = async (connectorname)=>{
+    let response
+    const router =  '/kafka/pauseconnector';
+    try {
+        response = await BaseAxios({
+            method: 'put',
+            url: router,
+            headers: {"Authorization": `Bearer ${UserService.getToken()}`},
+            params: {
+                connector:connectorname
+            }
         });
     } catch (err) {
         console.log(err);
@@ -129,7 +151,42 @@ export const GetKafkaConnects = async ()=>{
 }
 
 
-//
+export const restarKafkaConnector = async (connectorname)=>{
+    let response
+    const router =  '/kafka/restartconnector';
+    try {
+        response = await BaseAxios({
+            method: 'post',
+            url: router,
+            headers: {"Authorization": `Bearer ${UserService.getToken()}`},
+            params: {
+                connector:connectorname
+            }
+        });
+    } catch (err) {
+        console.log(err);
+    }
+    return response
+}
+
+export const createKafkaConnector = async (body)=>{
+    let response
+    const router =  '/kafka/createkafkaconnector';
+    try {
+        response = await BaseAxios({
+            method: 'post',
+            url: router,
+            headers: {"Authorization": `Bearer ${UserService.getToken()}`},
+            body:body  
+        });
+    } catch (err) {
+        console.log(err);
+    }
+    return response
+}
+
+
+
 
 
 
@@ -138,8 +195,11 @@ const DataIngest = {
     Logdetail,
     CreateInvoiceProcess,
     UpdateInvoiceProcess,
-    GetKafkaConnect,
-    GetKafkaConnects
+    GetKafkaConnector,
+    pauseKafkaConnector,
+    restarKafkaConnector,
+    createKafkaConnector
+    
 
 };
 

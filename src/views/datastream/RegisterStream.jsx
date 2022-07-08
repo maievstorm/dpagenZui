@@ -140,13 +140,7 @@ const RegisterStreaming = () => {
 
 
         console.log(JSON.stringify(body));
-        GetKafkaConnect().then(res => {
-            console.log(res.data)
-        }).catch(err => { console.log(err) })
-
-        GetProcess('airflow').then(res => {
-            console.log(res.data)
-        }).catch(err => { console.log(err) })
+         
 
     }
 
