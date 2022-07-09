@@ -65,30 +65,31 @@ const hasRole = (roles) => roles.some((role) => _kc.hasRealmRole(role));
 const listroles = () => _kc.tokenParsed?.realm_access;
 
 
-const applyService = async (data) => {
-  try {
-    await BaseAxios({
-      method: 'post',
-      url: '/requestsub',
-      data: data
-    });
-  } catch (err) {
-    console.log(err);
-  }
-}
+// const applyService = async (data) => {
+//   try {
+//     await BaseAxios({
+//       method: 'post',
+//       url: '/requestsub',
+//       data: data
+//     });
+//   } catch (err) {
+//     console.log(err);
+//   }
+// }
 
-const getOffer = async () => {
-  let response
-  try {
-    response = await BaseAxios({
-      method: 'get',
-      url: '/offer',
-    });
-  } catch (err) {
-    console.log(err);
-  }
-  return response
-}
+// const getOffer = async () => {
+//   let response
+//   try {
+//     response = await BaseAxios({
+//       method: 'get',
+//       url: '/prerequisite/offerandplan',
+//       headers: { "Authorization": `Bearer ${_kc.token()}` },
+//     });
+//   } catch (err) {
+//     console.log(err);
+//   }
+//   return response
+// }
 
 
 const UserService = {
@@ -101,8 +102,8 @@ const UserService = {
   getUsername,
   hasRole,
   listroles,
-  applyService,
-  getOffer,
+  // applyService,
+  // getOffer,
   ckLoggedIn
 };
 
