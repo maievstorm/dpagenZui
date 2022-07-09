@@ -27,7 +27,7 @@ const CreateNewFlow = () => {
   const steps = ['Đăng ký tiến trình', 'Đăng ký CSDL', 'Tạo truy vấn tổng hợp', 'Xác nhận thông tin', 'Hoàn thành'];
 
   const [stepWizard, setStepWizard] = useState(null);
-  const [user, setUser] = useState({});
+ // const [user, setUser] = useState({});
   const [activeStep, setActiveStep] = useState(0);
   const [daginfo, setDagInfo] = useState({})
   const [formSrcFields, setFormSrcFields] = useState()
