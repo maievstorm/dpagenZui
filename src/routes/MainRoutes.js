@@ -41,6 +41,9 @@ const AdminPage = Loadable(lazy(() => import('views/admin')));
 const RegisterService = Loadable(lazy(() => import('views/registerservice')));
 const LogInfo = Loadable(lazy(() => import('views/dataingest/LogInfo')));
 const Logdetail = Loadable(lazy(() => import('views/dataingest/Logdetail'))); 
+const OrderDetail = Loadable(lazy(() => import('views/registerservice/OfferDetail'))); 
+
+
 
 
 // ==============================|| MAIN ROUTING ||============================== //
@@ -168,8 +171,13 @@ const MainRoutes = {
             element: <AdminPage />
         },
         {
-            path: '/register-service',
+            path: '/registerservice',
             element: <RegisterService />
+        }
+        ,
+        {
+            path: '/registerservice/offerdetail',
+            element: <OrderDetail />
         }
         ,
         {

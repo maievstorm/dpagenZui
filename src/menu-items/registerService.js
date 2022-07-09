@@ -22,7 +22,7 @@ const registerService = {
             id: 'util-typography',
             title: 'Đăng ký tài nguyên',
             type: 'item',
-            url: '/register-service',
+            url: '/registerservice',
             icon: icons.IconSquarePlus,
             breadcrumbs: true
         }

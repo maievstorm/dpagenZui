@@ -80,6 +80,14 @@ export default function ManageSubscription() {
             label: 'Ngày yêu cầu'
         },
         {
+            name: "request_type",
+            options: {
+                filter: false
+            },
+            label: 'Loại yêu cầu'
+        }
+        ,
+        {
             name: "request_status",
             options: {
                 filter: false
@@ -105,7 +113,8 @@ export default function ManageSubscription() {
                     'offer_id': item.offer_id,
                     'plan_id': item.plan_id,
                     'request_date': item.request_date,
-                    'request_status': item.request_status
+                    'request_status': item.request_status,
+                    'request_type': item.request_type,
                 }
 
             }));
@@ -152,10 +161,19 @@ export default function ManageSubscription() {
     //     ]
     // }
 
+
+       
+
     const [loading, setLoading] = React.useState(true);
 
-    const createuserandsub = (first_name, last_name, user_name, password, email, current_plan_id, offer_id, requestsub_id) => {
+    const createuserandsub = (account_id,first_name, last_name, user_name, password, email, current_plan_id, offer_id, requestsub_id,request_type) => {
 
+        const date = new Date();
+
+        const year = date.getFullYear();
+        const month = date.getMonth();
+        const day = date.getDate();
+       
         const ingroup = [{
             "time_added": new Date().toLocaleString() + '',
             "time_removed": null,
@@ -170,49 +188,71 @@ export default function ManageSubscription() {
                 "current_plan_id": current_plan_id,
                 "offer_id": offer_id,
                 "offer_start_date": new Date().toLocaleString() + '',
-                "offer_end_date": null,
+                "offer_end_date": new Date(year + 1, month, day).toLocaleString()+ '',
                 "date_subscribed": new Date().toLocaleString() + '',
-                "valid_to": null,
+                "valid_to": new Date(year + 1, month, day).toLocaleString()+ '',
                 "date_unsubscribed": null,
                 "insert_ts": new Date().toLocaleString() + '',
-                "requestsub_id": null,
+                "requestsub_id": requestsub_id,
 
 
             }
         ];
 
-        const bodycreate = {
+      console.log(request_type)
+        if(request_type==1)
+        {
+            const bodycreate = {
 
-            "user_group_type_id": 10,
-            "customer_invoice_data": "",
-            "insert_ts": new Date().toLocaleString() + '',
-            "first_name": first_name,
-            "last_name": last_name,
-            "user_name": user_name,
-            "password": password,
-            "email": email,
-            "confirmation_code": "9",
-            "confirmation_time": new Date().toLocaleString() + '',
-            "insert_ts": new Date().toLocaleString() + '',
-            "ingroup": ingroup,
-            "subscription": subscription,
-            "requestsub_id": requestsub_id
+                "user_group_type_id": 10,
+                "customer_invoice_data": user_name+' With offer '+ offer_id,
+                "insert_ts": new Date().toLocaleString() + '',
+                "account_id": account_id,
+                "ingroup": ingroup,
+                "subscription": subscription,
+                "requestsub_id": requestsub_id
+    
+            };
+            console.log(JSON.stringify(bodycreate));
+            axios({
+                method: 'post',
+                url: config.rootapi + '/subscription/creategroupsub',
+                data: bodycreate
+              })
+                .then(res => {
+                    console.log(res)
+                  setTimeout(() => {
+                    setLoading(false) 
+                  }, 5000);
+    
+                })
+                .catch(err => console.log(err))
 
-        };
-        console.log(JSON.stringify(bodycreate));
-        axios({
-            method: 'post',
-            url: config.rootapi + '/subscription/user',
-            data: bodycreate
-          })
-            .then(res => {
-                console.log(res)
-              setTimeout(() => {
-                setLoading(false) 
-              }, 5000);
 
-            })
-            .catch(err => console.log(err))
+        }
+        else {
+            // bodycreate = {
+            //     "user_group_type_id": 10,
+            //     "customer_invoice_data": "",
+            //     "insert_ts": new Date().toLocaleString() + '',
+            //     "first_name": first_name,
+            //     "last_name": last_name,
+            //     "user_name": user_name,
+            //     "password": password,
+            //     "email": email,
+            //     "confirmation_code": "9",
+            //     "confirmation_time": new Date().toLocaleString() + '',
+            //     "insert_ts": new Date().toLocaleString() + '',
+            //     "ingroup": ingroup,
+            //     "subscription": subscription,
+            //     "requestsub_id": requestsub_id
+    
+            // };
+            console.log('aaa');
+          
+        }
+
+        
 
 
     }
@@ -229,6 +269,7 @@ export default function ManageSubscription() {
                     <IconButton
                         onClick={() => {
                             createuserandsub(
+                                rows[selectedRows.data[0].dataIndex]['user_account_id'],
                                 rows[selectedRows.data[0].dataIndex]['fullname'],
                                 rows[selectedRows.data[0].dataIndex]['fullname'],
                                 rows[selectedRows.data[0].dataIndex]['user_name'],
@@ -236,7 +277,8 @@ export default function ManageSubscription() {
                                 rows[selectedRows.data[0].dataIndex]['upassword'],
                                 rows[selectedRows.data[0].dataIndex]['plan_id'],
                                 rows[selectedRows.data[0].dataIndex]['offer_id'],
-                                rows[selectedRows.data[0].dataIndex]['id']
+                                rows[selectedRows.data[0].dataIndex]['id'],
+                                rows[selectedRows.data[0].dataIndex]['request_type']
                             );
 
 

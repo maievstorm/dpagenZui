@@ -30,14 +30,25 @@ const applyService = async (data) => {
     return response
   }
 
-
-
-
+  const getUserinfo = async () => {
+    let response
+    try {
+      response = await BaseAxios({
+        method: 'get',
+        url: '/useraccount/accountbyusername/'+UserService.getUsername(),
+        headers: { "Authorization": `Bearer ${UserService.getToken()}` },
+      });
+    } catch (err) {
+      console.log(err);
+    }
+    return response
+  }
 
 
 const OfferPlanService = {
     applyService,
-    getOffer
+    getOffer,
+    getUserinfo
     
 
 

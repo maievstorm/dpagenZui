@@ -9,13 +9,13 @@ import CardContent from '@mui/material/CardContent';
 import CardHeader from '@mui/material/CardHeader';
 import Button from '@mui/material/Button';
 import Link from '@mui/material/Link';
+import { useNavigate } from "react-router"
 import Switch from '@mui/material/Switch';
 import { useEffect, useState } from 'react';
 import OfferPlanService from 'services/OfferPlanService';
 
 const useStyles = makeStyles((theme) => ({
     section: {
-        backgroundImage: 'url("nereus-assets/img/bg/pattern1.png")',
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'cover',
     },
@@ -24,9 +24,9 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function ListProductPrice(props) {
+export default function ListProductPrice() {
     const classes = useStyles();
-    const [offerList, setOfferId] = useState([])
+    const navigate = useNavigate()
     const [listOffer, setListOffer] = useState([])
     useEffect(() => {
         OfferPlanService.getOffer()
@@ -38,18 +38,20 @@ export default function ListProductPrice(props) {
 
    
 
-    const [state, setState] = React.useState({
-        checkbox: true,
-    });
+    // const [state, setState] = React.useState({
+    //     checkbox: true,
+    // });
 
-    const handleChange = (event) => {
-        setState({ ...state, checkbox: event.target.checked });
-    };
+    // const handleChange = (event) => {
+    //     setState({ ...state, checkbox: event.target.checked });
+    // };
 
-    const onClickHander = (offerid) => {
-         console.log(offerid) 
+    const onClickHander = (type,offerid) => {
+         
+         navigate(type, { state: { id: offerid } })
 
     }
+
 
     return (
         <section className={classes.section}>
@@ -65,9 +67,9 @@ export default function ListProductPrice(props) {
                             <Typography variant="subtitle1" color="textSecondary" paragraph={true}>mô tả các thứ</Typography>
 
                             <div>
-                                <Typography variant="subtitle1" component="span">Thang</Typography>
+                                {/* <Typography variant="subtitle1" component="span">Thang</Typography>
                                 &nbsp; <Switch name="checkbox" color="primary" checked={state.checkbox} onChange={handleChange} /> &nbsp;
-                                <Typography variant="subtitle1" component="span">Nam</Typography>
+                                <Typography variant="subtitle1" component="span">Nam</Typography> */}
                             </div>
                         </Container>
                     </Box>
@@ -94,7 +96,7 @@ export default function ListProductPrice(props) {
                                         <Button name={offer.offer_id} 
                                         variant="outlined" 
                                         color="primary" 
-                                        className={classes.primaryAction} onClick={()=>onClickHander(offer.offer_id)}>Lua chon chung toi</Button>
+                                        className={classes.primaryAction} onClick={()=>onClickHander('offerdetail',offer.offer_id)}>Lua chon chung toi</Button>
                                         <Box mt={2}>
                                             <Link href="#" color="primary">tim hieu them</Link>
                                         </Box>
