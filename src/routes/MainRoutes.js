@@ -42,6 +42,10 @@ const RegisterService = Loadable(lazy(() => import('views/registerservice')));
 const LogInfo = Loadable(lazy(() => import('views/dataingest/LogInfo')));
 const Logdetail = Loadable(lazy(() => import('views/dataingest/Logdetail'))); 
 const OrderDetail = Loadable(lazy(() => import('views/registerservice/OfferDetail'))); 
+const Mysubscription = Loadable(lazy(() => import('views/registerservice/Mysubscription'))); 
+
+
+
 
 
 
@@ -178,6 +182,10 @@ const MainRoutes = {
         {
             path: '/registerservice/offerdetail',
             element: <OrderDetail />
+        },
+        {
+            path: '/mysubscription',
+            element: <Mysubscription />
         }
         ,
         {

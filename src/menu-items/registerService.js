@@ -15,12 +15,20 @@ const icons = {
 
 const registerService = {
     id: 'registerService',
-    title: 'Mở rộng',
+    title: 'Quản lý tài nguyên',
     type: 'group',
     children: [
         {
+            id: 'mysubscription',
+            title: 'Tài nguyên',
+            type: 'item',
+            url: '/mysubscription',
+            icon: icons.IconSquarePlus,
+            breadcrumbs: true
+        },
+        {
             id: 'util-typography',
-            title: 'Đăng ký tài nguyên',
+            title: 'Đăng ký',
             type: 'item',
             url: '/registerservice',
             icon: icons.IconSquarePlus,
