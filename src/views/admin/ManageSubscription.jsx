@@ -194,6 +194,7 @@ export default function ManageSubscription() {
                 "date_unsubscribed": null,
                 "insert_ts": new Date().toLocaleString() + '',
                 "requestsub_id": requestsub_id,
+                "subscription_name" :'Thuê bao '+ user_name+ ' plan ' +current_plan_id+' offer ' +offer_id +' '+new Date().toLocaleString() + ''
 
 
             }

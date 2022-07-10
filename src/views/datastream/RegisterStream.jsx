@@ -182,12 +182,12 @@ const RegisterStreaming = () => {
                         onChange={sonInputChanged}
                     >
 
-                        {subscription_id.map((scheduletype) => (
+                        {subscription_id.map((sub) => (
                             <MenuItem
-                                key={scheduletype.subscription_id}
-                                value={scheduletype.subscription_id}
+                                key={sub.subscription_id}
+                                value={sub.subscription_id}
                             >
-                                {scheduletype.subscription_id}
+                                {sub.subscription_name}
                             </MenuItem>
                         ))}
 
