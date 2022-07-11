@@ -200,6 +200,79 @@ export default function ManageSubscription() {
             }
         ];
 
+        const bodydwh={
+            host: 'pgdbconfg-postgresql',
+            port: '5432',
+            user: 'postgres',
+            password: 'fAYkndBMnj',
+            database: 'dpacrawlconf',
+        }
+
+        const bodybigdata={
+            host: 'pgdbconfg-postgresql',
+            port: '5432',
+            user: 'postgres',
+            password: 'fAYkndBMnj',
+            database: 'dpacrawlconf',
+        }
+
+        const bodystorage={
+            host: 'pgdbconfg-postgresql',
+            port: '5432',
+            user: 'postgres',
+            password: 'fAYkndBMnj',
+            database: 'dpacrawlconf',
+        }
+
+
+        const invoicebodybigdata =
+        {
+          "item_name": user_name+'bigdata',
+          "item_type": 'bigdata',
+          "customer_invoice_data": JSON.stringify(bodybigdata),
+          "subscription_id": 1,
+          "plan_history_id": 1,
+          "invoice_period_start_date": new Date().toLocaleString() + '',
+          "invoice_period_end_date": new Date().toLocaleString() + '',
+          "invoice_description": user_name+'bigdata',
+          "invoice_amount": 100,
+          "invoice_created_ts": new Date().toLocaleString() + '',
+          "invoice_due_ts": new Date().toLocaleString() + '',
+          "invoice_paid_ts": new Date().toLocaleString() + ''
+        }
+
+        const invoicebodystorage =
+        {
+          "item_name": user_name+'bigdata',
+          "item_type": 'bigdata',
+          "customer_invoice_data": JSON.stringify(bodystorage),
+          "subscription_id": 1,
+          "plan_history_id": 1,
+          "invoice_period_start_date": new Date().toLocaleString() + '',
+          "invoice_period_end_date": new Date().toLocaleString() + '',
+          "invoice_description": user_name+'bigdata',
+          "invoice_amount": 100,
+          "invoice_created_ts": new Date().toLocaleString() + '',
+          "invoice_due_ts": new Date().toLocaleString() + '',
+          "invoice_paid_ts": new Date().toLocaleString() + ''
+        }
+
+        const invoicebodydwh =
+        {
+          "item_name": user_name+'bigdata',
+          "item_type": 'bigdata',
+          "customer_invoice_data": JSON.stringify(bodydwh),
+          "subscription_id": 1,
+          "plan_history_id": 1,
+          "invoice_period_start_date": new Date().toLocaleString() + '',
+          "invoice_period_end_date": new Date().toLocaleString() + '',
+          "invoice_description": user_name+'bigdata',
+          "invoice_amount": 100,
+          "invoice_created_ts": new Date().toLocaleString() + '',
+          "invoice_due_ts": new Date().toLocaleString() + '',
+          "invoice_paid_ts": new Date().toLocaleString() + ''
+        }
+
       console.log(request_type)
         if(request_type==1)
         {
