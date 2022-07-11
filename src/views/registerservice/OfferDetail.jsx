@@ -4,6 +4,12 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import Button from '@mui/material/Button';
 import OfferPlanService from 'services/OfferPlanService';
 import UserService from "services/UserService";
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardHeader from '@mui/material/CardHeader';
 
 
 
@@ -47,7 +53,7 @@ export default function OrderDetail() {
     console.log(OfferSelected.offer_name);
 
     const submit = () => {
-  
+
         let today = new Date()
         let data = {
             user_account_id: userinfo.id,
@@ -64,6 +70,8 @@ export default function OrderDetail() {
         console.log(data);
 
         OfferPlanService.applyService(data);
+        navigate('/registerservice');
+
 
     }
 
@@ -74,14 +82,40 @@ export default function OrderDetail() {
 
     return (
         <>
+           
+            
+
+
+            <Grid item xs={12} md={4}>
+                <Card variant="outlined">
+                    <CardHeader title={OfferSelected.offer_name} key={OfferSelected.offer_name} ></CardHeader>
+                    <CardContent>
+                        <Box px={1}>
+
+                            {OfferSelected.description}
+                            {/* {OfferSelected.description.split('|').map(line => (
+                                                <Typography color="textSecondary" variant="subtitle1" component="p" key={line}>
+                                                    {line}
+                                                </Typography>
+                                            ))} */}
+
+                            <Typography variant="h3" component="h2" gutterBottom={true}>
+                                {OfferSelected.current_price}
+                                <Typography variant="h6" color="textSecondary" component="span">Tr.VND/Tháng</Typography>
+                            </Typography>
+
+                        </Box>
+
+                    </CardContent>
+                </Card>
+            </Grid>
+
             <Button onClick={() => BacktoOffer()} >{<ArrowBackIcon />}</Button>
-            {OfferId}
-            {OfferSelected.offer_name}
 
             <Button name={OfferSelected.offer_id}
                 variant="outlined"
                 color="primary"
-               onClick={() => submit()}>Lua chon chung toi</Button>
+                onClick={() => submit()}>Đăng ký</Button>
 
         </>
 
