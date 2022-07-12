@@ -5,6 +5,7 @@ import axios from 'axios';
 import config from "../../config";
 import { Tooltip, IconButton } from '@mui/material';
 import PersonAddAltOutlinedIcon from '@mui/icons-material/PersonAddAltOutlined';
+import { CreateInvoiceProcess } from 'services/DataIngest';
  
 
 
@@ -210,8 +211,8 @@ export default function ManageSubscription() {
 
         const bodybigdata={
             host: '10.14.222.186:8020/warehouse/tablespace/managed/hive',
-            user: 'trinhhk',
-            password: 'trinhhk',
+            user: user_name,
+            password: password,
             database: 'cdp_cn.db',
         }
 
@@ -292,6 +293,10 @@ export default function ManageSubscription() {
               })
                 .then(res => {
                     console.log(res)
+                    CreateInvoiceProcess(invoicebodybigdata)
+                    CreateInvoiceProcess(invoicebodystorage)
+                    CreateInvoiceProcess(invoicebodydwh)
+
                   setTimeout(() => {
                     setLoading(false) 
                   }, 5000);
