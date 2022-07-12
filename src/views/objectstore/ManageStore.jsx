@@ -34,12 +34,12 @@ export default function ManageStore() {
                     }
                 })
                 setownbucket(data)
-                setbucketname(data[0].name)
+                setbucketname(data[0]?.name)
               //  getBuckets(data[0].name)
-                getBuckets(data[0])
+                getBuckets(data[0]?.name,data[0]?.storagekey)
 
                 setselectedbucket(data[0])
-                setstoragekey(data[0].storagekey)
+                setstoragekey(data[0]?.storagekey)
                 
             }).catch(err => { console.log(err) })
     }, []);
@@ -47,61 +47,23 @@ export default function ManageStore() {
 
     const onInputChanged = (event) => {
         const targetValue = event.target.value;
-        getBuckets(ownbucket.filter((bucket)=>bucket.id===targetValue)[0]);
+        let res = ownbucket.filter((bucket)=>bucket.id===targetValue)[0]
+        getBuckets(targetValue,res?.storagekey);
         setbucketname(targetValue);
-        //setstoragekey(ownbucket.filter((bucket)=>bucket.id===targetValue)[0].storagekey);
-        
-         
-
+    
     };
   
 
-    // const getBuckets = (targetValue) => {
-    //     // create the client
-
-    //     const fileObj = []
 
 
-    //     try {
-    //         const stream = DpzStorageConf.listObjects(targetValue, '', true);
-
-    //         stream.on('data', function (obj) { fileObj.push(obj) });
-    //         stream.on("end", function () {
-    //             let data = JSON.parse(JSON.stringify(fileObj))
-    //             let newData = data.map(item => {
-    //                 let lastModified = new Date(Date.parse(item.lastModified)).toLocaleString()
-
-    //                 return {
-    //                     'etag': item.item,
-    //                     'lastModified': lastModified,
-    //                     'name': item.name,
-    //                     'size': item.size
-    //                 }
-    //             })
-    //             // data.lastModified = data.lastModified.map(item =>{
-    //             //     return new Date(Date.parse(item)).toLocaleString()
-    //             // })
-    //             setData(newData);
-    //         });
-    //         stream.on('error', function (err) { console.log(err) });
-
-    //     }
-    //     catch (e) {
-    //         console.log(e)
-    //     }
-
-    // };
-
-    const getBuckets = (targetValue) => {
+    const getBuckets = (targetValue,defaultStorageKey) => {
         // create the client
 
         
         const fileObj = []
 
-       // setstoragekey= ownbucket.filter((bucket)=>bucket.id===targetValue)[0].storagekey
-       const key = JSON.stringify(targetValue.storagekey)
-       const key2 =eval(key)
-       console.log(key2)
+       const storagekey = JSON.parse(defaultStorageKey)
+       console.log(storagekey?.accessKey,storagekey?.secretKey)
       
 
       
@@ -109,9 +71,9 @@ export default function ManageStore() {
     //console.log(ownbucket.filter((bucket)=>bucket.id===targetValue)[0].storagekey)
 
         try {
-            DpzStorageConf('naQrl3yAjoue8o22', 'A0d6ZmTAbcVrhgTorNzCFBddtAWUjruP')
+            DpzStorageConf(storagekey?.accessKey,storagekey?.secretKey)
                 .then(storage => {
-                    const stream = storage.listObjects(targetValue.name, '', true);
+                    const stream = storage.listObjects(targetValue, '', true);
 
                     stream.on('data', function (obj) { fileObj.push(obj) });
                     stream.on("end", function () {
