@@ -17,6 +17,7 @@ import { DpzStorageConf } from 'services/StorageConf';
 export default function ManageStore() {
     const [rows, setData] = useState([]);
     const [ownbucket, setownbucket] = useState([]);
+    const [selectedbucket, setselectedbucket] = useState([]);
     const [bucketname, setbucketname] = useState("");
     const [storagekey, setstoragekey] = useState("");
 
@@ -34,7 +35,10 @@ export default function ManageStore() {
                 })
                 setownbucket(data)
                 setbucketname(data[0].name)
-                getBuckets(data[0].name)
+              //  getBuckets(data[0].name)
+                getBuckets(data[0])
+
+                setselectedbucket(data[0])
                 setstoragekey(data[0].storagekey)
                 
             }).catch(err => { console.log(err) })
@@ -43,9 +47,9 @@ export default function ManageStore() {
 
     const onInputChanged = (event) => {
         const targetValue = event.target.value;
-        getBuckets(targetValue);
+        getBuckets(ownbucket.filter((bucket)=>bucket.id===targetValue)[0]);
         setbucketname(targetValue);
-       // setstoragekey(ownbucket.filter((bucket)=>bucket.id===targetValue)[0].storagekey);
+        //setstoragekey(ownbucket.filter((bucket)=>bucket.id===targetValue)[0].storagekey);
         
          
 
@@ -91,18 +95,23 @@ export default function ManageStore() {
     const getBuckets = (targetValue) => {
         // create the client
 
+        
         const fileObj = []
 
        // setstoragekey= ownbucket.filter((bucket)=>bucket.id===targetValue)[0].storagekey
+       const key = JSON.stringify(targetValue.storagekey)
+       const key2 =eval(key)
+       console.log(key2)
+      
 
-       console.log(storagekey)
-       console.log(ownbucket)
+      
+     
     //console.log(ownbucket.filter((bucket)=>bucket.id===targetValue)[0].storagekey)
 
         try {
             DpzStorageConf('naQrl3yAjoue8o22', 'A0d6ZmTAbcVrhgTorNzCFBddtAWUjruP')
-                .then(minio => {
-                    const stream = minio.listObjects(targetValue, '', true);
+                .then(storage => {
+                    const stream = storage.listObjects(targetValue.name, '', true);
 
                     stream.on('data', function (obj) { fileObj.push(obj) });
                     stream.on("end", function () {
