@@ -18,7 +18,7 @@ export default function ManageStore() {
     const [rows, setData] = useState([]);
     const [ownbucket, setownbucket] = useState([]);
     const [bucketname, setbucketname] = useState("");
-      const [storagekey, setstoragekey] = useState("");
+    const [storagekey, setstoragekey] = useState("");
 
     useEffect(() => {
         // const getstorageapi = config.rootapi + '/invoice/usernamentype/' + UserService.getUsername() + '&storage';
@@ -50,9 +50,7 @@ export default function ManageStore() {
          
 
     };
-   // console.log(storagekey)
-
-   // console.log(ownbucket.);
+  
 
     // const getBuckets = (targetValue) => {
     //     // create the client
@@ -95,9 +93,10 @@ export default function ManageStore() {
 
         const fileObj = []
 
-        setstoragekey= ownbucket.filter((bucket)=>bucket.id===targetValue)[0].storagekey
+       // setstoragekey= ownbucket.filter((bucket)=>bucket.id===targetValue)[0].storagekey
 
        console.log(storagekey)
+       console.log(ownbucket)
     //console.log(ownbucket.filter((bucket)=>bucket.id===targetValue)[0].storagekey)
 
         try {
