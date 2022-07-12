@@ -113,7 +113,7 @@ export default function ManageSubscription() {
                     'upassword': item.upassword,
                     'offer_id': item.offer_id,
                     'plan_id': item.plan_id,
-                    'request_date': item.request_date,
+                    'request_date': request_date,
                     'request_status': item.request_status,
                     'request_type': item.request_type,
                 }
