@@ -18,6 +18,7 @@ export default function ManageStore() {
     const [rows, setData] = useState([]);
     const [ownbucket, setownbucket] = useState([]);
     const [bucketname, setbucketname] = useState("");
+      const [storagekey, setstoragekey] = useState("");
 
     useEffect(() => {
         // const getstorageapi = config.rootapi + '/invoice/usernamentype/' + UserService.getUsername() + '&storage';
@@ -26,12 +27,16 @@ export default function ManageStore() {
             .then(res => {
                 let data = res.data.data.map(item => {
                     return {
-                        'id': item.item_name, 'name': item.item_name
+                        'id': item.item_name, 
+                        'name': item.item_name,
+                        'storagekey':item.customer_invoice_data
                     }
                 })
                 setownbucket(data)
                 setbucketname(data[0].name)
                 getBuckets(data[0].name)
+                setstoragekey(data[0].storagekey)
+                
             }).catch(err => { console.log(err) })
     }, []);
 
@@ -40,10 +45,14 @@ export default function ManageStore() {
         const targetValue = event.target.value;
         getBuckets(targetValue);
         setbucketname(targetValue);
+       // setstoragekey(ownbucket.filter((bucket)=>bucket.id===targetValue)[0].storagekey);
+        
+         
 
     };
+   // console.log(storagekey)
 
-
+   // console.log(ownbucket.);
 
     // const getBuckets = (targetValue) => {
     //     // create the client
@@ -86,6 +95,10 @@ export default function ManageStore() {
 
         const fileObj = []
 
+        setstoragekey= ownbucket.filter((bucket)=>bucket.id===targetValue)[0].storagekey
+
+       console.log(storagekey)
+    //console.log(ownbucket.filter((bucket)=>bucket.id===targetValue)[0].storagekey)
 
         try {
             DpzStorageConf('naQrl3yAjoue8o22', 'A0d6ZmTAbcVrhgTorNzCFBddtAWUjruP')
