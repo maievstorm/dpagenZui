@@ -7,7 +7,7 @@ import Button from '@mui/material/Button';
 import CircularProgress from '@mui/material/CircularProgress';
 import { useState, useEffect } from 'react'
 import { useNavigate } from "react-router";
-import MenuItem from '@mui/material/MenuItem'; 
+import MenuItem from '@mui/material/MenuItem';
 import { GetProcess } from 'services/DataIngest';
 
 
@@ -25,20 +25,24 @@ function UploadMultiFiles(props) {
   //const [fileInfos, setFileInfos] = useState([])
   const [loading, setLoading] = useState(false)
   useEffect(() => {
-    
-
     GetProcess('storage')
       .then(res => {
-        setownbucket(res.data.data.map(item => {
+        let data = res.data.data.map(item => {
           return {
-            'id': item.item_name, 'name': item.item_name
+            'id': item.item_name,
+            'name': item.item_name,
+            'storagekey': item.customer_invoice_data
           }
-        }))
+        })
+        setownbucket(data)
+        console.log(data[0]?.name)
+        setBucketSelect(data[0]?.name)
+        
       }).catch(err => { console.log(err) })
   }, []);
 
 
- 
+
   const onInputChanged = (event) => {
     const targetValue = event.target.value;
     setBucketSelect(targetValue)
@@ -51,9 +55,12 @@ function UploadMultiFiles(props) {
 
   const upload = (idx, file) => {
     //let _progressInfos = [...progressInfos];
+    let res = ownbucket.filter((bucket)=>bucket.id===bucketSelect)[0]
+    const storagekey = JSON.parse(res?.storagekey)
 
-    UploadService.upload(file, bucketSelect )
-    
+
+    UploadService.upload(file, bucketSelect,storagekey)
+
   }
 
   const uploadFiles = () => {
@@ -74,7 +81,7 @@ function UploadMultiFiles(props) {
       gohome();
     }, 2000);
 
- 
+
 
 
   }
@@ -82,8 +89,6 @@ function UploadMultiFiles(props) {
   const gohome = () => {
     navigate('/ojectstorage')
   }
-
-  console.log(bucketSelect.length)
 
 
 
@@ -111,7 +116,7 @@ function UploadMultiFiles(props) {
 
       <Box className="row my-3">
         <strong>Chọn thư mục : </strong>
-        <Select id="listbucket" name='listbucket' value={ownbucket?.id} onChange={onInputChanged}
+        <Select id="listbucket" name='listbucket' value={bucketSelect} onChange={onInputChanged}
           size="small"
 
 
