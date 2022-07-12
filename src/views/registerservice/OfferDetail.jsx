@@ -3,13 +3,13 @@ import { useLocation, useNavigate } from "react-router"
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import Button from '@mui/material/Button';
 import OfferPlanService from 'services/OfferPlanService';
-import UserService from "services/UserService";
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardHeader from '@mui/material/CardHeader';
+import { addLog } from "services/LogService";
 
 
 
@@ -70,6 +70,7 @@ export default function OrderDetail() {
         console.log(data);
 
         OfferPlanService.applyService(data);
+        addLog('request_resource',data)
         navigate('/registerservice');
 
 

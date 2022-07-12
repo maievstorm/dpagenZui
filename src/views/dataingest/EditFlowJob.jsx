@@ -13,6 +13,7 @@ import SaveIcon from '@mui/icons-material/Save';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import MainCard from "ui-component/cards/MainCard";
 import DataIngest from "services/DataIngest";
+import { addLog } from "services/LogService";
 
 
 export default function EditFlowJob() {
@@ -156,6 +157,7 @@ export default function EditFlowJob() {
             .then(res => {
                 if (res.status === 200) {
                     DataIngest.UpdateInvoiceProcess(confInfo.DagId,data);
+                    addLog('edit_flow',data)
                    
                     navigate('/dataingest/', { state: { id: DagId } })
                 }

@@ -13,6 +13,7 @@ import MainCard from "ui-component/cards/MainCard";
 import { IconButton } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import DataIngest from "services/DataIngest";
+import { addLog } from "services/LogService";
 
 
 
@@ -105,7 +106,8 @@ const CreateNewFlow = () => {
     })
       .then(res => {
         if (res.status === 200) {
-          DataIngest.CreateInvoiceProcess(invoicebody)
+          DataIngest.CreateInvoiceProcess(invoicebody);
+          addLog('create_flow',invoicebody)
             .then(res => {
               setTimeout(() => {
                 setLoading(false)

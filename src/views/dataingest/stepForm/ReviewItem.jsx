@@ -75,7 +75,7 @@ export default function ReviewItem(props) {
                     }}
                     variant="standard"
                     // onChange={onInputChanged}
-                    focused={true}
+                    focused="true"
                     size="small"
 
                 />
@@ -115,7 +115,7 @@ export default function ReviewItem(props) {
                             disableUnderline: edit,
                         }}
                         variant="standard"
-                        focused={true}
+                        focused="true"
 
                     />
                 }
@@ -146,7 +146,7 @@ export default function ReviewItem(props) {
                             disableUnderline: true,
                         }}
                         variant="standard"
-                        focused={true}
+                        focused="true"
 
                     />
                 }
@@ -165,7 +165,7 @@ export default function ReviewItem(props) {
                         disableUnderline: true,
                     }}
                     variant="standard"
-                    focused={true}
+                    focused="true"
 
                 />
 
@@ -174,7 +174,7 @@ export default function ReviewItem(props) {
                     id="tags"
                     name="tags"
 
-                    focused={true}
+                    focused="true"
 
                     value={conf?.tags}
                     onChange={onInputChanged}
@@ -225,7 +225,7 @@ export default function ReviewItem(props) {
                             disableUnderline: edit,
                         }}
                         variant="standard"
-                        focused={true}
+                        focused="true"
 
                     />
                 }
@@ -275,7 +275,7 @@ export default function ReviewItem(props) {
                                         disableUnderline: edit,
                                     }}
                                     variant="standard"
-                                    focused={true}
+                                    focused="true"
                                 />
                             }
                             <TextField
@@ -290,7 +290,7 @@ export default function ReviewItem(props) {
                                     disableUnderline: edit,
                                 }}
                                 variant="standard"
-                                focused={true}
+                                focused="true"
                             />
                             <TextField
                                 name='databasename'
@@ -304,7 +304,7 @@ export default function ReviewItem(props) {
                                     disableUnderline: edit,
                                 }}
                                 variant="standard"
-                                focused={true}
+                                focused="true"
                             />
                             <br></br>
                             <TextField
@@ -319,7 +319,7 @@ export default function ReviewItem(props) {
                                     disableUnderline: edit,
                                 }}
                                 variant="standard"
-                                focused={true}
+                                focused="true"
                             />
                             <TextField
                                 name='srcpassword'
@@ -333,7 +333,7 @@ export default function ReviewItem(props) {
                                     disableUnderline: edit,
                                 }}
                                 variant="standard"
-                                focused={true} />
+                                focused="true" />
 
                             <TextField
                                 name='tablename'
@@ -349,7 +349,7 @@ export default function ReviewItem(props) {
                                     disableUnderline: edit,
                                 }}
                                 variant="standard"
-                                focused={true} />
+                                focused="true" />
                             <TextField
                                 name='alias'
                                 size="small"
@@ -362,7 +362,7 @@ export default function ReviewItem(props) {
                                     disableUnderline: edit,
                                 }}
                                 variant="standard"
-                                focused={true}
+                                focused="true"
                             />
                             {
                                 !edit && <Button style={divStyle} name="removesource" onClick={() => props?.removeFields(index)}><IconCircleMinus /></Button>
@@ -407,7 +407,7 @@ export default function ReviewItem(props) {
                                     disableUnderline: edit,
                                 }}
                                 variant="standard"
-                                focused={true}
+                                focused="true"
                             />
                             {
                                 !edit && <MultipleSelectCheckmarks
@@ -430,7 +430,7 @@ export default function ReviewItem(props) {
                                         disableUnderline: edit,
                                     }}
                                     variant="standard"
-                                    focused={true}
+                                    focused="true"
                                 />
                             }
 
@@ -450,7 +450,7 @@ export default function ReviewItem(props) {
                                 InputProps={{
                                     readOnly: edit,
                                 }}
-                                focused={true}
+                                focused="true"
                             />
                             <br></br>
 
@@ -468,7 +468,7 @@ export default function ReviewItem(props) {
                                     disableUnderline: edit,
                                 }}
                                 variant="standard"
-                                focused={true}
+                                focused="true"
                             /> */}
 
                             <Select name='targettable'
@@ -477,7 +477,7 @@ export default function ReviewItem(props) {
                                 size="small"
                                 style={divStyle}
                                 variant="standard"
-                                focused={true}
+                                focused="true"
                             >
 
                                 {formSrcFields?.map((formSrcField) => (
@@ -520,7 +520,7 @@ export default function ReviewItem(props) {
                                         disableUnderline: edit,
                                     }}
                                     variant="standard"
-                                    focused={true}
+                                    focused="true"
                                 />
                             }
                             {
