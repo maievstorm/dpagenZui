@@ -63,7 +63,7 @@ export default function ManageStore() {
         const fileObj = []
 
        const storagekey = JSON.parse(defaultStorageKey)
-       console.log(storagekey?.accessKey,storagekey?.secretKey)
+      // console.log(storagekey?.accessKey,storagekey?.secretKey)
       
 
       

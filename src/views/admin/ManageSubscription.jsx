@@ -205,12 +205,11 @@ export default function ManageSubscription() {
             port: '5432',
             user: 'postgres',
             password: 'HztIWjzS57',
-            database: 'dpacrawlconf',
+            database: 'postgres',
         }
 
         const bodybigdata={
-            host: 'hdfs://10.14.222.186:8020/warehouse/tablespace/managed/hive/cdp_cn.db',
-            port: '8020',
+            host: '10.14.222.186:8020/warehouse/tablespace/managed/hive',
             user: 'trinhhk',
             password: 'trinhhk',
             database: 'cdp_cn.db',
