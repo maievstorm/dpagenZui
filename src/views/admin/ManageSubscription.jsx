@@ -209,18 +209,17 @@ export default function ManageSubscription() {
         }
 
         const bodybigdata={
-            host: 'pgdbconfg-postgresql',
-            port: '5432',
-            user: 'postgres',
-            password: 'fAYkndBMnj',
-            database: 'dpacrawlconf',
+            host: 'hdfs://10.14.222.186:8020/warehouse/tablespace/managed/hive/cdp_cn.db',
+            port: '8020',
+            user: 'trinhhk',
+            password: 'trinhhk',
+            database: 'cdp_cn.db',
         }
 
         const bodystorage={
             bucket: 'trinhhkbucket',
             accessKey:"85dtbrEshxH9d6Jf",
             secretKey:"LC7ziR8BnstCgiL2te1bykAp5HwV4MOO",
-          
         }
 
 
