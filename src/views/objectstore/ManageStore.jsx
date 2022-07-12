@@ -175,18 +175,29 @@ export default function ManageStore() {
     };
 
     const deleteObjects = async (curent_bucketName, obj) => {
+        let res = ownbucket.filter((bucket)=>bucket.id===curent_bucketName)[0]
+        let storagekey = JSON.parse(res?.storagekey)
+
 
 
         if (obj) {
 
             try {
-                DpzStorageConf.removeObject(curent_bucketName, obj, function (err) {
-                    if (err) {
-                        return console.log('Unable to remove object', err)
-                    }
-                    console.log('Removed the object')
-                    getBuckets(curent_bucketName);
-                });
+                DpzStorageConf(storagekey?.accessKey,storagekey?.secretKey)
+                .then(storage => {
+                    storage.removeObject(curent_bucketName, obj, function (err) {
+                        if (err) {
+                            return console.log('Unable to remove object', err)
+                        }
+                        console.log('Removed the object')
+                        getBuckets(curent_bucketName,res?.storagekey);
+                    });
+
+                })
+                .catch (e=> {
+                    console.log(e)
+                })
+                
             } catch (e) {
                 console.log(e)
             }
@@ -196,16 +207,21 @@ export default function ManageStore() {
     }
 
     const getObject = async (curent_bucketName, obj) => {
+        let res = ownbucket.filter((bucket)=>bucket.id===curent_bucketName)[0]
+        let storagekey = JSON.parse(res?.storagekey)
 
 
         if (obj) {
 
             try {
-                DpzStorageConf.presignedGetObject(curent_bucketName, obj, 24 * 60 * 60, function (err, presignedUrl) {
-                    if (err) return console.log(err)
-                    console.log(presignedUrl)
-                    window.location.href = presignedUrl
-
+                DpzStorageConf(storagekey?.accessKey,storagekey?.secretKey)
+                .then(storage =>{
+                    storage.presignedGetObject(curent_bucketName, obj, 24 * 60 * 60, function (err, presignedUrl) {
+                        if (err) return console.log(err)
+                        console.log(presignedUrl)
+                        window.location.href = presignedUrl
+    
+                    })
                 })
             } catch (e) {
                 console.log(e)
