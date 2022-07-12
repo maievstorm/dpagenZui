@@ -2,7 +2,7 @@ import { DpzStorageConf } from 'services/StorageConf';
 
 class UploadFilesService {
   upload(file, bucket, storagekey) {
-    console.log(storagekey)
+   // console.log(storagekey)
 
     let formData = new FormData();
     formData.append("file", file);
