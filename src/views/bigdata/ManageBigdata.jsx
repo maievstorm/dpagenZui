@@ -41,12 +41,13 @@ export default function ManageBigdata() {
     ];
    
     useEffect(() => {
-        GetProcess('storage').then(res => {
+        GetProcess('bigdata').then(res => {
             setData(res.data.data.map(item => {
                 let invoice_created_ts = new Date(Date.parse(item.invoice_created_ts)).toLocaleString()
                 return {
                     'id_invoice': item.id_invoice,
                     'item_name': item.item_name,
+                    'customer_invoice_data':item.customer_invoice_data,
                     'invoice_created_ts': invoice_created_ts
                 }
 

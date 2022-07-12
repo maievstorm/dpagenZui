@@ -223,53 +223,6 @@ export default function ManageSubscription() {
         }
 
 
-        const invoicebodybigdata =
-        {
-          "item_name": user_name+'bigdata',
-          "item_type": 'bigdata',
-          "customer_invoice_data": JSON.stringify(bodybigdata),
-          "subscription_id": 1,
-          "plan_history_id": 1,
-          "invoice_period_start_date": new Date().toLocaleString() + '',
-          "invoice_period_end_date": new Date().toLocaleString() + '',
-          "invoice_description": user_name+'bigdata',
-          "invoice_amount": 100,
-          "invoice_created_ts": new Date().toLocaleString() + '',
-          "invoice_due_ts": new Date().toLocaleString() + '',
-          "invoice_paid_ts": new Date().toLocaleString() + ''
-        }
-
-        const invoicebodystorage =
-        {
-          "item_name": user_name+'bigdata',
-          "item_type": 'bigdata',
-          "customer_invoice_data": JSON.stringify(bodystorage),
-          "subscription_id": 1,
-          "plan_history_id": 1,
-          "invoice_period_start_date": new Date().toLocaleString() + '',
-          "invoice_period_end_date": new Date().toLocaleString() + '',
-          "invoice_description": user_name+'bigdata',
-          "invoice_amount": 100,
-          "invoice_created_ts": new Date().toLocaleString() + '',
-          "invoice_due_ts": new Date().toLocaleString() + '',
-          "invoice_paid_ts": new Date().toLocaleString() + ''
-        }
-
-        const invoicebodydwh =
-        {
-          "item_name": user_name+'bigdata',
-          "item_type": 'bigdata',
-          "customer_invoice_data": JSON.stringify(bodydwh),
-          "subscription_id": 1,
-          "plan_history_id": 1,
-          "invoice_period_start_date": new Date().toLocaleString() + '',
-          "invoice_period_end_date": new Date().toLocaleString() + '',
-          "invoice_description": user_name+'bigdata',
-          "invoice_amount": 100,
-          "invoice_created_ts": new Date().toLocaleString() + '',
-          "invoice_due_ts": new Date().toLocaleString() + '',
-          "invoice_paid_ts": new Date().toLocaleString() + ''
-        }
 
       console.log(request_type)
         if(request_type==1)
@@ -281,7 +234,19 @@ export default function ManageSubscription() {
                 "insert_ts": new Date().toLocaleString() + '',
                 "account_id": account_id,
                 "ingroup": ingroup,
-                "subscription": subscription,
+                "trial_period_start_date": new Date().toLocaleString() + '',
+                "trial_period_end_date": null,
+                "subscribe_after_trial": false,
+                "current_plan_id": current_plan_id,
+                "offer_id": offer_id,
+                "offer_start_date": new Date().toLocaleString() + '',
+                "offer_end_date": new Date(year + 1, month, day).toLocaleString()+ '',
+                "date_subscribed": new Date().toLocaleString() + '',
+                "valid_to": new Date(year + 1, month, day).toLocaleString()+ '',
+                "date_unsubscribed": null,
+                "insert_ts": new Date().toLocaleString() + '',
+                "requestsub_id": requestsub_id,
+                "subscription_name" :'Thuê bao '+ user_name+ ' plan ' +current_plan_id+' offer ' +offer_id +' '+new Date().toLocaleString() + '',
                 "requestsub_id": requestsub_id
     
             };
@@ -292,10 +257,58 @@ export default function ManageSubscription() {
                 data: bodycreate
               })
                 .then(res => {
-                    console.log(res)
-                    CreateInvoiceProcess(invoicebodybigdata)
-                    CreateInvoiceProcess(invoicebodystorage)
-                    CreateInvoiceProcess(invoicebodydwh)
+                    console.log(res.data.subscription.id)
+
+                    const invoicebodybigdata =
+                    {
+                      "item_name": user_name+'bigdata' +res.data.subscription.id,
+                      "item_type": 'bigdata',
+                      "customer_invoice_data": JSON.stringify(bodybigdata),
+                      "subscription_id": res.data.subscription.id,
+                      "plan_history_id": current_plan_id,
+                      "invoice_period_start_date": new Date().toLocaleString() + '',
+                      "invoice_period_end_date": new Date().toLocaleString() + '',
+                      "invoice_description": user_name+'bigdata' +res.data.subscription.id,
+                      "invoice_amount": 100,
+                      "invoice_created_ts": new Date().toLocaleString() + '',
+                      "invoice_due_ts": new Date().toLocaleString() + '',
+                      "invoice_paid_ts": new Date().toLocaleString() + ''
+                    }
+            
+                    const invoicebodystorage =
+                    {
+                      "item_name": user_name+'storage' +res.data.subscription.id,
+                      "item_type": 'storage',
+                      "customer_invoice_data": JSON.stringify(bodystorage),
+                      "subscription_id": res.data.subscription.id,
+                      "plan_history_id": current_plan_id,
+                      "invoice_period_start_date": new Date().toLocaleString() + '',
+                      "invoice_period_end_date": new Date().toLocaleString() + '',
+                      "invoice_description": user_name+'storage' +res.data.subscription.id,
+                      "invoice_amount": 100,
+                      "invoice_created_ts": new Date().toLocaleString() + '',
+                      "invoice_due_ts": new Date().toLocaleString() + '',
+                      "invoice_paid_ts": new Date().toLocaleString() + ''
+                    }
+            
+                    const invoicebodydwh =
+                    {
+                      "item_name": user_name+'dwh' +res.data.subscription.id,
+                      "item_type": 'dwh',
+                      "customer_invoice_data": JSON.stringify(bodydwh),
+                      "subscription_id": res.data.subscription.id,
+                      "plan_history_id": current_plan_id,
+                      "invoice_period_start_date": new Date().toLocaleString() + '',
+                      "invoice_period_end_date": new Date().toLocaleString() + '',
+                      "invoice_description": user_name+'dwh' +res.data.subscription.id,
+                      "invoice_amount": 100,
+                      "invoice_created_ts": new Date().toLocaleString() + '',
+                      "invoice_due_ts": new Date().toLocaleString() + '',
+                      "invoice_paid_ts": new Date().toLocaleString() + ''
+                    }
+                    CreateInvoiceProcess(invoicebodybigdata);
+                    CreateInvoiceProcess(invoicebodystorage);
+                    CreateInvoiceProcess(invoicebodydwh);
 
                   setTimeout(() => {
                     setLoading(false) 

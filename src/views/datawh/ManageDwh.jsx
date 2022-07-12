@@ -45,10 +45,12 @@ export default function ManageDwh() {
     useEffect(() => {
         GetProcess('dwh').then(res => {
             setData(res.data.data.map(item => {
-                let invoice_created_ts = new Date(Date.parse(item.invoice_created_ts)).toLocaleString()
+                let invoice_created_ts = new Date(Date.parse(item.invoice_created_ts)).toLocaleString();
+                let customer_invoice_data=  item.customer_invoice_data 
                 return {
                     'id_invoice': item.id_invoice,
                     'item_name': item.item_name,
+                    'customer_invoice_data':customer_invoice_data,
                     'invoice_created_ts': invoice_created_ts
                 }
 
