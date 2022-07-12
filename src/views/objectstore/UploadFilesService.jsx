@@ -1,8 +1,8 @@
 import { DpzStorageConf } from 'services/StorageConf';
 
 class UploadFilesService {
-  upload(file,bucket) {
-    console.log(file)
+  upload(file, bucket, storagekey) {
+    console.log(storagekey)
 
     let formData = new FormData();
     formData.append("file", file);
@@ -13,16 +13,21 @@ class UploadFilesService {
 
     fileReader.readAsArrayBuffer(fileToUpload)
     fileReader.onload = async function (evt) {
-      
+
       if (evt.target.readyState === FileReader.DONE) {
 
         const uint = new Uint8Array(evt.target.result)
-        return await DpzStorageConf.putObject(bucket, objectKey, Buffer.from(uint), {
-          'Content-Type': contentType,
-          'X-Amz-Meta-App': "ReactJS"
-        },
-        // onUploadProgress
-        )
+        return DpzStorageConf(storagekey?.accessKey, storagekey?.secretKey)
+          .then(storage => {
+            storage.putObject(bucket, objectKey, Buffer.from(uint), {
+              'Content-Type': contentType,
+              'X-Amz-Meta-App': "ReactJS"
+            },
+              // onUploadProgress
+            )
+
+          })
+
 
         // console.log(onUploadProgress)
 
