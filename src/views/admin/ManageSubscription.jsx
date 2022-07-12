@@ -201,10 +201,10 @@ export default function ManageSubscription() {
         ];
 
         const bodydwh={
-            host: 'pgdbconfg-postgresql',
+            host: 'postgresql-ha-pgpool',
             port: '5432',
             user: 'postgres',
-            password: 'fAYkndBMnj',
+            password: 'HztIWjzS57',
             database: 'dpacrawlconf',
         }
 
@@ -217,11 +217,10 @@ export default function ManageSubscription() {
         }
 
         const bodystorage={
-            host: 'pgdbconfg-postgresql',
-            port: '5432',
-            user: 'postgres',
-            password: 'fAYkndBMnj',
-            database: 'dpacrawlconf',
+            bucket: 'trinhhkbucket',
+            accessKey:"85dtbrEshxH9d6Jf",
+            secretKey:"LC7ziR8BnstCgiL2te1bykAp5HwV4MOO",
+          
         }
 
 

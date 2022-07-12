@@ -1,4 +1,4 @@
-import DpzStorageConf from 'services/StorageConf';
+import { DpzStorageConf } from 'services/StorageConf';
 
 class UploadFilesService {
   upload(file,bucket) {

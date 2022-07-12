@@ -8,8 +8,9 @@ import FileDownloadIcon from '@mui/icons-material/FileDownload';
 import { Tooltip, IconButton } from '@mui/material';
 import { Select } from '@mui/material';
 import MenuItem from '@mui/material/MenuItem';
-import DpzStorageConf from 'services/StorageConf';
+//import DpzStorageConf from 'services/StorageConf';
 import { GetProcess } from 'services/DataIngest';
+import { DpzStorageConf } from 'services/StorageConf';
 
 
 
@@ -19,7 +20,7 @@ export default function ManageStore() {
     const [bucketname, setbucketname] = useState("");
 
     useEffect(() => {
-       // const getstorageapi = config.rootapi + '/invoice/usernamentype/' + UserService.getUsername() + '&storage';
+        // const getstorageapi = config.rootapi + '/invoice/usernamentype/' + UserService.getUsername() + '&storage';
 
         GetProcess('storage')
             .then(res => {
@@ -41,49 +42,86 @@ export default function ManageStore() {
         setbucketname(targetValue);
 
     };
-  
 
+
+
+    // const getBuckets = (targetValue) => {
+    //     // create the client
+
+    //     const fileObj = []
+
+
+    //     try {
+    //         const stream = DpzStorageConf.listObjects(targetValue, '', true);
+
+    //         stream.on('data', function (obj) { fileObj.push(obj) });
+    //         stream.on("end", function () {
+    //             let data = JSON.parse(JSON.stringify(fileObj))
+    //             let newData = data.map(item => {
+    //                 let lastModified = new Date(Date.parse(item.lastModified)).toLocaleString()
+
+    //                 return {
+    //                     'etag': item.item,
+    //                     'lastModified': lastModified,
+    //                     'name': item.name,
+    //                     'size': item.size
+    //                 }
+    //             })
+    //             // data.lastModified = data.lastModified.map(item =>{
+    //             //     return new Date(Date.parse(item)).toLocaleString()
+    //             // })
+    //             setData(newData);
+    //         });
+    //         stream.on('error', function (err) { console.log(err) });
+
+    //     }
+    //     catch (e) {
+    //         console.log(e)
+    //     }
+
+    // };
 
     const getBuckets = (targetValue) => {
         // create the client
 
         const fileObj = []
-        // const mc = new minio.Client({
-        //     endPoint: config.storageapi,
-        //     useSSL: true,
-        //     accessKey: "s2l92I0TXj01BOGP",
-        //     secretKey: "Q25hRHG13VxoKPrFmgLuXMDOi3WFOLFk"
-        // });
+
 
         try {
-            const stream = DpzStorageConf.listObjects(targetValue, '', true);
+            DpzStorageConf('naQrl3yAjoue8o22', 'A0d6ZmTAbcVrhgTorNzCFBddtAWUjruP')
+                .then(minio => {
+                    const stream = minio.listObjects(targetValue, '', true);
 
-            stream.on('data', function (obj) { fileObj.push(obj) });
-            stream.on("end", function () {
-                let data = JSON.parse(JSON.stringify(fileObj))
-                let newData = data.map(item => {
-                    let lastModified = new Date(Date.parse(item.lastModified)).toLocaleString()
+                    stream.on('data', function (obj) { fileObj.push(obj) });
+                    stream.on("end", function () {
+                        let data = JSON.parse(JSON.stringify(fileObj))
+                        let newData = data.map(item => {
+                            let lastModified = new Date(Date.parse(item.lastModified)).toLocaleString()
 
-                    return {
-                        'etag': item.item,
-                        'lastModified': lastModified,
-                        'name': item.name,
-                        'size': item.size
-                    }
+                            return {
+                                'etag': item.item,
+                                'lastModified': lastModified,
+                                'name': item.name,
+                                'size': item.size
+                            }
+                        })
+                        // data.lastModified = data.lastModified.map(item =>{
+                        //     return new Date(Date.parse(item)).toLocaleString()
+                        // })
+                        setData(newData);
+                    });
+                    stream.on('error', function (err) { console.log(err) });
+
                 })
-                // data.lastModified = data.lastModified.map(item =>{
-                //     return new Date(Date.parse(item)).toLocaleString()
-                // })
-                setData(newData);
-            });
-            stream.on('error', function (err) { console.log(err) });
 
-        }
-        catch (e) {
+
+        } catch (e) {
             console.log(e)
         }
 
     };
+
+
 
     const columns = [
         {
@@ -126,7 +164,7 @@ export default function ManageStore() {
                     <IconButton
                         onClick={() => {
                             getObject(bucketname, rows[selectedRows.data[0].dataIndex]['name'])
-                          
+
 
                         }}
 
@@ -139,7 +177,7 @@ export default function ManageStore() {
                     <IconButton
                         onClick={() => {
                             deleteObjects(bucketname, rows[selectedRows.data[0].dataIndex]['name'])
-                           
+
 
                         }}
 
@@ -200,17 +238,17 @@ export default function ManageStore() {
 
     const onClickHandler = () => navigate('/objectstore/uploadmultifile');
 
- 
+
 
 
     return (
         <div><strong>Danh sách thư mục : </strong>
-            <Select id="listbucket" 
-            name='listbucket'
-            value={bucketname} 
-            // defaultValue={ownbucket[0]?.name}
-            onChange={onInputChanged}
-            size="small"
+            <Select id="listbucket"
+                name='listbucket'
+                value={bucketname}
+                // defaultValue={ownbucket[0]?.name}
+                onChange={onInputChanged}
+                size="small"
             >
 
                 {ownbucket.map((item) => (

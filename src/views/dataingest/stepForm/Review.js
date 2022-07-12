@@ -37,7 +37,7 @@ export const Review = (props) => {
           }}
           variant="standard"
 
-          focused="true"
+          focused
           size="small"
 
         />
@@ -54,7 +54,7 @@ export const Review = (props) => {
             readOnly: true,
             disableUnderline: true,
           }}
-          focused="true"
+          focused
           variant="standard"
 
         />
@@ -71,7 +71,7 @@ export const Review = (props) => {
             readOnly: true,
             disableUnderline: true,
           }}
-          focused="true"
+          focused
           variant="standard"
 
         />
@@ -81,7 +81,7 @@ export const Review = (props) => {
           id="tags_name"
           name="tags_name"
 
-          focused="true"
+          focused
           variant="standard"
 
           value={conf?.tags}
@@ -98,7 +98,7 @@ export const Review = (props) => {
           id="subscription_id"
           name="subscription_id"
 
-          focused="true"
+          focused
           variant="standard"
 
           value={conf?.subscription_id}
@@ -134,7 +134,7 @@ export const Review = (props) => {
                 readOnly: true,
                 disableUnderline: true,
               }}
-              focused="true"
+              focused
               variant="standard"
             />
             <TextField
@@ -146,7 +146,7 @@ export const Review = (props) => {
                 readOnly: true,
                 disableUnderline: true,
               }}
-              focused="true"
+              focused
               variant="standard"
             />
             <TextField
@@ -158,7 +158,7 @@ export const Review = (props) => {
                 readOnly: true,
                 disableUnderline: true,
               }}
-              focused="true"
+              focused
               variant="standard"
             />
             <br></br>
@@ -171,7 +171,7 @@ export const Review = (props) => {
                 readOnly: true,
                 disableUnderline: true,
               }}
-              focused="true"
+              focused
               variant="standard"
             />
             <TextField
@@ -183,7 +183,7 @@ export const Review = (props) => {
                 readOnly: true,
                 disableUnderline: true,
               }}
-              focused="true"
+              focused
               variant="standard"
               />
 
@@ -198,7 +198,7 @@ export const Review = (props) => {
                 readOnly: true,
                 disableUnderline: true,
               }}
-              focused="true"
+              focused
               variant="standard"
               />
             <TextField
@@ -210,7 +210,7 @@ export const Review = (props) => {
                 readOnly: true,
                 disableUnderline: true,
               }}
-              focused="true"
+              focused
               variant="standard"
               />
           </Box>
@@ -243,7 +243,7 @@ export const Review = (props) => {
                 readOnly: true,
                 disableUnderline: true,
               }}
-              focused="true"
+              focused
               variant="standard"
             />
             <TextField
@@ -255,7 +255,7 @@ export const Review = (props) => {
                 readOnly: true,
                 disableUnderline: true,
               }}
-              focused="true"
+              focused
               variant="standard"
             />
             <br></br>
@@ -272,7 +272,7 @@ export const Review = (props) => {
               InputProps={{
                 readOnly: true,
               }}
-              focused="true"
+              focused
               
             />
             <br></br>
@@ -287,7 +287,7 @@ export const Review = (props) => {
                 readOnly: true,
                 disableUnderline: true,
               }}
-              focused="true"
+              focused
               variant="standard"
             />
             <TextField
@@ -299,7 +299,7 @@ export const Review = (props) => {
                 readOnly: true,
                 disableUnderline: true,
               }}
-              focused="true"
+              focused
               variant="standard"
             />
 
