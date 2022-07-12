@@ -4,6 +4,7 @@ import ActionButtons from "./ActionButton";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 
+<<<<<<< HEAD
 
 export const Review = (props) => {
   const conf = props.conf
@@ -11,6 +12,11 @@ export const Review = (props) => {
   //const classes = useStyles();  
   const divStyle = {
     margin: '5px',
+=======
+export const Review = ({conf,submit,navigation}) => {
+  const json = {
+    conf
+>>>>>>> 8f14744 (ok)
   };
 
   const validate = () => {
