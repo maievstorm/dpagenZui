@@ -41,7 +41,10 @@ import Transitions from 'ui-component/extended/Transitions';
 // assets
 //import { IconLogout, IconSearch, IconSettings, IconUser } from '@tabler/icons';
 import { IconLogout, IconSettings } from '@tabler/icons';
+<<<<<<< HEAD
 import { useNavigate } from 'react-router';
+=======
+>>>>>>> 03ba192 (ok)
 
 // ==============================|| PROFILE MENU ||============================== //
 

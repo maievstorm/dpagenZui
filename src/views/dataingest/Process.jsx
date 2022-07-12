@@ -6,10 +6,7 @@ import StepLabel from '@mui/material/StepLabel';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import axios from 'axios';
-<<<<<<< HEAD
 import config from '../../config';
-=======
->>>>>>> 8f14744 (ok)
 
 const steps = ['Đăng ký tiến trình','Đăng ký CSDL', 'Tạo truy vấn tổng hợp', 'Xác nhận thông tin','Hoàn thành'];
 
@@ -36,19 +33,12 @@ export default function HorizontalLinearStepper({navigation,conf}) {
       const body = {
         "conf": {conf},
       }
-<<<<<<< HEAD
       if(conf.DagId.length>3)
       {
         console.log(conf)
             axios({
                 method: 'post',
                 url:  config.airflowapi+'/dags/dag_create_job_file/dagRuns',
-=======
-      console.log(conf)
-            axios({
-                method: 'post',
-                url: 'https://flowdpa.apps.xplat.fis.com.vn/api/v1/dags/dag_create_job_file/dagRuns',
->>>>>>> 8f14744 (ok)
                  
                 auth: {
                     username: 'hung',
@@ -60,10 +50,7 @@ export default function HorizontalLinearStepper({navigation,conf}) {
               const invoicebody=
               {
                   "item_name":conf.DagId,
-<<<<<<< HEAD
                   "item_type":'airflow',
-=======
->>>>>>> 8f14744 (ok)
                   "customer_invoice_data":JSON.stringify(body),
                   "subscription_id":1,
                   "plan_history_id":1,
@@ -75,7 +62,6 @@ export default function HorizontalLinearStepper({navigation,conf}) {
                   "invoice_due_ts":new Date().toLocaleString() + '',
                   "invoice_paid_ts":new Date().toLocaleString() + ''
               }
-<<<<<<< HEAD
                
            console.log(invoicebody)
               axios({
@@ -86,15 +72,6 @@ export default function HorizontalLinearStepper({navigation,conf}) {
 
       }
          
-=======
-
-           console.log(invoicebody)
-              axios({
-                  method: 'post',
-                  url: 'https://dpzapi.apps.xplat.fis.com.vn/api/v1/invoice',           
-                  data: invoicebody
-              });     
->>>>>>> 8f14744 (ok)
 
 
     }

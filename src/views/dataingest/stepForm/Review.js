@@ -4,7 +4,6 @@ import ActionButtons from "./ActionButton";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 
-<<<<<<< HEAD
 
 export const Review = (props) => {
   const conf = props.conf
@@ -12,11 +11,6 @@ export const Review = (props) => {
   //const classes = useStyles();  
   const divStyle = {
     margin: '5px',
-=======
-export const Review = ({conf,submit,navigation}) => {
-  const json = {
-    conf
->>>>>>> 8f14744 (ok)
   };
 
   const validate = () => {
@@ -43,7 +37,7 @@ export const Review = ({conf,submit,navigation}) => {
           }}
           variant="standard"
 
-           focused='true'
+          focused="true"
           size="small"
 
         />
@@ -60,7 +54,7 @@ export const Review = ({conf,submit,navigation}) => {
             readOnly: true,
             disableUnderline: true,
           }}
-          focused='true'
+          focused="true"
           variant="standard"
 
         />
@@ -77,7 +71,7 @@ export const Review = ({conf,submit,navigation}) => {
             readOnly: true,
             disableUnderline: true,
           }}
-          focused='true'
+          focused="true"
           variant="standard"
 
         />
@@ -87,7 +81,7 @@ export const Review = ({conf,submit,navigation}) => {
           id="tags_name"
           name="tags_name"
 
-          focused='true'
+          focused="true"
           variant="standard"
 
           value={conf?.tags}
@@ -104,7 +98,7 @@ export const Review = ({conf,submit,navigation}) => {
           id="subscription_id"
           name="subscription_id"
 
-          focused='true'
+          focused="true"
           variant="standard"
 
           value={conf?.subscription_id}
@@ -140,7 +134,7 @@ export const Review = ({conf,submit,navigation}) => {
                 readOnly: true,
                 disableUnderline: true,
               }}
-              focused='true'
+              focused="true"
               variant="standard"
             />
             <TextField
@@ -152,7 +146,7 @@ export const Review = ({conf,submit,navigation}) => {
                 readOnly: true,
                 disableUnderline: true,
               }}
-              focused='true'
+              focused="true"
               variant="standard"
             />
             <TextField
@@ -164,7 +158,7 @@ export const Review = ({conf,submit,navigation}) => {
                 readOnly: true,
                 disableUnderline: true,
               }}
-              focused='true'
+              focused="true"
               variant="standard"
             />
             <br></br>
@@ -177,7 +171,7 @@ export const Review = ({conf,submit,navigation}) => {
                 readOnly: true,
                 disableUnderline: true,
               }}
-              focused='true'
+              focused="true"
               variant="standard"
             />
             <TextField
@@ -189,7 +183,7 @@ export const Review = ({conf,submit,navigation}) => {
                 readOnly: true,
                 disableUnderline: true,
               }}
-              focused='true'
+              focused="true"
               variant="standard"
               />
 
@@ -204,7 +198,7 @@ export const Review = ({conf,submit,navigation}) => {
                 readOnly: true,
                 disableUnderline: true,
               }}
-              focused='true' 
+              focused="true"
               variant="standard"
               />
             <TextField
@@ -216,7 +210,7 @@ export const Review = ({conf,submit,navigation}) => {
                 readOnly: true,
                 disableUnderline: true,
               }}
-              focused='true' 
+              focused="true"
               variant="standard"
               />
           </Box>
@@ -249,7 +243,7 @@ export const Review = ({conf,submit,navigation}) => {
                 readOnly: true,
                 disableUnderline: true,
               }}
-              focused='true' 
+              focused="true"
               variant="standard"
             />
             <TextField
@@ -261,7 +255,7 @@ export const Review = ({conf,submit,navigation}) => {
                 readOnly: true,
                 disableUnderline: true,
               }}
-              focused='true' 
+              focused="true"
               variant="standard"
             />
             <br></br>
@@ -278,7 +272,7 @@ export const Review = ({conf,submit,navigation}) => {
               InputProps={{
                 readOnly: true,
               }}
-              focused='true' 
+              focused="true"
               
             />
             <br></br>
@@ -293,7 +287,7 @@ export const Review = ({conf,submit,navigation}) => {
                 readOnly: true,
                 disableUnderline: true,
               }}
-              focused='true' 
+              focused="true"
               variant="standard"
             />
             <TextField
@@ -305,7 +299,7 @@ export const Review = ({conf,submit,navigation}) => {
                 readOnly: true,
                 disableUnderline: true,
               }}
-              focused='true' 
+              focused="true"
               variant="standard"
             />
 

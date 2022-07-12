@@ -28,6 +28,7 @@ const Databackuppage = Loadable(lazy(() => import('views/databackup')));
 const Dataaipage = Loadable(lazy(() => import('views/dataai')));
 const Financereportpage = Loadable(lazy(() => import('views/financereport')));
 const Datavisualpage = Loadable(lazy(() => import('views/datavisual')));
+<<<<<<< HEAD
 const Dragonflypage = Loadable(lazy(() => import('views/dragonfly')));
 //const MonitorJob = Loadable(lazy(() => import('views/dataingest/MonitorJob')));
 const CreateflowJob = Loadable(lazy(() => import('views/dataingest/CreateNewFlow')));
@@ -50,6 +51,11 @@ const Mysubscription = Loadable(lazy(() => import('views/registerservice/Mysubsc
 
 
 
+=======
+const Dragonflypage= Loadable(lazy(() => import('views/dragonfly')));
+const MonitorJob = Loadable(lazy(() => import('views/dataingest/MonitorJob')));
+const CreateflowJob  = Loadable(lazy(() => import('views/dataingest/CreateFlowJob')));
+>>>>>>> 03ba192 (ok)
 // ==============================|| MAIN ROUTING ||============================== //
 
 const MainRoutes = {
@@ -144,6 +150,7 @@ const MainRoutes = {
         }
         ,
         {
+<<<<<<< HEAD
             path: '/dataingest/createflowjob',
             element: <CreateflowJob />
         },
@@ -191,6 +198,15 @@ const MainRoutes = {
         {
             path: '/documents',
             element: <Documents />
+=======
+            path: '/dataingest/monitorjob',
+            element: <MonitorJob />
+>>>>>>> 03ba192 (ok)
+        }
+        ,
+        {
+            path: '/dataingest/createflowjob',
+            element: <CreateflowJob />
         }
     ]
 };
