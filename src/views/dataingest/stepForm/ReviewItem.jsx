@@ -244,7 +244,7 @@ export default function ReviewItem(props) {
                             noValidate
                             autoComplete="off">
 
-                            <strong>Source {index + 1} </strong><br></br>
+                           <h2> <strong>Nguồn dữ liệu {index + 1} </strong><br></br></h2>
                             {
                                 !edit && <Select name='sourcetype' value={form.sourcetype} onChange={event => props.handleFormSrcChange(event, index)}
                                     size="small"
@@ -391,7 +391,7 @@ export default function ReviewItem(props) {
                             key={index}
 
                         >
-                            <strong>Query {index + 1} </strong>
+                           <h2> <strong>Tổng hợp {index + 1} </strong></h2>
                             <br></br>
                             <TextField
                                 label="Tên job tổng hợp"
