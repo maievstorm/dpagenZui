@@ -7,13 +7,11 @@ import Grid from '@mui/material/Grid';
 import { TextField, Select, Button } from '@mui/material';
 import MenuItem from '@mui/material/MenuItem';
 import UserService from 'services/UserService';
-import { getSubcription } from 'services/DataIngest';
+import { getSubcription,CreateInvoiceProcess } from 'services/DataIngest';
 import MainCard from 'ui-component/cards/MainCard';
+//import { getSubcription,createKafkaConnector, CreateInvoiceProcess, GetKafkaConnectors } from 'services/DataIngest';
 
- 
-
-
-
+import { createKafkaConnector,GetKafkaConnectors } from 'services/KafkaConnect';
 
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -23,13 +21,6 @@ const Item = styled(Paper)(({ theme }) => ({
     textAlign: 'center',
     color: theme.palette.text.secondary,
 }));
-
-
-
-
-
-
-
 
 
 const RegisterStreaming = () => {
@@ -129,6 +120,153 @@ const RegisterStreaming = () => {
     
 
 
+    // const submit = (e) => {
+    //     e.preventDefault();
+    //     let stream = {
+    //         'data': [
+    //             {
+    //                 'source': Streamsource,
+    //                 'target': Streamtarget
+    //             }
+
+    //         ]
+    //     }
+
+
+
+    //     const body = {
+    //         "conf": { stream },
+    //     }
+
+
+    //     console.log(JSON.stringify(body));
+    //     const invoicebody =
+    //     {
+    //         "item_name": Streamsource.tentientrinh,
+    //         "item_type": 'stream',
+    //         "customer_invoice_data": JSON.stringify(body),
+    //         "subscription_id": Streamsource.subscription_id,
+    //         "plan_history_id": 1,
+    //         "invoice_period_start_date": new Date().toLocaleString() + '',
+    //         "invoice_period_end_date": new Date().toLocaleString() + '',
+    //         "invoice_description": Streamsource.tentientrinh,
+    //         "invoice_amount": 100,
+    //         "invoice_created_ts": new Date().toLocaleString() + '',
+    //         "invoice_due_ts": new Date().toLocaleString() + '',
+    //         "invoice_paid_ts": new Date().toLocaleString() + ''
+    //     }
+
+    //     console.log(JSON.stringify(invoicebody));
+
+
+    // }
+
+    function getConnectorClass(dbType) {
+        var ret;
+
+        if (dbType == 'mysql') {
+            ret = 'io.debezium.connector.mysql.MySqlConnector'
+        }
+
+        else if (dbType == 'sqlserver') {
+            ret = 'io.debezium.connector.sqlserver.SqlServerConnector'
+        }
+
+        else if (dbType == 'oracle') {
+            ret = 'io.debezium.connector.oracle.OracleConnector'
+        }
+
+        else if (dbType == 'postgres') {
+            ret = 'io.debezium.connector.postgresql.PostgresConnector'
+        }
+
+
+        return ret
+    }
+
+
+    function toSourcePayload(Streamsource, nameProgress) {
+        var sourcePayload = {};
+        var configPayload = {};
+
+        let connectorClass = getConnectorClass(Streamsource.sdbtype);
+        configPayload['connector.class'] = connectorClass
+        configPayload['database.server.name'] = Streamsource.sdatabaseservername
+        configPayload['database.hostname'] = Streamsource.sdatabasehostname
+        configPayload['database.port'] = Streamsource.sdatabaseport
+        configPayload['database.user'] = Streamsource.sdatabaseuser
+        configPayload['database.password'] = Streamsource.sdatabasepassword
+        configPayload['database.dbname'] = Streamsource.sdatabasedbname
+        configPayload['table.include.list'] = Streamsource.stableincludelist
+        configPayload['database.history.kafka.bootstrap.servers'] = 'kafkadpa-headless:9092'
+        configPayload['database.history.kafka.topic'] = `${nameProgress}_dbhistory`
+        configPayload['database.serverTimezone'] = 'Asia/Ho_Chi_Minh'
+        configPayload['decimal.handling.mode'] = 'double'
+        configPayload['time.precision.mode'] = 'connect'
+        configPayload['transforms'] = 'route,unwrap'
+        configPayload['transforms.route.type'] = 'org.apache.kafka.connect.transforms.RegexRouter'
+        configPayload['transforms.route.regex'] = '([^.]+)\\.([^.]+)\\.([^.]+)'
+        configPayload['transforms.route.replacement'] = '$3'
+        configPayload['transforms.unwrap.type'] = 'io.debezium.transforms.ExtractNewRecordState'
+        configPayload['transforms.unwrap.drop.tombstones'] = 'false'
+
+        sourcePayload["name"] = `${nameProgress}_source`;
+        sourcePayload["config"] = configPayload;
+
+        return JSON.stringify(sourcePayload);
+    }
+
+    function getUrlSinkDatabase(dbType, host, port, databaseName) {
+        var ret;
+
+        if (dbType == 'mysql') {
+            ret = `jdbc:mysql://${host}/${databaseName}`
+        }
+
+        else if (dbType == 'sqlserver') {
+            ret = `jdbc:sqlserver://${host};instance=SQLEXPRESS;databaseName=${databaseName}`
+        }
+
+        else if (dbType == 'oracle') {
+            ret = `jdbc:oracle:thin:@${host}:${port}:${databaseName}`
+        }
+
+        else if (dbType == 'postgres') {
+            ret = `jdbc:postgresql://${host}:${port}/${databaseName}`
+        }
+
+
+        return ret
+    }
+
+    function toSinkPayload(Streamsource, Streamtarget) {
+        var sinkPayload = {};
+        var configPayload = {};
+
+        configPayload['connector.class'] = 'io.confluent.connect.jdbc.JdbcSinkConnector'
+        configPayload['topics'] = Streamtarget.ttableincludelist
+        var url = getUrlSinkDatabase(Streamtarget.tdbtype, Streamtarget.tdatabasehostname, Streamtarget.tdatabaseport, Streamtarget.tdatabasedbname)
+        configPayload['connection.url'] = url
+        configPayload['connection.user'] = Streamtarget.tdatabaseuser
+        configPayload['connection.password'] = Streamtarget.tdatabasepassword
+        configPayload['transforms'] = 'unwrap'
+        configPayload['transforms.unwrap.type'] = 'io.debezium.transforms.ExtractNewRecordState'
+        configPayload['auto.create'] = 'false'
+        configPayload['insert.mode'] = 'upsert'
+        configPayload['delete.enabled'] = 'true'
+        configPayload['pk.fields'] = 'id'
+        configPayload['pk.mode'] = 'double'
+        configPayload['transforms.unwrap.drop.tombstones'] = 'connect'
+        configPayload['time.precision.mode'] = 'connect'
+        configPayload['table.name.format'] = '${topic}'
+
+        sinkPayload['name'] = `${Streamsource.tentientrinh}_sink`;
+        sinkPayload['config'] = configPayload;
+
+        return JSON.stringify(sinkPayload);
+    }
+
+
     const submit = (e) => {
         e.preventDefault();
         let stream = {
@@ -141,32 +279,46 @@ const RegisterStreaming = () => {
             ]
         }
 
+        var nameProgress = Streamsource.tentientrinh;
+        const inputString = JSON.stringify(stream);
+        var jsonInput = JSON.parse(inputString);
 
+        var sourcePayLoadData = toSourcePayload(Streamsource, nameProgress);
+        var sinkPayLoadData = toSinkPayload(Streamsource, Streamtarget);
+        console.log(sourcePayLoadData);
+        console.log(sinkPayLoadData);
 
         const body = {
             "conf": { stream },
         }
 
-
-        console.log(JSON.stringify(body));
+        console.log('Start create connector.')
         const invoicebody =
         {
-            "item_name": Streamsource.tentientrinh,
+            "item_name": nameProgress,
             "item_type": 'stream',
             "customer_invoice_data": JSON.stringify(body),
             "subscription_id": Streamsource.subscription_id,
             "plan_history_id": 1,
             "invoice_period_start_date": new Date().toLocaleString() + '',
             "invoice_period_end_date": new Date().toLocaleString() + '',
-            "invoice_description": Streamsource.tentientrinh,
+            "invoice_description": nameProgress,
             "invoice_amount": 100,
             "invoice_created_ts": new Date().toLocaleString() + '',
             "invoice_due_ts": new Date().toLocaleString() + '',
             "invoice_paid_ts": new Date().toLocaleString() + ''
         }
-
-        console.log(JSON.stringify(invoicebody));
-
+        CreateInvoiceProcess(invoicebody);
+        createKafkaConnector(sourcePayLoadData).then(res => {
+            if (res.status === 200) {
+                console.log('Created successfully.');
+                console.log(res.data);
+               // CreateInvoiceProcess(invoicebody);
+                
+            }
+        })
+            .catch(err => console.log(err.data));
+            
 
     }
 
@@ -200,7 +352,7 @@ const RegisterStreaming = () => {
                         id="tentientrinh"
                         label="Tên tiến trình"
                         fullWidth
-                        value={UserService.getUsername()+'_'+Streamsource.tentientrinh}
+                        value={Streamsource.tentientrinh}
                         onChange={sonInputChanged}
                         style={divStyle}
 
