@@ -124,7 +124,7 @@ export const Review = (props) => {
             noValidate
             autoComplete="off">
 
-            <strong>Source {index + 1} </strong><br></br>
+            <h3><strong>Nguồn dữ liệu {index + 1} </strong></h3>
             <TextField
               label='Source Type'
               name='sourcetype'
@@ -230,8 +230,8 @@ export const Review = (props) => {
           //   noValidate
           //   autoComplete="off"
             >
-            <strong>Query {index + 1} </strong>
-            <br></br>
+            <h3><strong>Tổng hợp {index + 1} </strong></h3>
+       
             <TextField
               label="Tên job tổng hợp"
               id="queryname"

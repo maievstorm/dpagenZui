@@ -91,7 +91,8 @@ export const Source = (props) => {
                 {formSrcFields?.map((form, index) => {
                     return (
                         <div key={index}  >
-                            <strong>Source {index + 1} </strong>
+                            <h2><strong>Nguồn dữ liệu {index + 1} </strong></h2>
+
                             <Select name='sourcetype' value={form.sourcetype} onChange={event => handleFormSrcChange(event, index)}
                                 size="small"
                                 style={divStyle}
