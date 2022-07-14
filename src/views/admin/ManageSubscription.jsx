@@ -6,10 +6,14 @@ import config from "../../config";
 import { Tooltip, IconButton } from '@mui/material';
 import PersonAddAltOutlinedIcon from '@mui/icons-material/PersonAddAltOutlined';
 import { CreateInvoiceProcess } from 'services/DataIngest';
- 
 
-
-
+import Button from '@mui/material/Button';
+import Input from '@mui/material/Input';
+import { CreateUserStorage } from 'services/StorageConf';
+import { DpzStorageConf } from 'services/StorageConf';
+import KeycloakService from 'services/KeycloakService';
+import { changeRequestStatus } from 'services/OfferPlanService';
+import UserAccount from 'services/UserAccount';
 
 
 export default function ManageSubscription() {
@@ -122,7 +126,7 @@ export default function ManageSubscription() {
             // setData(res.data.data);
         }).catch(err => { console.log(err) })
     }, []);
-
+    console.log(rows)
 
 
     // {
@@ -163,18 +167,18 @@ export default function ManageSubscription() {
     // }
 
 
-       
+
 
     const [loading, setLoading] = React.useState(true);
 
-    const createuserandsub = (account_id,first_name, last_name, user_name, password, email, current_plan_id, offer_id, requestsub_id,request_type) => {
+    const createuserandsub = (id,account_id, first_name, last_name, user_name, email, password, current_plan_id, offer_id, requestsub_id, request_type) => {
 
         const date = new Date();
 
         const year = date.getFullYear();
         const month = date.getMonth();
         const day = date.getDate();
-       
+
         const ingroup = [{
             "time_added": new Date().toLocaleString() + '',
             "time_removed": null,
@@ -189,19 +193,19 @@ export default function ManageSubscription() {
                 "current_plan_id": current_plan_id,
                 "offer_id": offer_id,
                 "offer_start_date": new Date().toLocaleString() + '',
-                "offer_end_date": new Date(year + 1, month, day).toLocaleString()+ '',
+                "offer_end_date": new Date(year + 1, month, day).toLocaleString() + '',
                 "date_subscribed": new Date().toLocaleString() + '',
-                "valid_to": new Date(year + 1, month, day).toLocaleString()+ '',
+                "valid_to": new Date(year + 1, month, day).toLocaleString() + '',
                 "date_unsubscribed": null,
                 "insert_ts": new Date().toLocaleString() + '',
                 "requestsub_id": requestsub_id,
-                "subscription_name" :'Thuê bao '+ user_name+ ' plan ' +current_plan_id+' offer ' +offer_id +' '+new Date().toLocaleString() + ''
+                "subscription_name": 'Thuê bao ' + user_name + ' plan ' + current_plan_id + ' offer ' + offer_id + ' ' + new Date().toLocaleString() + ''
 
 
             }
         ];
 
-        const bodydwh={
+        const bodydwh = {
             host: 'postgresql-ha-pgpool',
             port: '5432',
             user: 'postgres',
@@ -209,28 +213,26 @@ export default function ManageSubscription() {
             database: 'postgres',
         }
 
-        const bodybigdata={
+        const bodybigdata = {
             host: '10.14.222.186:8020/warehouse/tablespace/managed/hive',
             user: user_name,
             password: password,
             database: 'cdp_cn.db',
         }
 
-        const bodystorage={
+        const bodystorage = {
             bucket: 'trinhhkbucket',
-            accessKey:"85dtbrEshxH9d6Jf",
-            secretKey:"LC7ziR8BnstCgiL2te1bykAp5HwV4MOO",
+            accessKey: "85dtbrEshxH9d6Jf",
+            secretKey: "LC7ziR8BnstCgiL2te1bykAp5HwV4MOO",
         }
 
 
 
-      console.log(request_type)
-        if(request_type==1)
-        {
+        if (request_type == 1) {
             const bodycreate = {
 
                 "user_group_type_id": 10,
-                "customer_invoice_data": user_name+' With offer '+ offer_id,
+                "customer_invoice_data": user_name + ' With offer ' + offer_id,
                 "insert_ts": new Date().toLocaleString() + '',
                 "account_id": account_id,
                 "ingroup": ingroup,
@@ -240,82 +242,90 @@ export default function ManageSubscription() {
                 "current_plan_id": current_plan_id,
                 "offer_id": offer_id,
                 "offer_start_date": new Date().toLocaleString() + '',
-                "offer_end_date": new Date(year + 1, month, day).toLocaleString()+ '',
+                "offer_end_date": new Date(year + 1, month, day).toLocaleString() + '',
                 "date_subscribed": new Date().toLocaleString() + '',
-                "valid_to": new Date(year + 1, month, day).toLocaleString()+ '',
+                "valid_to": new Date(year + 1, month, day).toLocaleString() + '',
                 "date_unsubscribed": null,
                 "insert_ts": new Date().toLocaleString() + '',
                 "requestsub_id": requestsub_id,
-                "subscription_name" :'Thuê bao '+ user_name+ ' plan ' +current_plan_id+' offer ' +offer_id +' '+new Date().toLocaleString() + '',
+                "subscription_name": 'Thuê bao ' + user_name + ' plan ' + current_plan_id + ' offer ' + offer_id + ' ' + new Date().toLocaleString() + '',
                 "requestsub_id": requestsub_id
-    
+
             };
             console.log(JSON.stringify(bodycreate));
             axios({
                 method: 'post',
                 url: config.rootapi + '/subscription/creategroupsub',
                 data: bodycreate
-              })
+            })
                 .then(res => {
                     console.log(res.data.subscription.id)
 
                     const invoicebodybigdata =
                     {
-                      "item_name": user_name+'bigdata' +res.data.subscription.id,
-                      "item_type": 'bigdata',
-                      "customer_invoice_data": JSON.stringify(bodybigdata),
-                      "subscription_id": res.data.subscription.id,
-                      "plan_history_id": current_plan_id,
-                      "invoice_period_start_date": new Date().toLocaleString() + '',
-                      "invoice_period_end_date": new Date().toLocaleString() + '',
-                      "invoice_description": user_name+'bigdata' +res.data.subscription.id,
-                      "invoice_amount": 100,
-                      "invoice_created_ts": new Date().toLocaleString() + '',
-                      "invoice_due_ts": new Date().toLocaleString() + '',
-                      "invoice_paid_ts": new Date().toLocaleString() + ''
+                        "item_name": user_name + 'bigdata' + res.data.subscription.id,
+                        "item_type": 'bigdata',
+                        "customer_invoice_data": JSON.stringify(bodybigdata),
+                        "subscription_id": res.data.subscription.id,
+                        "plan_history_id": current_plan_id,
+                        "invoice_period_start_date": new Date().toLocaleString() + '',
+                        "invoice_period_end_date": new Date().toLocaleString() + '',
+                        "invoice_description": user_name + 'bigdata' + res.data.subscription.id,
+                        "invoice_amount": 100,
+                        "invoice_created_ts": new Date().toLocaleString() + '',
+                        "invoice_due_ts": new Date().toLocaleString() + '',
+                        "invoice_paid_ts": new Date().toLocaleString() + ''
                     }
-            
+
                     const invoicebodystorage =
                     {
-                      "item_name": user_name+'storage' +res.data.subscription.id,
-                      "item_type": 'storage',
-                      "customer_invoice_data": JSON.stringify(bodystorage),
-                      "subscription_id": res.data.subscription.id,
-                      "plan_history_id": current_plan_id,
-                      "invoice_period_start_date": new Date().toLocaleString() + '',
-                      "invoice_period_end_date": new Date().toLocaleString() + '',
-                      "invoice_description": user_name+'storage' +res.data.subscription.id,
-                      "invoice_amount": 100,
-                      "invoice_created_ts": new Date().toLocaleString() + '',
-                      "invoice_due_ts": new Date().toLocaleString() + '',
-                      "invoice_paid_ts": new Date().toLocaleString() + ''
+                        "item_name": user_name + 'storage' + res.data.subscription.id,
+                        "item_type": 'storage',
+                        "customer_invoice_data": JSON.stringify(bodystorage),
+                        "subscription_id": res.data.subscription.id,
+                        "plan_history_id": current_plan_id,
+                        "invoice_period_start_date": new Date().toLocaleString() + '',
+                        "invoice_period_end_date": new Date().toLocaleString() + '',
+                        "invoice_description": user_name + 'storage' + res.data.subscription.id,
+                        "invoice_amount": 100,
+                        "invoice_created_ts": new Date().toLocaleString() + '',
+                        "invoice_due_ts": new Date().toLocaleString() + '',
+                        "invoice_paid_ts": new Date().toLocaleString() + ''
                     }
-            
+
                     const invoicebodydwh =
                     {
-                      "item_name": user_name+'dwh' +res.data.subscription.id,
-                      "item_type": 'dwh',
-                      "customer_invoice_data": JSON.stringify(bodydwh),
-                      "subscription_id": res.data.subscription.id,
-                      "plan_history_id": current_plan_id,
-                      "invoice_period_start_date": new Date().toLocaleString() + '',
-                      "invoice_period_end_date": new Date().toLocaleString() + '',
-                      "invoice_description": user_name+'dwh' +res.data.subscription.id,
-                      "invoice_amount": 100,
-                      "invoice_created_ts": new Date().toLocaleString() + '',
-                      "invoice_due_ts": new Date().toLocaleString() + '',
-                      "invoice_paid_ts": new Date().toLocaleString() + ''
+                        "item_name": user_name + 'dwh' + res.data.subscription.id,
+                        "item_type": 'dwh',
+                        "customer_invoice_data": JSON.stringify(bodydwh),
+                        "subscription_id": res.data.subscription.id,
+                        "plan_history_id": current_plan_id,
+                        "invoice_period_start_date": new Date().toLocaleString() + '',
+                        "invoice_period_end_date": new Date().toLocaleString() + '',
+                        "invoice_description": user_name + 'dwh' + res.data.subscription.id,
+                        "invoice_amount": 100,
+                        "invoice_created_ts": new Date().toLocaleString() + '',
+                        "invoice_due_ts": new Date().toLocaleString() + '',
+                        "invoice_paid_ts": new Date().toLocaleString() + ''
                     }
                     CreateInvoiceProcess(invoicebodybigdata);
                     CreateInvoiceProcess(invoicebodystorage);
                     CreateInvoiceProcess(invoicebodydwh);
+                    CreateUserStorage(invoicebodystorage?.item_name)
+                    .then(()=>{
+                        console.log('Create successfully:',invoicebodystorage?.item_name)
+                    })
+                    .catch(err=> console.log(err))
 
-                  setTimeout(() => {
-                    setLoading(false) 
-                  }, 5000);
-    
+                    setTimeout(() => {
+                        setLoading(false)
+                    }, 5000);
+
                 })
-                .catch(err => console.log(err))
+                .catch(err =>{
+                    console.log(err)
+                    
+                })
 
 
         }
@@ -335,13 +345,29 @@ export default function ManageSubscription() {
             //     "ingroup": ingroup,
             //     "subscription": subscription,
             //     "requestsub_id": requestsub_id
-    
+
             // };
-            console.log('aaa');
-          
+
+            KeycloakService.addUser(user_name, first_name, last_name, email, password)
+            .then(()=>{
+                console.log('Add user done!')
+                let status = 1
+                changeRequestStatus(id,status)
+                .then(()=>{
+                    console.log('Update user status done!')
+                    UserAccount.addUser(first_name, last_name,user_name, password, email)
+                    window.location.reload()
+                })
+                .catch(err => console.log(err))
+
+            })
+            .catch(err => console.log(err))
+            
+
+
         }
 
-        
+
 
 
     }
@@ -358,6 +384,8 @@ export default function ManageSubscription() {
                     <IconButton
                         onClick={() => {
                             createuserandsub(
+                                rows[selectedRows.data[0].dataIndex]['id'],
+
                                 rows[selectedRows.data[0].dataIndex]['user_account_id'],
                                 rows[selectedRows.data[0].dataIndex]['fullname'],
                                 rows[selectedRows.data[0].dataIndex]['fullname'],
@@ -386,6 +414,20 @@ export default function ManageSubscription() {
 
     };
 
+    const [bucket, setBucket] = useState('')
+
+
+    const submit = () => {
+        let akey = 'naQrl3yAjoue8o22'
+        let skey = 'A0d6ZmTAbcVrhgTorNzCFBddtAWUjruP'
+        DpzStorageConf(akey, skey)
+        .then(minio=>{
+            console.log(minio)
+
+        })
+        .catch(err=> console.log(err))
+
+    }
 
 
 
@@ -399,6 +441,11 @@ export default function ManageSubscription() {
                 columns={columns}
                 options={options}
             />
+
+            <Input onChange={e => setBucket(e.target.value)} value={bucket} />
+            <Button onClick={() => CreateUserStorage(bucket)}>Create</Button>
+            <Button onClick={submit}>Create</Button>
+
 
         </div>
 
