@@ -31,17 +31,17 @@ export default function ManageFlow() {
             label: 'Tên tiến trình',
         }
         ,
-        {
-            name: "customer_invoice_data",
-            options: {
-                filter: false,
-                customBodyRender: (value) => (
-                    <div><pre>{value}</pre></div>
-                )
-            },
-            label: 'Thông số tiến trình'
+        // {
+        //     name: "customer_invoice_data",
+        //     options: {
+        //         filter: false,
+        //         customBodyRender: (value) => (
+        //             <div><pre>{value}</pre></div>
+        //         )
+        //     },
+        //     label: 'Thông số tiến trình'
             
-        },
+        // },
         {
             name: "invoice_created_ts",
             options: {
