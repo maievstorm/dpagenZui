@@ -26,6 +26,7 @@ export default function ManageDwh() {
             name: "customer_invoice_data",
             options: {
                 filter: false,
+               
                 customBodyRender: (value) => (
                     <div><pre>{value}</pre></div>
                 )
