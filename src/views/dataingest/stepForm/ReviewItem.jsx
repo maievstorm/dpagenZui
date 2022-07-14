@@ -455,21 +455,6 @@ export default function ReviewItem(props) {
                             <br></br>
 
 
-                            {/* <TextField
-                                label="Target table"
-                                size="small"
-                                name='targettable'
-                                value={formquery?.targettable}
-                                onChange={event => props.handleformQuery(event, index)}
-
-                                style={divStyle}
-                                InputProps={{
-                                    readOnly: edit,
-                                    disableUnderline: edit,
-                                }}
-                                variant="standard"
-                                focused
-                            /> */}
 
                             <Select name='targettable'
                                 value={formquery?.targettable}

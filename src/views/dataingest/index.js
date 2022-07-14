@@ -8,10 +8,7 @@ import ManageFlow from './ManageFlow';
 // ==============================|| Bigdata Page ||============================== //
 
 const Dataingestpage = () => (
-    
         <ManageFlow/>
-     
-           
 );
 
 export default Dataingestpage;

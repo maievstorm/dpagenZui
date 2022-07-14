@@ -7,8 +7,7 @@ import TextField from "@mui/material/TextField";
 
 export const Review = (props) => {
   const conf = props.conf
-  //console.log(conf)
-  //const classes = useStyles();  
+ 
   const divStyle = {
     margin: '5px',
   };

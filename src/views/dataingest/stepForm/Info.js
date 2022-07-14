@@ -24,7 +24,7 @@ export const Info = (props) => {
   const [error, setError] = useState("");
 
   const [daginfo, setDagInfo] = useState({})
-  console.log(daginfo)
+  
 
   const [subscription_id, setSubscription_id] = useState([]);
 
@@ -65,7 +65,7 @@ export const Info = (props) => {
       [targetName]: targetValue
     }));
   };
-  console.log('daginfo:', daginfo)
+ 
 
   const scheduletypes = [
     {

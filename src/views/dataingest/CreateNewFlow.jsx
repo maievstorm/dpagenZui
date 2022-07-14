@@ -93,7 +93,7 @@ const CreateNewFlow = () => {
       "invoice_due_ts": new Date().toLocaleString() + '',
       "invoice_paid_ts": new Date().toLocaleString() + ''
     }
-    //console.log(invoicebody)
+   
     axios({
       method: 'post',
       url: config.airflowapi + '/dags/dag_create_job_file/dagRuns',

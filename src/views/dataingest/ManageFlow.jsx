@@ -8,9 +8,9 @@ import AddIcon from '@mui/icons-material/Add';
 import { useNavigate } from "react-router-dom";
 import Button from '@mui/material/Button';
 import { Tooltip, IconButton } from '@mui/material';
-
 import RateReviewIcon from '@mui/icons-material/RateReview';
 import { GetProcess } from 'services/DataIngest';
+
 
 export default function ManageFlow() {
     
@@ -29,6 +29,18 @@ export default function ManageFlow() {
                 filter: true
             },
             label: 'Tên tiến trình',
+        }
+        ,
+        {
+            name: "customer_invoice_data",
+            options: {
+                filter: false,
+                customBodyRender: (value) => (
+                    <div><pre>{value}</pre></div>
+                )
+            },
+            label: 'Thông số tiến trình'
+            
         },
         {
             name: "invoice_created_ts",
@@ -48,7 +60,8 @@ export default function ManageFlow() {
                 return {
                     'id_invoice':item.id_invoice,
                     'item_name':item.item_name,
-                    'invoice_created_ts':invoice_created_ts
+                    'invoice_created_ts':invoice_created_ts,
+                    'customer_invoice_data':item.customer_invoice_data
                 }
             }));
         }).catch(err => { console.log(err) })
@@ -156,14 +169,16 @@ export default function ManageFlow() {
 
     const onClickHandler = () => navigate('/dataingest/createflowjob')
 
-
+    const [isLoading, setLoading] = useState(true);
+    useEffect(() => {
+        setLoading(false);
+    }, []);
 
     return (
         <div>
             <Button onClick={onClickHandler} > {<AddIcon />} Tiến trình mới</Button>
-            {/* <Button   > {<ModeEditIcon/>} Tải xuống</Button>
-                <Button   > {<ModeEditIcon/>} Xoá</Button> */}
-            <MUIDataTable
+          
+            <MUIDataTable isLoading={isLoading}
                 title={"Danh sách tiến trình"}
                 data={rows}
                 columns={columns}

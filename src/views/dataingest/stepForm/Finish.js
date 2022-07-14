@@ -7,7 +7,7 @@ import { useEffect } from "react";
 
 export const Finish = (props) => {
   const loading = props.loading
-  console.log(props.loading)
+  //console.log(props.loading)
   const timerRef = React.useRef();
 
   useEffect(

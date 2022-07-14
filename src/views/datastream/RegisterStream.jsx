@@ -6,11 +6,8 @@ import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import { TextField, Select, Button } from '@mui/material';
 import MenuItem from '@mui/material/MenuItem';
-import UserService from 'services/UserService';
 import { getSubcription,CreateInvoiceProcess } from 'services/DataIngest';
 import MainCard from 'ui-component/cards/MainCard';
-//import { getSubcription,createKafkaConnector, CreateInvoiceProcess, GetKafkaConnectors } from 'services/DataIngest';
-
 import { createKafkaConnector,GetKafkaConnectors } from 'services/KafkaConnect';
 
 
@@ -81,20 +78,6 @@ const RegisterStreaming = () => {
 
 
 
-    // const [Streamtarget, setStreamtarget] = useState([
-    //     {
-    //         tdbtype: '',
-    //         tdatabaseservername: '',
-    //         tdatabasehostname: '',
-    //         tdatabaseport: '',
-    //         tdatabasedbname: '',
-    //         tdatabaseuser: '',
-    //         tdatabasepassword: '',
-    //         ttableincludelist: ''
-
-    //     },
-    // ])
-
     const [Streamsource, setStreamsource] = useState({})
     const [Streamtarget, setStreamtarget] = useState({})
 
@@ -120,63 +103,22 @@ const RegisterStreaming = () => {
     
 
 
-    // const submit = (e) => {
-    //     e.preventDefault();
-    //     let stream = {
-    //         'data': [
-    //             {
-    //                 'source': Streamsource,
-    //                 'target': Streamtarget
-    //             }
-
-    //         ]
-    //     }
-
-
-
-    //     const body = {
-    //         "conf": { stream },
-    //     }
-
-
-    //     console.log(JSON.stringify(body));
-    //     const invoicebody =
-    //     {
-    //         "item_name": Streamsource.tentientrinh,
-    //         "item_type": 'stream',
-    //         "customer_invoice_data": JSON.stringify(body),
-    //         "subscription_id": Streamsource.subscription_id,
-    //         "plan_history_id": 1,
-    //         "invoice_period_start_date": new Date().toLocaleString() + '',
-    //         "invoice_period_end_date": new Date().toLocaleString() + '',
-    //         "invoice_description": Streamsource.tentientrinh,
-    //         "invoice_amount": 100,
-    //         "invoice_created_ts": new Date().toLocaleString() + '',
-    //         "invoice_due_ts": new Date().toLocaleString() + '',
-    //         "invoice_paid_ts": new Date().toLocaleString() + ''
-    //     }
-
-    //     console.log(JSON.stringify(invoicebody));
-
-
-    // }
-
     function getConnectorClass(dbType) {
         var ret;
 
-        if (dbType == 'mysql') {
+        if (dbType === 'mysql') {
             ret = 'io.debezium.connector.mysql.MySqlConnector'
         }
 
-        else if (dbType == 'sqlserver') {
+        else if (dbType === 'sqlserver') {
             ret = 'io.debezium.connector.sqlserver.SqlServerConnector'
         }
 
-        else if (dbType == 'oracle') {
+        else if (dbType === 'oracle') {
             ret = 'io.debezium.connector.oracle.OracleConnector'
         }
 
-        else if (dbType == 'postgres') {
+        else if (dbType === 'postgres') {
             ret = 'io.debezium.connector.postgresql.PostgresConnector'
         }
 
@@ -219,19 +161,19 @@ const RegisterStreaming = () => {
     function getUrlSinkDatabase(dbType, host, port, databaseName) {
         var ret;
 
-        if (dbType == 'mysql') {
+        if (dbType === 'mysql') {
             ret = `jdbc:mysql://${host}/${databaseName}`
         }
 
-        else if (dbType == 'sqlserver') {
+        else if (dbType === 'sqlserver') {
             ret = `jdbc:sqlserver://${host};instance=SQLEXPRESS;databaseName=${databaseName}`
         }
 
-        else if (dbType == 'oracle') {
+        else if (dbType === 'oracle') {
             ret = `jdbc:oracle:thin:@${host}:${port}:${databaseName}`
         }
 
-        else if (dbType == 'postgres') {
+        else if (dbType === 'postgres') {
             ret = `jdbc:postgresql://${host}:${port}/${databaseName}`
         }
 
