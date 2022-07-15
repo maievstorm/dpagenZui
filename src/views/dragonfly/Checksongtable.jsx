@@ -1,106 +1,123 @@
-import React  from "react";
-import { useState, useEffect } from 'react'   
-import axios from 'axios'; // npm instal axios
-
- 
-import Paper from "@mui/material/Paper";
-
-
-import {
-    Table,
-    TableHead,
-    TableCell,
-    TableBody,
-    TableRow,
-    TablePagination,
-    TableContainer
-} from '@mui/material'
+import React from "react";
+import { useState, useEffect } from 'react'
+import axios from 'axios';
+import MUIDataTable from "mui-datatables";
+import UserService from "services/UserService";
 
 
 
-export default function ChecksongDataTable() {  
- 
-    const [page, setPage] = React.useState(0);  
-    const [data, setData] = useState([]);   
-    const [rowsPerPage, setRowsPerPage] = React.useState(5);  
+export default function ChecksongDataTable() {
 
-    const handleChangePage = (event, newPage) => {  
-        setPage(newPage);  
-      };  
-    
-      const handleChangeRowsPerPage = event => {  
-        setRowsPerPage(+event.target.value);  
-        setPage(0);  
-      };  
- 
-    useEffect(() => {   
-          axios({method:'get',url:"https://dpzapi.apps.xplat.fis.com.vn/api/v1/checksong"}).then(res=>{
-            setData(res.data.data);    
-          })  
-        }, []);   
-    return (  
-      <Paper>  
-        <TableContainer>  
-          <Table stickyHeader aria-label="sticky table">  
-          <TableHead>  
-              <TableRow>  
-                <TableCell>check_song_name</TableCell>  
-                <TableCell align="right">src_url</TableCell>  
-                <TableCell align="right">src_tags</TableCell>  
-                <TableCell align="right">src_song_duration</TableCell>  
-                <TableCell align="right">src_view_count</TableCell> 
-                <TableCell align="right">original_song_name</TableCell>  
-                <TableCell align="right">tar_song_duration</TableCell>  
-                <TableCell align="right">time_similar</TableCell>  
-                <TableCell align="right">accuracy_similar</TableCell>  
-                <TableCell align="right">fingerprint_match</TableCell>  
-                <TableCell align="right">start_match_target</TableCell>  
-                <TableCell align="right">start_match_source</TableCell>   
-              </TableRow>  
-            </TableHead>  
-            <TableBody>  
-              {data?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(row => {  
-                return (  
-  
-             <TableRow >  
-                  <TableCell component="th" scope="row">  
-                    {row.check_song_name}  
-                  </TableCell>  
-                  <TableCell align="right">{row.src_url}</TableCell>  
-                  <TableCell align="right">{row.src_tags}</TableCell>  
-                  <TableCell align="right">{row.src_song_duration}</TableCell>  
-                  <TableCell align="right">{row.src_view_count}</TableCell>  
-                  <TableCell align="right">{row.original_song_name}</TableCell>  
-                  <TableCell align="right">{row.tar_song_duration}</TableCell>  
-                  <TableCell align="right">{row.time_similar}</TableCell>  
-                  <TableCell align="right">{row.accuracy_similar}</TableCell>  
-                  <TableCell align="right">{row.fingerprint_match}</TableCell>  
-                  <TableCell align="right">{row.start_match_target}</TableCell>  
-                  <TableCell align="right">{row.start_match_source}</TableCell>  
-                  
-                </TableRow>  
-                );  
-  
-              })}  
-            </TableBody>  
-          </Table>  
-        </TableContainer>  
-        <TablePagination
-                sx={{ px: 2 }}
-                rowsPerPageOptions={[10, 20, 30]}
-                component="div"
-                count={data.length}
-                rowsPerPage={rowsPerPage}
-                page={page}
-                backIconButtonProps={{
-                    'aria-label': 'Previous Page',
-                }}
-                nextIconButtonProps={{
-                    'aria-label': 'Next Page',
-                }}
-                onPageChange={handleChangePage}
-                onRowsPerPageChange={handleChangeRowsPerPage}
-            />
-      </Paper>  
-    );  
-  } 
+
+  const [data, setData] = useState([]);
+
+  const columns = [
+    {
+      name: "id",
+      options: {
+        filter: true
+      },
+      label: 'ID'
+    },
+    {
+      name: "check_song_name",
+      options: {
+        filter: true
+      },
+      label: 'Tên bài hát',
+    }
+    ,
+    {
+      name: "src_url",
+      options: {
+        filter: false
+      },
+      label: 'Link'
+    }
+    ,
+    {
+      name: "src_song_duration",
+      options: {
+        filter: false
+      },
+      label: 'Độ dài (s)'
+    }
+    ,
+    {
+      name: "src_view_count",
+      options: {
+        filter: false
+      },
+      label: 'Số views'
+    }
+    ,
+    {
+      name: "original_song_name",
+      options: {
+        filter: false
+      },
+      label: 'Bài hát gốc'
+    }
+    ,
+    {
+      name: "time_similar",
+      options: {
+        filter: false
+      },
+      label: 'Số s giống nhau'
+    }
+    ,
+    {
+      name: "start_match_target",
+      options: {
+        filter: false
+      },
+      label: 'start_match_target'
+    }
+    ,
+    {
+      name: "start_match_source",
+      options: {
+        filter: false
+      },
+      label: 'start_match_source'
+    }
+
+  ];
+
+  const options = {
+    filter: false,
+    print: false,
+    selectableRows: "single",
+    responsive: "standard",
+
+
+
+  };
+
+
+
+
+  useEffect(() => {
+    axios({
+      method: 'get',
+      url: "https://dpaapigw.apps.xplat.fis.com.vn/dpzapipub/api/v1/checksong",
+      headers: { "Authorization": `Bearer ${UserService.getToken()}` }
+
+    }).then(res => {
+      setData(res.data.data);
+    })
+  }, []);
+  return (
+    <>
+      <MUIDataTable
+        title={"Danh sách bài hát"}
+        data={data}
+        columns={columns}
+        options={options}
+      />
+
+    </>
+
+  );
+} 

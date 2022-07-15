@@ -6,7 +6,7 @@ import React from 'react'
 // project imports
 import MainCard from 'ui-component/cards/MainCard';
 import ChecksongDataTable from './Checksongtable';
-import SongIdentifi from './SongIdentifi';
+//import SongIdentifi from './SongIdentifi';
 
 
 
@@ -18,7 +18,7 @@ const Dragonflypage = () => {
     return (
         <MainCard>
            <ChecksongDataTable></ChecksongDataTable>
-           <SongIdentifi/>
+           {/* <SongIdentifi/> */}
         </MainCard>
     )
 }
