@@ -44,13 +44,7 @@ export default function OrderDetail() {
             .catch(err => console.log(err))
     }, [])
 
-    console.log(userinfo)
-    // let offerselected= listOffer.filter( (offer) => offer.offer_id===OfferId);
-
-
-
-
-    console.log(OfferSelected.offer_name);
+    
 
     const submit = () => {
 

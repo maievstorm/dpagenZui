@@ -29,7 +29,7 @@ const pages = {
             children: [
                 {
                     id: 'dataai',
-                    title: 'Trí tuệ nhân tạo',
+                    title: 'Khoa học dữ liệu',
                     type: 'item',
                     url: '/dataai',
                     breadcrumbs: true

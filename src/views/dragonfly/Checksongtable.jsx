@@ -90,13 +90,7 @@ export default function ChecksongDataTable() {
     print: false,
     selectableRows: "single",
     responsive: "standard",
-
-
-
   };
-
-
-
 
   useEffect(() => {
     axios({
