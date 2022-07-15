@@ -6,9 +6,12 @@ import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import { TextField, Select, Button } from '@mui/material';
 import MenuItem from '@mui/material/MenuItem';
-import { getSubcription,CreateInvoiceProcess } from 'services/DataIngest';
+import UserService from 'services/UserService';
+import { getSubcription, CreateInvoiceProcess } from 'services/DataIngest';
 import MainCard from 'ui-component/cards/MainCard';
-import { createKafkaConnector,GetKafkaConnectors } from 'services/KafkaConnect';
+//import { getSubcription,createKafkaConnector, CreateInvoiceProcess, GetKafkaConnectors } from 'services/DataIngest';
+
+import { createKafkaConnector, GetKafkaConnectors } from 'services/KafkaConnect';
 
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -26,11 +29,11 @@ const RegisterStreaming = () => {
     const [subscription_id, setSubscription_id] = useState([]);
     useEffect(() => {
         getSubcription()
-          .then(res => {
-            setSubscription_id(res.data.data)
-          })
-          .catch(error => console.log(error))
-      }, []);
+            .then(res => {
+                setSubscription_id(res.data.data)
+            })
+            .catch(error => console.log(error))
+    }, []);
 
     const divStyle = {
         marginTop: '10px',
@@ -78,6 +81,20 @@ const RegisterStreaming = () => {
 
 
 
+    // const [Streamtarget, setStreamtarget] = useState([
+    //     {
+    //         tdbtype: '',
+    //         tdatabaseservername: '',
+    //         tdatabasehostname: '',
+    //         tdatabaseport: '',
+    //         tdatabasedbname: '',
+    //         tdatabaseuser: '',
+    //         tdatabasepassword: '',
+    //         ttableincludelist: ''
+
+    //     },
+    // ])
+
     const [Streamsource, setStreamsource] = useState({})
     const [Streamtarget, setStreamtarget] = useState({})
 
@@ -100,25 +117,66 @@ const RegisterStreaming = () => {
             [targetName]: targetValue
         }));
     };
-    
 
+
+
+    // const submit = (e) => {
+    //     e.preventDefault();
+    //     let stream = {
+    //         'data': [
+    //             {
+    //                 'source': Streamsource,
+    //                 'target': Streamtarget
+    //             }
+
+    //         ]
+    //     }
+
+
+
+    //     const body = {
+    //         "conf": { stream },
+    //     }
+
+
+    //     console.log(JSON.stringify(body));
+    //     const invoicebody =
+    //     {
+    //         "item_name": Streamsource.tentientrinh,
+    //         "item_type": 'stream',
+    //         "customer_invoice_data": JSON.stringify(body),
+    //         "subscription_id": Streamsource.subscription_id,
+    //         "plan_history_id": 1,
+    //         "invoice_period_start_date": new Date().toLocaleString() + '',
+    //         "invoice_period_end_date": new Date().toLocaleString() + '',
+    //         "invoice_description": Streamsource.tentientrinh,
+    //         "invoice_amount": 100,
+    //         "invoice_created_ts": new Date().toLocaleString() + '',
+    //         "invoice_due_ts": new Date().toLocaleString() + '',
+    //         "invoice_paid_ts": new Date().toLocaleString() + ''
+    //     }
+
+    //     console.log(JSON.stringify(invoicebody));
+
+
+    // }
 
     function getConnectorClass(dbType) {
         var ret;
 
-        if (dbType === 'mysql') {
+        if (dbType == 'mysql') {
             ret = 'io.debezium.connector.mysql.MySqlConnector'
         }
 
-        else if (dbType === 'sqlserver') {
+        else if (dbType == 'sqlserver') {
             ret = 'io.debezium.connector.sqlserver.SqlServerConnector'
         }
 
-        else if (dbType === 'oracle') {
+        else if (dbType == 'oracle') {
             ret = 'io.debezium.connector.oracle.OracleConnector'
         }
 
-        else if (dbType === 'postgres') {
+        else if (dbType == 'postgres') {
             ret = 'io.debezium.connector.postgresql.PostgresConnector'
         }
 
@@ -161,19 +219,19 @@ const RegisterStreaming = () => {
     function getUrlSinkDatabase(dbType, host, port, databaseName) {
         var ret;
 
-        if (dbType === 'mysql') {
+        if (dbType == 'mysql') {
             ret = `jdbc:mysql://${host}/${databaseName}`
         }
 
-        else if (dbType === 'sqlserver') {
+        else if (dbType == 'sqlserver') {
             ret = `jdbc:sqlserver://${host};instance=SQLEXPRESS;databaseName=${databaseName}`
         }
 
-        else if (dbType === 'oracle') {
+        else if (dbType == 'oracle') {
             ret = `jdbc:oracle:thin:@${host}:${port}:${databaseName}`
         }
 
-        else if (dbType === 'postgres') {
+        else if (dbType == 'postgres') {
             ret = `jdbc:postgresql://${host}:${port}/${databaseName}`
         }
 
@@ -186,7 +244,7 @@ const RegisterStreaming = () => {
         var configPayload = {};
 
         configPayload['connector.class'] = 'io.confluent.connect.jdbc.JdbcSinkConnector'
-        configPayload['topics'] = Streamtarget.ttableincludelist
+        configPayload['topics'] = Streamsource.stableincludelist
         var url = getUrlSinkDatabase(Streamtarget.tdbtype, Streamtarget.tdatabasehostname, Streamtarget.tdatabaseport, Streamtarget.tdatabasedbname)
         configPayload['connection.url'] = url
         configPayload['connection.user'] = Streamtarget.tdatabaseuser
@@ -195,12 +253,12 @@ const RegisterStreaming = () => {
         configPayload['transforms.unwrap.type'] = 'io.debezium.transforms.ExtractNewRecordState'
         configPayload['auto.create'] = 'false'
         configPayload['insert.mode'] = 'upsert'
-        configPayload['delete.enabled'] = 'true'
-        configPayload['pk.fields'] = 'id'
-        configPayload['pk.mode'] = 'double'
-        configPayload['transforms.unwrap.drop.tombstones'] = 'connect'
+        //configPayload['delete.enabled'] = 'true'
+        configPayload['pk.fields'] = Streamtarget.ttableprimarykey
+        configPayload['pk.mode'] = 'record_value'
+        configPayload['transforms.unwrap.drop.tombstones'] = 'true'
         configPayload['time.precision.mode'] = 'connect'
-        configPayload['table.name.format'] = '${topic}'
+        configPayload['table.name.format'] = Streamtarget.ttableincludelist
 
         sinkPayload['name'] = `${Streamsource.tentientrinh}_sink`;
         sinkPayload['config'] = configPayload;
@@ -227,14 +285,14 @@ const RegisterStreaming = () => {
 
         var sourcePayLoadData = toSourcePayload(Streamsource, nameProgress);
         var sinkPayLoadData = toSinkPayload(Streamsource, Streamtarget);
-        console.log(sourcePayLoadData);
-        console.log(sinkPayLoadData);
+        //console.log(sourcePayLoadData);
+        //console.log(sinkPayLoadData);
 
         const body = {
             "conf": { stream },
         }
 
-        console.log('Start create connector.')
+
         const invoicebody =
         {
             "item_name": nameProgress,
@@ -250,56 +308,77 @@ const RegisterStreaming = () => {
             "invoice_due_ts": new Date().toLocaleString() + '',
             "invoice_paid_ts": new Date().toLocaleString() + ''
         }
+        
+
+        console.log('sourcePayLoadData', sourcePayLoadData);
+        console.log('Start create source connector.')
+        createKafkaConnector(sourcePayLoadData);
+
+        console.log('sinkPayLoadData', sinkPayLoadData);
+        console.log('Start create sink connector.')
+        createKafkaConnector(sinkPayLoadData);
+
         CreateInvoiceProcess(invoicebody);
-        createKafkaConnector(sourcePayLoadData).then(res => {
-            if (res.status === 200) {
-                console.log('Created successfully.');
-                console.log(res.data);
-               // CreateInvoiceProcess(invoicebody);
-                
-            }
-        })
-            .catch(err => console.log(err.data));
-            
+        // createKafkaConnector(sourcePayLoadData).then(res => {
+        //     if (res.status === 200) {
+        //         console.log('Created source connector successfully.');
+        //         console.log(res.data);
+        //         // CreateInvoiceProcess(invoicebody);
+        //         createKafkaConnector(sinkPayLoadData).then(res2 => {
+        //             if (res2.status === 200) {
+        //                 console.log('Created sink connector successfully.');
+        //                 console.log(res2.data);
+        //                 CreateInvoiceProcess(invoicebody);
+        //             }
+        //         })
+        //             .catch(err2 =>{
+        //                 console.log(err2.data);
+        //                 console.log("Error create sink connector.");
+        //             } );
+        //     }
+        // })
+        //     .catch(err => {
+        //         console.log(err.data);
+        //         console.log("Error create source connector.");
+        //     } );
 
     }
-
     return (
         <MainCard>
             <Box sx={{ flexGrow: 1 }}>
                 <Grid container spacing={{ xs: 2, md: 2 }} columns={{ sm: 6, md: 12 }} style={divStyle}>
-                <Grid item xs={3} sm={6} md={6} >
-                 <strong>Chọn subcripttion: </strong>   <Select id="subscription_id" name='subscription_id'
-                        size="small"
-                        style={divStyle}
-                        headername={'Subscription id'}
-                        onChange={sonInputChanged}
-                    >
+                    <Grid item xs={3} sm={6} md={6} >
+                        <strong>Chọn subcripttion: </strong>   <Select id="subscription_id" name='subscription_id'
+                            size="small"
+                            style={divStyle}
+                            headername={'Subscription id'}
+                            onChange={sonInputChanged}
+                        >
 
-                        {subscription_id.map((sub) => (
-                            <MenuItem
-                                key={sub.subscription_id}
-                                value={sub.subscription_id}
-                            >
-                                {sub.subscription_name}
-                            </MenuItem>
-                        ))}
+                            {subscription_id.map((sub) => (
+                                <MenuItem
+                                    key={sub.subscription_id}
+                                    value={sub.subscription_id}
+                                >
+                                    {sub.subscription_name}
+                                </MenuItem>
+                            ))}
 
-                    </Select>
-                </Grid>
-                <Grid item xs={3} sm={6} md={6} >
-                    <TextField
-                        type="text"
-                        name="tentientrinh"
-                        id="tentientrinh"
-                        label="Tên tiến trình"
-                        fullWidth
-                        value={Streamsource.tentientrinh}
-                        onChange={sonInputChanged}
-                        style={divStyle}
+                        </Select>
+                    </Grid>
+                    <Grid item xs={3} sm={6} md={6} >
+                        <TextField
+                            type="text"
+                            name="tentientrinh"
+                            id="tentientrinh"
+                            label="Tên tiến trình"
+                            fullWidth
+                            value={Streamsource.tentientrinh}
+                            onChange={sonInputChanged}
+                            style={divStyle}
 
-                    />
-                    </Grid>  
+                        />
+                    </Grid>
                     <Grid item xs={3} sm={6} md={6} >
                         <Item style={divStyle} ><strong>Nguồn</strong></Item>
                         <strong>Loại CSDL Nguồn: </strong>
@@ -494,6 +573,17 @@ const RegisterStreaming = () => {
                             fullWidth
                             style={divStyle}
                             value={Streamtarget.ttableincludelist}
+                            onChange={tonInputChanged}
+                        />
+                        {/* 7 */}
+                        <TextField
+                            type="text"
+                            name="ttableprimarykey"
+                            id="ttableprimarykey"
+                            label="Primary Key Column (trường hợp cần update dữ liệu)"
+                            fullWidth
+                            style={divStyle}
+                            value={Streamtarget.ttableprimarykey}
                             onChange={tonInputChanged}
                         />
                     </Grid>

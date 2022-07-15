@@ -2,18 +2,18 @@ import BaseAxios from "./BaseAxios";
 import UserService from "./UserService";
 
 
-export const GetKafkaConnectors = async ()=>{
+export const GetKafkaConnectors = async () => {
     let response
-    const router =  '/kafka/kafkaconnector';
+    const router = '/kafka/kafkaconnector';
     try {
         response = await BaseAxios({
             method: 'get',
-            params:{
-                connector:'jdbc_sink8'
+            params: {
+                connector: 'jdbc_sink8'
             },
             url: router,
-            headers: {"Authorization": `Bearer ${UserService.getToken()}`}
-            
+            headers: { "Authorization": `Bearer ${UserService.getToken()}` }
+
         });
     } catch (err) {
         console.log(err);
@@ -22,16 +22,16 @@ export const GetKafkaConnectors = async ()=>{
 }
 
 
-export const GetKafkaConnector = async (connectorname)=>{
+export const GetKafkaConnector = async (connectorname) => {
     let response
-    const router =  '/kafka/connector';
+    const router = '/kafka/connector';
     try {
         response = await BaseAxios({
             method: 'get',
             url: router,
-            headers: {"Authorization": `Bearer ${UserService.getToken()}`},
+            headers: { "Authorization": `Bearer ${UserService.getToken()}` },
             params: {
-                connector:connectorname
+                connector: connectorname
             }
         });
     } catch (err) {
@@ -40,16 +40,16 @@ export const GetKafkaConnector = async (connectorname)=>{
     return response
 }
 
-export const pauseKafkaConnector = async (connectorname)=>{
+export const pauseKafkaConnector = async (connectorname) => {
     let response
-    const router =  '/kafka/pauseconnector';
+    const router = '/kafka/pauseconnector';
     try {
         response = await BaseAxios({
             method: 'put',
             url: router,
-            headers: {"Authorization": `Bearer ${UserService.getToken()}`},
+            headers: { "Authorization": `Bearer ${UserService.getToken()}` },
             params: {
-                connector:connectorname
+                connector: connectorname
             }
         });
     } catch (err) {
@@ -59,16 +59,16 @@ export const pauseKafkaConnector = async (connectorname)=>{
 }
 
 
-export const restarKafkaConnector = async (connectorname)=>{
+export const restarKafkaConnector = async (connectorname) => {
     let response
-    const router =  '/kafka/restartconnector';
+    const router = '/kafka/restartconnector';
     try {
         response = await BaseAxios({
             method: 'post',
             url: router,
-            headers: {"Authorization": `Bearer ${UserService.getToken()}`},
+            headers: { "Authorization": `Bearer ${UserService.getToken()}` },
             params: {
-                connector:connectorname
+                connector: connectorname
             }
         });
     } catch (err) {
@@ -77,20 +77,44 @@ export const restarKafkaConnector = async (connectorname)=>{
     return response
 }
 
-export const createKafkaConnector = async (body)=>{
-    let response
-    const router =  '/kafka/createkafkaconnector';
-    try {
-        response = await BaseAxios({
-            method: 'post',
-            url: router,
-            headers: {"Authorization": `Bearer ${UserService.getToken()}`},
-            body:body  
+// export const createKafkaConnector = async (body)=>{
+//     let response
+//     const router =  '/kafka/createkafkaconnector';
+//     try {
+//         response = await BaseAxios({
+//             method: 'post',
+//             url: router,
+//             headers: {"Authorization": `Bearer ${UserService.getToken()}`},
+//             body:body  
+//         });
+//     } catch (err) {
+//         console.log(err);
+//     }
+//     return response
+// }
+
+export const createKafkaConnector = async (body) => {
+    const baseUrl = 'https://dpaapigw.apps.xplat.fis.com.vn/dpzapipub/api/v1';
+
+    var axios = require('axios');
+    var config = {
+        method: 'post',
+        url: `${baseUrl}/kafka/createkafkaconnector`,
+        headers: {
+            "Authorization": `Bearer ${UserService.getToken()}`,
+            'Content-Type': 'application/json',
+        },
+        data: body
+    };
+    axios(config)
+        .then(function (response) {
+            //debugger
+            console.log("response ", response);
+        })
+        .catch(function (error) {
+            console.log(error);
         });
-    } catch (err) {
-        console.log(err);
-    }
-    return response
+
 }
 
 const Kafkaconnect = {

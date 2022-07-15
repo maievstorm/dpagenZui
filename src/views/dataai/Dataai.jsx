@@ -61,7 +61,7 @@ function DataaiPage() {
                                     <CardHeader title={prod.title} key={prod.title} className={classes.cardHeader}></CardHeader>
                                     <CardContent>
                                         <Box px={1}>
-                                            <Typography variant="h3" component="h2" gutterBottom={true}>
+                                            <Typography variant="h3" component="h3" gutterBottom={true}>
                                                 {prod.description}
                                                 
                                             </Typography>
