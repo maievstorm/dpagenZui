@@ -48,6 +48,13 @@ export default function ManageFlow() {
                 filter: false
             },
             label: 'Ngày tạo'
+        },
+        {
+            name: "invoice_due_ts",
+            options: {
+                filter: false
+            },
+            label: 'Ngày hiệu chỉnh'
         }
 
     ];
@@ -56,11 +63,14 @@ export default function ManageFlow() {
         GetProcess('airflow')
         .then(res => {
             setData(res.data.data.map(item=>{
-                let invoice_created_ts = new Date(Date.parse(item.invoice_created_ts)).toLocaleString()
+                let invoice_created_ts = new Date(Date.parse(item.invoice_created_ts)).toLocaleString();
+                let invoice_due_ts = new Date(Date.parse(item.invoice_due_ts)).toLocaleString();
+                
                 return {
                     'id_invoice':item.id_invoice,
                     'item_name':item.item_name,
                     'invoice_created_ts':invoice_created_ts,
+                    'invoice_due_ts':invoice_due_ts,
                     'customer_invoice_data':item.customer_invoice_data
                 }
             }));
