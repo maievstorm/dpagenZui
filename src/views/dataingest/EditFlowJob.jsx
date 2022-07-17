@@ -5,7 +5,7 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import { useEffect, useState } from "react";
 import EditIcon from '@mui/icons-material/Edit';
-import NotStartedOutlinedIcon from '@mui/icons-material/NotStartedOutlined';
+import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
 import axios from "axios";
 import { IconButton } from '@mui/material';
 import UserService from 'services/UserService';
@@ -191,6 +191,8 @@ export default function EditFlowJob() {
             data: body
         })
 
+        navigate('/dataingest/loginformation',{state:{id:confInfo.DagId}})
+
     }
     const backtodataingest = () => {
 
@@ -223,7 +225,7 @@ export default function EditFlowJob() {
                         </Grid>
                         <Grid item xs={3} sm={6} md={4}>
                             <IconButton onClick={submit}>
-                                <NotStartedOutlinedIcon color="primary" fontSize="medium" />
+                                <PlayCircleOutlineIcon color="primary" fontSize="medium" />
                             </IconButton>
                         </Grid>
 

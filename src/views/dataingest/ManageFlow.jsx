@@ -88,6 +88,8 @@ export default function ManageFlow() {
             },
             data: body
         });
+        navigate('loginformation',{state:{id:selected}})
+
     }
 
     const onEdittJobClickHandler = (type,selected) => {
