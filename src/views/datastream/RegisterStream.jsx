@@ -164,19 +164,19 @@ const RegisterStreaming = () => {
     function getConnectorClass(dbType) {
         var ret;
 
-        if (dbType == 'mysql') {
+        if (dbType === 'mysql') {
             ret = 'io.debezium.connector.mysql.MySqlConnector'
         }
 
-        else if (dbType == 'sqlserver') {
+        else if (dbType === 'sqlserver') {
             ret = 'io.debezium.connector.sqlserver.SqlServerConnector'
         }
 
-        else if (dbType == 'oracle') {
+        else if (dbType === 'oracle') {
             ret = 'io.debezium.connector.oracle.OracleConnector'
         }
 
-        else if (dbType == 'postgres') {
+        else if (dbType === 'postgres') {
             ret = 'io.debezium.connector.postgresql.PostgresConnector'
         }
 
@@ -219,19 +219,19 @@ const RegisterStreaming = () => {
     function getUrlSinkDatabase(dbType, host, port, databaseName) {
         var ret;
 
-        if (dbType == 'mysql') {
+        if (dbType === 'mysql') {
             ret = `jdbc:mysql://${host}/${databaseName}`
         }
 
-        else if (dbType == 'sqlserver') {
+        else if (dbType === 'sqlserver') {
             ret = `jdbc:sqlserver://${host};instance=SQLEXPRESS;databaseName=${databaseName}`
         }
 
-        else if (dbType == 'oracle') {
+        else if (dbType === 'oracle') {
             ret = `jdbc:oracle:thin:@${host}:${port}:${databaseName}`
         }
 
-        else if (dbType == 'postgres') {
+        else if (dbType === 'postgres') {
             ret = `jdbc:postgresql://${host}:${port}/${databaseName}`
         }
 

@@ -19,6 +19,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { processTime } from "./constant";
 
 
+
 export default function ReviewItem(props) {
     const [dateValue, setDateValue] = useState(new Date('2014-08-18T21:11:54'));
     const setConfInfo = props?.setConfInfo
@@ -26,6 +27,8 @@ export default function ReviewItem(props) {
     const edit = props?.edit === undefined ? true : props?.edit === false ? true : false
     const onInputChanged = props?.onInputChanged
     const [subscription_id, setSubscription_id] = useState([]);
+   
+
     useEffect(() => {
         let router = config.rootapi + '/subscription/subbyusername/' + UserService.getUsername()
         axios({
@@ -54,6 +57,8 @@ export default function ReviewItem(props) {
         setConfInfo({ ...conf, 'schedule_interval': crontab_struct });
     }, [conf?.Schedule])
 
+   
+
 
     return (
         <div>
@@ -79,6 +84,7 @@ export default function ReviewItem(props) {
                     size="small"
 
                 />
+               
                 {
                     !edit && <FormControl fullWidth>
                         <InputLabel id="demo-simple-select-label">Tần suất chạy</InputLabel>
@@ -244,7 +250,7 @@ export default function ReviewItem(props) {
                             noValidate
                             autoComplete="off">
 
-                           <h2> <strong>Nguồn dữ liệu {index + 1} </strong><br></br></h2>
+                            <h2> <strong>Nguồn dữ liệu {index + 1} </strong><br></br></h2>
                             {
                                 !edit && <Select name='sourcetype' value={form.sourcetype} onChange={event => props.handleFormSrcChange(event, index)}
                                     size="small"
@@ -391,7 +397,7 @@ export default function ReviewItem(props) {
                             key={index}
 
                         >
-                           <h2> <strong>Tổng hợp {index + 1} </strong></h2>
+                            <h2> <strong>Tổng hợp {index + 1} </strong></h2>
                             <br></br>
                             <TextField
                                 label="Tên job tổng hợp"

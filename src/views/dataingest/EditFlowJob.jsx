@@ -14,6 +14,10 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import MainCard from "ui-component/cards/MainCard";
 import DataIngest from "services/DataIngest";
 import { addLog } from "services/LogService";
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Switch from '@mui/material/Switch';
+import FormGroup from '@mui/material/FormGroup';
+
 
 
 export default function EditFlowJob() {
@@ -26,6 +30,7 @@ export default function EditFlowJob() {
     const [formSrcFields, setFormSrcFields] = useState([])
     const [formQuery, setformQuery] = useState([])
     const [rows, setData] = useState([]);
+    const [dagactivechecked, setdagactiveChecked] = useState(false);
 
 
     const onInputChanged = (event) => {
@@ -37,13 +42,43 @@ export default function EditFlowJob() {
             [targetName]: targetValue
         }));
     };
-  
+
+    const switchHandler = (event) => {
+        setdagactiveChecked(event.target.checked);
+        
+        const dagstage={
+            "is_paused": !event.target.checked
+          }
+        
+        let dagapi = config.airflowapi + '/dags' ;
+
+        axios({
+            method: 'patch',
+            url: dagapi,
+            auth: {
+                username: 'hung',
+                password: '123456a@'
+            },
+            params :{
+                dag_id_pattern:DagId,
+                limit:1
+            },
+            data :dagstage
+
+        })
+            .then(res => {
+                
+                 
+            })
+      };
+
 
 
 
     useEffect(() => {
         const getairflowapi = config.rootapi + '/invoice/' + DagId;
-        let router = config.airflowapi + '/dags/' + DagId + '/dagRuns?limit=40&order_by=-start_date'
+        let router = config.airflowapi + '/dags/' + DagId + '/dagRuns?limit=40&order_by=-start_date';
+        let dagstatusapi = config.airflowapi + '/dags/' + DagId ;
 
         axios.get(getairflowapi)
             .then(res => {
@@ -79,6 +114,20 @@ export default function EditFlowJob() {
                     }
                 }))
             })
+            axios({
+                method: 'get',
+                url: dagstatusapi,
+                auth: {
+                    username: 'hung',
+                    password: '123456a@'
+                }
+    
+            })
+                .then(res => {
+                     
+                    setdagactiveChecked(!res.data.is_paused)
+                })
+        
 
     }, [])
     const handleFormSrcChange = (event, index) => {
@@ -156,9 +205,9 @@ export default function EditFlowJob() {
         })
             .then(res => {
                 if (res.status === 200) {
-                    DataIngest.UpdateInvoiceProcess(confInfo.DagId,data);
-                    addLog('edit_flow',data)
-                   
+                    DataIngest.UpdateInvoiceProcess(confInfo.DagId, data);
+                    addLog('edit_flow', data)
+
                     navigate('/dataingest/', { state: { id: DagId } })
                 }
             })
@@ -191,7 +240,7 @@ export default function EditFlowJob() {
             data: body
         })
 
-        navigate('/dataingest/loginformation',{state:{id:confInfo.DagId}})
+        navigate('/dataingest/loginformation', { state: { id: confInfo.DagId } })
 
     }
     const backtodataingest = () => {
@@ -213,40 +262,50 @@ export default function EditFlowJob() {
                 </IconButton>Thông số chi tiết tiến trình</h3>
                 <Box sx={{ flexGrow: 1 }}>
                     <Grid container spacing={{ xs: 2, md: 2 }} columns={{ sm: 6, md: 12 }} style={divStyle}>
-                        <Grid item xs={3} sm={6} md={4}>
+                        <Grid item xs={3} sm={6} md={3}>
+                            <FormGroup>
+                                <FormControlLabel control={<
+                                    Switch 
+                                    checked={dagactivechecked=== 'undefined'?false:dagactivechecked}  
+                                    onChange={switchHandler} />} label="Active" />
+                            </FormGroup>
+
+                        </Grid>
+                        <Grid item xs={3} sm={6} md={3}>
                             <IconButton onClick={() => setEdit(!edit)}>
                                 <EditIcon color="primary" fontSize="medium" />
                             </IconButton>
                         </Grid>
-                        <Grid item xs={3} sm={6} md={4}>
+                        <Grid item xs={3} sm={6} md={3}>
                             <IconButton onClick={save}>
                                 <SaveIcon color="primary" fontSize="medium" />
                             </IconButton>
                         </Grid>
-                        <Grid item xs={3} sm={6} md={4}>
+                        <Grid item xs={3} sm={6} md={3}>
                             <IconButton onClick={submit}>
                                 <PlayCircleOutlineIcon color="primary" fontSize="medium" />
                             </IconButton>
                         </Grid>
+
 
                     </Grid>
                 </Box>
 
 
                 <Box sx={{ flexGrow: 1 }}>
-                <ReviewItem conf={confInfo} edit={edit} onInputChanged={onInputChanged}
-                                formSrcFields={formSrcFields}
-                                formQuery={formQuery}
-                                addFields={addFields}
-                                setConfInfo={setConfInfo}
-                                removeFields={removeFields}
-                                handleFormSrcChange={handleFormSrcChange}
-                                removeQuery={removeQuery}
-                                addFieldQuery={addFieldQuery}
-                                handleformQuery={handleformQuery}
-                                setformQuery={setformQuery}
+                    <ReviewItem conf={confInfo} edit={edit} onInputChanged={onInputChanged}
+                        formSrcFields={formSrcFields}
+                        formQuery={formQuery}
+                        addFields={addFields}
+                        setConfInfo={setConfInfo}
+                        removeFields={removeFields}
+                        handleFormSrcChange={handleFormSrcChange}
+                        removeQuery={removeQuery}
+                        addFieldQuery={addFieldQuery}
+                        handleformQuery={handleformQuery}
+                        setformQuery={setformQuery}
 
-                            />
+                    />
                 </Box>
             </Box>
         </MainCard>
