@@ -39,7 +39,7 @@ export default function OrderDetail() {
     // const [listOffer, setListOffer] = useState([])
     const [userinfo, setUserinfo] = useState([])
     const [OfferSelected, setOfferSelected] = useState([])
-    const [rows,setRows] = useState([])
+    const [rows, setRows] = useState([])
     useEffect(() => {
         OfferPlanService.getOffer()
             .then(res => {
@@ -49,10 +49,10 @@ export default function OrderDetail() {
                 setOfferSelected((res.data.pre).filter((offer) => offer.offer_id === OfferId)[0])
                 let listTable = JSON.parse(data?.description)
                 let listrow = []
-                for(var key in listTable){
-                    console.log(key,listTable[key])
+                for (var key in listTable) {
+                    console.log(key, listTable[key])
                     listrow.push({
-                        'key':key,
+                        'key': key,
                         'value': listTable[key]
                     })
                 }
@@ -125,32 +125,6 @@ export default function OrderDetail() {
     return (
         <>
 
-
-
-
-            <Grid item xs={12} md={4}>
-                <Card variant="outlined">
-                    <CardHeader title={OfferSelected?.offer_name} key={OfferSelected?.offer_name} ></CardHeader>
-                    <CardContent>
-                        <Box px={1}>
-
-                            <Typography variant="h3" component="h2" gutterBottom={true}>
-                                {OfferSelected?.current_price}
-                                <Typography variant="h6" color="textSecondary" component="span">Tr.VND/Tháng</Typography>
-                            </Typography>
-
-                        </Box>
-
-                    </CardContent>
-                </Card>
-            </Grid>
-
-            <Button onClick={() => BacktoOffer()} >{<ArrowBackIcon />}</Button>
-
-            <Button name={OfferSelected?.offer_id}
-                variant="outlined"
-                color="primary"
-                onClick={() => submit()}>Đăng ký</Button>
 
             <Box sx={{ m: 6 }}>
                 <Card sx={{
@@ -255,7 +229,7 @@ export default function OrderDetail() {
                                         </TableRow>
                                     </TableHead>
                                     <TableBody>
-                                        {rows.map((row,index) => (
+                                        {rows.map((row, index) => (
                                             <TableRow
                                                 key={index}
                                                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
@@ -282,8 +256,10 @@ export default function OrderDetail() {
                                         ))}
                                         <TableRow>
                                             <TableCell align="right" colSpan={5}>
-                                                <Typography sx={{ fontWeight: 700, color: "#f05252" }}>Tổng cộng: {OfferSelected?.current_price}
-                                                </Typography></TableCell>
+                                                <Typography sx={{ fontWeight: 700, color: "#f05252" }}>Tổng cộng: {OfferSelected?.current_price} Tr.VND/Tháng
+                                                </Typography>
+
+                                            </TableCell>
                                         </TableRow>
                                     </TableBody>
                                 </Table>
@@ -291,20 +267,20 @@ export default function OrderDetail() {
                         </Box>
 
 
+                        <Box sx={{ mt: 2 }}>
+                            <Button name={OfferSelected?.offer_id}
+                                variant="outlined"
+                                color="primary"
+                                onClick={() => submit()}>Đăng ký</Button>
 
+
+                        </Box>
 
                     </CardContent>
                 </Card>
 
 
-                <Box sx={{ mt: 2 }}>
-                    <Button name={OfferSelected?.offer_id}
-                        variant="outlined"
-                        color="primary"
-                        onClick={() => submit()}>Đăng ký</Button>
 
-                    <Button color="success" sx={{ float: "right" }} size="small">Print Invoice</Button>
-                </Box>
             </Box>
 
 

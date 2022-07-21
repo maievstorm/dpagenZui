@@ -123,8 +123,8 @@ export default function ListProductPrice() {
                                                     <Table aria-label="simple table">
                                                         <TableHead>
                                                             <TableRow>
-                                                                <TableCell>Offer</TableCell>
-                                                                <TableCell align="right">Value</TableCell>
+                                                                <TableCell>Dịch vụ</TableCell>
+                                                                <TableCell align="right">Số lượng</TableCell>
                                                             </TableRow>
                                                         </TableHead>
                                                         <TableBody>
