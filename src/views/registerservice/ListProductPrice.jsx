@@ -36,7 +36,7 @@ export default function ListProductPrice() {
             .catch(err => console.log(err))
     }, [])
 
-   
+    // console.log(listOffer[0]?.description)
 
     // const [state, setState] = React.useState({
     //     checkbox: true,
@@ -75,35 +75,51 @@ export default function ListProductPrice() {
                     </Box>
 
                     <Grid container spacing={3}>
-                        {listOffer.map(offer => (
-                            <Grid item xs={12} md={4}>
-                                <Card variant="outlined">
-                                    <CardHeader title={offer.offer_name} key={offer.offer_name} className={classes.cardHeader}></CardHeader>
-                                    <CardContent>
-                                        <Box px={1}>
-                                            <Typography variant="h3" component="h2" gutterBottom={true}>
-                                                {offer.current_price}
-                                                <Typography variant="h6" color="textSecondary" component="span">Tr.VND/Tháng</Typography>
-                                            </Typography>
+                        {listOffer.map(offer => {
+                            // console.log(offer?.description)
+                            let x = JSON.parse(JSON.stringify(offer?.description))
+                            console.log(x)
 
-                                            {offer.description.split('|').map(line => (
-                                                <Typography color="textSecondary" variant="subtitle1" component="p" key={line}>
-                                                    {line}
+                            const string = '{"name":"paresh","age":34,"professional":"coder"}';
+
+
+console.log(JSON.parse(string));
+
+
+
+                            // for (var key of x){
+                            //     console.log(key)
+                            // }
+                            return (
+                                <Grid item xs={12} md={4}>
+                                    <Card variant="outlined">
+                                        <CardHeader title={offer.offer_name} key={offer.offer_name} className={classes.cardHeader}></CardHeader>
+                                        <CardContent>
+                                            <Box px={1}>
+                                                <Typography variant="h3" component="h2" gutterBottom={true}>
+                                                    {offer.current_price}
+                                                    <Typography variant="h6" color="textSecondary" component="span">Tr.VND/Tháng</Typography>
                                                 </Typography>
-                                            ))}
-
-                                        </Box>
-                                        <Button name={offer.offer_id} 
-                                        variant="outlined" 
-                                        color="primary" 
-                                        className={classes.primaryAction} onClick={()=>onClickHander('offerdetail',offer.offer_id)}>Lựa chọn</Button>
-                                        <Box mt={2}>
-                                            <Link href="#" color="primary">Chi tiết gói</Link>
-                                        </Box>
-                                    </CardContent>
-                                </Card>
-                            </Grid>
-                        ))}
+                                                
+                                                {offer.description.split('|').map(line => (
+                                                    <Typography color="textSecondary" variant="subtitle1" component="p" key={line}>
+                                                        {line}
+                                                    </Typography>
+                                                ))}
+    
+                                            </Box>
+                                            <Button name={offer.offer_id} 
+                                            variant="outlined" 
+                                            color="primary" 
+                                            className={classes.primaryAction} onClick={()=>onClickHander('offerdetail',offer.offer_id)}>Lựa chọn</Button>
+                                            <Box mt={2}>
+                                                <Link href="#" color="primary">Chi tiết gói</Link>
+                                            </Box>
+                                        </CardContent>
+                                    </Card>
+                                </Grid>
+                            )
+                        })}
                       
                     </Grid>
                 </Box>

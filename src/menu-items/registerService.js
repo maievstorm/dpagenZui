@@ -1,6 +1,7 @@
 // assets
-import { IconTypography, IconPalette, IconShadow, IconWindmill,IconNotebook,IconSquarePlus  } from '@tabler/icons';
+import { IconTypography, IconPalette, IconShadow, IconWindmill,IconNotebook,IconListCheck  ,IconTextWrapDisabled } from '@tabler/icons';
 
+ 
 // constant
 const icons = {
     IconTypography,
@@ -8,7 +9,8 @@ const icons = {
     IconShadow,
     IconWindmill,
     IconNotebook,
-    IconSquarePlus
+    IconListCheck,
+    IconTextWrapDisabled
 };
 
 // ==============================|| UTILITIES MENU ITEMS ||============================== //
@@ -23,7 +25,7 @@ const registerService = {
             title: 'Tài nguyên',
             type: 'item',
             url: '/mysubscription',
-            icon: icons.IconSquarePlus,
+            icon: icons.IconListCheck,
             breadcrumbs: true
         },
         {
@@ -31,7 +33,7 @@ const registerService = {
             title: 'Đăng ký',
             type: 'item',
             url: '/registerservice',
-            icon: icons.IconSquarePlus,
+            icon: icons.IconTextWrapDisabled,
             breadcrumbs: true
         }
     ]
