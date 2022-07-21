@@ -50,7 +50,7 @@ export default function OrderDetail() {
                 let listTable = JSON.parse(data?.description)
                 let listrow = []
                 for (var key in listTable) {
-                    console.log(key, listTable[key])
+                  
                     listrow.push({
                         'key': key,
                         'value': listTable[key]
@@ -61,7 +61,7 @@ export default function OrderDetail() {
             .catch(err => console.log(err))
     }, []);
 
-    // console.log('row',rows)
+
 
     useEffect(() => {
         OfferPlanService.getUserinfo()
@@ -89,7 +89,7 @@ export default function OrderDetail() {
             'request_status': 0,
             'request_type': 1
         }
-        console.log(data);
+       
 
         OfferPlanService.applyService(data);
         addLog('request_resource', data)

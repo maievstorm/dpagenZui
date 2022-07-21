@@ -46,15 +46,7 @@ export default function ListProductPrice() {
             .catch(err => console.log(err))
     }, [])
 
-    // console.log(listOffer[0]?.description)
-
-    // const [state, setState] = React.useState({
-    //     checkbox: true,
-    // });
-
-    // const handleChange = (event) => {
-    //     setState({ ...state, checkbox: event.target.checked });
-    // };
+   
 
     const onClickHander = (type, offerid) => {
 
@@ -91,7 +83,7 @@ export default function ListProductPrice() {
                             try {
                                 listTable = JSON.parse(offer?.description)
                                 for(var key in listTable){
-                                    console.log(key,listTable[key])
+                                  
                                     rows.push({
                                         'key':key,
                                         'value': listTable[key]
@@ -101,13 +93,8 @@ export default function ListProductPrice() {
                                 console.log(error)
 
                             }
-                            console.log(offer?.description)
+                          
 
-
-
-                            // for (var key of x){
-                            //     console.log(key)
-                            // }
                             return (
                                 <Grid item xs={12} md={4}>
                                     <Card variant="outlined">
