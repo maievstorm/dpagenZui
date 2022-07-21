@@ -13,6 +13,13 @@ import { useNavigate } from "react-router"
 import Switch from '@mui/material/Switch';
 import { useEffect, useState } from 'react';
 import OfferPlanService from 'services/OfferPlanService';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
 
 const useStyles = makeStyles((theme) => ({
     section: {
@@ -23,6 +30,9 @@ const useStyles = makeStyles((theme) => ({
         paddingTop: theme.spacing(3),
     },
 }));
+
+
+
 
 export default function ListProductPrice() {
     const classes = useStyles();
@@ -46,9 +56,9 @@ export default function ListProductPrice() {
     //     setState({ ...state, checkbox: event.target.checked });
     // };
 
-    const onClickHander = (type,offerid) => {
-         
-         navigate(type, { state: { id: offerid } })
+    const onClickHander = (type, offerid) => {
+
+        navigate(type, { state: { id: offerid } })
 
     }
 
@@ -62,7 +72,7 @@ export default function ListProductPrice() {
                             <Typography variant="overline" color="textSecondary">Danh sách sản phẩm</Typography>
                             <Typography variant="h3" component="h2" gutterBottom={true}>
                                 <Typography variant="h3" component="span" color="primary">Lựa chọn gói sản phẩm phù hợp với bạn </Typography>
-                                
+
                             </Typography>
                             <Typography variant="subtitle1" color="textSecondary" paragraph={true}>Các sản phẩm được tuỳ biến theo mục đích sử dụng</Typography>
 
@@ -76,14 +86,22 @@ export default function ListProductPrice() {
 
                     <Grid container spacing={3}>
                         {listOffer.map(offer => {
-                            // console.log(offer?.description)
-                            let x = JSON.parse(JSON.stringify(offer?.description))
-                            console.log(x)
+                            let listTable
+                            let rows = []
+                            try {
+                                listTable = JSON.parse(offer?.description)
+                                for(var key in listTable){
+                                    console.log(key,listTable[key])
+                                    rows.push({
+                                        'key':key,
+                                        'value': listTable[key]
+                                    })
+                                }
+                            } catch (error) {
+                                console.log(error)
 
-                            const string = '{"name":"paresh","age":34,"professional":"coder"}';
-
-
-console.log(JSON.parse(string));
+                            }
+                            console.log(offer?.description)
 
 
 
@@ -100,18 +118,36 @@ console.log(JSON.parse(string));
                                                     {offer.current_price}
                                                     <Typography variant="h6" color="textSecondary" component="span">Tr.VND/Tháng</Typography>
                                                 </Typography>
-                                                
-                                                {offer.description.split('|').map(line => (
-                                                    <Typography color="textSecondary" variant="subtitle1" component="p" key={line}>
-                                                        {line}
-                                                    </Typography>
-                                                ))}
-    
+
+                                                <TableContainer component={Paper}>
+                                                    <Table aria-label="simple table">
+                                                        <TableHead>
+                                                            <TableRow>
+                                                                <TableCell>Offer</TableCell>
+                                                                <TableCell align="right">Value</TableCell>
+                                                            </TableRow>
+                                                        </TableHead>
+                                                        <TableBody>
+                                                            {rows.map((row) => (
+                                                                <TableRow
+                                                                key={row.Offer}
+                                                                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                                              >
+                                                                <TableCell component="th" scope="row">
+                                                                  {row.key}
+                                                                </TableCell>
+                                                                {/* <TableCell align="right">{row.key}</TableCell> */}
+                                                                <TableCell align="right">{row.value}</TableCell>
+                                                              </TableRow>
+                                                            ))}
+                                                        </TableBody>
+                                                    </Table>
+                                                </TableContainer>
                                             </Box>
-                                            <Button name={offer.offer_id} 
-                                            variant="outlined" 
-                                            color="primary" 
-                                            className={classes.primaryAction} onClick={()=>onClickHander('offerdetail',offer.offer_id)}>Lựa chọn</Button>
+                                            <Button name={offer.offer_id}
+                                                variant="outlined"
+                                                color="primary"
+                                                className={classes.primaryAction} onClick={() => onClickHander('offerdetail', offer.offer_id)}>Lựa chọn</Button>
                                             <Box mt={2}>
                                                 <Link href="#" color="primary">Chi tiết gói</Link>
                                             </Box>
@@ -120,7 +156,7 @@ console.log(JSON.parse(string));
                                 </Grid>
                             )
                         })}
-                      
+
                     </Grid>
                 </Box>
             </Container>

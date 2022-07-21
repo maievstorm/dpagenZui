@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import EditIcon from '@mui/icons-material/Edit';
 import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
 import axios from "axios";
-import { IconButton } from '@mui/material';
+import { Button, IconButton } from '@mui/material';
 import UserService from 'services/UserService';
 import SaveIcon from '@mui/icons-material/Save';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
@@ -45,12 +45,12 @@ export default function EditFlowJob() {
 
     const switchHandler = (event) => {
         setdagactiveChecked(event.target.checked);
-        
-        const dagstage={
+
+        const dagstage = {
             "is_paused": !event.target.checked
-          }
-        
-        let dagapi = config.airflowapi + '/dags' ;
+        }
+
+        let dagapi = config.airflowapi + '/dags';
 
         axios({
             method: 'patch',
@@ -59,18 +59,18 @@ export default function EditFlowJob() {
                 username: 'hung',
                 password: '123456a@'
             },
-            params :{
-                dag_id_pattern:DagId,
-                limit:1
+            params: {
+                dag_id_pattern: DagId,
+                limit: 1
             },
-            data :dagstage
+            data: dagstage
 
         })
             .then(res => {
-                
-                 
+
+
             })
-      };
+    };
 
 
 
@@ -78,7 +78,7 @@ export default function EditFlowJob() {
     useEffect(() => {
         const getairflowapi = config.rootapi + '/invoice/' + DagId;
         let router = config.airflowapi + '/dags/' + DagId + '/dagRuns?limit=40&order_by=-start_date';
-        let dagstatusapi = config.airflowapi + '/dags/' + DagId ;
+        let dagstatusapi = config.airflowapi + '/dags/' + DagId;
 
         axios.get(getairflowapi)
             .then(res => {
@@ -114,20 +114,20 @@ export default function EditFlowJob() {
                     }
                 }))
             })
-            axios({
-                method: 'get',
-                url: dagstatusapi,
-                auth: {
-                    username: 'hung',
-                    password: '123456a@'
-                }
-    
+        axios({
+            method: 'get',
+            url: dagstatusapi,
+            auth: {
+                username: 'hung',
+                password: '123456a@'
+            }
+
+        })
+            .then(res => {
+
+                setdagactiveChecked(!res.data.is_paused)
             })
-                .then(res => {
-                     
-                    setdagactiveChecked(!res.data.is_paused)
-                })
-        
+
 
     }, [])
     const handleFormSrcChange = (event, index) => {
@@ -252,6 +252,19 @@ export default function EditFlowJob() {
 
     };
 
+    const showGraph = () => {
+        navigate('/dataingest/daggraph', {
+            state:
+            {
+                listsourcetable: formQuery.map(item => item.listsourcetable),
+                queryname: formQuery.map(item => item.queryname)
+            }
+        })
+
+    }
+
+
+
 
 
     return (
@@ -260,13 +273,15 @@ export default function EditFlowJob() {
                 <h3><IconButton onClick={() => backtodataingest()}>
                     <ArrowBackIcon color="primary" fontSize="medium" />
                 </IconButton>Thông số chi tiết tiến trình</h3>
+                <Button onClick={showGraph}>Show dag graph</Button>
+
                 <Box sx={{ flexGrow: 1 }}>
                     <Grid container spacing={{ xs: 2, md: 2 }} columns={{ sm: 6, md: 12 }} style={divStyle}>
                         <Grid item xs={3} sm={6} md={3}>
                             <FormGroup>
                                 <FormControlLabel control={<
-                                    Switch 
-                                    checked={dagactivechecked=== 'undefined'?false:dagactivechecked}  
+                                    Switch
+                                    checked={dagactivechecked === 'undefined' ? false : dagactivechecked}
                                     onChange={switchHandler} />} label="Active" />
                             </FormGroup>
 
