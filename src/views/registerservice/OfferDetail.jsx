@@ -93,7 +93,7 @@ export default function OrderDetail() {
 
         OfferPlanService.applyService(data);
         addLog('request_resource', data)
-        navigate('/registerservice');
+        navigate('/thanks');
 
 
     }

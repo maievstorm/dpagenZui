@@ -44,6 +44,8 @@ const Logdetail = Loadable(lazy(() => import('views/dataingest/Logdetail')));
 const OrderDetail = Loadable(lazy(() => import('views/registerservice/OfferDetail'))); 
 const Mysubscription = Loadable(lazy(() => import('views/registerservice/Mysubscription'))); 
 const DagGraph = Loadable(lazy(() => import('views/dataingest/DagGraph'))); 
+const Thanks = Loadable(lazy(() => import('views/registerservice/Thanks'))); 
+ 
 
 
 
@@ -197,6 +199,11 @@ const MainRoutes = {
         {
             path: '/documents',
             element: <Documents />
+        }
+        ,
+        {
+            path: '/thanks',
+            element: <Thanks />
         }
     ]
 };
