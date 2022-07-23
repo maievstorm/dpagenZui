@@ -45,6 +45,8 @@ const OrderDetail = Loadable(lazy(() => import('views/registerservice/OfferDetai
 const Mysubscription = Loadable(lazy(() => import('views/registerservice/Mysubscription'))); 
 const DagGraph = Loadable(lazy(() => import('views/dataingest/DagGraph'))); 
 const Thanks = Loadable(lazy(() => import('views/registerservice/Thanks'))); 
+const Songcheck = Loadable(lazy(() => import('views/dragonfly/Songcheck'))); 
+ 
  
 
 
@@ -204,6 +206,11 @@ const MainRoutes = {
         {
             path: '/thanks',
             element: <Thanks />
+        }
+        ,
+        {
+            path: '/dragonfly/songcheck',
+            element: <Songcheck />
         }
     ]
 };
