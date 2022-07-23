@@ -118,7 +118,7 @@ function SongIdentifi() {
 
 
       <MUIDataTable
-        title={"Employee List"}
+        title={"Danh sách"}
         data={data}
         columns={columns}
         options={options}
