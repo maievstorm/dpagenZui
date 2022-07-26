@@ -4,13 +4,9 @@ import { useLocation } from "react-router"
 import OfferPlanService from 'services/OfferPlanService';
 import axios from 'axios';
 import config from "../../config";
-import { Tooltip, IconButton } from '@mui/material';
-import PersonAddAltOutlinedIcon from '@mui/icons-material/PersonAddAltOutlined';
 import { CreateInvoiceProcess } from 'services/DataIngest';
 import Button from '@mui/material/Button';
-import Input from '@mui/material/Input';
 import { CreateUserStorage } from 'services/StorageConf';
-import { DpzStorageConf } from 'services/StorageConf';
 import KeycloakService from 'services/KeycloakService';
 import { changeRequestStatus } from 'services/OfferPlanService';
 import UserAccount from 'services/UserAccount';
@@ -33,7 +29,6 @@ import {
     TableBody
 } from '@mui/material';
 
-
 export default function ReviewSubscription() {
 
     const location = useLocation();
@@ -46,6 +41,7 @@ export default function ReviewSubscription() {
     const email = location?.state?.email;
     const current_plan_id = location?.state?.current_plan_id;
     const request_type = location?.state?.request_type;
+    const requeststatus = location?.state?.request_status;
     const [OfferSelected, setOfferSelected] = useState([])
     const [rows, setRows] = useState([])
     const [dataoffer, setdataoffer] = useState([])
@@ -85,28 +81,28 @@ export default function ReviewSubscription() {
         },
     }));
 
-    const submit = () => {
+    // const submit = () => {
 
-        let today = new Date()
-        let data = {
-            // user_account_id: userinfo.id,
-            // 'username': userinfo.username,
-            // 'fullname': userinfo.last_name + ' ' + userinfo.first_name,
-            // 'email': userinfo.email,
-            // 'upassword': null,
-            // 'offer_id': OfferSelected?.offer_id,
-            // 'plan_id': OfferSelected.plan_id,
-            // 'request_date': today,
-            // 'request_status': 0,
-            // 'request_type': 1
-        }
-
-
-
-        addLog('request_resource', data)
+    //     let today = new Date()
+    //     let data = {
+    //         user_account_id: userinfo.id,
+    //         'username': userinfo.username,
+    //         'fullname': userinfo.last_name + ' ' + userinfo.first_name,
+    //         'email': userinfo.email,
+    //         'upassword': null,
+    //         'offer_id': OfferSelected?.offer_id,
+    //         'plan_id': OfferSelected.plan_id,
+    //         'request_date': today,
+    //         'request_status': 0,
+    //         'request_type': 1
+    //     }
 
 
-    }
+
+    //     addLog('request_resource', data)
+
+
+    // }
 
 
     const [loading, setLoading] = React.useState(true);
@@ -124,32 +120,49 @@ export default function ReviewSubscription() {
             "group_admin": true
         }];
 
-        const subscription = [
-            {
-                "trial_period_start_date": new Date().toLocaleString() + '',
-                "trial_period_end_date": null,
-                "subscribe_after_trial": false,
-                "current_plan_id": current_plan_id,
-                "offer_id": OfferId,
-                "offer_start_date": new Date().toLocaleString() + '',
-                "offer_end_date": new Date(year + 1, month, day).toLocaleString() + '',
-                "date_subscribed": new Date().toLocaleString() + '',
-                "valid_to": new Date(year + 1, month, day).toLocaleString() + '',
-                "date_unsubscribed": null,
-                "insert_ts": new Date().toLocaleString() + '',
-                "requestsub_id": requestid,
-                "subscription_name": 'Thuê bao ' + username + ' plan ' + current_plan_id + ' offer ' + OfferId + ' ' + new Date().toLocaleString() + ''
+        
+        let data = {
+             user_account_id: account_id,
+            'username': username,
+            'fullname': full_name,
+            'email': email,
+            'upassword': null,
+            'offer_id': OfferId,
+            'plan_id': current_plan_id,
+            'request_date': date,
+            'request_status': 0,
+            'request_type': 1
+        }
 
 
-            }
-        ];
+
+
+        // const subscription = [
+        //     {
+        //         "trial_period_start_date": new Date().toLocaleString() + '',
+        //         "trial_period_end_date": null,
+        //         "subscribe_after_trial": false,
+        //         "current_plan_id": current_plan_id,
+        //         "offer_id": OfferId,
+        //         "offer_start_date": new Date().toLocaleString() + '',
+        //         "offer_end_date": new Date(year + 1, month, day).toLocaleString() + '',
+        //         "date_subscribed": new Date().toLocaleString() + '',
+        //         "valid_to": new Date(year + 1, month, day).toLocaleString() + '',
+        //         "date_unsubscribed": null,
+        //         "insert_ts": new Date().toLocaleString() + '',
+        //         "requestsub_id": requestid,
+        //         "subscription_name": 'Thuê bao ' + username + ' plan ' + current_plan_id + ' offer ' + OfferId + ' ' + new Date().toLocaleString() + ''
+
+
+        //     }
+        // ];
 
         const bodydwh = {
             host: username + requestid + 'dwh',
             port: '5432',
-            user: 'postgres',
-            password: 'HztIWjzS57',
-            database: 'postgres',
+            user: username,
+            password: password,
+            database: username,
         }
 
         const bodybigdata = {
@@ -167,7 +180,7 @@ export default function ReviewSubscription() {
 
 
 
-        if (request_type == 1) {
+        if (request_type === 1 && requeststatus===0) {
             const bodycreate = {
 
                 "user_group_type_id": 10,
@@ -187,11 +200,11 @@ export default function ReviewSubscription() {
                 "date_unsubscribed": null,
                 "insert_ts": new Date().toLocaleString() + '',
                 "requestsub_id": requestid,
-                "subscription_name": 'Thuê bao ' + username + ' plan ' + current_plan_id + ' offer ' + OfferId + ' ' + new Date().toLocaleString() + '',
+                "subscription_name": 'Thuê bao ' + username + ' plan ' + current_plan_id + ' offer ' + OfferId + 'request' +requestid + new Date().toLocaleString() + '',
                 "requestsub_id": requestid
 
             };
-            console.log(JSON.stringify(bodycreate));
+            
             axios({
                 method: 'post',
                 url: config.rootapi + '/subscription/creategroupsub',
@@ -252,7 +265,9 @@ export default function ReviewSubscription() {
                     CreateInvoiceProcess(invoicebodydwh);
                     CreateUserStorage(invoicebodystorage?.item_name)
                         .then(() => {
-                            console.log('Create successfully:', invoicebodystorage?.item_name)
+                            console.log('Create successfully:', invoicebodystorage?.item_name);
+                            let status = 1;
+                            changeRequestStatus(requestid, status);
                         })
                         .catch(err => console.log(err))
 
@@ -289,6 +304,8 @@ export default function ReviewSubscription() {
 
 
         }
+
+        addLog('request_resource', data);
 
 
     }
@@ -333,7 +350,7 @@ export default function ReviewSubscription() {
                                                 px: "0.5rem",
                                                 py: "0px"
                                             }}>
-                                            Pending
+                                            {requeststatus}
                                         </Button>
                                     </span>
                                 </Typography>
@@ -415,6 +432,7 @@ export default function ReviewSubscription() {
 
 
                         <Box >
+                            <br></br>
                             <Button name={OfferSelected?.OfferId}
                                 variant="outlined"
                                 color="primary"

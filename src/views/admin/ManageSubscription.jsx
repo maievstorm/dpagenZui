@@ -373,22 +373,23 @@ export default function ManageSubscription() {
 
     }
     const navigate = useNavigate()
-    const onEdittJobClickHandler = (type, id,account_id, offer_id, username,upassword,first_name,email,current_plan_id,request_type) => {
+    const onEdittJobClickHandler = (type, id, account_id, offer_id, username, upassword, first_name, email, current_plan_id, request_type,request_status) => {
         navigate(type, {
             state: {
                 id: id,
                 account_id: account_id,
                 offer_id: offer_id,
                 username: username,
-                upassword:upassword,
+                upassword: upassword,
                 first_name: first_name,
                 email: email,
-                current_plan_id:current_plan_id,
-                request_type:request_type
+                current_plan_id: current_plan_id,
+                request_type: request_type,
+                request_status:request_status
 
             }
         })
-        
+
     }
     const location = useLocation()
 
@@ -400,7 +401,7 @@ export default function ManageSubscription() {
         textLabels: {},
         customToolbarSelect: selectedRows => (
             <>
-                <Tooltip title="Phê duyệt">
+                {/* <Tooltip title="Phê duyệt">
                     <IconButton
                         onClick={() => {
                             createuserandsub(
@@ -425,11 +426,11 @@ export default function ManageSubscription() {
                         <PersonAddAltOutlinedIcon />
                     </IconButton>
 
-                </Tooltip>
-                <Tooltip title="Phê duyệt">
+                </Tooltip> */}
+                <Tooltip title="Xem xét phê duyệt">
                     <IconButton
                         onClick={() => {
-                            onEdittJobClickHandler('reviewsubcription', rows[selectedRows.data[0].dataIndex]['id'],rows[selectedRows.data[0].dataIndex]['user_account_id'], rows[selectedRows.data[0].dataIndex]['offer_id'], rows[selectedRows.data[0].dataIndex]['user_name'],rows[selectedRows.data[0].dataIndex]['upassword'],rows[selectedRows.data[0].dataIndex]['fullname'],rows[selectedRows.data[0].dataIndex]['email'],rows[selectedRows.data[0].dataIndex]['plan_id'],rows[selectedRows.data[0].dataIndex]['request_type']);
+                            onEdittJobClickHandler('reviewsubcription', rows[selectedRows.data[0].dataIndex]['id'], rows[selectedRows.data[0].dataIndex]['user_account_id'], rows[selectedRows.data[0].dataIndex]['offer_id'], rows[selectedRows.data[0].dataIndex]['user_name'], rows[selectedRows.data[0].dataIndex]['upassword'], rows[selectedRows.data[0].dataIndex]['fullname'], rows[selectedRows.data[0].dataIndex]['email'], rows[selectedRows.data[0].dataIndex]['plan_id'], rows[selectedRows.data[0].dataIndex]['request_type'],rows[selectedRows.data[0].dataIndex]['request_status']);
 
                         }}
 
