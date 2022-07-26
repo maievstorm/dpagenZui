@@ -20,7 +20,7 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent'; 
+import CardContent from '@mui/material/CardContent';
 import { addLog } from "services/LogService";
 
 import {
@@ -52,7 +52,7 @@ export default function ReviewSubscription() {
     useEffect(() => {
         OfferPlanService.getOffer()
             .then(res => {
-               
+
                 let data = (res.data.pre).filter((offer) => offer.offer_id === OfferId)[0]
 
                 setOfferSelected((res.data.pre).filter((offer) => offer.offer_id === OfferId)[0])
@@ -67,7 +67,7 @@ export default function ReviewSubscription() {
                     })
                 }
                 setRows(listrow)
-                console.log(listTable['Dữ liệu lớn'])
+
             })
             .catch(err => console.log(err))
     }, []);
@@ -102,20 +102,15 @@ export default function ReviewSubscription() {
         }
 
 
-    
+
         addLog('request_resource', data)
-        
 
 
     }
-    function togiga(num) {
-        return num.toLocaleString('it-IT', { style: 'currency', currency: 'VND' })
-    }
+
 
     const [loading, setLoading] = React.useState(true);
-    const createuserandsub = (
-        //id, account_id, first_name, last_name, username, email, password, current_plan_id, offer_id, requestsub_id, request_type
-        ) => {
+    const createuserandsub = () => {
 
         const date = new Date();
 
@@ -150,7 +145,7 @@ export default function ReviewSubscription() {
         ];
 
         const bodydwh = {
-            host: username+requestid+'dwh',
+            host: username + requestid + 'dwh',
             port: '5432',
             user: 'postgres',
             password: 'HztIWjzS57',
@@ -161,11 +156,11 @@ export default function ReviewSubscription() {
             host: '10.14.222.186:8020/warehouse/tablespace/managed/hive',
             user: username,
             password: password,
-            database: username+requestid+'bigdata',
+            database: username + requestid + 'bigdata',
         }
 
         const bodystorage = {
-            bucket: username+requestid+'storage',
+            bucket: username + requestid + 'storage',
             accessKey: "85dtbrEshxH9d6Jf",
             secretKey: "LC7ziR8BnstCgiL2te1bykAp5HwV4MOO",
         }
@@ -215,7 +210,7 @@ export default function ReviewSubscription() {
                         "invoice_period_start_date": new Date().toLocaleString() + '',
                         "invoice_period_end_date": new Date().toLocaleString() + '',
                         "invoice_description": username + 'bigdata' + res.data.subscription.id,
-                        "invoice_amount": 100,
+                        "invoice_amount": dataoffer['Dữ liệu lớn(GB)'],
                         "invoice_created_ts": new Date().toLocaleString() + '',
                         "invoice_due_ts": new Date().toLocaleString() + '',
                         "invoice_paid_ts": new Date().toLocaleString() + ''
@@ -231,7 +226,7 @@ export default function ReviewSubscription() {
                         "invoice_period_start_date": new Date().toLocaleString() + '',
                         "invoice_period_end_date": new Date().toLocaleString() + '',
                         "invoice_description": username + 'storage' + res.data.subscription.id,
-                        "invoice_amount": 100,
+                        "invoice_amount": dataoffer['Lưu trữ đám mây(GB)'],
                         "invoice_created_ts": new Date().toLocaleString() + '',
                         "invoice_due_ts": new Date().toLocaleString() + '',
                         "invoice_paid_ts": new Date().toLocaleString() + ''
@@ -247,7 +242,7 @@ export default function ReviewSubscription() {
                         "invoice_period_start_date": new Date().toLocaleString() + '',
                         "invoice_period_end_date": new Date().toLocaleString() + '',
                         "invoice_description": username + 'dwh' + res.data.subscription.id,
-                        "invoice_amount": 100,
+                        "invoice_amount": dataoffer['Kho dữ liệu(GB)'],
                         "invoice_created_ts": new Date().toLocaleString() + '',
                         "invoice_due_ts": new Date().toLocaleString() + '',
                         "invoice_paid_ts": new Date().toLocaleString() + ''
@@ -274,7 +269,7 @@ export default function ReviewSubscription() {
 
         }
         else {
-          
+
 
             KeycloakService.addUser(username, full_name, email, password)
                 .then(() => {
@@ -299,7 +294,7 @@ export default function ReviewSubscription() {
     }
     return (
         <>
-         <Box >
+            <Box >
                 <Card sx={{
                     minWidth: 275,
                     borderRadius: "0.75rem",
@@ -403,7 +398,7 @@ export default function ReviewSubscription() {
                                                     </Typography>
                                                 </TableCell>
                                                 <TableCell align="left">{row.value}</TableCell>
-                                              
+
                                             </TableRow>
                                         ))}
                                         <TableRow>
@@ -423,7 +418,7 @@ export default function ReviewSubscription() {
                             <Button name={OfferSelected?.OfferId}
                                 variant="outlined"
                                 color="primary"
-                                onClick={() => submit()}>Phê duyệt</Button>
+                                onClick={() => createuserandsub()}>Phê duyệt</Button>
 
 
                         </Box>
@@ -436,7 +431,6 @@ export default function ReviewSubscription() {
             </Box>
 
         </>
-        )
+    )
 
 }
- 

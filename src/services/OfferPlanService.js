@@ -67,7 +67,8 @@ export const changeRequestStatus = async (id, status) => {
       method: 'put',
       url: `requestsub/${id}`,
       data: {
-        request_status: status
+        request_status: status,
+        approve_user:UserService.getUsername()
       },
       headers: { "Authorization": `Bearer ${UserService.getToken()}` },
     });
