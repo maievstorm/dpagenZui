@@ -133,6 +133,7 @@ const CreateNewFlow = () => {
     <MainCard>
       <IconButton onClick={() => backtodataingest()}>
         <ArrowBackIcon color="primary" fontSize="medium" />
+        Bỏ qua
       </IconButton>
       <Stepper activeStep={activeStep}>
         {steps.map((label, index) => {

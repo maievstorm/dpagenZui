@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import React from "react";
+import { useLocation, useNavigate } from "react-router"
 import MUIDataTable from "mui-datatables";
 import axios from 'axios';
 import config from "../../config";
@@ -14,6 +15,7 @@ import { DpzStorageConf } from 'services/StorageConf';
 import KeycloakService from 'services/KeycloakService';
 import { changeRequestStatus } from 'services/OfferPlanService';
 import UserAccount from 'services/UserAccount';
+import RateReviewIcon from '@mui/icons-material/RateReview';
 
 
 export default function ManageSubscription() {
@@ -126,7 +128,6 @@ export default function ManageSubscription() {
             // setData(res.data.data);
         }).catch(err => { console.log(err) })
     }, []);
-    console.log(rows)
 
 
     // {
@@ -171,7 +172,7 @@ export default function ManageSubscription() {
 
     const [loading, setLoading] = React.useState(true);
 
-    const createuserandsub = (id,account_id, first_name, last_name, user_name, email, password, current_plan_id, offer_id, requestsub_id, request_type) => {
+    const createuserandsub = (id, account_id, first_name, last_name, user_name, email, password, current_plan_id, offer_id, requestsub_id, request_type) => {
 
         const date = new Date();
 
@@ -312,19 +313,19 @@ export default function ManageSubscription() {
                     CreateInvoiceProcess(invoicebodystorage);
                     CreateInvoiceProcess(invoicebodydwh);
                     CreateUserStorage(invoicebodystorage?.item_name)
-                    .then(()=>{
-                        console.log('Create successfully:',invoicebodystorage?.item_name)
-                    })
-                    .catch(err=> console.log(err))
+                        .then(() => {
+                            console.log('Create successfully:', invoicebodystorage?.item_name)
+                        })
+                        .catch(err => console.log(err))
 
                     setTimeout(() => {
                         setLoading(false)
                     }, 5000);
 
                 })
-                .catch(err =>{
+                .catch(err => {
                     console.log(err)
-                    
+
                 })
 
 
@@ -349,20 +350,20 @@ export default function ManageSubscription() {
             // };
 
             KeycloakService.addUser(user_name, first_name, last_name, email, password)
-            .then(()=>{
-                console.log('Add user done!')
-                let status = 1
-                changeRequestStatus(id,status)
-                .then(()=>{
-                    console.log('Update user status done!')
-                    UserAccount.addUser(first_name, last_name,user_name, password, email)
-                    window.location.reload()
+                .then(() => {
+                    console.log('Add user done!')
+                    let status = 1
+                    changeRequestStatus(id, status)
+                        .then(() => {
+                            console.log('Update user status done!')
+                            UserAccount.addUser(first_name, last_name, user_name, password, email)
+                            window.location.reload()
+                        })
+                        .catch(err => console.log(err))
+
                 })
                 .catch(err => console.log(err))
 
-            })
-            .catch(err => console.log(err))
-            
 
 
         }
@@ -371,6 +372,25 @@ export default function ManageSubscription() {
 
 
     }
+    const navigate = useNavigate()
+    const onEdittJobClickHandler = (type, id,account_id, offer_id, username,upassword,first_name,email,current_plan_id,request_type) => {
+        navigate(type, {
+            state: {
+                id: id,
+                account_id: account_id,
+                offer_id: offer_id,
+                username: username,
+                upassword:upassword,
+                first_name: first_name,
+                email: email,
+                current_plan_id:current_plan_id,
+                request_type:request_type
+
+            }
+        })
+        
+    }
+    const location = useLocation()
 
     const options = {
         filter: false,
@@ -404,10 +424,19 @@ export default function ManageSubscription() {
                     >
                         <PersonAddAltOutlinedIcon />
                     </IconButton>
+
                 </Tooltip>
+                <Tooltip title="Phê duyệt">
+                    <IconButton
+                        onClick={() => {
+                            onEdittJobClickHandler('reviewsubcription', rows[selectedRows.data[0].dataIndex]['id'],rows[selectedRows.data[0].dataIndex]['user_account_id'], rows[selectedRows.data[0].dataIndex]['offer_id'], rows[selectedRows.data[0].dataIndex]['user_name'],rows[selectedRows.data[0].dataIndex]['upassword'],rows[selectedRows.data[0].dataIndex]['fullname'],rows[selectedRows.data[0].dataIndex]['email'],rows[selectedRows.data[0].dataIndex]['plan_id'],rows[selectedRows.data[0].dataIndex]['request_type']);
 
+                        }}
 
-
+                    >
+                        <RateReviewIcon />
+                    </IconButton>
+                </Tooltip>
             </>
 
         )
@@ -421,11 +450,11 @@ export default function ManageSubscription() {
         let akey = 'naQrl3yAjoue8o22'
         let skey = 'A0d6ZmTAbcVrhgTorNzCFBddtAWUjruP'
         DpzStorageConf(akey, skey)
-        .then(minio=>{
-            console.log(minio)
+            .then(minio => {
+                console.log(minio)
 
-        })
-        .catch(err=> console.log(err))
+            })
+            .catch(err => console.log(err))
 
     }
 

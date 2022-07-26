@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router"
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import Button from '@mui/material/Button';
 import OfferPlanService from 'services/OfferPlanService';
 import Grid from '@mui/material/Grid';
@@ -8,11 +7,9 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
-import CardHeader from '@mui/material/CardHeader';
 import { addLog } from "services/LogService";
 import { styled } from '@mui/material/styles';
 import { tableCellClasses } from '@mui/material/TableCell';
-import UserService from "services/UserService";
 
 import {
     Paper,
@@ -50,7 +47,7 @@ export default function OrderDetail() {
                 let listTable = JSON.parse(data?.description)
                 let listrow = []
                 for (var key in listTable) {
-                  
+
                     listrow.push({
                         'key': key,
                         'value': listTable[key]
@@ -89,7 +86,7 @@ export default function OrderDetail() {
             'request_status': 0,
             'request_type': 1
         }
-       
+
 
         OfferPlanService.applyService(data);
         addLog('request_resource', data)
@@ -126,7 +123,7 @@ export default function OrderDetail() {
         <>
 
 
-            <Box sx={{ m: 6 }}>
+            <Box >
                 <Card sx={{
                     minWidth: 275,
                     borderRadius: "0.75rem",
@@ -134,8 +131,8 @@ export default function OrderDetail() {
                 }}>
                     <CardContent>
                         <Box>
-                            <Box sx={{ float: "left" }}>
-                                <Typography variant="h6" sx={{ fontSize: "1.25rem", fontWeight: "700" }} component="div">
+                            <Box >
+                                <Typography variant="h6" >
                                     {OfferSelected?.offer_name}
                                 </Typography>
                                 <Typography component="div" sx>
