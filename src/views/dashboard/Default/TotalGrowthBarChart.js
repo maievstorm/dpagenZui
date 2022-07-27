@@ -39,7 +39,7 @@ const status = [
 
 // ==============================|| DASHBOARD DEFAULT - TOTAL GROWTH BAR CHART ||============================== //
 
-const TotalGrowthBarChart = ({ isLoading }) => {
+const TotalGrowthBarChart = ({ isLoading,series }) => {
     const [value, setValue] = useState('today');
     const theme = useTheme();
     const customization = useSelector((state) => state.customization);
@@ -55,18 +55,10 @@ const TotalGrowthBarChart = ({ isLoading }) => {
     const secondaryMain = theme.palette.secondary.main;
     const secondaryLight = theme.palette.secondary.light;
 
-    const [categories, setDatacategories] = useState([]);
-    const [series, setDataseries] = useState([]);
+    // const [categories, setDatacategories] = useState([]);
+    // const [series, setDataseries] = useState([]);
 
-    useEffect(() => {
-        OfferPlanService.getMyresourceusage()
-            .then(res => {
-                setDatacategories(res.data.data );
-               
-            }).catch(err => { console.log(err) })
-    }, []);
 
-    console.log(categories)
 
 
     const chartData = {
@@ -136,24 +128,7 @@ const TotalGrowthBarChart = ({ isLoading }) => {
                 show: true
             }
         },
-        series: [
-            {
-                name: 'Storage',
-                data: [35, 125, 35, 35, 35, 80, 35, 20, 35, 45, 15, 75]
-            },
-            {
-                name: 'DWH',
-                data: [35, 15, 15, 35, 65, 40, 80, 25, 15, 85, 25, 75]
-            },
-            {
-                name: 'Bigdata',
-                data: [35, 145, 35, 35, 20, 105, 100, 10, 65, 45, 30, 10]
-            },
-            {
-                name: 'Process',
-                data: [0, 0, 75, 0, 0, 115, 0, 0, 0, 0, 150, 0]
-            }
-        ]
+        series: series
     };
 
     useEffect(() => {

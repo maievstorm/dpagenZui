@@ -10,14 +10,61 @@ import TotalOrderLineChartCard from './TotalOrderLineChartCard';
 
 import TotalGrowthBarChart from './TotalGrowthBarChart';
 import { gridSpacing } from 'store/constant';
-
+import OfferPlanService from 'services/OfferPlanService';
 // ==============================|| DEFAULT DASHBOARD ||============================== //
 
 const Dashboard = () => {
+    const [categories, setDatacategories] = useState([]);
+    const [series, setDataseries] = useState([]);
+
+
+
     const [isLoading, setLoading] = useState(true);
     useEffect(() => {
         setLoading(false);
+        OfferPlanService.getMyresourceusage()
+            .then(res => {
+                let data = res.data.data
+                let dataInfo = {
+
+                }
+                // console.log(data)
+                data.map(item=>{
+                    let month = parseInt(item.rpt_month) - 1
+                    if( dataInfo[item.item_type] === undefined){
+                        dataInfo[item.item_type] = Array(12).fill(0)
+                        dataInfo[item.item_type][month] = item.sum
+                    }
+                    else{
+                        dataInfo[item.item_type][month] = item.sum
+                    }
+                })
+
+                let resData = []
+
+                for(var item in dataInfo){
+                    resData.push({
+                        'name':item,
+                        'data': dataInfo[item]
+                    })
+                }
+
+                setDataseries(resData)
+
+                // console.log(resData)
+
+
+
+
+                setDatacategories(data);
+
+            }).catch(err => { console.log(err) })
     }, []);
+
+    // console.log(series)
+
+
+
 
     return (
         <Grid container spacing={gridSpacing}>
@@ -44,7 +91,7 @@ const Dashboard = () => {
             <Grid item xs={12}>
                 <Grid container spacing={gridSpacing}>
                     <Grid item xs={12} md={12}>
-                        <TotalGrowthBarChart isLoading={isLoading} />
+                        <TotalGrowthBarChart isLoading={isLoading} series={series} />
                     </Grid>
                     {/* <Grid item xs={12} md={4}>
                         <PopuarCard isLoading={isLoading} />
