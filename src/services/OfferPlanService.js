@@ -37,7 +37,10 @@ const getMyresourceusage = async () => {
   try {
     response = await BaseAxios({
       method: 'get',
-      url: '/requestsub/resourceusageusername/' + UserService.getUsername(),
+      url: '/requestsub/resourceusageusername/aggregateResource',
+      params: {
+        userName: UserService.getUsername()
+      },
       headers: { "Authorization": `Bearer ${UserService.getToken()}` },
     });
   } catch (err) {
@@ -82,7 +85,7 @@ export const changeRequestStatus = async (id, status) => {
       url: `requestsub/${id}`,
       data: {
         request_status: status,
-        approve_user:UserService.getUsername()
+        approve_user: UserService.getUsername()
       },
       headers: { "Authorization": `Bearer ${UserService.getToken()}` },
     });
