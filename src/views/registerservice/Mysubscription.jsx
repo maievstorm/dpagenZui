@@ -8,20 +8,6 @@ import AddIcon from '@mui/icons-material/Add';
 import { GetProcess } from 'services/DataIngest';
 import OfferPlanService from 'services/OfferPlanService';
 
-// id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1 ),
-// user_account_id integer,
-// user_name character varying(250) COLLATE pg_catalog."default" NOT NULL,
-// fullname character varying(250) COLLATE pg_catalog."default",
-// email character varying(250) COLLATE pg_catalog."default",
-// upassword character varying(250) COLLATE pg_catalog."default",
-// offer_id integer,
-// plan_id integer,
-// request_date timestamp without time zone,
-// request_status character(1) COLLATE pg_catalog."default",
-// request_type integer,
-// CONSTRAINT requestsub_pkey PRIMARY KEY (id)
-//)
-
 
 export default function Mysubscription() {
     const [rows, setData] = useState([]);

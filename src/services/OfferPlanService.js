@@ -32,6 +32,20 @@ const getMyreqest = async () => {
   return response
 }
 
+const getMyresourceusage = async () => {
+  let response
+  try {
+    response = await BaseAxios({
+      method: 'get',
+      url: '/requestsub/resourceusageusername/' + UserService.getUsername(),
+      headers: { "Authorization": `Bearer ${UserService.getToken()}` },
+    });
+  } catch (err) {
+    console.log(err);
+  }
+  return response
+}
+
 const getOffer = async () => {
   let response
   try {
@@ -84,7 +98,8 @@ const OfferPlanService = {
   applyService,
   getOffer,
   getUserinfo,
-  getMyreqest
+  getMyreqest,
+  getMyresourceusage
 
 
 
