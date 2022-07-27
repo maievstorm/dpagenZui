@@ -2,10 +2,6 @@ import { useState, useEffect } from 'react'
 import MUIDataTable from "mui-datatables";
 
 import { useNavigate } from "react-router-dom";
-import Button from '@mui/material/Button';
-import ModeEditIcon from '@mui/icons-material/ModeEdit';
-import AddIcon from '@mui/icons-material/Add';
-import { GetProcess } from 'services/DataIngest';
 import OfferPlanService from 'services/OfferPlanService';
 
 
