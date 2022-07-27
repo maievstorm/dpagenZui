@@ -50,18 +50,11 @@ const Dashboard = () => {
                 }
 
                 setDataseries(resData)
-
-                // console.log(resData)
-
-
-
-
+            
                 setDatacategories(data);
 
             }).catch(err => { console.log(err) })
     }, []);
-
-    // console.log(series)
 
 
 

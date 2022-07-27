@@ -303,7 +303,7 @@ const RegisterStreaming = () => {
             "invoice_period_start_date": new Date().toLocaleString() + '',
             "invoice_period_end_date": new Date().toLocaleString() + '',
             "invoice_description": nameProgress,
-            "invoice_amount": 100,
+            "invoice_amount": 1,
             "invoice_created_ts": new Date().toLocaleString() + '',
             "invoice_due_ts": new Date().toLocaleString() + '',
             "invoice_paid_ts": new Date().toLocaleString() + ''
