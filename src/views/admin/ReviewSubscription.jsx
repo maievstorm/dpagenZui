@@ -42,6 +42,7 @@ export default function ReviewSubscription() {
     const current_plan_id = location?.state?.current_plan_id;
     const request_type = location?.state?.request_type;
     const requeststatus = location?.state?.request_status;
+    console.log(requeststatus)
     const [OfferSelected, setOfferSelected] = useState([])
     const [rows, setRows] = useState([])
     const [dataoffer, setdataoffer] = useState([])
@@ -180,7 +181,7 @@ export default function ReviewSubscription() {
 
 
 
-        if (request_type === 1 && requeststatus===0) {
+        if (request_type === 1 && requeststatus==='0') {
             const bodycreate = {
 
                 "user_group_type_id": 10,

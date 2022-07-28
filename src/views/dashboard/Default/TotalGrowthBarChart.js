@@ -39,7 +39,7 @@ const status = [
 
 // ==============================|| DASHBOARD DEFAULT - TOTAL GROWTH BAR CHART ||============================== //
 
-const TotalGrowthBarChart = ({ isLoading,series }) => {
+const TotalGrowthBarChart = ({ isLoading,series,datauseage }) => {
     const [value, setValue] = useState('today');
     const theme = useTheme();
     const customization = useSelector((state) => state.customization);
@@ -183,12 +183,12 @@ const TotalGrowthBarChart = ({ isLoading,series }) => {
                                             <Typography variant="subtitle2">Total Cost</Typography>
                                         </Grid>
                                         <Grid item>
-                                            <Typography variant="h3">$2,324.00</Typography>
+                                            <Typography variant="h3">{datauseage[0]?.price_total_year} VND</Typography>
                                         </Grid>
                                     </Grid>
                                 </Grid>
                                 <Grid item>
-                                    <TextField
+                                    {/* <TextField
                                         id="standard-select-currency"
                                         select
                                         value={value}
@@ -199,7 +199,7 @@ const TotalGrowthBarChart = ({ isLoading,series }) => {
                                                 {option.label}
                                             </MenuItem>
                                         ))}
-                                    </TextField>
+                                    </TextField> */}
                                 </Grid>
                             </Grid>
                         </Grid>

@@ -14,8 +14,9 @@ import OfferPlanService from 'services/OfferPlanService';
 // ==============================|| DEFAULT DASHBOARD ||============================== //
 
 const Dashboard = () => {
-    const [categories, setDatacategories] = useState([]);
+    const [datauseage, setDatauseage] = useState([]);
     const [series, setDataseries] = useState([]);
+    
 
 
 
@@ -24,19 +25,23 @@ const Dashboard = () => {
         setLoading(false);
         OfferPlanService.getMyresourceusage()
             .then(res => {
+
+               // setprice_total_year(res.data.data[0]?.price_total_year)
                 let data = res.data.data
+               
                 let dataInfo = {
 
                 }
                 // console.log(data)
+          
                 data.map(item=>{
                     let month = parseInt(item.rpt_month) - 1
                     if( dataInfo[item.item_type] === undefined){
                         dataInfo[item.item_type] = Array(12).fill(0)
-                        dataInfo[item.item_type][month] = item.sum
+                        dataInfo[item.item_type][month] = item.price
                     }
                     else{
-                        dataInfo[item.item_type][month] = item.sum
+                        dataInfo[item.item_type][month] = item.price
                     }
                 })
 
@@ -48,15 +53,15 @@ const Dashboard = () => {
                         'data': dataInfo[item]
                     })
                 }
-
-                setDataseries(resData)
+                
+                 setDataseries(resData)
             
-                setDatacategories(data);
+                 setDatauseage(data);
 
             }).catch(err => { console.log(err) })
     }, []);
 
-
+    console.log(datauseage)
 
 
     return (
@@ -67,7 +72,7 @@ const Dashboard = () => {
                         <EarningCard isLoading={isLoading} />
                     </Grid>
                     <Grid item lg={6} md={6} sm={6} xs={12}>
-                        <TotalOrderLineChartCard isLoading={isLoading} />
+                        <TotalOrderLineChartCard isLoading={isLoading} series={series} datauseage={datauseage}  />
                     </Grid>
                     {/* <Grid item lg={4} md={12} sm={12} xs={12}>
                         <Grid container spacing={gridSpacing}>
@@ -84,7 +89,7 @@ const Dashboard = () => {
             <Grid item xs={12}>
                 <Grid container spacing={gridSpacing}>
                     <Grid item xs={12} md={12}>
-                        <TotalGrowthBarChart isLoading={isLoading} series={series} />
+                        <TotalGrowthBarChart isLoading={isLoading} series={series} datauseage={datauseage} />
                     </Grid>
                     {/* <Grid item xs={12} md={4}>
                         <PopuarCard isLoading={isLoading} />
